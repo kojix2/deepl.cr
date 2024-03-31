@@ -33,16 +33,11 @@ module DeepL
     end
 
     def auth_key : String
-      return @auth_key if @auth_key
-      ENV.fetch("DEEPL_AUTH_KEY") {
-        # For backward compatibility
-        ENV.fetch("DEEPL_API_KEY") { raise ApiKeyError.new }
-      }
+      @auth_key || ENV["DEEPL_AUTH_KEY"]? || ENV["DEEPL_API_KEY"]? || raise ApiKeyError.new
     end
 
     def user_agent : String
-      return @user_agent if @user_agent
-      ENV["DEEPL_USER_AGENT"]? || "deepl-cli/#{CLI::VERSION}"
+      @user_agent || ENV["DEEPL_USER_AGENT"]? || "deepl.cr/#{VERSION}"
     end
 
     private def http_headers_base
