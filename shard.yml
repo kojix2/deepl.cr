@@ -1,0 +1,11 @@
+name: deepl
+version: 0.0.0
+
+authors:
+  - kojix2 <2xijok@gmail.com>
+
+dependencies:
+  crest:
+    github: mamantoha/crest
+
+license: MIT
