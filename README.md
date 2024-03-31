@@ -49,7 +49,7 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 
 ## Contributing
 
-1. Fork it (<https://github.com/kojix2/deepl/fork>)
+1. Fork it (<https://github.com/kojix2/deepl.cr/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
