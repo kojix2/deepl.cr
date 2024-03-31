@@ -12,18 +12,37 @@ module DeepL
     getter api_url_translate : String
     getter api_url_document : String
 
-    property auth_key : String
-    property user_agent : String
+    setter auth_key : String?
+    setter user_agent : String?
 
     record DocumentHandle, key : String, id : String
 
-    def initialize(auth_key : String, user_agent : String = nil)
+    # Create a new DeepL::Translator instance
+    # @param auth_key [String | Nil] DeepL API key
+    # @param user_agent [String | Nil] User-Agent
+    # @return [DeepL::Translator]
+    # @note If `auth_key` is not given, it will be read from the environment variable `DEEPL_AUTH_KEY` at runtime.
+
+    def initialize(auth_key = nil, user_agent = nil)
       @api_url_base = \
          auth_key_is_free_account? ? API_URL_BASE_FREE : API_URL_BASE_PRO
       @api_url_translate = "#{api_url_base}/translate"
       @api_url_document = "#{api_url_base}/document"
-      @auth_key = deepl_auth_key
-      @user_agent = (deepl_user_agent || ENV["DEEPL_USER_AGENT"]? || "deepl.cr/#{VERSION}")
+      @auth_key = auth_key
+      @user_agent = user_agent
+    end
+
+    def auth_key : String
+      return @auth_key if @auth_key
+      ENV.fetch("DEEPL_AUTH_KEY") {
+        # For backward compatibility
+        ENV.fetch("DEEPL_API_KEY") { raise ApiKeyError.new }
+      }
+    end
+
+    def user_agent : String
+      return @user_agent if @user_agent
+      ENV["DEEPL_USER_AGENT"]? || "deepl-cli/#{CLI::VERSION}"
     end
 
     private def http_headers_base
