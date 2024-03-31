@@ -26,6 +26,7 @@ require "deepl"
 
 - Pull requests are welcome.
 - If you want to take over the project and become the owner, please submit your request with a pull request.
+- In a small community like Crystal, OSS developers have limited time to devote to coding. To maintain flexibility for future API changes, do not try to parse `JSON::Any` into Hash objects more than necessary. While far from ideal, there are real advantages. 
 
 ## Contributing
 
