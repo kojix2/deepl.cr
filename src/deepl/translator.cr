@@ -109,9 +109,9 @@ module DeepL
       params["glossary_id"] = glossary_id if glossary_id
       params["output_format"] = output_format if output_format
 
-      document_handle = upload_document(path, params)
+      document_handle = translate_document_upload(path, params)
 
-      check_status_of_document(document_handle)
+      translate_document_wait_until_done(document_handle)
 
       output_base_name = "#{path.stem}_#{target_lang}"
       output_extension = output_format ? ".#{output_format.downcase}" : path.extension
@@ -123,12 +123,12 @@ module DeepL
         output_path = path.parent / (output_base_name + "_#{Time.utc.to_unix}" + output_extension)
       end
 
-      download_document(output_path, document_handle)
+      translate_document_download(output_path, document_handle)
       # rescue ex
       #   raise DocumentTranslationError.new
     end
 
-    def upload_document(path, params) : DocumentHandle
+    def translate_document_upload(path, params) : DocumentHandle
       file = File.open(path)
       params["file"] = file
 
@@ -150,11 +150,11 @@ module DeepL
       document_handle
     end
 
-    def check_status_of_document(document_handle)
-      check_status_of_document(document_handle.id, document_handle.key)
+    def translate_document_wait_until_done(document_handle)
+      translate_document_wait_until_done(document_handle.id, document_handle.key)
     end
 
-    def check_status_of_document(document_id, document_key, interval = 10)
+    def translate_document_wait_until_done(document_id, document_key, interval = 10)
       url = "#{api_url_document}/#{document_id}"
       data = {"document_key" => document_key}
 
@@ -176,11 +176,11 @@ module DeepL
       end
     end
 
-    def download_document(output_path, document_handle)
-      download_document(output_path, document_handle.id, document_handle.key)
+    def translate_document_download(output_path, document_handle)
+      translate_document_download(output_path, document_handle.id, document_handle.key)
     end
 
-    def download_document(output_path, document_id, document_key)
+    def translate_document_download(output_path, document_id, document_key)
       data = {"document_key" => document_key}
       url = "#{api_url_document}/#{document_id}/result"
       Crest.post(url, form: data, headers: http_headers_json) do |response|
@@ -218,14 +218,14 @@ module DeepL
       (Array(Hash(String, (String | Bool)))).from_json(response.body)
     end
 
-    def glossary_language_pairs
+    def get_glossary_language_pairs
       url = "#{api_url_base}/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response)
-      parse_glossary_language_pairs_response(response)
+      parse_get_glossary_language_pairs_response(response)
     end
 
-    private def parse_glossary_language_pairs_response(response)
+    private def parse_get_glossary_language_pairs_response(response)
       Hash(String, Array(Hash(String, String)))
         .from_json(response.body)["supported_languages"]
     end
@@ -254,20 +254,20 @@ module DeepL
       handle_response(response)
     end
 
-    def glossary_list
+    def list_glossaries
       url = "#{api_url_base}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response)
-      parse_glossary_list_response(response)
+      parse_list_glossaries_response(response)
     end
 
-    private def parse_glossary_list_response(response)
+    private def parse_list_glossaries_response(response)
       # JSON.parse(response.body)["glossaries"]
       Hash(String, Array(Hash(String, (String | Bool | Int32))))
         .from_json(response.body)["glossaries"]
     end
 
-    def glossary_entries_from_id(glossary_id : String)
+    def get_glossary_entries_from_id(glossary_id : String)
       header = http_headers_base
       header["Accept"] = "text/tab-separated-values"
       url = "#{api_url_base}/glossaries/#{glossary_id}/entries"
@@ -276,11 +276,11 @@ module DeepL
       response.body # Do not parse
     end
 
-    def glossary_entries_from_name(glossary_name : String)
+    def get_glossary_entries_from_name(glossary_name : String)
       glossaries = glossary_list
       glossary = glossaries.find { |g| g["name"] == glossary_name }
       raise DeepLError.new("Glossary not found") unless glossary
-      glossary_entries_from_id(glossary["glossary_id"].to_s)
+      get_glossary_entries_from_id(glossary["glossary_id"].to_s)
     end
 
     def get_usage
