@@ -1,6 +1,8 @@
 # DeepL.cr
 
-TODO: Write a description here
+[![CI](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml)
+
+Crystal library for the DeepL language translation API. 
 
 ## Installation
 
@@ -9,7 +11,7 @@ TODO: Write a description here
    ```yaml
    dependencies:
      deepl:
-       github: your-github-user/deepl
+       github: kojix2/deepl
    ```
 
 2. Run `shards install`
@@ -20,20 +22,19 @@ TODO: Write a description here
 require "deepl"
 ```
 
-TODO: Write usage instructions here
-
 ## Development
 
-TODO: Write development instructions here
+- Pull requests are welcome.
+- If you want to take over the project and become the owner, please submit your request with a pull request.
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/deepl/fork>)
+1. Fork it (<https://github.com/kojix2/deepl/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
-## Contributors
+# License
 
-- [kojix2](https://github.com/your-github-user) - creator and maintainer
+MIT
