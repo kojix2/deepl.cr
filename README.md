@@ -39,8 +39,6 @@ puts t.translate_document("path/to/document.pdf", target_lang: "EN")
 | DEEPL_TARGET_LANG | Default target language      |
 | DEEPL_USER_AGENT  | User-Agent                   |
 
-```crystal
-
 ## Development
 
 - Pull requests are welcome.
@@ -58,4 +56,3 @@ puts t.translate_document("path/to/document.pdf", target_lang: "EN")
 # License
 
 MIT
-```
