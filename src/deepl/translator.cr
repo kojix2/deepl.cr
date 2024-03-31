@@ -8,12 +8,9 @@ module DeepL
     API_URL_BASE_PRO  = "https://api.deepl.com/v2"
     API_URL_BASE_FREE = "https://api-free.deepl.com/v2"
 
-    getter api_url_base : String
-    getter api_url_translate : String
-    getter api_url_document : String
-
     setter auth_key : String?
     setter user_agent : String?
+    setter api_url_base : String?
 
     record DocumentHandle, key : String, id : String
 
@@ -23,13 +20,24 @@ module DeepL
     # @return [DeepL::Translator]
     # @note If `auth_key` is not given, it will be read from the environment variable `DEEPL_AUTH_KEY` at runtime.
 
-    def initialize(auth_key = nil, user_agent = nil)
-      @api_url_base = \
-         auth_key_is_free_account? ? API_URL_BASE_FREE : API_URL_BASE_PRO
-      @api_url_translate = "#{api_url_base}/translate"
-      @api_url_document = "#{api_url_base}/document"
+    def initialize(auth_key = nil, user_agent = nil, api_url_base = nil)
       @auth_key = auth_key
       @user_agent = user_agent
+      # Fexibility for testing or future changes
+      @api_url_base = api_url_base
+    end
+
+    def api_url_base : String
+      @api_url_base ||
+        auth_key_is_free_account? ? API_URL_BASE_FREE : API_URL_BASE_PRO
+    end
+
+    def api_url_translate : String
+      "#{api_url_base}/translate"
+    end
+
+    def api_url_document : String
+      "#{api_url_base}/document"
     end
 
     def auth_key : String
@@ -311,7 +319,7 @@ module DeepL
         l = `powershell -Command "[System.Globalization.CultureInfo]::CurrentCulture.TwoLetterISOLanguageName"`
         l.empty? ? "EN" : l.strip.upcase
       {% else %}
-        # From official deepl documentation, EN is deprecated. 
+        # From official deepl documentation, EN is deprecated.
         # EN-US or EN-GB is recommended.
         "EN"
       {% end %}
