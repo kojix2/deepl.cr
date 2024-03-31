@@ -277,7 +277,7 @@ module DeepL
     end
 
     def get_glossary_entries_from_name(glossary_name : String)
-      glossaries = glossary_list
+      glossaries = list_glossaries
       glossary = glossaries.find { |g| g["name"] == glossary_name }
       raise DeepLError.new("Glossary not found") unless glossary
       get_glossary_entries_from_id(glossary["glossary_id"].to_s)
