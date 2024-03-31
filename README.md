@@ -31,6 +31,8 @@ puts t.translate_document("path/to/document.pdf", target_lang: "EN")
 # Save to file (default: "path/to/document_EN.pdf")
 ```
 
+See [documentation](https://kojix2.github.io/deepl.cr/).
+
 ### Environment Variables
 
 | Name              | Description                  |
