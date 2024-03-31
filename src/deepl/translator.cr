@@ -128,7 +128,7 @@ module DeepL
       #   raise DocumentTranslationError.new
     end
 
-    def upload_document(path, params)
+    def upload_document(path, params) : DocumentHandle
       file = File.open(path)
       params["file"] = file
 

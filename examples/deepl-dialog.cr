@@ -2,7 +2,7 @@
 # This script is a simple GUI wrapper around the DeepL API for translating documents.
 # It uses Powershell to show dialogs and to select files.
 
-### Windows Only
+# ## Windows Only
 
 {% unless flag?(:windows) %}
   puts "This program is only supported on Windows."
