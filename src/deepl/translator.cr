@@ -23,7 +23,7 @@ module DeepL
     def initialize(auth_key = nil, user_agent = nil, api_url_base = nil)
       @auth_key = auth_key
       @user_agent = user_agent
-      # Fexibility for testing or future changes
+      # Flexibility for testing or future changes
       @api_url_base = api_url_base
     end
 
@@ -309,7 +309,7 @@ module DeepL
     end
 
     def guess_target_language : String
-      tl = ENV["DEEPL_TARGET_LANGUAGE"]?
+      tl = ENV["DEEPL_TARGET_LANG"]?
       return tl if tl
       # The language of the current locale
       # If the locale is de_DE.UTF-8, then the target language is DE

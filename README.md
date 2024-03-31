@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml)
 
-Crystal library for the DeepL language translation API. 
+Crystal library for the DeepL language translation API.
 
 ## Installation
 
@@ -20,13 +20,32 @@ Crystal library for the DeepL language translation API.
 
 ```crystal
 require "deepl"
+
+# Translate text
+t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
+puts t.translate_text("こんにちは、世界！", target_lang: "EN") # => "Hello, world!"
+
+# Translate document
+t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
+puts t.translate_document("path/to/document.pdf", target_lang: "EN")
+# Save to file (default: "path/to/document_EN.pdf")
 ```
+
+### Environment Variables
+
+| Name              | Description                  |
+| ----------------- | ---------------------------- |
+| DEEPL_AUTH_KEY    | DeepL API authentication key |
+| DEEPL_TARGET_LANG | Default target language      |
+| DEEPL_USER_AGENT  | User-Agent                   |
+
+```crystal
 
 ## Development
 
 - Pull requests are welcome.
 - If you want to take over the project and become the owner, please submit your request with a pull request.
-- In a small community like Crystal, OSS developers have limited time to devote to coding. To maintain flexibility for future API changes, do not try to parse `JSON::Any` into Hash objects more than necessary. While far from ideal, there are real advantages. 
+- In a small community like Crystal, OSS developers have limited time to devote to coding. To maintain flexibility for future API changes, do not try to parse responses into a specific data structure.
 
 ## Contributing
 
@@ -39,3 +58,4 @@ require "deepl"
 # License
 
 MIT
+```

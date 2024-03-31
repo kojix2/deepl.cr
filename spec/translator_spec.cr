@@ -21,10 +21,10 @@ describe DeepL::Translator do
   end
 
   it "can guess target language from environment variable" do
-    ENV["DEEPL_TARGET_LANGUAGE"] = "CRYSTAL"
+    ENV["DEEPL_TARGET_LANG"] = "CRYSTAL"
     t = DeepL::Translator.new
     t.guess_target_language.should eq("CRYSTAL")
-    ENV.delete("DEEPL_TARGET_LANGUAGE")
+    ENV.delete("DEEPL_TARGET_LANG")
   end
 
   it "can guess target language" do
