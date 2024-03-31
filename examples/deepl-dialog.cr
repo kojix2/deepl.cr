@@ -1,55 +1,65 @@
+# deepl-dialog.rb
+# This script is a simple GUI wrapper around the DeepL API for translating documents.
+# It uses Powershell to show dialogs and to select files.
+
+### Windows Only
+
+{% unless flag?(:windows) %}
+  puts "This program is only supported on Windows."
+  exit(0)
+{% end %}
+
 require "json"
 require "../src/deepl"
 
-def config_path
-  File.expand_path("config.json", Dir.current)
-end
+# ## Powershell GUI Dialogs
 
-def setup_deepl_api_key
-  if File.exists?(config_path)
-    config = JSON.parse(File.read(config_path))
-    if config["deepl_api_key"]?
-      ENV["DEEPL_AUTH_KEY"] = config["deepl_api_key"].to_s
-      return
-    end
-  end
-  return if ENV["DEEPL_AUTH_KEY"]?
-
-  api_key = prompt_for_api_key
-  unless api_key.empty?
-    save_api_key_to_config(api_key)
-    show_message(
-      message: "API Key saved successfully.\nPlease restart the application.",
-      title: "API Key Saved"
-    )
-  else
-    show_message("No API Key provided.", "NO API KEY")
-  end
-  exit
-end
-
-def prompt_for_api_key
-  input_dialog_cmd = <<-CMD
+def powershell_run_script(script : String) : String
+  powershell_script = <<-POWERSHELL
   powershell -Command
+    #{script}
+  POWERSHELL
+  ps = Process.new(
+    command: powershell_script,
+    output: Process::Redirect::Pipe,
+    error: Process::Redirect::Pipe,
+    shell: true
+  )
+  stdout = ps.output.gets_to_end.strip
+  stderr = ps.error.gets_to_end.strip
+  ps.wait
+  STDERR.puts(stderr) unless stderr.empty?
+  stdout
+end
+
+def powershell_show_message_dialog(
+  message : String,
+  title : String,
+  icon : String = "Information"
+)
+  cmd = <<-POWERSHELL
+    Add-Type -AssemblyName System.Windows.Forms
+    [System.Windows.Forms.MessageBox]::Show(
+      \\"#{message}\\", \\"#{title}\\",
+      [System.Windows.Forms.MessageBoxButtons]::OK,
+      [System.Windows.Forms.MessageBoxIcon]::#{icon}
+    )
+  POWERSHELL
+  powershell_run_script(cmd)
+end
+
+def powershell_entry_for_api_key
+  input_dialog_cmd = <<-POWERSHELL
       Add-Type -AssemblyName Microsoft.VisualBasic
       Add-Type -AssemblyName System.Windows.Forms
       $apiKey = [Microsoft.VisualBasic.Interaction]::InputBox(\\"Enter your DeepL API Key:\\", \\"API Key\\", \\"\\")
       Write-Host $apiKey
-  CMD
-
-  ps = Process.new(input_dialog_cmd, shell: true, output: Process::Redirect::Pipe, error: Process::Redirect::Pipe)
-  api_key = ps.output.gets_to_end.strip
-  ps.wait
-  api_key
+  POWERSHELL
+  powershell_run_script(input_dialog_cmd)
 end
 
-def save_api_key_to_config(api_key : String)
-  config = {"deepl_api_key" => api_key}
-  File.write("config.json", config.to_json)
-end
-
-def select_file
-  file_types = {
+private def valid_filetypes_for_deepl_document_translation
+  {
     "All Files"                => "*.*",
     "Word Documents"           => "*.docx",
     "PowerPoint Presentations" => "*.pptx",
@@ -59,72 +69,136 @@ def select_file
     "Text Files"               => "*.txt",
     "XLIFF Documents"          => "*.xlf;*.xliff",
   }
+end
 
-  filter_string = file_types.map { |d, e| "#{d} (#{e})|#{e}" }.join("|")
+private def filter_string_for_select_file_dialog
+  valid_filetypes_for_deepl_document_translation.map do |d, e|
+    "#{d} (#{e})|#{e}"
+  end.join("|")
+end
 
-  cmd = <<-CMD
-  powershell -Command
+def powershell_select_file_dialog
+  filter_string = filter_string_for_select_file_dialog
+
+  cmd = <<-POWERSHELL
     Add-Type -AssemblyName System.Windows.Forms
     $openFileDialog = New-Object System.Windows.Forms.OpenFileDialog
     $openFileDialog.filter = \\"#{filter_string}\\"
     $openFileDialog.ShowDialog() > $null
     Write-Host $openFileDialog.Filename
-  CMD
+  POWERSHELL
 
-  ps = Process.new(cmd, shell: true, output: Process::Redirect::Pipe, error: Process::Redirect::Pipe)
-  content = ps.output.gets_to_end
-  Path.windows(content.strip)
+  path = powershell_run_script(cmd)
+  Path.windows(path)
 end
 
-def main
-  setup_deepl_api_key
+# ## Deepl API Key Management
 
-  path = ARGV.size > 0 && File.exists?(ARGV[0]) ? Path.windows(ARGV[0]) : select_file
-  exit(0) if path == Path[""]
+def config_json_file_path : Path
+  Path["config.json"].expand
+end
 
-  translator = DeepL::Translator.new
-  translator.translate_document(
-    path: path, target_lang: DeepL::Config.target_lang
-  )
-  show_message("Translation completed successfully\n#{translator.usage}", "Success")
-rescue ex
-  error_message = "ERROR: #{ex.class} #{ex.message}"
-  error_message += "\n#{ex.response}" if ex.is_a?(Crest::RequestFailed)
-
-  show_message(error_message, "Error")
-  if ex.is_a?(Crest::Forbidden)
-    if File.exists?(config_path)
-      File.delete(config_path)
-      show_message(
-        message: "The API Key stored in the configuration file has been deleted due to authorization failure. \n" \
-                 "Please restart the application and enter a valid API Key.",
-        title: "API Key Error",
-        icon: "Warning"
-      )
-    else
-      show_message(
-        message: "The Environment Variable DEEPL_AUTH_KEY is set but appears to be invalid. \n" \
-                 "Please verify and correct the Environment Variable DEEPL_AUTH_KEY.",
-        title: "API Key Error",
-        icon: "Warning"
-      )
-    end
+def get_api_key_from_config_file : String?
+  if File.exists?(config_json_file_path)
+    config = JSON.parse(File.read(config_json_file_path))
+    key = config["deepl_api_key"]?
+    key.nil? ? nil : key.to_s
   end
+end
 
+def save_api_key_to_config_file(api_key : String)
+  config = {"deepl_api_key" => api_key}
+  File.write("config.json", config.to_json)
+end
+
+def delete_config_file_and_exit
+  File.delete(config_json_file_path) if File.exists?(config_json_file_path)
+  powershell_show_message_dialog(
+    message: "The API Key stored in the configuration file has been deleted due to authorization failure. \n" \
+             "Please restart the application and enter a valid API Key.",
+    title: "API Key Error",
+    icon: "Warning"
+  )
   exit(1)
 end
 
-def show_message(message : String, title : String, icon : String = "Information")
-  cmd = <<-CMD
-  powershell -Command
-    Add-Type -AssemblyName System.Windows.Forms
-    [System.Windows.Forms.MessageBox]::Show(
-      \\"#{message}\\", \\"#{title}\\",
-      [System.Windows.Forms.MessageBoxButtons]::OK,
-      [System.Windows.Forms.MessageBoxIcon]::#{icon}
-    )
-  CMD
-  Process.run(cmd, shell: true)
+def call_deepl_api_usage(key)
+  t = DeepL::Translator.new(auth_key: key)
+  t.usage
+end
+
+def check_deepl_auth_key_is_valid(key)
+  begin
+    call_deepl_api_usage(key)
+  rescue ex : Crest::RequestFailed
+    delete_config_file_and_exit
+  end
+end
+
+def create_config_file
+  api_key = powershell_entry_for_api_key
+
+  # Cancelled
+  if api_key.empty?
+    powershell_show_message_dialog("No API Key provided.", "NO API KEY")
+    exit(0)
+  end
+
+  save_api_key_to_config_file(api_key)
+  powershell_show_message_dialog(
+    message: "API Key saved successfully.",
+    title: "API Key Saved"
+  )
+end
+
+def setup_deepl_api_key
+  key = get_api_key_from_config_file
+  if key
+    usage = check_deepl_auth_key_is_valid(key)
+  else
+    create_config_file
+    # NOTE: Recursive call to get the key from the config file
+    key, usage = setup_deepl_api_key
+  end
+  {key, usage}
+end
+
+# ## Main Program
+
+def main
+  key, usage = setup_deepl_api_key
+
+  if ARGV.size > 0
+    path = Path.windows(ARGV[0])
+  else
+    path = powershell_select_file_dialog
+    exit(0) if path == Path[""] # Cancelled
+  end
+
+  translator = DeepL::Translator.new
+
+  translator.translate_document(
+    path: path, target_lang: translator.guess_target_language
+  )
+
+  # TODO : Add a message dialog to show the translation usage for the document
+
+  powershell_show_message_dialog(
+    message: "Translation completed successfully\n#{translator.usage}",
+    title: "Success"
+  )
+rescue ex
+  handle_error(ex)
+  exit(1)
+end
+
+private def handle_error(ex)
+  error_message = "ERROR: #{ex.class} #{ex.message}"
+  error_message += "\n#{ex.response}" if ex.is_a?(Crest::RequestFailed)
+
+  powershell_show_message_dialog(error_message, "Error")
+
+  delete_config_file_and_exit if ex.is_a?(Crest::Forbidden)
 end
 
 main()
