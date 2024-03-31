@@ -204,12 +204,12 @@ module DeepL
       handle_response(response)
     end
 
-    def target_languages
+    def get_target_languages
       response = request_languages("target")
       parse_languages_response(response)
     end
 
-    def source_languages
+    def get_source_languages
       response = request_languages("source")
       parse_languages_response(response)
     end
@@ -283,18 +283,18 @@ module DeepL
       glossary_entries_from_id(glossary["glossary_id"].to_s)
     end
 
-    def usage
-      response = request_usage
-      parse_usage_response(response)
+    def get_usage
+      response = request_get_usage
+      parse_get_usage_response(response)
     end
 
-    private def request_usage
+    private def request_get_usage
       url = "#{api_url_base}/usage"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response)
     end
 
-    private def parse_usage_response(response)
+    private def parse_get_usage_response(response)
       Hash(String, UInt64).from_json(response.body)
     end
 
@@ -303,7 +303,7 @@ module DeepL
     end
 
     # FIXME: Refactoring required
-    def avoid_spinner(str)
+    private def avoid_spinner(str)
       return str unless STDERR.tty?
       "#{"\e[2K\r" if STDERR.tty?}" + str
     end

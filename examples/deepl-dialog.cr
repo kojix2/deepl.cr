@@ -122,14 +122,14 @@ def delete_config_file_and_exit
   exit(1)
 end
 
-def call_deepl_api_usage(key)
+def call_deepl_api_get_usage(key)
   t = DeepL::Translator.new(auth_key: key)
-  t.usage
+  t.get_usage
 end
 
 def check_deepl_auth_key_is_valid(key)
   begin
-    call_deepl_api_usage(key)
+    call_deepl_api_get_usage(key)
   rescue ex : Crest::RequestFailed
     delete_config_file_and_exit
   end
@@ -184,7 +184,7 @@ def main
   # TODO : Add a message dialog to show the translation usage for the document
 
   powershell_show_message_dialog(
-    message: "Translation completed successfully\n#{translator.usage}",
+    message: "Translation completed successfully\n#{translator.get_usage}",
     title: "Success"
   )
 rescue ex
