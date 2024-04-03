@@ -197,11 +197,11 @@ module DeepL
       document_handle
     end
 
-    def translate_document_wait_until_done(document_handle, interval = 5.0)
+    def translate_document_wait_until_done(document_handle : DocumentHandle, interval = 5.0)
       translate_document_wait_until_done(document_handle.id, document_handle.key, interval)
     end
 
-    def translate_document_wait_until_done(document_id, document_key, interval = 5.0)
+    def translate_document_wait_until_done(document_id : String, document_key : String, interval = 5.0)
       url = "#{api_url_document}/#{document_id}"
       data = {"document_key" => document_key}
 
