@@ -5,8 +5,8 @@ require "./version"
 
 module DeepL
   class Translator
-    DEEPL_SERVER_URL  = "https://api.deepl.com/v2"
-    DEEPL_SERVER_URL_FREE = "https://api-free.deepl.com/v2"
+    DEEPL_SERVER_URL           = "https://api.deepl.com/v2"
+    DEEPL_SERVER_URL_FREE      = "https://api-free.deepl.com/v2"
     HTTP_STATUS_QUOTA_EXCEEDED = 456
 
     setter auth_key : String?
@@ -60,7 +60,7 @@ module DeepL
       http_headers_base.merge({"Content-Type" => "application/json"})
     end
 
-    private def handle_response(response)
+    private def handle_response(response, glossary = false)
       case response.status_code
       when 200..399
         return response
@@ -68,6 +68,8 @@ module DeepL
         raise AuthorizationError.new
       when HTTP_STATUS_QUOTA_EXCEEDED
         raise QuotaExceededError.new
+      when glossary && HTTP::Status::NOT_FOUND
+        raise GlossaryNotFoundError.new
       when HTTP::Status::NOT_FOUND
         raise RequestError.new("Not found")
       when HTTP::Status::BAD_REQUEST
@@ -225,7 +227,7 @@ module DeepL
     def get_glossary_language_pairs
       url = "#{server_url}/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
-      handle_response(response)
+      handle_response(response, glossary: true)
       parse_get_glossary_language_pairs_response(response)
     end
 
@@ -244,7 +246,7 @@ module DeepL
       }
       url = "#{server_url}/glossaries"
       response = Crest.post(url, form: data, headers: http_headers_json)
-      handle_response(response)
+      handle_response(response, glossary: true)
       parse_create_glossary_response(response)
     end
 
@@ -255,13 +257,13 @@ module DeepL
     def delete_glossary(glossary_id : String)
       url = "#{server_url}/glossaries/#{glossary_id}"
       response = Crest.delete(url, headers: http_headers_base)
-      handle_response(response)
+      handle_response(response, glossary: true)
     end
 
     def list_glossaries
       url = "#{server_url}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
-      handle_response(response)
+      handle_response(response, glossary: true)
       parse_list_glossaries_response(response)
     end
 
@@ -276,7 +278,7 @@ module DeepL
       header["Accept"] = "text/tab-separated-values"
       url = "#{server_url}/glossaries/#{glossary_id}/entries"
       response = Crest.get(url, headers: header)
-      handle_response(response)
+      handle_response(response, glossary: true)
       response.body # Do not parse
     end
 
