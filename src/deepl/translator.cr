@@ -1,12 +1,11 @@
 require "json"
 require "crest"
 require "./exceptions"
-require "./glossary_info"
+require "./api_data"
 require "./version"
 
 module DeepL
   record TextResult, text : String, detected_source_language : String
-  record DocumentHandle, key : String, id : String
 
   class Translator
     DEEPL_SERVER_URL           = "https://api.deepl.com/v2"
@@ -182,15 +181,11 @@ module DeepL
       response = Crest.post(api_url_document, form: params, headers: http_headers_base)
       handle_response(response)
 
-      parsed_response = JSON.parse(response.body)
-      document_handle = DocumentHandle.new(
-        key: parsed_response.dig("document_key").to_s,
-        id: parsed_response.dig("document_id").to_s
-      )
+      document_handle = DocumentHandle.from_json(response.body)
 
       STDERR.puts(
         avoid_spinner(
-          "[deepl.cr] Uploaded #{path} : #{parsed_response}"
+          "[deepl.cr] Uploaded #{path} id: #{document_handle.id}, key: #{document_handle.key}"
         )
       )
 
