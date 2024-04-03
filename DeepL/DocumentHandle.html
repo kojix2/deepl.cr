@@ -141,12 +141,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> DeepL::<wbr>DocumentHandle
+  <span class="kind">class</span> DeepL::<wbr>DocumentHandle
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DocumentHandle.html">DeepL::DocumentHandle</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DocumentHandle.html">DeepL::DocumentHandle</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -154,6 +154,20 @@
 
 
 
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">JSON::Serializable</li>
+    
+  </ul>
 
 
 
@@ -174,8 +188,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/5c47f3956acc0cfc6fe9de28693e078d123c27dd/src/deepl/translator.cr#L9" target="_blank">
-        deepl/translator.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/6136b714bf4acd9298ede4c31586a776929883af/src/deepl/api_data.cr#L2" target="_blank">
+        deepl/api_data.cr
       </a>
     
     <br/>
@@ -196,7 +210,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28key%3AString%2Cid%3AString%29-class-method" class="signature"><strong>.new</strong>(key : String, id : String)</a>
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
         
       </li>
     
@@ -219,22 +233,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#copy_with%28key_key%3D%40key%2Cid_id%3D%40id%29-instance-method" class="signature"><strong>#copy_with</strong>(key _key = @key, id _id = @id)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#id%3AString-instance-method" class="signature"><strong>#id</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
+        <a href="#id%3D%28id%3AString%29-instance-method" class="signature"><strong>#id=</strong>(id : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#key%3AString-instance-method" class="signature"><strong>#key</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#key%3D%28key%3AString%29-instance-method" class="signature"><strong>#key=</strong>(key : String)</a>
         
       </li>
     
@@ -295,18 +309,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(key:String,id:String)-class-method">
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(key : String, id : String)
+        def self.<strong>new</strong>(pull : JSON::PullParser)
 
-        <a class="method-permalink" href="#new%28key%3AString%2Cid%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5c47f3956acc0cfc6fe9de28693e078d123c27dd/src/deepl/translator.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/6136b714bf4acd9298ede4c31586a776929883af/src/deepl/api_data.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -327,38 +341,6 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="clone-instance-method">
-      <div class="signature">
-        
-        def <strong>clone</strong>
-
-        <a class="method-permalink" href="#clone-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5c47f3956acc0cfc6fe9de28693e078d123c27dd/src/deepl/translator.cr#L9" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="copy_with(key_key=@key,id_id=@id)-instance-method">
-      <div class="signature">
-        
-        def <strong>copy_with</strong>(key _key = @key, id _id = @id)
-
-        <a class="method-permalink" href="#copy_with%28key_key%3D%40key%2Cid_id%3D%40id%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5c47f3956acc0cfc6fe9de28693e078d123c27dd/src/deepl/translator.cr#L9" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="id:String-instance-method">
       <div class="signature">
         
@@ -369,6 +351,24 @@
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/6136b714bf4acd9298ede4c31586a776929883af/src/deepl/api_data.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="id=(id:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>id=</strong>(id : String)
+
+        <a class="method-permalink" href="#id%3D%28id%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/6136b714bf4acd9298ede4c31586a776929883af/src/deepl/api_data.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -383,6 +383,24 @@
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/6136b714bf4acd9298ede4c31586a776929883af/src/deepl/api_data.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="key=(key:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>key=</strong>(key : String)
+
+        <a class="method-permalink" href="#key%3D%28key%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/6136b714bf4acd9298ede4c31586a776929883af/src/deepl/api_data.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
