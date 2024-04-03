@@ -137,7 +137,7 @@ module DeepL
 
     def translate_document_upload(path, params) : DocumentHandle
       file = File.open(path)
-      params["file"] = file
+      params = params.merge({"file" => file})
 
       response = Crest.post(api_url_document, form: params, headers: http_headers_base)
       handle_response(response)
