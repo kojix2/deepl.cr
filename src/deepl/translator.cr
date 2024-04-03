@@ -1,6 +1,7 @@
 require "json"
 require "crest"
 require "./exceptions"
+require "./glossary_info"
 require "./version"
 
 module DeepL
@@ -276,7 +277,7 @@ module DeepL
         .from_json(response.body)["supported_languages"]
     end
 
-    def create_glossary(name, source_lang, target_lang, entries, entry_format = "tsv")
+    def create_glossary(name, source_lang, target_lang, entries, entry_format = "tsv") : GlossaryInfo
       data = {
         "name"           => name,
         "source_lang"    => source_lang,
@@ -287,11 +288,7 @@ module DeepL
       url = "#{server_url}/glossaries"
       response = Crest.post(url, form: data, headers: http_headers_json)
       handle_response(response, glossary: true)
-      parse_create_glossary_response(response)
-    end
-
-    private def parse_create_glossary_response(response)
-      JSON.parse(response.body)
+      GlossaryInfo.from_json(response.body)
     end
 
     def delete_glossary(glossary_id : String)
@@ -304,13 +301,9 @@ module DeepL
       url = "#{server_url}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
-      parse_list_glossaries_response(response)
-    end
-
-    private def parse_list_glossaries_response(response)
-      # JSON.parse(response.body)["glossaries"]
-      Hash(String, Array(Hash(String, (String | Bool | Int32))))
-        .from_json(response.body)["glossaries"]
+      JSON.parse(response.body)["glossaries"].as_a.map do |g|
+        GlossaryInfo.from_json(g)
+      end
     end
 
     def get_glossary_entries_from_id(glossary_id : String)
@@ -319,7 +312,7 @@ module DeepL
       url = "#{server_url}/glossaries/#{glossary_id}/entries"
       response = Crest.get(url, headers: header)
       handle_response(response, glossary: true)
-      response.body # Do not parse
+      response.body # Do not parse because it is a TSV
     end
 
     def get_glossary_entries_from_name(glossary_name : String)
