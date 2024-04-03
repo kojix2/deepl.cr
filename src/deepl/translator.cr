@@ -208,7 +208,7 @@ module DeepL
 
         STDERR.puts(
           avoid_spinner(
-            "[deepl.cr] Status of document : #{document_status}" # FIXME
+            "[deepl.cr] #{document_status.inspect}" # FIXME
           )
         )
 

@@ -18,6 +18,10 @@ module DeepL
     property seconds_remaining : Int32?
     property billed_characters : UInt64?
     property error_message : String?
+
+    def inspect
+      "#<DocumentStatus id=#{id} status=#{status} seconds_remaining=#{seconds_remaining} billed_characters=#{billed_characters} error_message=#{error_message}>"
+    end
   end
 
   class GlossaryInfo
