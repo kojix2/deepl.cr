@@ -348,13 +348,6 @@ module DeepL
     end
 
     def guess_target_language : String
-      _guess_target_language
-      if DeepL.debug?
-        STDERR.puts("[deepl.cr] Guessed target language: #{_guess_target_language}")
-      end
-    end
-
-    private def _guess_target_language : String
       tl = ENV["DEEPL_TARGET_LANG"]?
       return tl if tl
       # The language of the current locale
