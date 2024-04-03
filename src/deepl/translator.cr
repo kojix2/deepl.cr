@@ -87,15 +87,15 @@ module DeepL
       text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
       formality = nil, glossary_id = nil
     )
-      params = Hash(String, String | Array(String)).new
-      params["text"] = [text] # Multiple Sentences
-      params["target_lang"] = target_lang
-      params["source_lang"] = source_lang if source_lang
-      params["formality"] = formality if formality
-      params["glossary_id"] = glossary_id if glossary_id
-      # experimental feature
-      params["context"] = context if context
-      params["split_sentences"] = split_sentences if split_sentences
+      params = {
+        "text"            => [text],
+        "target_lang"     => target_lang,
+        "source_lang"     => source_lang,
+        "formality"       => formality,
+        "glossary_id"     => glossary_id,
+        "context"         => context,
+        "split_sentences" => split_sentences,
+      }.compact!
 
       response = Crest.post(api_url_translate, form: params, headers: http_headers_json, json: true)
 
@@ -108,12 +108,13 @@ module DeepL
       formality = nil, glossary_id = nil, output_format = nil,
       output_path = nil
     )
-      params = Hash(String, (String | File)).new
-      params["source_lang"] = source_lang if source_lang
-      params["formality"] = formality if formality
-      params["target_lang"] = target_lang if target_lang
-      params["glossary_id"] = glossary_id if glossary_id
-      params["output_format"] = output_format if output_format
+      params = {
+        "source_lang"   => source_lang,
+        "formality"     => formality,
+        "target_lang"   => target_lang,
+        "glossary_id"   => glossary_id,
+        "output_format" => output_format,
+      }.compact!
 
       document_handle = translate_document_upload(path, params)
 
