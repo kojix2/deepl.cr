@@ -9,6 +9,17 @@ module DeepL
     property key : String
   end
 
+  class DocumentStatus
+    include JSON::Serializable
+
+    @[JSON::Field(key: "document_id")]
+    property id : String
+    property status : String
+    property seconds_remaining : Int32
+    property billed_characters : UInt64
+    property error_message : String
+  end
+
   class GlossaryInfo
     include JSON::Serializable
 

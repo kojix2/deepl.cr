@@ -37,8 +37,10 @@ module DeepL
   # end
 
   class DocumentTranslationError < DeepLError
-    def initialize
-      super("Error occurred while translating document.")
+    def initialize(message : String? = nil)
+      m = "Error occurred while translating document."
+      m += " #{message}" if message
+      super(m)
     end
   end
 

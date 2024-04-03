@@ -204,17 +204,20 @@ module DeepL
         sleep interval
         response = Crest.post(url, form: data, headers: http_headers_json)
         handle_response(response)
-        parsed_response = JSON.parse(response.body)
+        document_status = DocumentStatus.from_json(response.body)
 
         STDERR.puts(
           avoid_spinner(
-            "[deepl.cr] Status of document : #{parsed_response}"
+            "[deepl.cr] Status of document : #{document_status}" # FIXME
           )
         )
 
-        status = parsed_response.dig("status")
-        break if status == "done"
-        raise DocumentTranslationError.new if status == "error"
+        case document_status.status
+        when "done"
+          break
+        when "error"
+          raise DocumentTranslationError.new(document_status.error_message)
+        end
       end
     end
 
