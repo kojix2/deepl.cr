@@ -35,11 +35,28 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 
 ### Environment Variables
 
-| Name              | Description                  |
-| ----------------- | ---------------------------- |
-| DEEPL_AUTH_KEY    | DeepL API authentication key |
-| DEEPL_TARGET_LANG | Default target language      |
-| DEEPL_USER_AGENT  | User-Agent                   |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DEEPL_AUTH_KEY</td>
+      <td>DeepL API authentication key</td>
+    </tr>
+    <tr>
+      <td>DEEPL_TARGET_LANG</td>
+      <td>Default target language</td>
+    </tr>
+    <tr>
+      <td>DEEPL_USER_AGENT</td>
+      <td>User-Agent</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Development
 
