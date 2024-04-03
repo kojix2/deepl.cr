@@ -62,10 +62,12 @@ module DeepL
 
     private def handle_response(response)
       case response.status_code
-      when HTTP_STATUS_QUOTA_EXCEEDED
-        raise QuotaExceededError.new
+      when 200..399
+        return response
       when HTTP::Status::FORBIDDEN
         raise AuthorizationError.new
+      when HTTP_STATUS_QUOTA_EXCEEDED
+        raise QuotaExceededError.new
       when HTTP::Status::NOT_FOUND
         raise RequestError.new("Not found")
       when HTTP::Status::BAD_REQUEST
@@ -73,9 +75,10 @@ module DeepL
       when HTTP::Status::TOO_MANY_REQUESTS
         raise TooManyRequestsError.new
       when HTTP::Status::SERVICE_UNAVAILABLE
-        raise RequestError.new("Service unavailable")
+        raise RequestError.new("Service unavailable or Document not ready")
+      else
+        raise RequestError.new("Unknown error")
       end
-      response
     end
 
     def translate_text(
