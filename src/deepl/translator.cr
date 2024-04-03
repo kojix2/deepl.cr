@@ -146,7 +146,7 @@ module DeepL
     def translate_document(
       path, target_lang, source_lang = nil,
       formality = nil, glossary_id = nil, output_format = nil,
-      output_path = nil
+      output_path = nil, interval = 5.0
     )
       params = {
         "source_lang"   => source_lang,
@@ -158,7 +158,7 @@ module DeepL
 
       document_handle = translate_document_upload(path, params)
 
-      translate_document_wait_until_done(document_handle)
+      translate_document_wait_until_done(document_handle, interval)
 
       output_base_name = "#{path.stem}_#{target_lang}"
       output_extension = output_format ? ".#{output_format.downcase}" : path.extension
@@ -197,11 +197,11 @@ module DeepL
       document_handle
     end
 
-    def translate_document_wait_until_done(document_handle)
-      translate_document_wait_until_done(document_handle.id, document_handle.key)
+    def translate_document_wait_until_done(document_handle, interval = 5.0)
+      translate_document_wait_until_done(document_handle.id, document_handle.key, interval)
     end
 
-    def translate_document_wait_until_done(document_id, document_key, interval = 10)
+    def translate_document_wait_until_done(document_id, document_key, interval = 5.0)
       url = "#{api_url_document}/#{document_id}"
       data = {"document_key" => document_key}
 
