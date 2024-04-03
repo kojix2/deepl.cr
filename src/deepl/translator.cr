@@ -5,8 +5,9 @@ require "./version"
 
 module DeepL
   class Translator
-    API_URL_BASE_PRO  = "https://api.deepl.com/v2"
-    API_URL_BASE_FREE = "https://api-free.deepl.com/v2"
+    DEEPL_SERVER_URL  = "https://api.deepl.com/v2"
+    DEEPL_SERVER_URL_FREE = "https://api-free.deepl.com/v2"
+    HTTP_STATUS_QUOTA_EXCEEDED = 456
 
     setter auth_key : String?
     setter user_agent : String?
@@ -29,7 +30,7 @@ module DeepL
 
     def api_url_base : String
       @api_url_base ||
-        auth_key_is_free_account? ? API_URL_BASE_FREE : API_URL_BASE_PRO
+        auth_key_is_free_account? ? DEEPL_SERVER_URL_FREE : DEEPL_SERVER_URL
     end
 
     def api_url_translate : String
@@ -61,7 +62,7 @@ module DeepL
 
     private def handle_response(response)
       case response.status_code
-      when 456
+      when HTTP_STATUS_QUOTA_EXCEEDED
         raise QuotaExceededError.new
       when HTTP::Status::FORBIDDEN
         raise AuthorizationError.new
