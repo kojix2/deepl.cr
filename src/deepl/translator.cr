@@ -301,9 +301,8 @@ module DeepL
       url = "#{server_url}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
-      JSON.parse(response.body)["glossaries"].as_a.map do |g|
-        GlossaryInfo.from_json(g)
-      end
+      glossaries_json = JSON.parse(response.body)["glossaries"].to_json
+      Array(GlossaryInfo).from_json(glossaries_json)
     end
 
     def get_glossary_entries_from_id(glossary_id : String)
@@ -317,9 +316,9 @@ module DeepL
 
     def get_glossary_entries_from_name(glossary_name : String)
       glossaries = list_glossaries
-      glossary = glossaries.find { |g| g["name"] == glossary_name }
+      glossary = glossaries.find { |g| g.name == glossary_name }
       raise DeepLError.new("Glossary not found") unless glossary
-      get_glossary_entries_from_id(glossary["glossary_id"].to_s)
+      get_glossary_entries_from_id(glossary.glossary_id)
     end
 
     def get_usage
