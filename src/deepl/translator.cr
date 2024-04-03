@@ -4,6 +4,9 @@ require "./exceptions"
 require "./version"
 
 module DeepL
+  record TextResult, text : String, detected_source_language : String
+  record DocumentHandle, key : String, id : String
+
   class Translator
     DEEPL_SERVER_URL           = "https://api.deepl.com/v2"
     DEEPL_SERVER_URL_FREE      = "https://api-free.deepl.com/v2"
@@ -12,8 +15,6 @@ module DeepL
     setter auth_key : String?
     setter user_agent : String?
     setter server_url : String?
-
-    record DocumentHandle, key : String, id : String
 
     # Create a new DeepL::Translator instance
     # @param auth_key [String | Nil] DeepL API key
@@ -86,6 +87,32 @@ module DeepL
     def translate_text(
       text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
       formality = nil, glossary_id = nil
+    ) : TextResult
+      response = request_translate_text(
+        text: text, target_lang: target_lang, source_lang: source_lang,
+        context: context, split_sentences: split_sentences,
+        formality: formality, glossary_id: glossary_id
+      )
+
+      parse_translate_text_response(response)
+    end
+
+    def translate_xml(
+      text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
+      formality = nil, glossary_id = nil
+    ) : Array(TextResult)
+      response = request_translate_text(
+        text: text, target_lang: target_lang, source_lang: source_lang,
+        context: context, split_sentences: split_sentences,
+        formality: formality, glossary_id: glossary_id
+      )
+
+      parse_translate_xml_response(response)
+    end
+
+    private def request_translate_text(
+      text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
+      formality = nil, glossary_id = nil
     )
       params = {
         "text"            => [text],
@@ -98,9 +125,21 @@ module DeepL
       }.compact!
 
       response = Crest.post(api_url_translate, form: params, headers: http_headers_json, json: true)
+      handle_response(response)
+    end
 
+    private def parse_translate_text_response(response) : TextResult
+      parse_translate_xml_response(response).first
+    end
+
+    private def parse_translate_xml_response(response) : Array(TextResult)
       parsed_response = JSON.parse(response.body)
-      parsed_response.dig("translations", 0, "text")
+      parsed_response["translations"].as_a.map do |t|
+        TextResult.new(
+          text: t["text"].as_s,
+          detected_source_language: t["detected_source_language"].as_s
+        )
+      end
     end
 
     def translate_document(
