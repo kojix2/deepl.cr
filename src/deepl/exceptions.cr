@@ -1,6 +1,5 @@
 module DeepL
   class DeepLError < Exception
-    class_property debug : Bool = false
   end
 
   class ApiKeyError < DeepLError
