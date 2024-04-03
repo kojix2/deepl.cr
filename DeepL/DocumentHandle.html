@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::DeepLError - deepl main</title>
+  <title>DeepL::DocumentHandle - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -72,12 +72,12 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
+  <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="../DeepL/DeepLError.html">DeepLError</a>
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/DocumentHandle" data-name="deepl::documenthandle">
+  <li class=" current" data-id="deepl/DeepL/DocumentHandle" data-name="deepl::documenthandle">
       <a href="../DeepL/DocumentHandle.html">DocumentHandle</a>
       
     </li>
@@ -136,12 +136,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> DeepL::<wbr>DeepLError
+  <span class="kind">struct</span> DeepL::<wbr>DocumentHandle
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DeepLError.html">DeepL::DeepLError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DocumentHandle.html">DeepL::DocumentHandle</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -153,34 +153,6 @@
 
 
 
-
-  <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Direct Known Subclasses
-  </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../DeepL/ApiKeyError.html">DeepL::ApiKeyError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/AuthorizationError.html">DeepL::AuthorizationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentNotReadyError.html">DeepL::DocumentNotReadyError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentTranslationError.html">DeepL::DocumentTranslationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNotFoundError.html">DeepL::GlossaryNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/QuotaExceededError.html">DeepL::QuotaExceededError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/RequestError.html">DeepL::RequestError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/TooManyRequestsError.html">DeepL::TooManyRequestsError</a></li>
-    
-  </ul>
 
 
 
@@ -197,8 +169,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/exceptions.cr#L2" target="_blank">
-        deepl/exceptions.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/translator.cr#L8" target="_blank">
+        deepl/translator.cr
       </a>
     
     <br/>
@@ -208,25 +180,18 @@
 
 
 
-
-
   <h2>
-    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Summary
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#debug%3ABool-class-method" class="signature"><strong>.debug</strong> : Bool</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#debug%3D%28debug%3ABool%29-class-method" class="signature"><strong>.debug=</strong>(debug : Bool)</a>
+        <a href="#new%28key%3AString%2Cid%3AString%29-class-method" class="signature"><strong>.new</strong>(key : String, id : String)</a>
         
       </li>
     
@@ -235,6 +200,40 @@
 
 
 
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28key_key%3D%40key%2Cid_id%3D%40id%29-instance-method" class="signature"><strong>#copy_with</strong>(key _key = @key, id _id = @id)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#id%3AString-instance-method" class="signature"><strong>#id</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#key%3AString-instance-method" class="signature"><strong>#key</strong> : String</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -282,45 +281,27 @@
 </div>
 
 
-
-
   <h2>
-    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Detail
+    Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="debug:Bool-class-method">
+    <div class="entry-detail" id="new(key:String,id:String)-class-method">
       <div class="signature">
         
-        def self.<strong>debug</strong> : Bool
+        def self.<strong>new</strong>(key : String, id : String)
 
-        <a class="method-permalink" href="#debug%3ABool-class-method">#</a>
+        <a class="method-permalink" href="#new%28key%3AString%2Cid%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/exceptions.cr#L3" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="debug=(debug:Bool)-class-method">
-      <div class="signature">
-        
-        def self.<strong>debug=</strong>(debug : Bool)
-
-        <a class="method-permalink" href="#debug%3D%28debug%3ABool%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/exceptions.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/translator.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -329,6 +310,78 @@
 
 
 
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="clone-instance-method">
+      <div class="signature">
+        
+        def <strong>clone</strong>
+
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/translator.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(key_key=@key,id_id=@id)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(key _key = @key, id _id = @id)
+
+        <a class="method-permalink" href="#copy_with%28key_key%3D%40key%2Cid_id%3D%40id%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/98b799e076906127718c31a23fa4f704cb89d73b/src/deepl/translator.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="id:String-instance-method">
+      <div class="signature">
+        
+        def <strong>id</strong> : String
+
+        <a class="method-permalink" href="#id%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="key:String-instance-method">
+      <div class="signature">
+        
+        def <strong>key</strong> : String
+
+        <a class="method-permalink" href="#key%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
 
 
 </div>
