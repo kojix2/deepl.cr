@@ -257,16 +257,13 @@ module DeepL
       Array(LanguageInfo).from_json(response.body)
     end
 
-    def get_glossary_language_pairs : Array(Hash(String, String))
+    def get_glossary_language_pairs : Array(GlossaryLanguagePair)
       url = "#{server_url}/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
-      parse_get_glossary_language_pairs_response(response)
-    end
-
-    private def parse_get_glossary_language_pairs_response(response)
-      Hash(String, Array(Hash(String, String)))
-        .from_json(response.body)["supported_languages"]
+      Array(GlossaryLanguagePair).from_json(
+        JSON.parse(response.body)["supported_languages"].to_json
+      )
     end
 
     def create_glossary(name, source_lang, target_lang, entries, entry_format = "tsv") : GlossaryInfo

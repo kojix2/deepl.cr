@@ -19,6 +19,13 @@ module DeepL
     property supports_formality : Bool?
   end
 
+  class GlossaryLanguagePair
+    include JSON::Serializable
+
+    property source_lang : String
+    property target_lang : String
+  end
+
   class DocumentStatus
     include JSON::Serializable
 
