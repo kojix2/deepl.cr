@@ -62,7 +62,10 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 
 - Pull requests are welcome.
 - If you want to take over the project and become the owner, please submit your request with a pull request.
-- In a small community like Crystal, OSS developers have limited time to devote to coding. To maintain flexibility for future API changes, do not try to parse responses into a specific data structure.
+
+## Use case
+
+- [DeepL CLI](https://github.com/kojix2/deepl-cli)
 
 ## Contributing
 
