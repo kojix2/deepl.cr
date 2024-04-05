@@ -32,11 +32,11 @@ module DeepL
         auth_key_is_free_account? ? DEEPL_SERVER_URL_FREE : DEEPL_SERVER_URL
     end
 
-    def api_url_translate : String
+    private def api_url_translate : String
       "#{server_url}/translate"
     end
 
-    def api_url_document : String
+    private def api_url_document : String
       "#{server_url}/document"
     end
 
@@ -219,7 +219,7 @@ module DeepL
       end
     end
 
-    def translate_document_download(output_path, document_handle)
+    def translate_document_download(output_path, document_handle : DocumentHandle)
       translate_document_download(output_path, document_handle.id, document_handle.key)
     end
 
@@ -284,6 +284,7 @@ module DeepL
       url = "#{server_url}/glossaries/#{glossary_id}"
       response = Crest.delete(url, headers: http_headers_base)
       handle_response(response, glossary: true)
+      # FIXME: Return value
     end
 
     def list_glossaries : Array(GlossaryInfo)
