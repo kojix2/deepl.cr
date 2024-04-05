@@ -240,7 +240,7 @@ module DeepL
       )
     end
 
-    def request_languages(type)
+    private def request_languages(type)
       data = {"type" => type}
       url = "#{server_url}/languages"
       response = Crest.get(url, params: data, headers: http_headers_base)
@@ -286,7 +286,7 @@ module DeepL
       handle_response(response, glossary: true)
     end
 
-    def list_glossaries
+    def list_glossaries : Array(GlossaryInfo)
       url = "#{server_url}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
@@ -294,7 +294,7 @@ module DeepL
       Array(GlossaryInfo).from_json(glossaries_json)
     end
 
-    def get_glossary_entries_from_id(glossary_id : String)
+    def get_glossary_entries_from_id(glossary_id : String) : String
       header = http_headers_base
       header["Accept"] = "text/tab-separated-values"
       url = "#{server_url}/glossaries/#{glossary_id}/entries"
@@ -303,7 +303,7 @@ module DeepL
       response.body # Do not parse because it is a TSV
     end
 
-    def get_glossary_entries_from_name(glossary_name : String)
+    def get_glossary_entries_from_name(glossary_name : String) : String
       glossaries = list_glossaries
       glossary = glossaries.find { |g| g.name == glossary_name }
       raise DeepLError.new("Glossary not found") unless glossary
@@ -325,7 +325,7 @@ module DeepL
       Hash(String, UInt64).from_json(response.body)
     end
 
-    private def auth_key_is_free_account?
+    private def auth_key_is_free_account? : Bool
       auth_key.ends_with?(":fx")
     end
 
