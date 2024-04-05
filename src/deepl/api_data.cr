@@ -1,4 +1,6 @@
 module DeepL
+  record TextResult, text : String, detected_source_language : String
+
   class DocumentHandle
     include JSON::Serializable
 
@@ -7,6 +9,14 @@ module DeepL
 
     @[JSON::Field(key: "document_key")]
     property key : String
+  end
+
+  class LanguageInfo
+    include JSON::Serializable
+
+    property language : String
+    property name : String
+    property supports_formality : Bool?
   end
 
   class DocumentStatus

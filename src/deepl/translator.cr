@@ -5,8 +5,6 @@ require "./api_data"
 require "./version"
 
 module DeepL
-  record TextResult, text : String, detected_source_language : String
-
   class Translator
     DEEPL_SERVER_URL           = "https://api.deepl.com/v2"
     DEEPL_SERVER_URL_FREE      = "https://api-free.deepl.com/v2"
@@ -249,21 +247,17 @@ module DeepL
       handle_response(response)
     end
 
-    def get_target_languages
+    def get_target_languages : Array(LanguageInfo)
       response = request_languages("target")
-      parse_languages_response(response)
+      Array(LanguageInfo).from_json(response.body)
     end
 
-    def get_source_languages
+    def get_source_languages : Array(LanguageInfo)
       response = request_languages("source")
-      parse_languages_response(response)
+      Array(LanguageInfo).from_json(response.body)
     end
 
-    private def parse_languages_response(response)
-      (Array(Hash(String, (String | Bool)))).from_json(response.body)
-    end
-
-    def get_glossary_language_pairs
+    def get_glossary_language_pairs : Array(Hash(String, String))
       url = "#{server_url}/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
