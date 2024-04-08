@@ -83,34 +83,56 @@ module DeepL
     end
 
     def translate_text(
-      text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
-      formality = nil, glossary_id = nil
+      text, target_lang,
+      source_lang = nil,
+      context = nil,
+      split_sentences = nil,
+      formality = nil,
+      glossary_id = nil
     ) : TextResult
       response = request_translate_text(
-        text: text, target_lang: target_lang, source_lang: source_lang,
-        context: context, split_sentences: split_sentences,
-        formality: formality, glossary_id: glossary_id
+        text: text,
+        target_lang: target_lang,
+        source_lang: source_lang,
+        context: context,
+        split_sentences: split_sentences,
+        formality: formality,
+        glossary_id: glossary_id
       )
 
       parse_translate_text_response(response)
     end
 
     def translate_xml(
-      text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
-      formality = nil, glossary_id = nil
+      text,
+      target_lang,
+      source_lang = nil,
+      context = nil,
+      split_sentences = nil,
+      formality = nil,
+      glossary_id = nil
     ) : Array(TextResult)
       response = request_translate_text(
-        text: text, target_lang: target_lang, source_lang: source_lang,
-        context: context, split_sentences: split_sentences,
-        formality: formality, glossary_id: glossary_id
+        text: text,
+        target_lang: target_lang,
+        source_lang: source_lang,
+        context: context,
+        split_sentences: split_sentences,
+        formality: formality,
+        glossary_id: glossary_id
       )
 
       parse_translate_xml_response(response)
     end
 
     private def request_translate_text(
-      text, target_lang, source_lang = nil, context = nil, split_sentences = nil,
-      formality = nil, glossary_id = nil
+      text,
+      target_lang,
+      source_lang = nil,
+      context = nil,
+      split_sentences = nil,
+      formality = nil,
+      glossary_id = nil
     )
       params = {
         "text"            => [text],
@@ -122,7 +144,9 @@ module DeepL
         "split_sentences" => split_sentences,
       }.compact!
 
-      response = Crest.post(api_url_translate, form: params, headers: http_headers_json, json: true)
+      response = Crest.post(
+        api_url_translate, form: params, headers: http_headers_json, json: true
+      )
       handle_response(response)
     end
 
@@ -264,7 +288,13 @@ module DeepL
       )
     end
 
-    def create_glossary(name, source_lang, target_lang, entries, entry_format = "tsv") : GlossaryInfo
+    def create_glossary(
+      name,
+      source_lang,
+      target_lang,
+      entries,
+      entry_format = "tsv"
+    ) : GlossaryInfo
       data = {
         "name"           => name,
         "source_lang"    => source_lang,
