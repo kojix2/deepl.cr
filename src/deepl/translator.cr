@@ -141,11 +141,17 @@ module DeepL
     end
 
     def translate_document(
-      path, target_lang, source_lang = nil,
-      formality = nil, glossary_id = nil, output_format = nil,
-      output_path = nil, interval = 5.0
+      path,
+      target_lang,
+      source_lang = nil,
+      formality = nil,
+      glossary_id = nil,
+      output_format = nil,
+      output_path = nil,
+      interval = 5.0
     )
-      params = {
+      source_path = Path[path]
+      translation_params = {
         "source_lang"   => source_lang,
         "formality"     => formality,
         "target_lang"   => target_lang,
@@ -153,23 +159,27 @@ module DeepL
         "output_format" => output_format,
       }.compact!
 
-      document_handle = translate_document_upload(path, params)
+      document_handle = translate_document_upload(source_path, translation_params)
 
       translate_document_wait_until_done(document_handle, interval)
 
-      output_base_name = "#{path.stem}_#{target_lang}"
-      output_extension = output_format ? ".#{output_format.downcase}" : path.extension
-
-      output_path ||= path.parent / (output_base_name + output_extension)
-
-      # Do not overwrite the original file
-      if File.exists?(output_path)
-        output_path = path.parent / (output_base_name + "_#{Time.utc.to_unix}" + output_extension)
-      end
+      output_path ||= generate_output_path(source_path, target_lang, output_format)
 
       translate_document_download(output_path, document_handle)
-      # rescue ex
-      #   raise DocumentTranslationError.new
+    end
+
+    private def generate_output_path(source_path : Path, target_lang, output_format) : Path
+      output_base_name = "#{source_path.stem}_#{target_lang}"
+      output_extension = output_format ? ".#{output_format.downcase}" : source_path.extension
+      output_path = source_path.parent / (output_base_name + output_extension)
+      ensure_unique_output_path(output_path)
+    end
+
+    private def ensure_unique_output_path(output_path : Path) : Path
+      return output_path unless File.exists?(output_path)
+      output_base_name = "#{output_path.stem}_#{Time.utc.to_unix}"
+      output_extension = output_path.extension
+      output_path = output_path.parent / (output_base_name + output_extension)
     end
 
     def translate_document_upload(path, params) : DocumentHandle
