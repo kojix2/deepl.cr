@@ -148,7 +148,8 @@ module DeepL
       glossary_id = nil,
       output_format = nil,
       output_path = nil,
-      interval = 5.0
+      interval = 5.0,
+      &block : String -> Nil
     )
       source_path = Path[path]
       translation_params = {
@@ -160,12 +161,16 @@ module DeepL
       }.compact!
 
       document_handle = translate_document_upload(source_path, translation_params)
+      block.call "[deepl.cr] Uploaded #{source_path} id: #{document_handle.id}, key: #{document_handle.key}"
 
-      translate_document_wait_until_done(document_handle, interval)
+      translate_document_wait_until_done(document_handle, interval) do |document_status|
+        block.call("[deepl.cr] #{document_status.inspect}")
+      end
 
       output_path ||= generate_output_path(source_path, target_lang, output_format)
 
       translate_document_download(output_path, document_handle)
+      block.call "[deepl.cr] Saved #{output_path}"
     end
 
     private def generate_output_path(source_path : Path, target_lang, output_format) : Path
@@ -182,29 +187,21 @@ module DeepL
       output_path = output_path.parent / (output_base_name + output_extension)
     end
 
-    def translate_document_upload(path, params) : DocumentHandle
+    def translate_document_upload(path : Path | String, params) : DocumentHandle
       file = File.open(path)
       params = params.merge({"file" => file})
 
       response = Crest.post(api_url_document, form: params, headers: http_headers_base)
       handle_response(response)
 
-      document_handle = DocumentHandle.from_json(response.body)
-
-      STDERR.puts(
-        avoid_spinner(
-          "[deepl.cr] Uploaded #{path} id: #{document_handle.id}, key: #{document_handle.key}"
-        )
-      )
-
-      document_handle
+      DocumentHandle.from_json(response.body)
     end
 
-    def translate_document_wait_until_done(document_handle : DocumentHandle, interval = 5.0)
-      translate_document_wait_until_done(document_handle.id, document_handle.key, interval)
+    def translate_document_wait_until_done(document_handle : DocumentHandle, interval = 5.0, &block : DocumentStatus -> Nil)
+      translate_document_wait_until_done(document_handle.id, document_handle.key, interval, &block)
     end
 
-    def translate_document_wait_until_done(document_id : String, document_key : String, interval = 5.0)
+    def translate_document_wait_until_done(document_id : String, document_key : String, interval = 5.0, &block : DocumentStatus -> Nil)
       url = "#{api_url_document}/#{document_id}"
       data = {"document_key" => document_key}
 
@@ -214,11 +211,7 @@ module DeepL
         handle_response(response)
         document_status = DocumentStatus.from_json(response.body)
 
-        STDERR.puts(
-          avoid_spinner(
-            "[deepl.cr] #{document_status.inspect}" # FIXME
-          )
-        )
+        block.call(document_status)
 
         case document_status.status
         when "done"
@@ -242,12 +235,6 @@ module DeepL
           IO.copy(response.body_io, file)
         end
       end
-
-      STDERR.puts(
-        avoid_spinner(
-          "[deepl.cr] Saved #{output_path}"
-        )
-      )
     end
 
     private def request_languages(type)
@@ -338,12 +325,6 @@ module DeepL
 
     private def auth_key_is_free_account? : Bool
       auth_key.ends_with?(":fx")
-    end
-
-    # FIXME: Refactoring required
-    private def avoid_spinner(str)
-      return str unless STDERR.tty?
-      "#{"\e[2K\r" if STDERR.tty?}" + str
     end
 
     def guess_target_language : String
