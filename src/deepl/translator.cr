@@ -173,7 +173,30 @@ module DeepL
       output_format = nil,
       output_path = nil,
       interval = 5.0,
-      &block : String -> Nil
+      &block : (String ->)
+    )
+      translate_document(
+        path,
+        target_lang,
+        source_lang = nil,
+        formality = nil,
+        glossary_id = nil,
+        output_format = nil,
+        output_path = nil,
+        interval = 5.0, block
+      )
+    end
+
+    def translate_document(
+      path,
+      target_lang,
+      source_lang = nil,
+      formality = nil,
+      glossary_id = nil,
+      output_format = nil,
+      output_path = nil,
+      interval = 5.0,
+      block : (String ->)? = nil
     )
       source_path = Path[path]
       translation_params = {
@@ -185,17 +208,17 @@ module DeepL
       }.compact!
 
       document_handle = translate_document_upload(source_path, translation_params)
-      block.call "[deepl.cr] (i) id (k) key (s) status (t) seconds_remaining (c) billed_characters (e) error_message"
-      block.call "[deepl.cr] Uploaded #{source_path} (i) #{document_handle.id} (k) #{document_handle.key}"
+      block.try &.call "[deepl.cr] (i) id (k) key (s) status (t) seconds_remaining (c) billed_characters (e) error_message"
+      block.try &.call "[deepl.cr] Uploaded #{source_path} (i) #{document_handle.id} (k) #{document_handle.key}"
 
       translate_document_wait_until_done(document_handle, interval) do |document_status|
-        block.call("[deepl.cr] #{document_status.summary}")
+        block.try &.call("[deepl.cr] #{document_status.summary}")
       end
 
       output_path ||= generate_output_path(source_path, target_lang, output_format)
 
       translate_document_download(output_path, document_handle)
-      block.call "[deepl.cr] Saved #{output_path}"
+      block.try &.call "[deepl.cr] Saved #{output_path}"
     end
 
     private def generate_output_path(source_path : Path, target_lang, output_format) : Path
@@ -222,11 +245,51 @@ module DeepL
       DocumentHandle.from_json(response.body)
     end
 
-    def translate_document_wait_until_done(document_handle : DocumentHandle, interval = 5.0, &block : DocumentStatus -> Nil)
-      translate_document_wait_until_done(document_handle.id, document_handle.key, interval, &block)
+    def translate_document_wait_until_done(
+      document_handle : DocumentHandle,
+      interval = 5.0,
+      &block : (DocumentStatus ->)
+    )
+      translate_document_wait_until_done(
+        document_handle.id,
+        document_handle.key,
+        interval,
+        block
+      )
     end
 
-    def translate_document_wait_until_done(document_id : String, document_key : String, interval = 5.0, &block : DocumentStatus -> Nil)
+    def translate_document_wait_until_done(
+      document_handle : DocumentHandle,
+      interval = 5.0,
+      block : (DocumentStatus ->)? = nil
+    )
+      translate_document_wait_until_done(
+        document_handle.id,
+        document_handle.key,
+        interval, block
+      )
+    end
+
+    def translate_document_wait_until_done(
+      document_id : String,
+      document_key : String,
+      interval = 5.0,
+      &block : (DocumentStatus ->)
+    )
+      translate_document_wait_until_done(
+        document_id,
+        document_key,
+        interval,
+        block
+      )
+    end
+
+    def translate_document_wait_until_done(
+      document_id : String,
+      document_key : String,
+      interval = 5.0,
+      block : (DocumentStatus ->)? = nil
+    )
       url = "#{api_url_document}/#{document_id}"
       data = {"document_key" => document_key}
 
@@ -236,7 +299,7 @@ module DeepL
         handle_response(response)
         document_status = DocumentStatus.from_json(response.body)
 
-        block.call(document_status)
+        block.try &.call(document_status)
 
         case document_status.status
         when "done"
