@@ -36,8 +36,14 @@ module DeepL
     property billed_characters : UInt64?
     property error_message : String?
 
-    def inspect
-      "#<DocumentStatus id=#{id} status=#{status} seconds_remaining=#{seconds_remaining} billed_characters=#{billed_characters} error_message=#{error_message}>"
+    def summary : String
+      String.build do |s|
+        s << "(i) #{id}"
+        s << " (s) #{status}"
+        s << " (t) #{seconds_remaining}" if seconds_remaining
+        s << " (c) #{billed_characters}" if billed_characters
+        s << " (e) #{error_message}" if error_message
+      end
     end
   end
 

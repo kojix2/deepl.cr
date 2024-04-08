@@ -161,10 +161,11 @@ module DeepL
       }.compact!
 
       document_handle = translate_document_upload(source_path, translation_params)
-      block.call "[deepl.cr] Uploaded #{source_path} id: #{document_handle.id}, key: #{document_handle.key}"
+      block.call "[deepl.cr] (i) id (k) key (s) status (t) seconds_remaining (c) billed_characters (e) error_message"
+      block.call "[deepl.cr] Uploaded #{source_path} (i) #{document_handle.id} (k) #{document_handle.key}"
 
       translate_document_wait_until_done(document_handle, interval) do |document_status|
-        block.call("[deepl.cr] #{document_status.inspect}")
+        block.call("[deepl.cr] #{document_status.summary}")
       end
 
       output_path ||= generate_output_path(source_path, target_lang, output_format)
