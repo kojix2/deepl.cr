@@ -3,11 +3,11 @@ require "./spec_helper"
 # Change private methods to public for testing
 
 class DeepL::Translator
-  def generate_output_path(source_path : Path, target_lang, output_format) : Path
+  def generate_output_file(source_path : Path, target_lang, output_format) : Path
     previous_def
   end
 
-  def ensure_unique_output_path(output_path : Path) : Path
+  def ensure_unique_output_file(output_file : Path) : Path
     previous_def
   end
 end
@@ -49,8 +49,8 @@ describe DeepL::Translator do
     source_path = Path[__DIR__] / "fixtures" / "sample.txt"
     target_lang = "PT-BR"
     output_format = "docx"
-    output_path = t.generate_output_path(source_path, target_lang, output_format)
-    output_path.should eq(Path[__DIR__] / "fixtures" / "sample_PT-BR.docx")
+    output_file = t.generate_output_file(source_path, target_lang, output_format)
+    output_file.should eq(Path[__DIR__] / "fixtures" / "sample_PT-BR.docx")
   end
 
   it "can ensure unique output path" do
@@ -58,8 +58,8 @@ describe DeepL::Translator do
     source_path = Path[__DIR__] / "fixtures" / "sample.pdf"
     target_lang = "PT-BR"
     output_format = "txt"
-    output_path = t.generate_output_path(source_path, target_lang, output_format)
-    output_path.parent.should eq(Path[__DIR__] / "fixtures")
-    output_path.basename.to_s.should match(/sample_PT-BR_\d{10}.txt/)
+    output_file = t.generate_output_file(source_path, target_lang, output_format)
+    output_file.parent.should eq(Path[__DIR__] / "fixtures")
+    output_file.basename.to_s.should match(/sample_PT-BR_\d{10}.txt/)
   end
 end

@@ -171,7 +171,7 @@ module DeepL
       formality = nil,
       glossary_id = nil,
       output_format = nil,
-      output_path = nil,
+      output_file = nil,
       interval = 5.0,
       &block : (String ->)
     )
@@ -182,7 +182,7 @@ module DeepL
         formality = nil,
         glossary_id = nil,
         output_format = nil,
-        output_path = nil,
+        output_file = nil,
         interval = 5.0, block
       )
     end
@@ -194,7 +194,7 @@ module DeepL
       formality = nil,
       glossary_id = nil,
       output_format = nil,
-      output_path = nil,
+      output_file = nil,
       interval = 5.0,
       block : (String ->)? = nil
     )
@@ -215,24 +215,24 @@ module DeepL
         block.try &.call("[deepl.cr] #{document_status.summary}")
       end
 
-      output_path ||= generate_output_path(source_path, target_lang, output_format)
+      output_file ||= generate_output_file(source_path, target_lang, output_format)
 
-      translate_document_download(output_path, document_handle)
-      block.try &.call "[deepl.cr] Saved #{output_path}"
+      translate_document_download(output_file, document_handle)
+      block.try &.call "[deepl.cr] Saved #{output_file}"
     end
 
-    private def generate_output_path(source_path : Path, target_lang, output_format) : Path
+    private def generate_output_file(source_path : Path, target_lang, output_format) : Path
       output_base_name = "#{source_path.stem}_#{target_lang}"
       output_extension = output_format ? ".#{output_format.downcase}" : source_path.extension
-      output_path = source_path.parent / (output_base_name + output_extension)
-      ensure_unique_output_path(output_path)
+      output_file = source_path.parent / (output_base_name + output_extension)
+      ensure_unique_output_file(output_file)
     end
 
-    private def ensure_unique_output_path(output_path : Path) : Path
-      return output_path unless File.exists?(output_path)
-      output_base_name = "#{output_path.stem}_#{Time.utc.to_unix}"
-      output_extension = output_path.extension
-      output_path = output_path.parent / (output_base_name + output_extension)
+    private def ensure_unique_output_file(output_file : Path) : Path
+      return output_file unless File.exists?(output_file)
+      output_base_name = "#{output_file.stem}_#{Time.utc.to_unix}"
+      output_extension = output_file.extension
+      output_file = output_file.parent / (output_base_name + output_extension)
     end
 
     def translate_document_upload(path : Path | String, params) : DocumentHandle
@@ -290,12 +290,12 @@ module DeepL
       DocumentStatus.from_json(response.body)
     end
 
-    def translate_document_download(output_path, handle : DocumentHandle)
+    def translate_document_download(output_file, handle : DocumentHandle)
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
       Crest.post(url, form: data, headers: http_headers_json) do |response|
         raise DocumentTranslationError.new unless response.success?
-        File.open(output_path, "wb") do |file|
+        File.open(output_file, "wb") do |file|
           IO.copy(response.body_io, file)
         end
       end
