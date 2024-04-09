@@ -246,58 +246,28 @@ module DeepL
     end
 
     def translate_document_wait_until_done(
-      document_handle : DocumentHandle,
+      handle : DocumentHandle,
       interval = 5.0,
       &block : (DocumentStatus ->)
     )
       translate_document_wait_until_done(
-        document_handle.id,
-        document_handle.key,
+        handle,
         interval,
         block
       )
     end
 
     def translate_document_wait_until_done(
-      document_handle : DocumentHandle,
+      handle : DocumentHandle,
       interval = 5.0,
       block : (DocumentStatus ->)? = nil
     )
-      translate_document_wait_until_done(
-        document_handle.id,
-        document_handle.key,
-        interval, block
-      )
-    end
-
-    def translate_document_wait_until_done(
-      document_id : String,
-      document_key : String,
-      interval = 5.0,
-      &block : (DocumentStatus ->)
-    )
-      translate_document_wait_until_done(
-        document_id,
-        document_key,
-        interval,
-        block
-      )
-    end
-
-    def translate_document_wait_until_done(
-      document_id : String,
-      document_key : String,
-      interval = 5.0,
-      block : (DocumentStatus ->)? = nil
-    )
-      url = "#{api_url_document}/#{document_id}"
-      data = {"document_key" => document_key}
+      url = "#{api_url_document}/#{handle.id}"
+      data = {"document_key" => handle.key}
 
       loop do
         sleep interval
-        response = Crest.post(url, form: data, headers: http_headers_json)
-        handle_response(response)
-        document_status = DocumentStatus.from_json(response.body)
+        document_status = translate_document_get_status(handle)
 
         block.try &.call(document_status)
 
@@ -310,13 +280,19 @@ module DeepL
       end
     end
 
-    def translate_document_download(output_path, document_handle : DocumentHandle)
-      translate_document_download(output_path, document_handle.id, document_handle.key)
+    def translate_document_get_status(handle : DocumentHandle) : DocumentStatus
+      document_id = handle.id
+      document_key = handle.key
+      url = "#{api_url_document}/#{document_id}"
+      data = {"document_key" => document_key}
+      response = Crest.post(url, form: data, headers: http_headers_json)
+      handle_response(response)
+      DocumentStatus.from_json(response.body)
     end
 
-    def translate_document_download(output_path, document_id, document_key)
-      data = {"document_key" => document_key}
-      url = "#{api_url_document}/#{document_id}/result"
+    def translate_document_download(output_path, handle : DocumentHandle)
+      data = {"document_key" => handle.key}
+      url = "#{api_url_document}/#{handle.id}/result"
       Crest.post(url, form: data, headers: http_headers_json) do |response|
         raise DocumentTranslationError.new unless response.success?
         File.open(output_path, "wb") do |file|
