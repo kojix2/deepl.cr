@@ -1,8 +1,16 @@
 require "json"
 require "crest"
 require "./exceptions"
-require "./api_data"
 require "./version"
+
+# API Data
+
+require "./text_result"
+require "./document_handle"
+require "./document_status"
+require "./glossary_info"
+require "./glossary_language_pair"
+require "./language_info"
 
 module DeepL
   class Translator
@@ -151,7 +159,7 @@ module DeepL
     end
 
     private def parse_translate_text_response(response) : TextResult
-      parse_translate_xml_response(response).first
+      parse_translate_xml_response(response).first # FIXME
     end
 
     private def parse_translate_xml_response(response) : Array(TextResult)
@@ -262,9 +270,6 @@ module DeepL
       interval = 5.0,
       block : (DocumentStatus ->)? = nil
     )
-      url = "#{api_url_document}/#{handle.id}"
-      data = {"document_key" => handle.key}
-
       loop do
         sleep interval
         document_status = translate_document_get_status(handle)
@@ -272,19 +277,15 @@ module DeepL
         block.try &.call(document_status)
 
         case document_status.status
-        when "done"
-          break
-        when "error"
-          raise DocumentTranslationError.new(document_status.error_message)
+        when "done"  then break
+        when "error" then raise DocumentTranslationError.new(document_status.error_message)
         end
       end
     end
 
     def translate_document_get_status(handle : DocumentHandle) : DocumentStatus
-      document_id = handle.id
-      document_key = handle.key
-      url = "#{api_url_document}/#{document_id}"
-      data = {"document_key" => document_key}
+      url = "#{api_url_document}/#{handle.id}"
+      data = {"document_key" => handle.key}
       response = Crest.post(url, form: data, headers: http_headers_json)
       handle_response(response)
       DocumentStatus.from_json(response.body)
@@ -334,6 +335,7 @@ module DeepL
       entries,
       entry_format = "tsv"
     ) : GlossaryInfo
+      url = "#{server_url}/glossaries"
       data = {
         "name"           => name,
         "source_lang"    => source_lang,
@@ -341,7 +343,6 @@ module DeepL
         "entries"        => entries,
         "entries_format" => entry_format,
       }
-      url = "#{server_url}/glossaries"
       response = Crest.post(url, form: data, headers: http_headers_json)
       handle_response(response, glossary: true)
       GlossaryInfo.from_json(response.body)
@@ -371,9 +372,9 @@ module DeepL
       response.body # Do not parse because it is a TSV
     end
 
-    def get_glossary_entries_from_name(glossary_name : String) : String
+    def get_glossary_entries_from_name(name : String) : String
       glossaries = list_glossaries
-      glossary = glossaries.find { |g| g.name == glossary_name }
+      glossary = glossaries.find { |g| g.name == name }
       raise DeepLError.new("Glossary not found") unless glossary
       get_glossary_entries_from_id(glossary.glossary_id)
     end
