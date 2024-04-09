@@ -41,7 +41,7 @@ module DeepL
     end
 
     def auth_key : String
-      @auth_key || ENV["DEEPL_AUTH_KEY"]? || ENV["DEEPL_API_KEY"]? || raise ApiKeyError.new
+      @auth_key || ENV["DEEPL_AUTH_KEY"]? || raise ApiKeyError.new
     end
 
     def user_agent : String
