@@ -355,6 +355,11 @@ module DeepL
       # FIXME: Return value
     end
 
+    def delete_glossary_by_name(name : String)
+      glossary_id = convert_glossary_name_to_id(name)
+      delete_glossary(glossary_id)
+    end
+
     def list_glossaries : Array(GlossaryInfo)
       url = "#{server_url}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
@@ -363,7 +368,7 @@ module DeepL
       Array(GlossaryInfo).from_json(glossaries_json)
     end
 
-    def get_glossary_entries_from_id(glossary_id : String) : String
+    def get_glossary_entries(glossary_id : String) : String
       header = http_headers_base
       header["Accept"] = "text/tab-separated-values"
       url = "#{server_url}/glossaries/#{glossary_id}/entries"
@@ -372,11 +377,16 @@ module DeepL
       response.body # Do not parse because it is a TSV
     end
 
-    def get_glossary_entries_from_name(name : String) : String
+    def get_glossary_entries_by_name(name : String) : String
+      glossary_id = convert_glossary_name_to_id(name)
+      get_glossary_entries(glossary_id)
+    end
+
+    def convert_glossary_name_to_id(name : String) : String
       glossaries = list_glossaries
       glossary = glossaries.find { |g| g.name == name }
-      raise DeepLError.new("Glossary not found") unless glossary
-      get_glossary_entries_from_id(glossary.glossary_id)
+      raise GlossaryNotFoundError.new unless glossary
+      glossary.glossary_id
     end
 
     def get_usage
