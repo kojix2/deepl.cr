@@ -96,7 +96,8 @@ module DeepL
       context = nil,
       split_sentences = nil,
       formality = nil,
-      glossary_id = nil
+      glossary_id = nil,
+      glossary_name = nil # original option of deepl.cr
     ) : TextResult
       response = request_translate_text(
         text: text,
@@ -105,7 +106,8 @@ module DeepL
         context: context,
         split_sentences: split_sentences,
         formality: formality,
-        glossary_id: glossary_id
+        glossary_id: glossary_id,
+        glossary_name: glossary_name
       )
 
       parse_translate_text_response(response)
@@ -118,7 +120,8 @@ module DeepL
       context = nil,
       split_sentences = nil,
       formality = nil,
-      glossary_id = nil
+      glossary_id = nil,
+      glossary_name = nil # original option of deepl.cr
     ) : Array(TextResult)
       response = request_translate_text(
         text: text,
@@ -127,7 +130,8 @@ module DeepL
         context: context,
         split_sentences: split_sentences,
         formality: formality,
-        glossary_id: glossary_id
+        glossary_id: glossary_id,
+        glossary_name: glossary_name
       )
 
       parse_translate_xml_response(response)
@@ -140,8 +144,12 @@ module DeepL
       context = nil,
       split_sentences = nil,
       formality = nil,
-      glossary_id = nil
+      glossary_id = nil,
+      glossary_name = nil # original option of deepl.cr
     )
+      if glossary_name
+        glossary_id ||= convert_glossary_name_to_id(glossary_name)
+      end
       params = {
         "text"            => [text],
         "target_lang"     => target_lang,
@@ -178,20 +186,23 @@ module DeepL
       source_lang = nil,
       formality = nil,
       glossary_id = nil,
+      glossary_name = nil, # original option of deepl.cr
       output_format = nil,
       output_file = nil,
       interval = 5.0,
       &block : (String ->)
     )
       translate_document(
-        path,
-        target_lang,
-        source_lang = nil,
-        formality = nil,
-        glossary_id = nil,
-        output_format = nil,
-        output_file = nil,
-        interval = 5.0, block
+        path: path,
+        target_lang: target_lang,
+        source_lang: source_lang,
+        formality: formality,
+        glossary_id: glossary_id,
+        glossary_name: glossary_name,
+        output_format: output_format,
+        output_file: output_file,
+        interval: interval,
+        block: block
       )
     end
 
@@ -201,21 +212,23 @@ module DeepL
       source_lang = nil,
       formality = nil,
       glossary_id = nil,
+      glossary_name = nil,
       output_format = nil,
       output_file = nil,
       interval = 5.0,
       block : (String ->)? = nil
     )
       source_path = Path[path]
-      translation_params = {
-        "source_lang"   => source_lang,
-        "formality"     => formality,
-        "target_lang"   => target_lang,
-        "glossary_id"   => glossary_id,
-        "output_format" => output_format,
-      }.compact!
 
-      document_handle = translate_document_upload(source_path, translation_params)
+      document_handle = translate_document_upload(
+        path: source_path,
+        target_lang: target_lang,
+        source_lang: source_lang,
+        formality: formality,
+        glossary_id: glossary_id,
+        glossary_name: glossary_name,
+        output_format: output_format
+      )
       block.try &.call "[deepl.cr] (i) id (k) key (s) status (t) seconds_remaining (c) billed_characters (e) error_message"
       block.try &.call "[deepl.cr] Uploaded #{source_path} (i) #{document_handle.id} (k) #{document_handle.key}"
 
@@ -243,7 +256,26 @@ module DeepL
       output_file = output_file.parent / (output_base_name + output_extension)
     end
 
-    def translate_document_upload(path : Path | String, params) : DocumentHandle
+    def translate_document_upload(
+      path : Path | String,
+      target_lang,
+      source_lang = nil,
+      formality = nil,
+      glossary_id = nil,
+      glossary_name = nil, # original option of deepl.cr
+      output_format = nil
+    ) : DocumentHandle
+      path = Path[path] if path.is_a?(String)
+      if glossary_name
+        glossary_id ||= convert_glossary_name_to_id(glossary_name)
+      end
+      params = {
+        "source_lang"   => source_lang,
+        "formality"     => formality,
+        "target_lang"   => target_lang,
+        "glossary_id"   => glossary_id,
+        "output_format" => output_format,
+      }.compact!
       file = File.open(path)
       params = params.merge({"file" => file})
 
@@ -259,9 +291,9 @@ module DeepL
       &block : (DocumentStatus ->)
     )
       translate_document_wait_until_done(
-        handle,
-        interval,
-        block
+        handle: handle,
+        interval: interval,
+        block: block
       )
     end
 
