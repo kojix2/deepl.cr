@@ -50,6 +50,12 @@ module DeepL
     end
   end
 
+  class GlossaryNameNotFoundError < DeepLError
+    def initialize(name : String)
+      super("The specified glossary name '#{name}' was not found.")
+    end
+  end
+
   class DocumentNotReadyError < DeepLError
     def initialize
       super("The translation of the specified document is not yet complete.")

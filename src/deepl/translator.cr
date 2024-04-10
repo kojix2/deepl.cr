@@ -417,7 +417,7 @@ module DeepL
     def convert_glossary_name_to_id(name : String) : String
       glossaries = list_glossaries
       glossary = glossaries.find { |g| g.name == name }
-      raise GlossaryNotFoundError.new unless glossary
+      raise GlossaryNameNotFoundError.new(name) unless glossary
       glossary.glossary_id
     end
 
