@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml)
 
-Crystal library for the DeepL language translation API.
+Crystal library for the [DeepL language translation API](https://www.deepl.com/pro-api/).
 
 ## Installation
 
