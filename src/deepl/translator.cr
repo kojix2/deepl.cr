@@ -392,6 +392,13 @@ module DeepL
       delete_glossary(glossary_id)
     end
 
+    def get_glossary_info(glossary_id : String) : GlossaryInfo
+      url = "#{server_url}/glossaries/#{glossary_id}"
+      response = Crest.get(url, headers: http_headers_base)
+      handle_response(response, glossary: true)
+      GlossaryInfo.from_json(response.body)
+    end
+
     def list_glossaries : Array(GlossaryInfo)
       url = "#{server_url}/glossaries"
       response = Crest.get(url, headers: http_headers_base)
