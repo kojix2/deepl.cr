@@ -148,7 +148,7 @@ module DeepL
       glossary_name = nil # original option of deepl.cr
     )
       if glossary_name
-        glossary_id ||= convert_glossary_name_to_id(glossary_name)
+        glossary_id ||= get_glossary_info_by_name(glossary_name).glossary_id
       end
       params = {
         "text"            => [text],
@@ -267,7 +267,7 @@ module DeepL
     ) : DocumentHandle
       path = Path[path] if path.is_a?(String)
       if glossary_name
-        glossary_id ||= convert_glossary_name_to_id(glossary_name)
+        glossary_id ||= get_glossary_info_by_name(glossary_name).glossary_id
       end
       params = {
         "source_lang"   => source_lang,
@@ -388,7 +388,7 @@ module DeepL
     end
 
     def delete_glossary_by_name(name : String)
-      glossary_id = convert_glossary_name_to_id(name)
+      glossary_id = get_glossary_info_by_name(name).glossary_id
       delete_glossary(glossary_id)
     end
 
@@ -397,6 +397,13 @@ module DeepL
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
       GlossaryInfo.from_json(response.body)
+    end
+
+    def get_glossary_info_by_name(name : String) : GlossaryInfo
+      glossaries = list_glossaries
+      glossary_info = glossaries.find { |g| g.name == name }
+      raise GlossaryNameNotFoundError.new(name) unless glossary_info
+      glossary_info
     end
 
     def list_glossaries : Array(GlossaryInfo)
@@ -417,15 +424,8 @@ module DeepL
     end
 
     def get_glossary_entries_by_name(name : String) : String
-      glossary_id = convert_glossary_name_to_id(name)
+      glossary_id = get_glossary_info_by_name(name).glossary_id
       get_glossary_entries(glossary_id)
-    end
-
-    def convert_glossary_name_to_id(name : String) : String
-      glossaries = list_glossaries
-      glossary = glossaries.find { |g| g.name == name }
-      raise GlossaryNameNotFoundError.new(name) unless glossary
-      glossary.glossary_id
     end
 
     def get_usage
