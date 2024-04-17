@@ -229,7 +229,7 @@ module DeepL
         glossary_name: glossary_name,
         output_format: output_format
       )
-      block.try &.call "[deepl.cr] (i) id (k) key (s) status (t) seconds_remaining (c) billed_characters (e) error_message"
+      block.try &.call "[deepl.cr] (i) id (k) key (s) status (r) seconds_remaining (c) billed_characters (e) error_message"
       block.try &.call "[deepl.cr] Uploaded #{source_path} (i) #{document_handle.id} (k) #{document_handle.key}"
 
       translate_document_wait_until_done(document_handle, interval) do |document_status|
