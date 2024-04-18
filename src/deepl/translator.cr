@@ -98,58 +98,11 @@ module DeepL
       formality = nil,
       glossary_id = nil,
       glossary_name = nil # original option of deepl.cr
-    ) : TextResult
-      response = request_translate_text(
-        text: text,
-        target_lang: target_lang,
-        source_lang: source_lang,
-        context: context,
-        split_sentences: split_sentences,
-        formality: formality,
-        glossary_id: glossary_id,
-        glossary_name: glossary_name
-      )
-
-      parse_translate_text_response(response)
-    end
-
-    def translate_xml(
-      text,
-      target_lang,
-      source_lang = nil,
-      context = nil,
-      split_sentences = nil,
-      formality = nil,
-      glossary_id = nil,
-      glossary_name = nil # original option of deepl.cr
     ) : Array(TextResult)
-      response = request_translate_text(
-        text: text,
-        target_lang: target_lang,
-        source_lang: source_lang,
-        context: context,
-        split_sentences: split_sentences,
-        formality: formality,
-        glossary_id: glossary_id,
-        glossary_name: glossary_name
-      )
-
-      parse_translate_xml_response(response)
-    end
-
-    private def request_translate_text(
-      text,
-      target_lang,
-      source_lang = nil,
-      context = nil,
-      split_sentences = nil,
-      formality = nil,
-      glossary_id = nil,
-      glossary_name = nil # original option of deepl.cr
-    )
       if glossary_name
         glossary_id ||= get_glossary_info_by_name(glossary_name).glossary_id
       end
+
       params = {
         "text"            => [text],
         "target_lang"     => target_lang,
@@ -163,14 +116,12 @@ module DeepL
       response = Crest.post(
         api_url_translate, form: params, headers: http_headers_json, json: true
       )
+
       handle_response(response)
+      parse_translate_text_response(response)
     end
 
-    private def parse_translate_text_response(response) : TextResult
-      parse_translate_xml_response(response).first # FIXME
-    end
-
-    private def parse_translate_xml_response(response) : Array(TextResult)
+    private def parse_translate_text_response(response) : Array(TextResult)
       parsed_response = JSON.parse(response.body)
       parsed_response["translations"].as_a.map do |t|
         TextResult.new(
