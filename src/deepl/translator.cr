@@ -91,26 +91,41 @@ module DeepL
     end
 
     def translate_text(
-      text, target_lang,
+      text : (String | Array(String)),
+      target_lang,
       source_lang = nil,
       context = nil,
       split_sentences = nil,
+      preserve_formatting : Bool? = nil,
       formality = nil,
       glossary_id = nil,
-      glossary_name = nil # original option of deepl.cr
+      glossary_name = nil, # original option of deepl.cr
+      tag_handling = nil,
+      outline_detection : Bool? = nil,
+      non_splitting_tags : Array(String)? = nil,
+      splitting_tags : Array(String)? = nil,
+      ignore_tags : Array(String)? = nil
     ) : Array(TextResult)
       if glossary_name
         glossary_id ||= get_glossary_info_by_name(glossary_name).glossary_id
       end
 
+      text = [text] if text.is_a?(String)
+
       params = {
-        "text"            => [text],
-        "target_lang"     => target_lang,
-        "source_lang"     => source_lang,
-        "formality"       => formality,
-        "glossary_id"     => glossary_id,
-        "context"         => context,
-        "split_sentences" => split_sentences,
+        "text"                => text,
+        "target_lang"         => target_lang,
+        "source_lang"         => source_lang,
+        "formality"           => formality,
+        "glossary_id"         => glossary_id,
+        "context"             => context,
+        "split_sentences"     => split_sentences,
+        "preserve_formatting" => preserve_formatting,
+        "tag_handling"        => tag_handling,
+        "outline_detection"   => outline_detection,
+        "non_splitting_tags"  => non_splitting_tags,
+        "splitting_tags"      => splitting_tags,
+        "ignore_tags"         => ignore_tags,
       }.compact!
 
       response = Crest.post(
