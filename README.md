@@ -1,6 +1,7 @@
 # DeepL.cr
 
 [![CI](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/deepl.cr/actions/workflows/ci.yml)
+[![Docs Latest](https://img.shields.io/badge/docs-latest-blue.svg)](https://kojix2.github.io/deepl.cr/)
 
 Crystal library for the [DeepL language translation API](https://www.deepl.com/pro-api/).
 
