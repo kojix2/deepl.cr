@@ -369,6 +369,11 @@ module DeepL
       GlossaryInfo.from_json(response.body)
     end
 
+    # NOTE:
+    # If multiple glossaries have the same name, the ID of the first matching
+    # glossary is returned. (Expected to match the last glossary created,
+    # but depends on DeepL API behavior)
+
     def get_glossary_info_by_name(name : String) : GlossaryInfo
       glossaries = list_glossaries
       glossary_info = glossaries.find { |g| g.name == name }
