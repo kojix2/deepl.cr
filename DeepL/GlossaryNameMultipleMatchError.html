@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::GlossaryNotFoundError - deepl main</title>
+  <title>DeepL::GlossaryNameMultipleMatchError - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -107,7 +107,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/GlossaryNameMultipleMatchError" data-name="deepl::glossarynamemultiplematcherror">
+  <li class=" current" data-id="deepl/DeepL/GlossaryNameMultipleMatchError" data-name="deepl::glossarynamemultiplematcherror">
       <a href="../DeepL/GlossaryNameMultipleMatchError.html">GlossaryNameMultipleMatchError</a>
       
     </li>
@@ -117,7 +117,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/GlossaryNotFoundError" data-name="deepl::glossarynotfounderror">
+  <li class=" " data-id="deepl/DeepL/GlossaryNotFoundError" data-name="deepl::glossarynotfounderror">
       <a href="../DeepL/GlossaryNotFoundError.html">GlossaryNotFoundError</a>
       
     </li>
@@ -166,12 +166,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> DeepL::<wbr>GlossaryNotFoundError
+  <span class="kind">class</span> DeepL::<wbr>GlossaryNameMultipleMatchError
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/GlossaryNotFoundError.html">DeepL::GlossaryNotFoundError</a></li><li class="superclass"><a href="../DeepL/DeepLError.html">DeepL::DeepLError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/GlossaryNameMultipleMatchError.html">DeepL::GlossaryNameMultipleMatchError</a></li><li class="superclass"><a href="../DeepL/DeepLError.html">DeepL::DeepLError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -199,7 +199,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/ee525ceccde826d38e23662e45f78866113d24e3/src/deepl/exceptions.cr#L47" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/ee525ceccde826d38e23662e45f78866113d24e3/src/deepl/exceptions.cr#L59" target="_blank">
         deepl/exceptions.cr
       </a>
     
@@ -221,7 +221,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        <a href="#new%28name%3AString%2Cids%3AArray%28String%29%29-class-method" class="signature"><strong>.new</strong>(name : String, ids : Array(String))</a>
         
       </li>
     
@@ -301,18 +301,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new-class-method">
+    <div class="entry-detail" id="new(name:String,ids:Array(String))-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>
+        def self.<strong>new</strong>(name : String, ids : Array(String))
 
-        <a class="method-permalink" href="#new-class-method">#</a>
+        <a class="method-permalink" href="#new%28name%3AString%2Cids%3AArray%28String%29%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/ee525ceccde826d38e23662e45f78866113d24e3/src/deepl/exceptions.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/ee525ceccde826d38e23662e45f78866113d24e3/src/deepl/exceptions.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
