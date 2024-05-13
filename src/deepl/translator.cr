@@ -107,7 +107,7 @@ module DeepL
       ignore_tags : Array(String)? = nil
     ) : Array(TextResult)
       if glossary_name
-        glossary_id ||= get_glossary_info_by_name(glossary_name).glossary_id
+        glossary_id ||= find_glossary_info_by_name(glossary_name).glossary_id
       end
 
       text = [text] if text.is_a?(String)
@@ -233,7 +233,7 @@ module DeepL
     ) : DocumentHandle
       path = Path[path] if path.is_a?(String)
       if glossary_name
-        glossary_id ||= get_glossary_info_by_name(glossary_name).glossary_id
+        glossary_id ||= find_glossary_info_by_name(glossary_name).glossary_id
       end
       params = {
         "source_lang"   => source_lang,
@@ -358,7 +358,7 @@ module DeepL
     end
 
     def delete_glossary_by_name(name : String)
-      glossary_id = get_glossary_info_by_name(name).glossary_id
+      glossary_id = find_glossary_info_by_name(name).glossary_id
       delete_glossary(glossary_id)
     end
 
@@ -374,11 +374,16 @@ module DeepL
     # glossary is returned. (Expected to match the last glossary created,
     # but depends on DeepL API behavior)
 
-    def get_glossary_info_by_name(name : String) : GlossaryInfo
+    def find_glossary_info_by_name(name : String) : GlossaryInfo
       glossaries = list_glossaries
       glossary_info = glossaries.find { |g| g.name == name }
       raise GlossaryNameNotFoundError.new(name) unless glossary_info
       glossary_info
+    end
+
+    def get_glossary_info_by_name(name : String) : Array(GlossaryInfo)
+      glossaries = list_glossaries
+      glossaries.select { |g| g.name == name }
     end
 
     def list_glossaries : Array(GlossaryInfo)
@@ -403,7 +408,7 @@ module DeepL
     end
 
     def get_glossary_entries_by_name(name : String) : String
-      glossary_id = get_glossary_info_by_name(name).glossary_id
+      glossary_id = find_glossary_info_by_name(name).glossary_id
       get_glossary_entries(glossary_id)
     end
 
