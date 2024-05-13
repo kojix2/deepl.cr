@@ -357,13 +357,9 @@ module DeepL
       # FIXME: Return value
     end
 
-    # Deletes all glossaries with an exact name match.
-
     def delete_glossary_by_name(name : String)
-      glossary_info_list = get_glossary_info_by_name(name)
-      glossary_info_list.each do |glossary_info|
-        delete_glossary(glossary_info.glossary_id)
-      end
+      glossary_id = get_glossary_info_by_name(name).glossary_id
+      delete_glossary(glossary_id)
     end
 
     def get_glossary_info(glossary_id : String) : GlossaryInfo
@@ -373,11 +369,11 @@ module DeepL
       GlossaryInfo.from_json(response.body)
     end
 
-    def get_glossary_info_by_name(name : String) : Array(GlossaryInfo)
+    def get_glossary_info_by_name(name : String) : GlossaryInfo
       glossaries = list_glossaries
-      glossary_info_list = glossaries.select { |g| g.name == name }
-      raise GlossaryNameNotFoundError.new(name) unless glossary_info_list.empty?
-      glossary_info_list
+      glossary_info = glossaries.find { |g| g.name == name }
+      raise GlossaryNameNotFoundError.new(name) unless glossary_info
+      glossary_info
     end
 
     def list_glossaries : Array(GlossaryInfo)
