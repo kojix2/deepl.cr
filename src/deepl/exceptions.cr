@@ -56,6 +56,12 @@ module DeepL
     end
   end
 
+  class GlossaryNameMultipleMatchError < DeepLError
+    def initialize(name : String, ids : Array(String))
+      super("The specified glossary name matched multiple IDs: #{ids.join(", ")}")
+    end
+  end
+
   class DocumentNotReadyError < DeepLError
     def initialize
       super("The translation of the specified document is not yet complete.")

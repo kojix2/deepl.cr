@@ -371,9 +371,25 @@ module DeepL
 
     def get_glossary_info_by_name(name : String) : GlossaryInfo
       glossaries = list_glossaries
-      glossary_info = glossaries.find { |g| g.name == name }
-      raise GlossaryNameNotFoundError.new(name) unless glossary_info
-      glossary_info
+      glossary_info_list = glossaries.select { |g| g.name == name }
+
+      # NOTE:
+      # The DeepL API allows you to have different ID glossaries with the same
+      # name. However, kojix2 does not intend to support this in the "by_name"
+      # methods. Because it would create unacceptable complexity for personal
+      # development...
+
+      case glossary_info_list.size
+      when 0
+        raise GlossaryNameNotFoundError.new(name)
+      when 2..
+        ids = glossary_info_list.map { |glossary_info| glossary_info.glossary_id }
+        raise GlossaryNameMultipleMatchError.new(name, ids)
+      when 1
+        return glossary_info_list[0]
+      else
+        raise "will never get here"
+      end
     end
 
     def list_glossaries : Array(GlossaryInfo)
