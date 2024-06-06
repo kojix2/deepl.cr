@@ -2,12 +2,13 @@ module DeepL
   class DeepLError < Exception
   end
 
-  class ApiKeyError < DeepLError
+  class ApiKeyNotFoundError < DeepLError
     def initialize
       super <<-MSG
       DEEPL_AUTH_KEY is not set.
+
       Please get your API key from https://www.deepl.com/pro-api
-      and set it as an environment variable.
+      and set it as an environment variable: DEEPL_AUTH_KEY.
       MSG
     end
   end
