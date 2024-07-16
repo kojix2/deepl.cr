@@ -195,17 +195,31 @@ module DeepL
         glossary_name: glossary_name,
         output_format: output_format
       )
-      block.try &.call "[deepl.cr] (i) id (k) key (s) status (r) seconds_remaining (c) billed_characters (e) error_message"
-      block.try &.call "[deepl.cr] Uploaded #{source_path} (i) #{document_handle.id} (k) #{document_handle.key}"
+
+      yield_message(block, "Document uploaded")
+      yield_message(block, "File: #{source_path}")
+      yield_message(block, "ID: #{document_handle.id}")
+      yield_message(block, "Key: #{document_handle.key}")
 
       translate_document_wait_until_done(document_handle, interval) do |document_status|
-        block.try &.call("[deepl.cr] #{document_status.summary}")
+        # yeild_message(block, document_status.summary)
+        # yeild_message(block, document_status.id)
+        yield_message(block, "Status: #{document_status.status}")
+        yield_message(block, "Seconds Remaining: #{document_status.seconds_remaining}") if document_status.seconds_remaining
+        yield_message(block, "Billed Characters: #{document_status.billed_characters}") if document_status.billed_characters
+        yield_message(block, "Error Message: #{document_status.error_message}") if document_status.error_message
       end
 
       output_file ||= generate_output_file(source_path, target_lang, output_format)
 
+      yield_message(block, "Downloading translated document to #{output_file}")
       translate_document_download(output_file, document_handle)
-      block.try &.call "[deepl.cr] Saved #{output_file}"
+
+      yield_message(block, "Document saved as #{output_file}")
+    end
+
+    private def yield_message(block, message)
+      block.try &.call("[deepl.cr] #{message}")
     end
 
     private def generate_output_file(source_path : Path, target_lang, output_format) : Path
