@@ -9,6 +9,7 @@ module DeepL
     property billed_characters : UInt64?
     property error_message : String?
 
+    # currently not used
     def summary : String
       String.build do |s|
         s << "(i) #{id}"

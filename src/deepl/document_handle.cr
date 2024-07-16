@@ -7,5 +7,8 @@ module DeepL
 
     @[JSON::Field(key: "document_key")]
     property key : String
+
+    def initialize(@id, @key)
+    end
   end
 end
