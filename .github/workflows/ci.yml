@@ -5,6 +5,7 @@ on:
   pull_request:
   schedule:
     - cron: "51 3 * * 6" # Runs at 03:51, only on Saturday
+
 jobs:
   build:
     name: ${{ matrix.os }}
@@ -18,11 +19,18 @@ jobs:
           submodules: true
 
       - name: Set up Docker
-        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        if: matrix.os != 'windows'
         uses: docker/setup-buildx-action@v1
 
+      - name: Build Docker image
+        if: matrix.os != 'windows'
+        run: |
+          git clone https://github.com/DeepLcom/deepl-mock
+          cd deepl-mock
+          docker build -t deepl/deepl-mock .
+
       - name: Run DeepL API Mock Server
-        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        if: matrix.os != 'windows'
         run: |
           docker run -d --rm --name deepl-mock -p 3000:3000 -p 3001:3001 deepl/deepl-mock
 
@@ -34,14 +42,14 @@ jobs:
         run: shards install
 
       - name: Set environment variables
-        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        if: matrix.os != 'windows'
         run: |
           echo "DEEPL_SERVER_URL=http://localhost:3000" >> $GITHUB_ENV
           echo "DEEPL_PROXY_URL=http://localhost:3001" >> $GITHUB_ENV
 
-      - name: Test
+      - name: Run tests
         run: crystal spec
 
       - name: Stop DeepL API Mock Server
-        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        if: matrix.os != 'windows'
         run: docker stop deepl-mock
