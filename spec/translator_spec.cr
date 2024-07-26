@@ -21,11 +21,16 @@ describe DeepL::Translator do
   end
 
   it "can get deepl api key from environment variable" do
+    deepl_api_key = ENV["DEEPL_AUTH_KEY"]?
     dummy_api_key = "dummy_env_key"
     ENV["DEEPL_AUTH_KEY"] = dummy_api_key
     t = DeepL::Translator.new
     t.auth_key.should eq(dummy_api_key)
-    ENV.delete("DEEPL_AUTH_KEY")
+    if deepl_api_key
+      ENV["DEEPL_AUTH_KEY"] = deepl_api_key
+    else
+      ENV.delete("DEEPL_AUTH_KEY")
+    end
   end
 
   it "can set deepl api key" do
