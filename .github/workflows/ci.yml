@@ -16,10 +16,32 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
+
+      - name: Set up Docker
+        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        uses: docker/setup-buildx-action@v1
+
+      - name: Run DeepL API Mock Server
+        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        run: |
+          docker run -d --rm --name deepl-mock -p 3000:3000 -p 3001:3001 deepl/deepl-mock
+
       - uses: crystal-lang/install-crystal@v1
         with:
           crystal: latest
+
       - name: Install dependencies
         run: shards install
+
+      - name: Set environment variables
+        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        run: |
+          echo "DEEPL_SERVER_URL=http://localhost:3000" >> $GITHUB_ENV
+          echo "DEEPL_PROXY_URL=http://localhost:3001" >> $GITHUB_ENV
+
       - name: Test
         run: crystal spec
+
+      - name: Stop DeepL API Mock Server
+        if: matrix.os == 'ubuntu' || matrix.os == 'macos'
+        run: docker stop deepl-mock
