@@ -19,18 +19,18 @@ jobs:
           submodules: true
 
       - name: Set up Docker
-        if: matrix.os != 'windows'
+        if: matrix.os == 'ubuntu'
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
-        if: matrix.os != 'windows'
+        if: matrix.os == 'ubuntu'
         run: |
           git clone https://github.com/DeepLcom/deepl-mock
           cd deepl-mock
           docker build -t deepl/deepl-mock .
 
       - name: Run DeepL API Mock Server
-        if: matrix.os != 'windows'
+        if: matrix.os == 'ubuntu'
         run: |
           docker run -d --rm --name deepl-mock -p 3000:3000 -p 3001:3001 deepl/deepl-mock
 
@@ -42,7 +42,7 @@ jobs:
         run: shards install
 
       - name: Set environment variables
-        if: matrix.os != 'windows'
+        if: matrix.os == 'ubuntu'
         run: |
           echo "DEEPL_SERVER_URL=http://localhost:3000" >> $GITHUB_ENV
           echo "DEEPL_PROXY_URL=http://localhost:3001" >> $GITHUB_ENV
@@ -51,5 +51,5 @@ jobs:
         run: crystal spec
 
       - name: Stop DeepL API Mock Server
-        if: matrix.os != 'windows'
+        if: matrix.os == 'ubuntu'
         run: docker stop deepl-mock
