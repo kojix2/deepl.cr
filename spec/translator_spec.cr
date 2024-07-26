@@ -75,10 +75,12 @@ describe DeepL::Translator do
     output_file.basename.to_s.should match(/sample_PT-BR_\d{10}.txt/)
   end
 
-  ### Mock HTTP requests ###
+  # ## Mock HTTP requests ###
 
-  it "can get source languages" do
-    t = DeepL::Translator.new
-    t.get_source_languages.should be_a(Array(DeepL::LanguageInfo))
+  if ENV["DEEPL_AUTH_KEY"]?
+    it "can get source languages" do
+      t = DeepL::Translator.new
+      t.get_source_languages.should be_a(Array(DeepL::LanguageInfo))
+    end
   end
 end

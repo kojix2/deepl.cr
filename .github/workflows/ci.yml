@@ -46,6 +46,7 @@ jobs:
         run: |
           echo "DEEPL_SERVER_URL=http://localhost:3000" >> $GITHUB_ENV
           echo "DEEPL_PROXY_URL=http://localhost:3001" >> $GITHUB_ENV
+          echo "DEEPL_AUTH_KEY=123456" >> $GITHUB_ENV
 
       - name: Run tests
         run: crystal spec
