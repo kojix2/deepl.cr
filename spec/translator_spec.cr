@@ -79,6 +79,6 @@ describe DeepL::Translator do
 
   it "can get source languages" do
     t = DeepL::Translator.new
-    t.get_source_languages.should be_a(String)
+    t.get_source_languages.should be_a(Array(DeepL::LanguageInfo))
   end
 end
