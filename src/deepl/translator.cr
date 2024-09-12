@@ -156,6 +156,7 @@ module DeepL
       output_format = nil,
       output_file = nil,
       interval = 5.0,
+      message_prefix = "[deepl.cr] ",
       &block : (String ->)
     )
       translate_document(
@@ -168,6 +169,7 @@ module DeepL
         output_format: output_format,
         output_file: output_file,
         interval: interval,
+        message_prefix: message_prefix,
         block: block
       )
     end
@@ -182,6 +184,7 @@ module DeepL
       output_format = nil,
       output_file = nil,
       interval = 5.0,
+      message_prefix = "[deepl.cr] ",
       block : (String ->)? = nil
     )
       source_path = Path[path]
@@ -196,30 +199,27 @@ module DeepL
         output_format: output_format
       )
 
-      yield_message(block, "Document uploaded")
-      yield_message(block, "File: #{source_path}")
-      yield_message(block, "ID: #{document_handle.id}")
-      yield_message(block, "Key: #{document_handle.key}")
+      prefix = message_prefix
+      block.try &.call("#{prefix}Document uploaded")
+      block.try &.call("#{prefix}File: #{source_path}")
+      block.try &.call("#{prefix}ID: #{document_handle.id}")
+      block.try &.call("#{prefix}Key: #{document_handle.key}")
 
       translate_document_wait_until_done(document_handle, interval) do |document_status|
-        # yeild_message(block, document_status.summary)
-        # yeild_message(block, document_status.id)
-        yield_message(block, "Status: #{document_status.status}")
-        yield_message(block, "Seconds Remaining: #{document_status.seconds_remaining}") if document_status.seconds_remaining
-        yield_message(block, "Billed Characters: #{document_status.billed_characters}") if document_status.billed_characters
-        yield_message(block, "Error Message: #{document_status.error_message}") if document_status.error_message
+        # yeild_message(block, document_status.summary, prefix)
+        # yeild_message(block, document_status.id, prefix)
+        block.try &.call("#{prefix}Status: #{document_status.status}")
+        block.try &.call("#{prefix}Seconds Remaining: #{document_status.seconds_remaining}") if document_status.seconds_remaining
+        block.try &.call("#{prefix}Billed Characters: #{document_status.billed_characters}") if document_status.billed_characters
+        block.try &.call("#{prefix}Error Message: #{document_status.error_message}") if document_status.error_message
       end
 
       output_file ||= generate_output_file(source_path, target_lang, output_format)
 
-      yield_message(block, "Downloading translated document to #{output_file}")
+      block.try &.call("#{prefix}Downloading translated document to #{output_file}")
       translate_document_download(output_file, document_handle)
 
-      yield_message(block, "Document saved as #{output_file}")
-    end
-
-    private def yield_message(block, message)
-      block.try &.call("[deepl.cr] #{message}")
+      block.try &.call("#{prefix}Document saved as #{output_file}")
     end
 
     private def generate_output_file(source_path : Path, target_lang, output_format) : Path
