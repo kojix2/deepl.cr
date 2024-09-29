@@ -143,7 +143,7 @@ module DeepL
           text: t["text"].as_s,
           detected_source_language: t["detected_source_language"].as_s,
           # FIXME: `as_u64` is not available (2024-09-29)
-          billed_characters: t["billed_characters"].raw.as(INT).to_u64
+          billed_characters: t["billed_characters"].raw.as(Int).to_u64
         )
       end
     end
