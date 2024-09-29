@@ -141,7 +141,8 @@ module DeepL
       parsed_response["translations"].as_a.map do |t|
         TextResult.new(
           text: t["text"].as_s,
-          detected_source_language: t["detected_source_language"].as_s
+          detected_source_language: t["detected_source_language"].as_s,
+          billed_characters: t["billed_characters"].as_u64
         )
       end
     end
