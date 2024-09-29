@@ -95,6 +95,7 @@ module DeepL
       target_lang,
       source_lang = nil,
       context = nil,
+      show_billed_characters : Bool? = nil,
       split_sentences = nil,
       preserve_formatting : Bool? = nil,
       formality = nil,
@@ -113,19 +114,20 @@ module DeepL
       text = [text] if text.is_a?(String)
 
       params = {
-        "text"                => text,
-        "target_lang"         => target_lang,
-        "source_lang"         => source_lang,
-        "formality"           => formality,
-        "glossary_id"         => glossary_id,
-        "context"             => context,
-        "split_sentences"     => split_sentences,
-        "preserve_formatting" => preserve_formatting,
-        "tag_handling"        => tag_handling,
-        "outline_detection"   => outline_detection,
-        "non_splitting_tags"  => non_splitting_tags,
-        "splitting_tags"      => splitting_tags,
-        "ignore_tags"         => ignore_tags,
+        "text"                   => text,
+        "target_lang"            => target_lang,
+        "source_lang"            => source_lang,
+        "formality"              => formality,
+        "glossary_id"            => glossary_id,
+        "context"                => context,
+        "show_billed_characters" => show_billed_characters,
+        "split_sentences"        => split_sentences,
+        "preserve_formatting"    => preserve_formatting,
+        "tag_handling"           => tag_handling,
+        "outline_detection"      => outline_detection,
+        "non_splitting_tags"     => non_splitting_tags,
+        "splitting_tags"         => splitting_tags,
+        "ignore_tags"            => ignore_tags,
       }.compact!
 
       response = Crest.post(
