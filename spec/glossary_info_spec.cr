@@ -3,7 +3,7 @@ require "./spec_helper"
 describe DeepL::GlossaryInfo do
   it "can be serialized to JSON" do
     tm = Time.utc
-    info = DeepL::GlossaryInfo.new("glossary_id", "Glossary", true, "en", "fr", tm, 10_u32)
+    info = DeepL::GlossaryInfo.new("glossary_id", "Glossary", true, "en", "fr", tm, 10)
     json = info.to_json
     json.should eq(%({"glossary_id":"glossary_id","name":"Glossary","ready":true,"source_lang":"en","target_lang":"fr","creation_time":"#{tm.to_rfc3339}","entry_count":10}))
   end

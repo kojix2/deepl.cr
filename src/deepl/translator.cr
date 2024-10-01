@@ -144,8 +144,7 @@ module DeepL
         TextResult.new(
           text: t["text"].as_s,
           detected_source_language: t["detected_source_language"].as_s,
-          # FIXME: `as_u64` is not available (2024-09-29)
-          billed_characters: t["billed_characters"]?.try &.raw.try &.as(Int).try &.to_u64
+          billed_characters: t["billed_characters"]?.try &.as_i64
         )
       end
     end
@@ -442,7 +441,7 @@ module DeepL
     end
 
     private def parse_get_usage_response(response)
-      Hash(String, UInt64).from_json(response.body)
+      Hash(String, Int64).from_json(response.body)
     end
 
     private def auth_key_is_free_account? : Bool

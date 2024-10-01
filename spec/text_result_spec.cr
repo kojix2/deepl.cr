@@ -5,7 +5,7 @@ describe DeepL::TextResult do
     text = "Hello, world!"
     detected_source_language = "en"
     billed_characters = 13
-    result = DeepL::TextResult.new(text, detected_source_language, 13)
+    result = DeepL::TextResult.new(text, detected_source_language, billed_characters)
 
     result.text.should eq(text)
     result.detected_source_language.should eq(detected_source_language)

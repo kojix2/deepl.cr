@@ -5,8 +5,8 @@ module DeepL
     @[JSON::Field(key: "document_id")]
     property id : String
     property status : String
-    property seconds_remaining : Int32?
-    property billed_characters : UInt64?
+    property seconds_remaining : Int64?
+    property billed_characters : Int64?
     property error_message : String?
 
     # currently not used
