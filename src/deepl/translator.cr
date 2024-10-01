@@ -209,8 +209,6 @@ module DeepL
       block.try &.call("#{prefix}Key: #{document_handle.key}")
 
       translate_document_wait_until_done(document_handle, interval) do |document_status|
-        # yeild_message(block, document_status.summary, prefix)
-        # yeild_message(block, document_status.id, prefix)
         block.try &.call("#{prefix}Status: #{document_status.status}")
         block.try &.call("#{prefix}Seconds Remaining: #{document_status.seconds_remaining}") if document_status.seconds_remaining
         block.try &.call("#{prefix}Billed Characters: #{document_status.billed_characters}") if document_status.billed_characters
