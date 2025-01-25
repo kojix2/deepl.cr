@@ -225,6 +225,10 @@ puts t.translate_document(<span class="s">&quot;path/to/document.pdf&quot;</span
     </tr>
   </tbody>
 </table>
+<ul>
+<li>When the environment variable <code>DEEPL_TARGET_LANG</code> is set, the method <code>DeepL::Translator#guess_target_language</code> will prioritize the language defined in <code>DEEPL_TARGET_LANG</code>.</li>
+<li>However, please note that this does not directly affect translation methods like <code>translate_text</code>.</li>
+</ul>
 <h2><a id="development" class="anchor" href="#development">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
