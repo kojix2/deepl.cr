@@ -59,6 +59,9 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
   </tbody>
 </table>
 
+- When the environment variable `DEEPL_TARGET_LANG` is set, the method `DeepL::Translator#guess_target_language` will prioritize the language defined in `DEEPL_TARGET_LANG`. 
+- However, please note that this does not directly affect translation methods like `translate_text`.
+
 ## Development
 
 - Pull requests are welcome.
