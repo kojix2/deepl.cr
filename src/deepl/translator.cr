@@ -16,8 +16,9 @@ module DeepL
   class Translator
     # Note: The default server URL is set during the compilation process.
     # To change the default server URL, you need to recompile the code.
-    DEEPL_SERVER_URL           = {{ env("DEEPL_SERVER_URL") || "https://api.deepl.com/v2" }}
-    DEEPL_SERVER_URL_FREE      = {{ env("DEEPL_SERVER_URL_FREE") || "https://api-free.deepl.com/v2" }}
+    DEEPL_API_VERSION          = {{ env("DEEPL_API_VERSION") || "v2" }}
+    DEEPL_SERVER_URL           = {{ env("DEEPL_SERVER_URL") || "https://api.deepl.com" }} + "/#{DEEPL_API_VERSION}"
+    DEEPL_SERVER_URL_FREE      = {{ env("DEEPL_SERVER_URL_FREE") || "https://api-free.deepl.com" }} + "/#{DEEPL_API_VERSION}"
     HTTP_STATUS_QUOTA_EXCEEDED = 456
 
     setter auth_key : String?
@@ -107,7 +108,7 @@ module DeepL
       outline_detection : Bool? = nil,
       non_splitting_tags : Array(String)? = nil,
       splitting_tags : Array(String)? = nil,
-      ignore_tags : Array(String)? = nil
+      ignore_tags : Array(String)? = nil,
     ) : Array(TextResult)
       if glossary_name
         glossary_id ||= find_glossary_info_by_name(glossary_name).glossary_id
@@ -190,7 +191,7 @@ module DeepL
       output_file = nil,
       interval = 5.0,
       message_prefix = "[deepl.cr] ",
-      block : (String ->)? = nil
+      block : (String ->)? = nil,
     )
       source_path = Path[path]
 
@@ -246,7 +247,7 @@ module DeepL
       formality = nil,
       glossary_id = nil,
       glossary_name = nil, # original option of deepl.cr
-      output_format = nil
+      output_format = nil,
     ) : DocumentHandle
       path = Path[path] if path.is_a?(String)
       if glossary_name
@@ -283,7 +284,7 @@ module DeepL
     def translate_document_wait_until_done(
       handle : DocumentHandle,
       interval = 5.0,
-      block : (DocumentStatus ->)? = nil
+      block : (DocumentStatus ->)? = nil,
     )
       loop do
         sleep interval
@@ -348,7 +349,7 @@ module DeepL
       source_lang,
       target_lang,
       entries,
-      entry_format = "tsv"
+      entry_format = "tsv",
     ) : GlossaryInfo
       url = "#{server_url}/glossaries"
       data = {
