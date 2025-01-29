@@ -15,9 +15,9 @@ end
 describe DeepL::Translator do
   it "has default deepl server url" do
     DeepL::Translator::DEEPL_SERVER_URL.should \
-      eq(ENV.fetch("DEEPL_SERVER_URL", "https://api.deepl.com/v2"))
+      eq("#{ENV.fetch("DEEPL_SERVER_URL", "https://api.deepl.com")}/v2")
     DeepL::Translator::DEEPL_SERVER_URL_FREE.should \
-      eq(ENV.fetch("DEEPL_SERVER_URL_FREE", "https://api-free.deepl.com/v2"))
+      eq("#{ENV.fetch("DEEPL_SERVER_URL_FREE", "https://api-free.deepl.com")}/v2")
   end
 
   it "can get deepl api key from environment variable" do
