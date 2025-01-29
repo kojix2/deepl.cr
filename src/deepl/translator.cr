@@ -14,6 +14,8 @@ require "./language_info"
 
 module DeepL
   class Translator
+    # Note: The default server URL is set during the compilation process.
+    # To change the default server URL, you need to recompile the code.
     DEEPL_SERVER_URL           = {{ env("DEEPL_SERVER_URL") || "https://api.deepl.com/v2" }}
     DEEPL_SERVER_URL_FREE      = {{ env("DEEPL_SERVER_URL_FREE") || "https://api-free.deepl.com/v2" }}
     HTTP_STATUS_QUOTA_EXCEEDED = 456
