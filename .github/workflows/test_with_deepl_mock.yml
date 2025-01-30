@@ -62,3 +62,4 @@ jobs:
         env:
           DEEPL_SERVER_URL: http://localhost:3000
           HTTP_PROXY: http://localhost:3001
+          DEEPL_AUTH_KEY: mock
