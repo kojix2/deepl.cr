@@ -22,10 +22,16 @@ describe DeepL::Translator do
 
   it "can get deepl api key from environment variable" do
     dummy_api_key = "dummy_env_key"
+    original_api_key = ENV["DEEPL_AUTH_KEY"]?
     ENV["DEEPL_AUTH_KEY"] = dummy_api_key
     t = DeepL::Translator.new
     t.auth_key.should eq(dummy_api_key)
-    ENV.delete("DEEPL_AUTH_KEY")
+    # ENV.delete("DEEPL_AUTH_KEY")
+    if original_api_key
+      ENV["DEEPL_AUTH_KEY"] = original_api_key
+    else
+      ENV.delete("DEEPL_AUTH_KEY")
+    end
   end
 
   it "can set deepl api key" do
@@ -69,4 +75,13 @@ describe DeepL::Translator do
     output_file.parent.should eq(Path[__DIR__] / "fixtures")
     output_file.basename.to_s.should match(/sample_PT-BR_\d{10}.txt/)
   end
+
+  {% if flag?(:deepl_mock) %}
+    it "can translate text using mock" do
+      t = DeepL::Translator.new
+      r = t.translate_text("proton beam", "DE", "EN").first
+      r.detected_source_language.should eq("EN")
+      r.text.should eq("Protonenstrahl")
+    end
+  {% end %}
 end
