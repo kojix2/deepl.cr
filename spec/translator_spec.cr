@@ -45,6 +45,25 @@ describe DeepL::Translator do
     t.user_agent.should eq("deepl.cr/#{DeepL::VERSION}")
   end
 
+  it "can set user agent" do
+    dummy_user_agent = "dummy_user_agent"
+    t = DeepL::Translator.new(user_agent: dummy_user_agent)
+    t.user_agent.should eq(dummy_user_agent)
+  end
+
+  it "can set user agent from environment variable" do
+    original_user_agent = ENV["DEEPL_USER_AGENT"]?
+    dummy_user_agent = "dummy_env_user_agent"
+    ENV["DEEPL_USER_AGENT"] = dummy_user_agent
+    t = DeepL::Translator.new
+    t.user_agent.should eq(dummy_user_agent)
+    if original_user_agent
+      ENV["DEEPL_USER_AGENT"] = original_user_agent
+    else
+      ENV.delete("DEEPL_USER_AGENT")
+    end
+  end
+
   it "can guess target language from environment variable" do
     ENV["DEEPL_TARGET_LANG"] = "CRYSTAL"
     t = DeepL::Translator.new
