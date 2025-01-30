@@ -112,5 +112,17 @@ describe DeepL::Translator do
       output_text = File.read(output_file)
       output_text.should eq("Protonenstrahl\nProtonenstrahl\nProtonenstrahl")
     end
+
+    it "it can get target languages using mock" do
+      t = DeepL::Translator.new
+      r = t.get_target_languages
+      r.should be_a(Array(DeepL::LanguageInfo))
+    end
+
+    it "it can get source languages using mock" do
+      t = DeepL::Translator.new
+      r = t.get_source_languages
+      r.should be_a(Array(DeepL::LanguageInfo))
+    end
   {% end %}
 end
