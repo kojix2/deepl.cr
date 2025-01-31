@@ -20,6 +20,18 @@ describe DeepL::Translator do
       eq("#{ENV.fetch("DEEPL_SERVER_URL_FREE", "https://api-free.deepl.com")}/v2")
   end
 
+  it "cannot change deepl server url at runtime" do
+    original_server_url = ENV["DEEPL_SERVER_URL"]?
+    ENV["DEEPL_SERVER_URL"] = "https://example.com"
+    t = DeepL::Translator.new
+    t.server_url.should_not contain("example.com")
+    if original_server_url
+      ENV["DEEPL_SERVER_URL"] = original_server_url
+    else
+      ENV.delete("DEEPL_SERVER_URL")
+    end
+  end
+
   it "can get deepl api key from environment variable" do
     dummy_api_key = "dummy_env_key"
     original_api_key = ENV["DEEPL_AUTH_KEY"]?
