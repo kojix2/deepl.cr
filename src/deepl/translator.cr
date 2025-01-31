@@ -16,10 +16,12 @@ module DeepL
   class Translator
     # Note: The default server URL is set during the compilation process.
     # To change the default server URL, you need to recompile the code.
-    DEEPL_API_VERSION          = {{ env("DEEPL_API_VERSION") || "v2" }}
-    DEEPL_SERVER_URL           = {{ env("DEEPL_SERVER_URL") || "https://api.deepl.com" }} + "/#{DEEPL_API_VERSION}"
-    DEEPL_SERVER_URL_FREE      = {{ env("DEEPL_SERVER_URL_FREE") || "https://api-free.deepl.com" }} + "/#{DEEPL_API_VERSION}"
-    HTTP_STATUS_QUOTA_EXCEEDED = 456
+    DEEPL_DEFAULT_SERVER_URL      = "https://api.deepl.com"
+    DEEPL_DEFAULT_SERVER_URL_FREE = "https://api-free.deepl.com"
+    DEEPL_API_VERSION             = {{ env("DEEPL_API_VERSION") || "v2" }}
+    DEEPL_SERVER_URL              = {{ env("DEEPL_SERVER_URL") || DEEPL_DEFAULT_SERVER_URL }} + "/#{DEEPL_API_VERSION}"
+    DEEPL_SERVER_URL_FREE         = {{ env("DEEPL_SERVER_URL_FREE") || DEEPL_DEFAULT_SERVER_URL_FREE }} + "/#{DEEPL_API_VERSION}"
+    HTTP_STATUS_QUOTA_EXCEEDED    = 456
 
     setter auth_key : String?
     setter user_agent : String?
