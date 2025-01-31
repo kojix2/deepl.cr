@@ -221,7 +221,7 @@ module DeepL
       output_file ||= generate_output_file(source_path, target_lang, output_format)
 
       block.try &.call("#{prefix}Downloading translated document to #{output_file}")
-      translate_document_download(output_file, document_handle)
+      translate_document_download(document_handle, output_file)
 
       block.try &.call("#{prefix}Document saved as #{output_file}")
     end
@@ -307,7 +307,7 @@ module DeepL
       DocumentStatus.from_json(response.body)
     end
 
-    def translate_document_download(output_file, handle : DocumentHandle)
+    def translate_document_download(handle : DocumentHandle, output_file)
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
       Crest.post(url, form: data, headers: http_headers_json) do |response|
