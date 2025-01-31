@@ -113,6 +113,24 @@ describe DeepL::Translator do
       output_text.should eq("Protonenstrahl\nProtonenstrahl\nProtonenstrahl")
     end
 
+    it "can translate document step by step using mock" do
+      t = DeepL::Translator.new
+      source_path = Path[__DIR__] / "fixtures" / "proton_beams.txt"
+      output_file = Path[__DIR__] / "fixtures" / "proton_beams_DE.txt"
+      target_lang = "DE"
+      dh = t.translate_document_upload(source_path, target_lang)
+      dh.should be_a(DeepL::DocumentHandle)
+
+      ds = t.translate_document_get_status(dh)
+      ds.should be_a(DeepL::DocumentStatus)
+
+      t.translate_document_wait_until_done(dh)
+      t.translate_document_download(dh, output_file)
+
+      output_text = File.read(output_file)
+      output_text.should eq("Protonenstrahl\nProtonenstrahl\nProtonenstrahl")
+    end
+
     it "it can get target languages using mock" do
       t = DeepL::Translator.new
       r = t.get_target_languages
