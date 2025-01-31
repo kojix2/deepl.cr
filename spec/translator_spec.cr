@@ -15,9 +15,9 @@ end
 describe DeepL::Translator do
   it "has default deepl server url" do
     DeepL::Translator::DEEPL_SERVER_URL.should \
-      eq("#{ENV.fetch("DEEPL_SERVER_URL", "https://api.deepl.com")}/v2")
+      eq("#{ENV.fetch("DEEPL_SERVER_URL", "https://api.deepl.com")}")
     DeepL::Translator::DEEPL_SERVER_URL_FREE.should \
-      eq("#{ENV.fetch("DEEPL_SERVER_URL_FREE", "https://api-free.deepl.com")}/v2")
+      eq("#{ENV.fetch("DEEPL_SERVER_URL_FREE", "https://api-free.deepl.com")}")
   end
 
   it "cannot change deepl server url at runtime" do

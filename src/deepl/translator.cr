@@ -19,8 +19,8 @@ module DeepL
     DEEPL_DEFAULT_SERVER_URL      = "https://api.deepl.com"
     DEEPL_DEFAULT_SERVER_URL_FREE = "https://api-free.deepl.com"
     DEEPL_API_VERSION             = {{ env("DEEPL_API_VERSION") || "v2" }}
-    DEEPL_SERVER_URL              = {{ env("DEEPL_SERVER_URL") || DEEPL_DEFAULT_SERVER_URL }} + "/#{DEEPL_API_VERSION}"
-    DEEPL_SERVER_URL_FREE         = {{ env("DEEPL_SERVER_URL_FREE") || DEEPL_DEFAULT_SERVER_URL_FREE }} + "/#{DEEPL_API_VERSION}"
+    DEEPL_SERVER_URL              = {{ env("DEEPL_SERVER_URL") || DEEPL_DEFAULT_SERVER_URL }}
+    DEEPL_SERVER_URL_FREE         = {{ env("DEEPL_SERVER_URL_FREE") || DEEPL_DEFAULT_SERVER_URL_FREE }}
     HTTP_STATUS_QUOTA_EXCEEDED    = 456
 
     setter auth_key : String?
@@ -42,7 +42,11 @@ module DeepL
 
     def server_url : String
       @server_url ||
-        auth_key_is_free_account? ? DEEPL_SERVER_URL_FREE : DEEPL_SERVER_URL
+        if auth_key_is_free_account?
+          "#{DEEPL_SERVER_URL_FREE}/#{DEEPL_API_VERSION}"
+        else
+          "#{DEEPL_SERVER_URL}/#{DEEPL_API_VERSION}"
+        end
     end
 
     private def api_url_translate : String
