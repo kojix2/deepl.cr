@@ -115,6 +115,7 @@ module DeepL
       non_splitting_tags : Array(String)? = nil,
       splitting_tags : Array(String)? = nil,
       ignore_tags : Array(String)? = nil,
+      model_type = nil,
     ) : Array(TextResult)
       if glossary_name
         glossary_id ||= find_glossary_info_by_name(glossary_name).glossary_id
@@ -137,6 +138,7 @@ module DeepL
         "non_splitting_tags"     => non_splitting_tags,
         "splitting_tags"         => splitting_tags,
         "ignore_tags"            => ignore_tags,
+        "model_type"             => model_type,
       }.compact!
 
       response = Crest.post(
@@ -153,7 +155,8 @@ module DeepL
         TextResult.new(
           text: t["text"].as_s,
           detected_source_language: t["detected_source_language"].as_s,
-          billed_characters: t["billed_characters"]?.try &.as_i64
+          billed_characters: t["billed_characters"]?.try &.as_i64,
+          model_type_used: t["model_type_used"]?.try &.as_s
         )
       end
     end
