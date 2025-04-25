@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Crystal Docs 1.14.0">
+<meta name="generator" content="Crystal Docs 1.15.1">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="deepl">
 
@@ -161,12 +161,16 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> DeepL::<wbr>TextResult
+  <span class="kind">
+    struct
+  </span> DeepL::<wbr>TextResult
 
 </h1>
 
 
   <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/TextResult.html">DeepL::TextResult</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
 
 
 
@@ -194,7 +198,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f77afa252836ae29ae51947973f23ab35be0036a/src/deepl/text_result.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/62b6d11ac8a2f6c0b8ccc0ab0f22b685d3f233c9/src/deepl/text_result.cr#L2" target="_blank">
         deepl/text_result.cr
       </a>
     
@@ -205,6 +209,7 @@
 
 
 
+  
   <h2>
     <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
@@ -216,18 +221,18 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28text%3AString%2Cdetected_source_language%3AString%2Cbilled_characters%3AInt64%7CNil%29-class-method" class="signature"><strong>.new</strong>(text : String, detected_source_language : String, billed_characters : Int64 | Nil)</a>
+        <a href="#new%28text%3AString%2Cdetected_source_language%3AString%2Cbilled_characters%3AInt64%7CNil%2Cmodel_type_used%3AString%7CNil%29-class-method" class="signature"><strong>.new</strong>(text : String, detected_source_language : String, billed_characters : Int64 | Nil, model_type_used : String | Nil)</a>
         
       </li>
     
   </ul>
 
 
+  
 
+  
 
-
-
-
+  
   <h2>
     <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
   <svg class="octicon-link" aria-hidden="true">
@@ -249,12 +254,17 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28text_text%3D%40text%2Cdetected_source_language_detected_source_language%3D%40detected_source_language%2Cbilled_characters_billed_characters%3D%40billed_characters%29-instance-method" class="signature"><strong>#copy_with</strong>(text _text = @text, detected_source_language _detected_source_language = @detected_source_language, billed_characters _billed_characters = @billed_characters)</a>
+        <a href="#copy_with%28text_text%3D%40text%2Cdetected_source_language_detected_source_language%3D%40detected_source_language%2Cbilled_characters_billed_characters%3D%40billed_characters%2Cmodel_type_used_model_type_used%3D%40model_type_used%29-instance-method" class="signature"><strong>#copy_with</strong>(text _text = @text, detected_source_language _detected_source_language = @detected_source_language, billed_characters _billed_characters = @billed_characters, model_type_used _model_type_used = @model_type_used)</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#detected_source_language%3AString-instance-method" class="signature"><strong>#detected_source_language</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#model_type_used%3AString%7CNil-instance-method" class="signature"><strong>#model_type_used</strong> : String | Nil</a>
         
       </li>
     
@@ -267,50 +277,50 @@
 
 
 
-<div class="methods-inherited">
+  <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+  </div>
+
   
-    
-
-
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-    
-
-
-  
-</div>
-
-
   <h2>
     <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
@@ -320,29 +330,29 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(text:String,detected_source_language:String,billed_characters:Int64|Nil)-class-method">
+    <div class="entry-detail" id="new(text:String,detected_source_language:String,billed_characters:Int64|Nil,model_type_used:String|Nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(text : String, detected_source_language : String, billed_characters : Int64 | Nil)
+        def self.<strong>new</strong>(text : String, detected_source_language : String, billed_characters : Int64 | Nil, model_type_used : String | Nil)
 
-        <a class="method-permalink" href="#new%28text%3AString%2Cdetected_source_language%3AString%2Cbilled_characters%3AInt64%7CNil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28text%3AString%2Cdetected_source_language%3AString%2Cbilled_characters%3AInt64%7CNil%2Cmodel_type_used%3AString%7CNil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f77afa252836ae29ae51947973f23ab35be0036a/src/deepl/text_result.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/62b6d11ac8a2f6c0b8ccc0ab0f22b685d3f233c9/src/deepl/text_result.cr#L2" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+  
 
+  
 
-
-
-
+  
   <h2>
     <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
@@ -377,23 +387,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f77afa252836ae29ae51947973f23ab35be0036a/src/deepl/text_result.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/62b6d11ac8a2f6c0b8ccc0ab0f22b685d3f233c9/src/deepl/text_result.cr#L2" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(text_text=@text,detected_source_language_detected_source_language=@detected_source_language,billed_characters_billed_characters=@billed_characters)-instance-method">
+    <div class="entry-detail" id="copy_with(text_text=@text,detected_source_language_detected_source_language=@detected_source_language,billed_characters_billed_characters=@billed_characters,model_type_used_model_type_used=@model_type_used)-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(text _text = @text, detected_source_language _detected_source_language = @detected_source_language, billed_characters _billed_characters = @billed_characters)
+        def <strong>copy_with</strong>(text _text = @text, detected_source_language _detected_source_language = @detected_source_language, billed_characters _billed_characters = @billed_characters, model_type_used _model_type_used = @model_type_used)
 
-        <a class="method-permalink" href="#copy_with%28text_text%3D%40text%2Cdetected_source_language_detected_source_language%3D%40detected_source_language%2Cbilled_characters_billed_characters%3D%40billed_characters%29-instance-method">#</a>
+        <a class="method-permalink" href="#copy_with%28text_text%3D%40text%2Cdetected_source_language_detected_source_language%3D%40detected_source_language%2Cbilled_characters_billed_characters%3D%40billed_characters%2Cmodel_type_used_model_type_used%3D%40model_type_used%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f77afa252836ae29ae51947973f23ab35be0036a/src/deepl/text_result.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/62b6d11ac8a2f6c0b8ccc0ab0f22b685d3f233c9/src/deepl/text_result.cr#L2" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -404,6 +414,20 @@
         def <strong>detected_source_language</strong> : String
 
         <a class="method-permalink" href="#detected_source_language%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="model_type_used:String|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>model_type_used</strong> : String | Nil
+
+        <a class="method-permalink" href="#model_type_used%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
@@ -426,6 +450,7 @@
       </div>
     </div>
   
+
 
 
 </div>
