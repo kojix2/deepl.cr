@@ -67,6 +67,8 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 - Pull requests are welcome.
 - If you want to take over the project and become the owner, please submit your request with a pull request.
 
+- [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapihttps://github.com/DeepLcom/openapi)
+
 ## Use case
 
 - [DeepL CLI](https://github.com/kojix2/deepl-cli)
