@@ -296,8 +296,8 @@ module DeepL
       block : (DocumentStatus ->)? = nil,
     )
       loop do
-        sleep_interval_ms = (interval * 1000).to_i32
-        sleep Time::Span.new(milliseconds: sleep_interval_ms)
+        sleep_interval_ns = (interval * 1_000_000_000).to_i64
+        sleep Time::Span.new(nanoseconds: sleep_interval_ns)
 
         document_status = translate_document_get_status(handle)
 
