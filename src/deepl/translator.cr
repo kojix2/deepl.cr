@@ -11,6 +11,7 @@ require "./document_status"
 require "./glossary_info"
 require "./glossary_language_pair"
 require "./language_info"
+require "./usage"
 
 module DeepL
   class Translator
@@ -441,7 +442,7 @@ module DeepL
       get_glossary_entries(glossary_id)
     end
 
-    def get_usage
+    def get_usage : Usage
       response = request_get_usage
       parse_get_usage_response(response)
     end
@@ -452,8 +453,8 @@ module DeepL
       handle_response(response)
     end
 
-    private def parse_get_usage_response(response)
-      Hash(String, Int64).from_json(response.body)
+    private def parse_get_usage_response(response) : Usage
+      Usage.from_json(response.body)
     end
 
     private def auth_key_is_free_account? : Bool
