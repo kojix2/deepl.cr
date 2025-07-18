@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::DocumentStatus - deepl main</title>
+  <title>DeepL::Usage - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -87,7 +87,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/DocumentStatus" data-name="deepl::documentstatus">
+  <li class=" " data-id="deepl/DeepL/DocumentStatus" data-name="deepl::documentstatus">
       <a href="../DeepL/DocumentStatus.html">DocumentStatus</a>
       
     </li>
@@ -147,7 +147,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/Usage" data-name="deepl::usage">
+  <li class=" current" data-id="deepl/DeepL/Usage" data-name="deepl::usage">
       <a href="../DeepL/Usage.html">Usage</a>
       
     </li>
@@ -187,13 +187,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    class
-  </span> DeepL::<wbr>DocumentStatus
+    abstract class
+  </span> DeepL::<wbr>Usage
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DocumentStatus.html">DeepL::DocumentStatus</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/Usage.html">DeepL::Usage</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -222,6 +222,22 @@
 
 
 
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../DeepL/UsageFree.html">DeepL::UsageFree</a></li>
+    
+      <li class="other-type"><a href="../DeepL/UsagePro.html">DeepL::UsagePro</a></li>
+    
+  </ul>
+
 
 
 
@@ -237,8 +253,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L2" target="_blank">
-        deepl/document_status.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L2" target="_blank">
+        deepl/usage.cr
       </a>
     
     <br/>
@@ -283,59 +299,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#billed_characters%3AInt64%7CNil-instance-method" class="signature"><strong>#billed_characters</strong> : Int64 | Nil</a>
+        <a href="#character_count%3AInt64-instance-method" class="signature"><strong>#character_count</strong> : Int64</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#billed_characters%3D%28billed_characters%3AInt64%7CNil%29-instance-method" class="signature"><strong>#billed_characters=</strong>(billed_characters : Int64 | Nil)</a>
+        <a href="#character_count%3D%28character_count%3AInt64%29-instance-method" class="signature"><strong>#character_count=</strong>(character_count : Int64)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#error_message%3AString%7CNil-instance-method" class="signature"><strong>#error_message</strong> : String | Nil</a>
+        <a href="#character_limit%3AInt64-instance-method" class="signature"><strong>#character_limit</strong> : Int64</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#error_message%3D%28error_message%3AString%7CNil%29-instance-method" class="signature"><strong>#error_message=</strong>(error_message : String | Nil)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#id%3AString-instance-method" class="signature"><strong>#id</strong> : String</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#id%3D%28id%3AString%29-instance-method" class="signature"><strong>#id=</strong>(id : String)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#seconds_remaining%3AInt64%7CNil-instance-method" class="signature"><strong>#seconds_remaining</strong> : Int64 | Nil</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#seconds_remaining%3D%28seconds_remaining%3AInt64%7CNil%29-instance-method" class="signature"><strong>#seconds_remaining=</strong>(seconds_remaining : Int64 | Nil)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#status%3AString-instance-method" class="signature"><strong>#status</strong> : String</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#status%3D%28status%3AString%29-instance-method" class="signature"><strong>#status=</strong>(status : String)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#summary%3AString-instance-method" class="signature"><strong>#summary</strong> : String</a>
-        
-          <div class="summary"><p>currently not used</p></div>
+        <a href="#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="signature"><strong>#character_limit=</strong>(character_limit : Int64)</a>
         
       </li>
     
@@ -407,7 +386,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -428,183 +407,66 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="billed_characters:Int64|Nil-instance-method">
+    <div class="entry-detail" id="character_count:Int64-instance-method">
       <div class="signature">
         
-        def <strong>billed_characters</strong> : Int64 | Nil
+        def <strong>character_count</strong> : Int64
 
-        <a class="method-permalink" href="#billed_characters%3AInt64%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#character_count%3AInt64-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="billed_characters=(billed_characters:Int64|Nil)-instance-method">
+    <div class="entry-detail" id="character_count=(character_count:Int64)-instance-method">
       <div class="signature">
         
-        def <strong>billed_characters=</strong>(billed_characters : Int64 | Nil)
+        def <strong>character_count=</strong>(character_count : Int64)
 
-        <a class="method-permalink" href="#billed_characters%3D%28billed_characters%3AInt64%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#character_count%3D%28character_count%3AInt64%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="error_message:String|Nil-instance-method">
+    <div class="entry-detail" id="character_limit:Int64-instance-method">
       <div class="signature">
         
-        def <strong>error_message</strong> : String | Nil
+        def <strong>character_limit</strong> : Int64
 
-        <a class="method-permalink" href="#error_message%3AString%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#character_limit%3AInt64-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="error_message=(error_message:String|Nil)-instance-method">
+    <div class="entry-detail" id="character_limit=(character_limit:Int64)-instance-method">
       <div class="signature">
         
-        def <strong>error_message=</strong>(error_message : String | Nil)
+        def <strong>character_limit=</strong>(character_limit : Int64)
 
-        <a class="method-permalink" href="#error_message%3D%28error_message%3AString%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#character_limit%3D%28character_limit%3AInt64%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L10" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="id:String-instance-method">
-      <div class="signature">
-        
-        def <strong>id</strong> : String
-
-        <a class="method-permalink" href="#id%3AString-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="id=(id:String)-instance-method">
-      <div class="signature">
-        
-        def <strong>id=</strong>(id : String)
-
-        <a class="method-permalink" href="#id%3D%28id%3AString%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="seconds_remaining:Int64|Nil-instance-method">
-      <div class="signature">
-        
-        def <strong>seconds_remaining</strong> : Int64 | Nil
-
-        <a class="method-permalink" href="#seconds_remaining%3AInt64%7CNil-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L8" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="seconds_remaining=(seconds_remaining:Int64|Nil)-instance-method">
-      <div class="signature">
-        
-        def <strong>seconds_remaining=</strong>(seconds_remaining : Int64 | Nil)
-
-        <a class="method-permalink" href="#seconds_remaining%3D%28seconds_remaining%3AInt64%7CNil%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L8" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="status:String-instance-method">
-      <div class="signature">
-        
-        def <strong>status</strong> : String
-
-        <a class="method-permalink" href="#status%3AString-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L7" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="status=(status:String)-instance-method">
-      <div class="signature">
-        
-        def <strong>status=</strong>(status : String)
-
-        <a class="method-permalink" href="#status%3D%28status%3AString%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L7" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="summary:String-instance-method">
-      <div class="signature">
-        
-        def <strong>summary</strong> : String
-
-        <a class="method-permalink" href="#summary%3AString-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>currently not used</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/document_status.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>

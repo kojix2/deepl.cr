@@ -147,6 +147,11 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/Usage" data-name="deepl::usage">
+      <a href="../DeepL/Usage.html">Usage</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/UsageFree" data-name="deepl::usagefree">
       <a href="../DeepL/UsageFree.html">UsageFree</a>
       
@@ -188,7 +193,7 @@
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/UsagePro.html">DeepL::UsagePro</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/UsagePro.html">DeepL::UsagePro</a></li><li class="superclass"><a href="../DeepL/Usage.html">DeepL::Usage</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -198,20 +203,6 @@
 
 
 
-
-  <h2>
-    <a id="included-modules" class="anchor" href="#included-modules">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Included Modules
-  </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type">JSON::Serializable</li>
-    
-  </ul>
 
 
 
@@ -232,7 +223,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L9" target="_blank">
         deepl/usage.cr
       </a>
     
@@ -255,7 +246,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%2Capi_key_character_limit%3AInt64%2Cstart_time%3ATime%2Cend_time%3ATime%2Ccharacter_count%3AInt64%2Ccharacter_limit%3AInt64%29-class-method" class="signature"><strong>.new</strong>(products : Array(DeepL::UsagePro::Product), api_key_character_count : Int64, api_key_character_limit : Int64, start_time : Time, end_time : Time, character_count : Int64, character_limit : Int64)</a>
+        <a href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%2Capi_key_character_limit%3AInt64%2Cstart_time%3ATime%2Cend_time%3ATime%2Ccharacter_count%2Ccharacter_limit%29-class-method" class="signature"><strong>.new</strong>(products : Array(DeepL::UsagePro::Product), api_key_character_count : Int64, api_key_character_limit : Int64, start_time : Time, end_time : Time, character_count, character_limit)</a>
         
       </li>
     
@@ -303,26 +294,6 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#character_count%3AInt64-instance-method" class="signature"><strong>#character_count</strong> : Int64</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#character_count%3D%28character_count%3AInt64%29-instance-method" class="signature"><strong>#character_count=</strong>(character_count : Int64)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#character_limit%3AInt64-instance-method" class="signature"><strong>#character_limit</strong> : Int64</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="signature"><strong>#character_limit=</strong>(character_limit : Int64)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#end_time%3ATime-instance-method" class="signature"><strong>#end_time</strong> : Time</a>
         
       </li>
@@ -357,6 +328,52 @@
 
 
   <div class="methods-inherited">
+    
+      
+
+  <h3>Instance methods inherited from class <code><a href="../DeepL/Usage.html">DeepL::Usage</a></code></h3>
+  
+  
+    <a href="../DeepL/Usage.html#character_count%3AInt64-instance-method" class="tooltip">
+      <span>character_count : Int64</span>
+    character_count</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#character_count%3D%28character_count%3AInt64%29-instance-method" class="tooltip">
+      <span>character_count=(character_count : Int64)</span>
+    character_count=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#character_limit%3AInt64-instance-method" class="tooltip">
+      <span>character_limit : Int64</span>
+    character_limit</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="tooltip">
+      <span>character_limit=(character_limit : Int64)</span>
+    character_limit=</a>
+    
+  
+
+
+      
+
+  <h3>Constructor methods inherited from class <code><a href="../DeepL/Usage.html">DeepL::Usage</a></code></h3>
+  
+  
+    <a href="../DeepL/Usage.html#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="tooltip">
+      <span>new(pull : JSON::PullParser)</span>
+    new</a>
+    
+  
+
+
+      
+
+
+      
+
+
     
       
 
@@ -409,18 +426,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(products:Array(DeepL::UsagePro::Product),api_key_character_count:Int64,api_key_character_limit:Int64,start_time:Time,end_time:Time,character_count:Int64,character_limit:Int64)-class-method">
+    <div class="entry-detail" id="new(products:Array(DeepL::UsagePro::Product),api_key_character_count:Int64,api_key_character_limit:Int64,start_time:Time,end_time:Time,character_count,character_limit)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(products : Array(<a href="../DeepL/UsagePro/Product.html">DeepL::UsagePro::Product</a>), api_key_character_count : Int64, api_key_character_limit : Int64, start_time : Time, end_time : Time, character_count : Int64, character_limit : Int64)
+        def self.<strong>new</strong>(products : Array(<a href="../DeepL/UsagePro/Product.html">DeepL::UsagePro::Product</a>), api_key_character_count : Int64, api_key_character_limit : Int64, start_time : Time, end_time : Time, character_count, character_limit)
 
-        <a class="method-permalink" href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%2Capi_key_character_limit%3AInt64%2Cstart_time%3ATime%2Cend_time%3ATime%2Ccharacter_count%3AInt64%2Ccharacter_limit%3AInt64%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%2Capi_key_character_limit%3AInt64%2Cstart_time%3ATime%2Cend_time%3ATime%2Ccharacter_count%2Ccharacter_limit%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -436,7 +453,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -468,7 +485,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -484,7 +501,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -500,7 +517,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -516,71 +533,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L18" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="character_count:Int64-instance-method">
-      <div class="signature">
-        
-        def <strong>character_count</strong> : Int64
-
-        <a class="method-permalink" href="#character_count%3AInt64-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L21" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="character_count=(character_count:Int64)-instance-method">
-      <div class="signature">
-        
-        def <strong>character_count=</strong>(character_count : Int64)
-
-        <a class="method-permalink" href="#character_count%3D%28character_count%3AInt64%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L21" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="character_limit:Int64-instance-method">
-      <div class="signature">
-        
-        def <strong>character_limit</strong> : Int64
-
-        <a class="method-permalink" href="#character_limit%3AInt64-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L22" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="character_limit=(character_limit:Int64)-instance-method">
-      <div class="signature">
-        
-        def <strong>character_limit=</strong>(character_limit : Int64)
-
-        <a class="method-permalink" href="#character_limit%3D%28character_limit%3AInt64%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -596,7 +549,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -612,7 +565,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -628,7 +581,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -644,7 +597,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -660,7 +613,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -676,7 +629,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/7c9b3a7a055723e022c6afb96e5a1e7307b2077c/src/deepl/usage.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/5271a4933907a86225dec3982bf35f2f03c219f7/src/deepl/usage.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
