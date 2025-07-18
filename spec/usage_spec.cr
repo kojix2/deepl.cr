@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe DeepL::Usage do
+describe DeepL::UsagePro do
   sample_json = %({
     "products": [
       {
@@ -23,7 +23,7 @@ describe DeepL::Usage do
   })
 
   it "can be deserialized from JSON" do
-    usage = DeepL::Usage.from_json(sample_json)
+    usage = DeepL::UsagePro.from_json(sample_json)
 
     usage.products.size.should eq(2)
     usage.api_key_character_count.should eq(1880000)
@@ -35,7 +35,7 @@ describe DeepL::Usage do
   end
 
   it "can deserialize products correctly" do
-    usage = DeepL::Usage.from_json(sample_json)
+    usage = DeepL::UsagePro.from_json(sample_json)
 
     write_product = usage.products[0]
     write_product.product_type.should eq("write")
@@ -49,19 +49,19 @@ describe DeepL::Usage do
   end
 
   it "can be serialized to JSON" do
-    usage = DeepL::Usage.from_json(sample_json)
+    usage = DeepL::UsagePro.from_json(sample_json)
     serialized = usage.to_json
 
     # Parse back to verify structure
-    reparsed = DeepL::Usage.from_json(serialized)
+    reparsed = DeepL::UsagePro.from_json(serialized)
     reparsed.products.size.should eq(2)
     reparsed.api_key_character_count.should eq(1880000)
     reparsed.character_count.should eq(2150000)
   end
 
-  describe DeepL::Usage::Product do
+  describe DeepL::UsagePro::Product do
     it "can be initialized manually" do
-      product = DeepL::Usage::Product.new("translate", 500000_i64, 600000_i64)
+      product = DeepL::UsagePro::Product.new("translate", 500000_i64, 600000_i64)
 
       product.product_type.should eq("translate")
       product.api_key_character_count.should eq(500000)
@@ -69,13 +69,36 @@ describe DeepL::Usage do
     end
 
     it "can be serialized to JSON" do
-      product = DeepL::Usage::Product.new("write", 100000_i64, 120000_i64)
+      product = DeepL::UsagePro::Product.new("write", 100000_i64, 120000_i64)
       json = product.to_json
 
-      reparsed = DeepL::Usage::Product.from_json(json)
+      reparsed = DeepL::UsagePro::Product.from_json(json)
       reparsed.product_type.should eq("write")
       reparsed.api_key_character_count.should eq(100000)
       reparsed.character_count.should eq(120000)
+    end
+  end
+
+  describe DeepL::UsageFree do
+    it "can be deserialized from JSON" do
+      free_json = %({
+        "character_count": 180118,
+        "character_limit": 1250000
+      })
+
+      usage = DeepL::UsageFree.from_json(free_json)
+
+      usage.character_count.should eq(180118)
+      usage.character_limit.should eq(1250000)
+    end
+
+    it "can be serialized to JSON" do
+      usage = DeepL::UsageFree.new(180118_i64, 1250000_i64)
+      json = usage.to_json
+
+      reparsed = DeepL::UsageFree.from_json(json)
+      reparsed.character_count.should eq(180118)
+      reparsed.character_limit.should eq(1250000)
     end
   end
 end

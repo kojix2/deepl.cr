@@ -1,5 +1,5 @@
 module DeepL
-  class Usage
+  class UsagePro
     include JSON::Serializable
 
     class Product
@@ -22,6 +22,16 @@ module DeepL
     property character_limit : Int64
 
     def initialize(@products, @api_key_character_count, @api_key_character_limit, @start_time, @end_time, @character_count, @character_limit)
+    end
+  end
+
+  class UsageFree
+    include JSON::Serializable
+
+    property character_count : Int64
+    property character_limit : Int64
+
+    def initialize(@character_count, @character_limit)
     end
   end
 end

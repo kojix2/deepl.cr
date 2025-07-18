@@ -442,19 +442,20 @@ module DeepL
       get_glossary_entries(glossary_id)
     end
 
-    def get_usage : Usage
-      response = request_get_usage
-      parse_get_usage_response(response)
+    def get_usage_pro : UsagePro
+      # TODO: Raise error if free account
+      UsagePro.from_json(request_get_usage.body)
+    end
+
+    def get_usage_free : UsageFree
+      # TODO: Raise error if pro account
+      UsageFree.from_json(request_get_usage.body)
     end
 
     private def request_get_usage
       url = "#{server_url}/usage"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response)
-    end
-
-    private def parse_get_usage_response(response) : Usage
-      Usage.from_json(response.body)
     end
 
     private def auth_key_is_free_account? : Bool
