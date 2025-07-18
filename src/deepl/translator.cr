@@ -453,7 +453,9 @@ module DeepL
     end
 
     def get_usage : Usage
-      if auth_key_is_free_account?
+      if auth_key_is_mock? # FIXME: Workaround for testing
+        get_usage_free
+      elsif auth_key_is_free_account?
         get_usage_free
       else
         get_usage_pro
@@ -468,6 +470,10 @@ module DeepL
 
     private def auth_key_is_free_account? : Bool
       auth_key.ends_with?(":fx")
+    end
+
+    private def auth_key_is_mock? : Bool
+      auth_key == "mock"
     end
 
     def guess_target_language : String
