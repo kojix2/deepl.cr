@@ -452,6 +452,14 @@ module DeepL
       UsageFree.from_json(request_get_usage.body)
     end
 
+    def get_usage : Usage
+      if auth_key_is_free_account?
+        get_usage_free
+      else
+        get_usage_pro
+      end
+    end
+
     private def request_get_usage
       url = "#{server_url}/usage"
       response = Crest.get(url, headers: http_headers_base)
