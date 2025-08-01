@@ -1,35 +1,29 @@
+require "./usage_status"
+
 module DeepL
-  abstract class Usage
-    include JSON::Serializable
+  class Translator
+    def get_usage_pro : UsagePro
+      UsagePro.from_json(request_get_usage.body)
+    end
 
-    property character_count : Int64
-    property character_limit : Int64
-  end
+    def get_usage_free : UsageFree
+      UsageFree.from_json(request_get_usage.body)
+    end
 
-  class UsagePro < Usage
-    class Product
-      include JSON::Serializable
-
-      property product_type : String
-      property api_key_character_count : Int64
-      property character_count : Int64
-
-      def initialize(@product_type, @api_key_character_count, @character_count)
+    def get_usage : Usage
+      if auth_key_is_mock? # FIXME: Workaround for testing
+        get_usage_free
+      elsif auth_key_is_free_account?
+        get_usage_free
+      else
+        get_usage_pro
       end
     end
 
-    property products : Array(Product)
-    property api_key_character_count : Int64
-    property api_key_character_limit : Int64
-    property start_time : Time
-    property end_time : Time
-
-    def initialize(@products, @api_key_character_count, @api_key_character_limit, @start_time, @end_time, @character_count, @character_limit)
-    end
-  end
-
-  class UsageFree < Usage
-    def initialize(@character_count, @character_limit)
+    private def request_get_usage
+      url = "#{server_url}/usage"
+      response = Crest.get(url, headers: http_headers_base)
+      handle_response(response)
     end
   end
 end

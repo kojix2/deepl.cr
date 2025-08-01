@@ -1,3 +1,6 @@
+require "./glossary_info"
+require "./glossary_language_pair"
+
 module DeepL
   class Translator
     def get_glossary_language_pairs : Array(GlossaryLanguagePair)

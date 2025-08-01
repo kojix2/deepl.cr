@@ -1,3 +1,5 @@
+require "./language_info"
+
 module DeepL
   class Translator
     private def request_languages(type)

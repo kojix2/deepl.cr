@@ -1,3 +1,5 @@
+require "./text_result"
+
 module DeepL
   class Translator
     def translate_text(

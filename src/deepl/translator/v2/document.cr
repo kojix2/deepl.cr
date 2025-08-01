@@ -1,3 +1,6 @@
+require "./document_handle"
+require "./document_status"
+
 module DeepL
   class Translator
     def translate_document(
