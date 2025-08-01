@@ -376,20 +376,21 @@ module DeepL
       GlossaryInfo.from_json(response.body)
     end
 
-    def delete_glossary(glossary : GlossaryInfo)
+    def delete_glossary(glossary : GlossaryInfo) : Bool
       delete_glossary(glossary.glossary_id)
     end
 
-    def delete_glossary(glossary_id : String)
+    def delete_glossary(glossary_id : String) : Bool
       url = "#{server_url}/glossaries/#{glossary_id}"
       response = Crest.delete(url, headers: http_headers_base)
       handle_response(response, glossary: true)
-      # FIXME: Return value
+      true
     end
 
-    def delete_glossary_by_name(name : String)
+    def delete_glossary_by_name(name : String) : Bool
       glossary_id = find_glossary_info_by_name(name).glossary_id
       delete_glossary(glossary_id)
+      true
     end
 
     def get_glossary_info(glossary_id : String) : GlossaryInfo
@@ -443,12 +444,10 @@ module DeepL
     end
 
     def get_usage_pro : UsagePro
-      # TODO: Raise error if free account
       UsagePro.from_json(request_get_usage.body)
     end
 
     def get_usage_free : UsageFree
-      # TODO: Raise error if pro account
       UsageFree.from_json(request_get_usage.body)
     end
 
