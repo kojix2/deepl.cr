@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/kojix2/deepl.cr/actions/workflows/test.yml/badge.svg)](https://github.com/kojix2/deepl.cr/actions/workflows/test.yml)
 [![Docs Latest](https://img.shields.io/badge/docs-latest-blue.svg)](https://kojix2.github.io/deepl.cr/)
+[![Lines of Code](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fapi%2Fbadge%2Flines%3Furl%3Dhttps%3A%2F%2Fgithub.com%2Fkojix2%2Fdeepl.cr%2F)](https://tokei.kojix2.net/analyze?url=https%3A%2F%2Fgithub.com%2Fkojix2%2Fdeepl.cr%2F)
 
 Crystal library for the [DeepL language translation API](https://www.deepl.com/pro-api/).
 
