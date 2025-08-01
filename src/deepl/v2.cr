@@ -1,4 +1,5 @@
 require "./translator"
+require "./exceptions"
 
 # Translator modules
 
