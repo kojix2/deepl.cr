@@ -228,7 +228,12 @@ puts t.translate_text(<span class="s">&quot;こんにちは、世界！&quot;</s
 <span class="c"># Translate document</span>
 t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
 puts t.translate_document(<span class="s">&quot;path/to/document.pdf&quot;</span>, target_lang: <span class="s">&quot;EN&quot;</span>)
-<span class="c"># Save to file (default: &quot;path/to/document_EN.pdf&quot;)</span></code></pre>
+<span class="c"># Save to file (default: &quot;path/to/document_EN.pdf&quot;)</span>
+
+<span class="c"># Rephrase text (improve writing)</span>
+t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
+result <span class="o">=</span> t.rephrase_text(<span class="s">&quot;I have went to the store yesterday.&quot;</span>)
+puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went to the store yesterday.&quot;</span></code></pre>
 <p>See <a href="https://kojix2.github.io/deepl.cr/">documentation</a>.</p>
 <h3><a id="environment-variables" class="anchor" href="#environment-variables">
   <svg class="octicon-link" aria-hidden="true">
