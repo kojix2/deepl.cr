@@ -32,6 +32,11 @@ puts t.translate_text("こんにちは、世界！", target_lang: "EN") # => "He
 t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
 puts t.translate_document("path/to/document.pdf", target_lang: "EN")
 # Save to file (default: "path/to/document_EN.pdf")
+
+# Rephrase text (improve writing)
+t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
+result = t.rephrase_text("I have went to the store yesterday.")
+puts result[0].text # => "I went to the store yesterday."
 ```
 
 See [documentation](https://kojix2.github.io/deepl.cr/).
