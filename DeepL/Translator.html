@@ -97,6 +97,21 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/GlossaryDictionary" data-name="deepl::glossarydictionary">
+      <a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/GlossaryEntriesInformation" data-name="deepl::glossaryentriesinformation">
+      <a href="../DeepL/GlossaryEntriesInformation.html">GlossaryEntriesInformation</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/GlossaryEntriesResponse" data-name="deepl::glossaryentriesresponse">
+      <a href="../DeepL/GlossaryEntriesResponse.html">GlossaryEntriesResponse</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/GlossaryInfo" data-name="deepl::glossaryinfo">
       <a href="../DeepL/GlossaryInfo.html">GlossaryInfo</a>
       
@@ -119,6 +134,16 @@
   
   <li class=" " data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
       <a href="../DeepL/LanguageInfo.html">LanguageInfo</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/MultilingualGlossaryInfo" data-name="deepl::multilingualglossaryinfo">
+      <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/MultilingualGlossaryLanguagePair" data-name="deepl::multilingualglossarylanguagepair">
+      <a href="../DeepL/MultilingualGlossaryLanguagePair.html">MultilingualGlossaryLanguagePair</a>
       
     </li>
   
@@ -228,50 +253,57 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L5" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L5" target="_blank">
         deepl/translator.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L5" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L5" target="_blank">
         deepl/v2/document.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L5" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L5" target="_blank">
         deepl/v2/glossary.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/language.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/language.cr#L4" target="_blank">
         deepl/v2/language.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/rephrase.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/rephrase.cr#L4" target="_blank">
         deepl/v2/rephrase.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/text.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/text.cr#L4" target="_blank">
         deepl/v2/text.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/usage.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/usage.cr#L4" target="_blank">
         deepl/v2/usage.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L7" target="_blank">
+        deepl/v3/glossary.cr
       </a>
     
     <br/>
@@ -380,6 +412,13 @@ To change the default server URL, you need to recompile the code.</p>
       </li>
     
       <li class="entry-summary">
+        <a href="#create_multilingual_glossary%28name%3AString%2Cdictionaries%3AArray%28Hash%28String%2CString%29%29%29%3AMultilingualGlossaryInfo-instance-method" class="signature"><strong>#create_multilingual_glossary</strong>(name : String, dictionaries : Array(Hash(String, String))) : MultilingualGlossaryInfo</a>
+        
+          <div class="summary"><p>Create a multilingual glossary</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#delete_glossary%28glossary%3AGlossaryInfo%29%3ABool-instance-method" class="signature"><strong>#delete_glossary</strong>(glossary : GlossaryInfo) : Bool</a>
         
       </li>
@@ -395,7 +434,35 @@ To change the default server URL, you need to recompile the code.</p>
       </li>
     
       <li class="entry-summary">
+        <a href="#delete_multilingual_glossary%28glossary_id%3AString%29%3ABool-instance-method" class="signature"><strong>#delete_multilingual_glossary</strong>(glossary_id : String) : Bool</a>
+        
+          <div class="summary"><p>Delete a multilingual glossary</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete_multilingual_glossary%28glossary%3AMultilingualGlossaryInfo%29%3ABool-instance-method" class="signature"><strong>#delete_multilingual_glossary</strong>(glossary : MultilingualGlossaryInfo) : Bool</a>
+        
+          <div class="summary"><p>Convenience methods with MultilingualGlossaryInfo objects</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete_multilingual_glossary_dictionary%28glossary_id%3AString%2Csource_lang%3AString%2Ctarget_lang%3AString%29%3ABool-instance-method" class="signature"><strong>#delete_multilingual_glossary_dictionary</strong>(glossary_id : String, source_lang : String, target_lang : String) : Bool</a>
+        
+          <div class="summary"><p>Delete a dictionary from the glossary</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#find_glossary_info_by_name%28name%3AString%29%3AGlossaryInfo-instance-method" class="signature"><strong>#find_glossary_info_by_name</strong>(name : String) : GlossaryInfo</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#find_multilingual_glossary_by_name%28name%3AString%29%3AMultilingualGlossaryInfo-instance-method" class="signature"><strong>#find_multilingual_glossary_by_name</strong>(name : String) : MultilingualGlossaryInfo</a>
+        
+          <div class="summary"><p>Find multilingual glossary by name</p></div>
         
       </li>
     
@@ -426,6 +493,32 @@ To change the default server URL, you need to recompile the code.</p>
     
       <li class="entry-summary">
         <a href="#get_glossary_language_pairs%3AArray%28GlossaryLanguagePair%29-instance-method" class="signature"><strong>#get_glossary_language_pairs</strong> : Array(GlossaryLanguagePair)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_multilingual_glossaries_by_name%28name%3AString%29%3AArray%28MultilingualGlossaryInfo%29-instance-method" class="signature"><strong>#get_multilingual_glossaries_by_name</strong>(name : String) : Array(MultilingualGlossaryInfo)</a>
+        
+          <div class="summary"><p>Get multilingual glossaries by name (multiple matches possible)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_multilingual_glossary%28glossary_id%3AString%29%3AMultilingualGlossaryInfo-instance-method" class="signature"><strong>#get_multilingual_glossary</strong>(glossary_id : String) : MultilingualGlossaryInfo</a>
+        
+          <div class="summary"><p>Get multilingual glossary details</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_multilingual_glossary_entries%28glossary_id%3AString%2Csource_lang%3AString%2Ctarget_lang%3AString%29%3AGlossaryDictionary-instance-method" class="signature"><strong>#get_multilingual_glossary_entries</strong>(glossary_id : String, source_lang : String, target_lang : String) : GlossaryDictionary</a>
+        
+          <div class="summary"><p>Get glossary entries for specific language pair</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_multilingual_glossary_entries%28glossary%3AMultilingualGlossaryInfo%2Csource_lang%3AString%2Ctarget_lang%3AString%29%3AGlossaryDictionary-instance-method" class="signature"><strong>#get_multilingual_glossary_entries</strong>(glossary : MultilingualGlossaryInfo, source_lang : String, target_lang : String) : GlossaryDictionary</a>
         
       </li>
     
@@ -461,6 +554,27 @@ To change the default server URL, you need to recompile the code.</p>
     
       <li class="entry-summary">
         <a href="#list_glossaries%3AArray%28GlossaryInfo%29-instance-method" class="signature"><strong>#list_glossaries</strong> : Array(GlossaryInfo)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#list_multilingual_glossaries%3AArray%28MultilingualGlossaryInfo%29-instance-method" class="signature"><strong>#list_multilingual_glossaries</strong> : Array(MultilingualGlossaryInfo)</a>
+        
+          <div class="summary"><p>List all multilingual glossaries</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#patch_multilingual_glossary%28glossary_id%3AString%2Cname%3AString%7CNil%3Dnil%2Cdictionaries%3AArray%28Hash%28String%2CString%29%29%7CNil%3Dnil%29%3AMultilingualGlossaryInfo-instance-method" class="signature"><strong>#patch_multilingual_glossary</strong>(glossary_id : String, name : String | Nil = <span class="n">nil</span>, dictionaries : Array(Hash(String, String)) | Nil = <span class="n">nil</span>) : MultilingualGlossaryInfo</a>
+        
+          <div class="summary"><p>Edit glossary details (PATCH)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#put_multilingual_glossary_dictionary%28glossary_id%3AString%2Csource_lang%3AString%2Ctarget_lang%3AString%2Centries%3AString%2Centries_format%3AString%3D%22tsv%22%29%3AGlossaryEntriesInformation-instance-method" class="signature"><strong>#put_multilingual_glossary_dictionary</strong>(glossary_id : String, source_lang : String, target_lang : String, entries : String, entries_format : String = <span class="s">&quot;tsv&quot;</span>) : GlossaryEntriesInformation</a>
+        
+          <div class="summary"><p>Replace or create a dictionary in the glossary (PUT)</p></div>
         
       </li>
     
@@ -584,7 +698,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -616,7 +730,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L41" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -632,7 +746,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -648,7 +762,28 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_multilingual_glossary(name:String,dictionaries:Array(Hash(String,String))):MultilingualGlossaryInfo-instance-method">
+      <div class="signature">
+        
+        def <strong>create_multilingual_glossary</strong>(name : String, dictionaries : Array(Hash(String, String))) : <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>
+
+        <a class="method-permalink" href="#create_multilingual_glossary%28name%3AString%2Cdictionaries%3AArray%28Hash%28String%2CString%29%29%29%3AMultilingualGlossaryInfo-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create a multilingual glossary</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -664,7 +799,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -680,7 +815,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -696,7 +831,70 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L46" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete_multilingual_glossary(glossary_id:String):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>delete_multilingual_glossary</strong>(glossary_id : String) : Bool
+
+        <a class="method-permalink" href="#delete_multilingual_glossary%28glossary_id%3AString%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Delete a multilingual glossary</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L43" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete_multilingual_glossary(glossary:MultilingualGlossaryInfo):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>delete_multilingual_glossary</strong>(glossary : <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>) : Bool
+
+        <a class="method-permalink" href="#delete_multilingual_glossary%28glossary%3AMultilingualGlossaryInfo%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Convenience methods with MultilingualGlossaryInfo objects</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L124" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete_multilingual_glossary_dictionary(glossary_id:String,source_lang:String,target_lang:String):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>delete_multilingual_glossary_dictionary</strong>(glossary_id : String, source_lang : String, target_lang : String) : Bool
+
+        <a class="method-permalink" href="#delete_multilingual_glossary_dictionary%28glossary_id%3AString%2Csource_lang%3AString%2Ctarget_lang%3AString%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Delete a dictionary from the glossary</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L107" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -712,7 +910,28 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="find_multilingual_glossary_by_name(name:String):MultilingualGlossaryInfo-instance-method">
+      <div class="signature">
+        
+        def <strong>find_multilingual_glossary_by_name</strong>(name : String) : <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>
+
+        <a class="method-permalink" href="#find_multilingual_glossary_by_name%28name%3AString%29%3AMultilingualGlossaryInfo-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Find multilingual glossary by name</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L137" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -728,7 +947,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -744,7 +963,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -760,7 +979,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L97" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L97" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -776,7 +995,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -792,7 +1011,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -808,7 +1027,86 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_multilingual_glossaries_by_name(name:String):Array(MultilingualGlossaryInfo)-instance-method">
+      <div class="signature">
+        
+        def <strong>get_multilingual_glossaries_by_name</strong>(name : String) : Array(<a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>)
+
+        <a class="method-permalink" href="#get_multilingual_glossaries_by_name%28name%3AString%29%3AArray%28MultilingualGlossaryInfo%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Get multilingual glossaries by name (multiple matches possible)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L145" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_multilingual_glossary(glossary_id:String):MultilingualGlossaryInfo-instance-method">
+      <div class="signature">
+        
+        def <strong>get_multilingual_glossary</strong>(glossary_id : String) : <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>
+
+        <a class="method-permalink" href="#get_multilingual_glossary%28glossary_id%3AString%29%3AMultilingualGlossaryInfo-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Get multilingual glossary details</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_multilingual_glossary_entries(glossary_id:String,source_lang:String,target_lang:String):GlossaryDictionary-instance-method">
+      <div class="signature">
+        
+        def <strong>get_multilingual_glossary_entries</strong>(glossary_id : String, source_lang : String, target_lang : String) : <a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>
+
+        <a class="method-permalink" href="#get_multilingual_glossary_entries%28glossary_id%3AString%2Csource_lang%3AString%2Ctarget_lang%3AString%29%3AGlossaryDictionary-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Get glossary entries for specific language pair</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_multilingual_glossary_entries(glossary:MultilingualGlossaryInfo,source_lang:String,target_lang:String):GlossaryDictionary-instance-method">
+      <div class="signature">
+        
+        def <strong>get_multilingual_glossary_entries</strong>(glossary : <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>, source_lang : String, target_lang : String) : <a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>
+
+        <a class="method-permalink" href="#get_multilingual_glossary_entries%28glossary%3AMultilingualGlossaryInfo%2Csource_lang%3AString%2Ctarget_lang%3AString%29%3AGlossaryDictionary-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -824,7 +1122,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/language.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/language.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -840,7 +1138,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/language.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/language.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -856,7 +1154,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/usage.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/usage.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -872,7 +1170,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/usage.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/usage.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -888,7 +1186,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/usage.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/usage.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -904,7 +1202,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/language.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/language.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -920,7 +1218,70 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/glossary.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/glossary.cr#L76" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="list_multilingual_glossaries:Array(MultilingualGlossaryInfo)-instance-method">
+      <div class="signature">
+        
+        def <strong>list_multilingual_glossaries</strong> : Array(<a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>)
+
+        <a class="method-permalink" href="#list_multilingual_glossaries%3AArray%28MultilingualGlossaryInfo%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>List all multilingual glossaries</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="patch_multilingual_glossary(glossary_id:String,name:String|Nil=nil,dictionaries:Array(Hash(String,String))|Nil=nil):MultilingualGlossaryInfo-instance-method">
+      <div class="signature">
+        
+        def <strong>patch_multilingual_glossary</strong>(glossary_id : String, name : String | Nil = <span class="n">nil</span>, dictionaries : Array(Hash(String, String)) | Nil = <span class="n">nil</span>) : <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>
+
+        <a class="method-permalink" href="#patch_multilingual_glossary%28glossary_id%3AString%2Cname%3AString%7CNil%3Dnil%2Cdictionaries%3AArray%28Hash%28String%2CString%29%29%7CNil%3Dnil%29%3AMultilingualGlossaryInfo-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Edit glossary details (PATCH)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="put_multilingual_glossary_dictionary(glossary_id:String,source_lang:String,target_lang:String,entries:String,entries_format:String=&quot;tsv&quot;):GlossaryEntriesInformation-instance-method">
+      <div class="signature">
+        
+        def <strong>put_multilingual_glossary_dictionary</strong>(glossary_id : String, source_lang : String, target_lang : String, entries : String, entries_format : String = <span class="s">&quot;tsv&quot;</span>) : <a href="../DeepL/GlossaryEntriesInformation.html">GlossaryEntriesInformation</a>
+
+        <a class="method-permalink" href="#put_multilingual_glossary_dictionary%28glossary_id%3AString%2Csource_lang%3AString%2Ctarget_lang%3AString%2Centries%3AString%2Centries_format%3AString%3D%22tsv%22%29%3AGlossaryEntriesInformation-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Replace or create a dictionary in the glossary (PUT)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v3/glossary.cr#L85" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -936,7 +1297,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/rephrase.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/rephrase.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -952,7 +1313,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -968,7 +1329,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -984,7 +1345,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1000,7 +1361,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1016,7 +1377,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L163" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L163" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1032,7 +1393,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L155" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1048,7 +1409,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L94" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L94" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1064,7 +1425,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L123" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L123" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1080,7 +1441,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/document.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/document.cr#L135" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1096,7 +1457,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/v2/text.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/v2/text.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1112,7 +1473,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L45" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1128,7 +1489,7 @@ To change the default server URL, you need to recompile the code.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/0b7e5c9f17ebae0113b665d087eb5ee04b1602de/src/deepl/translator.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/9d5d73a3055d6e2ca652113b3ea6433b52630e01/src/deepl/translator.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
