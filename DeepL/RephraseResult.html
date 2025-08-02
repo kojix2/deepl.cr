@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::Usage - deepl main</title>
+  <title>DeepL::RephraseResult - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -127,7 +127,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/RephraseResult" data-name="deepl::rephraseresult">
+  <li class=" current" data-id="deepl/DeepL/RephraseResult" data-name="deepl::rephraseresult">
       <a href="../DeepL/RephraseResult.html">RephraseResult</a>
       
     </li>
@@ -152,7 +152,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/Usage" data-name="deepl::usage">
+  <li class=" " data-id="deepl/DeepL/Usage" data-name="deepl::usage">
       <a href="../DeepL/Usage.html">Usage</a>
       
     </li>
@@ -192,13 +192,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    abstract class
-  </span> DeepL::<wbr>Usage
+    class
+  </span> DeepL::<wbr>RephraseResult
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/Usage.html">DeepL::Usage</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/RephraseResult.html">DeepL::RephraseResult</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -227,22 +227,6 @@
 
 
 
-  <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Direct Known Subclasses
-  </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../DeepL/UsageFree.html">DeepL::UsageFree</a></li>
-    
-      <li class="other-type"><a href="../DeepL/UsagePro.html">DeepL::UsagePro</a></li>
-    
-  </ul>
-
 
 
 
@@ -258,8 +242,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/usage_status.cr#L2" target="_blank">
-        deepl/v2/usage_status.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L4" target="_blank">
+        deepl/v2/rephrase_result.cr
       </a>
     
     <br/>
@@ -279,6 +263,11 @@
     Constructors
   </h2>
   <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28detected_source_language%3AString%2Ctext%3AString%29-class-method" class="signature"><strong>.new</strong>(detected_source_language : String, text : String)</a>
+        
+      </li>
     
       <li class="entry-summary">
         <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
@@ -304,22 +293,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#character_count%3AInt64-instance-method" class="signature"><strong>#character_count</strong> : Int64</a>
+        <a href="#detected_source_language%3AString-instance-method" class="signature"><strong>#detected_source_language</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#character_count%3D%28character_count%3AInt64%29-instance-method" class="signature"><strong>#character_count=</strong>(character_count : Int64)</a>
+        <a href="#detected_source_language%3D%28detected_source_language%3AString%29-instance-method" class="signature"><strong>#detected_source_language=</strong>(detected_source_language : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#character_limit%3AInt64-instance-method" class="signature"><strong>#character_limit</strong> : Int64</a>
+        <a href="#text%3AString-instance-method" class="signature"><strong>#text</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="signature"><strong>#character_limit=</strong>(character_limit : Int64)</a>
+        <a href="#text%3D%28text%3AString%29-instance-method" class="signature"><strong>#text=</strong>(text : String)</a>
         
       </li>
     
@@ -380,6 +369,22 @@
     Constructor Detail
   </h2>
   
+    <div class="entry-detail" id="new(detected_source_language:String,text:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(detected_source_language : String, text : String)
+
+        <a class="method-permalink" href="#new%28detected_source_language%3AString%2Ctext%3AString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
@@ -391,7 +396,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/usage_status.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -412,66 +417,66 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="character_count:Int64-instance-method">
+    <div class="entry-detail" id="detected_source_language:String-instance-method">
       <div class="signature">
         
-        def <strong>character_count</strong> : Int64
+        def <strong>detected_source_language</strong> : String
 
-        <a class="method-permalink" href="#character_count%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#detected_source_language%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/usage_status.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="character_count=(character_count:Int64)-instance-method">
+    <div class="entry-detail" id="detected_source_language=(detected_source_language:String)-instance-method">
       <div class="signature">
         
-        def <strong>character_count=</strong>(character_count : Int64)
+        def <strong>detected_source_language=</strong>(detected_source_language : String)
 
-        <a class="method-permalink" href="#character_count%3D%28character_count%3AInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#detected_source_language%3D%28detected_source_language%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/usage_status.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="character_limit:Int64-instance-method">
+    <div class="entry-detail" id="text:String-instance-method">
       <div class="signature">
         
-        def <strong>character_limit</strong> : Int64
+        def <strong>text</strong> : String
 
-        <a class="method-permalink" href="#character_limit%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#text%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/usage_status.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="character_limit=(character_limit:Int64)-instance-method">
+    <div class="entry-detail" id="text=(text:String)-instance-method">
       <div class="signature">
         
-        def <strong>character_limit=</strong>(character_limit : Int64)
+        def <strong>text=</strong>(text : String)
 
-        <a class="method-permalink" href="#character_limit%3D%28character_limit%3AInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#text%3D%28text%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/usage_status.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/2ce342aefcf5fed2cf6e6816823fe7552a19e30f/src/deepl/v2/rephrase_result.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
