@@ -1,5 +1,5 @@
 require "./deepl/version"
-require "./deepl/v2"
+require "./deepl/v3"
 
 module DeepL
 end
