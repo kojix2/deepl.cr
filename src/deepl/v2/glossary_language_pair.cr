@@ -1,4 +1,5 @@
 module DeepL
+  @[Deprecated("Use V3 MultilingualGlossaryLanguagePair instead")]
   class GlossaryLanguagePair
     include JSON::Serializable
 

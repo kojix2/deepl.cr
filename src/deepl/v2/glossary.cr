@@ -2,6 +2,7 @@ require "./glossary_info"
 require "./glossary_language_pair"
 
 module DeepL
+  @[Deprecated("Use V3 MultilingualGlossaryInfo instead")]
   class Translator
     def get_glossary_language_pairs : Array(GlossaryLanguagePair)
       url = "#{server_url}/glossary-language-pairs"

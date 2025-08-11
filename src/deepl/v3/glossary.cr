@@ -1,7 +1,7 @@
 require "./multilingual_glossary_info"
 require "./glossary_dictionary"
 require "./glossary_entries_information"
-require "./glossary_language_pair"
+require "./multilingual_glossary_language_pair"
 
 module DeepL
   class Translator
