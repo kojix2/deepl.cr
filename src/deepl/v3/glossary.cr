@@ -5,16 +5,36 @@ require "./glossary_language_pair"
 
 module DeepL
   class Translator
-    # Create a multilingual glossary
+    # Get supported language pairs for multilingual glossaries
+    def get_multilingual_glossary_language_pairs : Array(MultilingualGlossaryLanguagePair)
+      url = "#{server_url}/v3/glossary-language-pairs"
+      response = Crest.get(url, headers: http_headers_base)
+      handle_response(response, glossary: true)
+      Array(MultilingualGlossaryLanguagePair).from_json(
+        JSON.parse(response.body)["supported_languages"].to_json
+      )
+    end
+
+    # Create a multilingual glossary with specified name and dictionaries
     def create_multilingual_glossary(
       name : String,
-      dictionaries : Array(Hash(String, String)),
+      dictionaries : Array(GlossaryDictionary),
     ) : MultilingualGlossaryInfo
       url = "#{server_url}/v3/glossaries"
 
+      # Convert GlossaryDictionary objects to the expected API format
+      dict_data = dictionaries.map do |dict|
+        {
+          "source_lang"    => dict.source_lang,
+          "target_lang"    => dict.target_lang,
+          "entries"        => dict.entries,
+          "entries_format" => dict.entries_format || "tsv",
+        }
+      end
+
       data = {
         "name"         => name,
-        "dictionaries" => dictionaries,
+        "dictionaries" => dict_data,
       }
 
       response = Crest.post(url, json: data, headers: http_headers_json)
@@ -22,7 +42,7 @@ module DeepL
       MultilingualGlossaryInfo.from_json(response.body)
     end
 
-    # List all multilingual glossaries
+    # List all multilingual glossaries and their meta-information
     def list_multilingual_glossaries : Array(MultilingualGlossaryInfo)
       url = "#{server_url}/v3/glossaries"
       response = Crest.get(url, headers: http_headers_base)
@@ -31,7 +51,7 @@ module DeepL
       Array(MultilingualGlossaryInfo).from_json(glossaries_json)
     end
 
-    # Get multilingual glossary details
+    # Get multilingual glossary details by ID
     def get_multilingual_glossary(glossary_id : String) : MultilingualGlossaryInfo
       url = "#{server_url}/v3/glossaries/#{glossary_id}"
       response = Crest.get(url, headers: http_headers_base)
@@ -39,7 +59,7 @@ module DeepL
       MultilingualGlossaryInfo.from_json(response.body)
     end
 
-    # Delete a multilingual glossary
+    # Delete a multilingual glossary by ID
     def delete_multilingual_glossary(glossary_id : String) : Bool
       url = "#{server_url}/v3/glossaries/#{glossary_id}"
       response = Crest.delete(url, headers: http_headers_base)
@@ -47,17 +67,29 @@ module DeepL
       true
     end
 
-    # Edit glossary details (PATCH)
+    # Edit glossary details (name or dictionaries)
     def patch_multilingual_glossary(
       glossary_id : String,
       name : String? = nil,
-      dictionaries : Array(Hash(String, String))? = nil,
+      dictionaries : Array(GlossaryDictionary)? = nil,
     ) : MultilingualGlossaryInfo
       url = "#{server_url}/v3/glossaries/#{glossary_id}"
 
       data = {} of String => JSON::Any::Type
       data["name"] = name if name
-      data["dictionaries"] = dictionaries if dictionaries
+
+      if dictionaries
+        # Convert GlossaryDictionary objects to the expected API format
+        dict_data = dictionaries.map do |dict|
+          {
+            "source_lang"    => dict.source_lang,
+            "target_lang"    => dict.target_lang,
+            "entries"        => dict.entries,
+            "entries_format" => dict.entries_format || "tsv",
+          }
+        end
+        data["dictionaries"] = dict_data
+      end
 
       response = Crest.patch(url, json: data, headers: http_headers_json)
       handle_response(response, glossary: true)
@@ -81,7 +113,7 @@ module DeepL
       GlossaryDictionary.from_json(response.body)
     end
 
-    # Replace or create a dictionary in the glossary (PUT)
+    # Replace or create a dictionary in the glossary
     def put_multilingual_glossary_dictionary(
       glossary_id : String,
       source_lang : String,
@@ -120,11 +152,12 @@ module DeepL
       true
     end
 
-    # Convenience methods with MultilingualGlossaryInfo objects
+    # Delete a multilingual glossary (convenience method)
     def delete_multilingual_glossary(glossary : MultilingualGlossaryInfo) : Bool
       delete_multilingual_glossary(glossary.glossary_id)
     end
 
+    # Get glossary entries (convenience method)
     def get_multilingual_glossary_entries(
       glossary : MultilingualGlossaryInfo,
       source_lang : String,
