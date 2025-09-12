@@ -7,7 +7,7 @@ module DeepL
   class Translator
     # Get supported language pairs for multilingual glossaries
     def get_multilingual_glossary_language_pairs : Array(MultilingualGlossaryLanguagePair)
-      url = "#{server_url}/v3/glossary-language-pairs"
+      url = "#{base_server_url}/v3/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
       Array(MultilingualGlossaryLanguagePair).from_json(
@@ -20,7 +20,7 @@ module DeepL
       name : String,
       dictionaries : Array(GlossaryDictionary),
     ) : MultilingualGlossaryInfo
-      url = "#{server_url}/v3/glossaries"
+      url = "#{base_server_url}/v3/glossaries"
 
       # Convert GlossaryDictionary objects to the expected API format
       dict_data = dictionaries.map do |dict|
@@ -44,7 +44,7 @@ module DeepL
 
     # List all multilingual glossaries and their meta-information
     def list_multilingual_glossaries : Array(MultilingualGlossaryInfo)
-      url = "#{server_url}/v3/glossaries"
+      url = "#{base_server_url}/v3/glossaries"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
       glossaries_json = JSON.parse(response.body)["glossaries"].to_json
@@ -53,7 +53,7 @@ module DeepL
 
     # Get multilingual glossary details by ID
     def get_multilingual_glossary(glossary_id : String) : MultilingualGlossaryInfo
-      url = "#{server_url}/v3/glossaries/#{glossary_id}"
+      url = "#{base_server_url}/v3/glossaries/#{glossary_id}"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
       MultilingualGlossaryInfo.from_json(response.body)
@@ -61,7 +61,7 @@ module DeepL
 
     # Delete a multilingual glossary by ID
     def delete_multilingual_glossary(glossary_id : String) : Bool
-      url = "#{server_url}/v3/glossaries/#{glossary_id}"
+      url = "#{base_server_url}/v3/glossaries/#{glossary_id}"
       response = Crest.delete(url, headers: http_headers_base)
       handle_response(response, glossary: true)
       true
@@ -73,7 +73,7 @@ module DeepL
       name : String? = nil,
       dictionaries : Array(GlossaryDictionary)? = nil,
     ) : MultilingualGlossaryInfo
-      url = "#{server_url}/v3/glossaries/#{glossary_id}"
+      url = "#{base_server_url}/v3/glossaries/#{glossary_id}"
 
       data = {} of String => JSON::Any::Type
       data["name"] = name if name
@@ -102,7 +102,7 @@ module DeepL
       source_lang : String,
       target_lang : String,
     ) : GlossaryDictionary
-      url = "#{server_url}/v3/glossaries/#{glossary_id}/entries"
+      url = "#{base_server_url}/v3/glossaries/#{glossary_id}/entries"
       params = {
         "source_lang" => source_lang,
         "target_lang" => target_lang,
@@ -121,7 +121,7 @@ module DeepL
       entries : String,
       entries_format : String = "tsv",
     ) : GlossaryEntriesInformation
-      url = "#{server_url}/v3/glossaries/#{glossary_id}/dictionaries"
+      url = "#{base_server_url}/v3/glossaries/#{glossary_id}/dictionaries"
 
       data = {
         "source_lang"    => source_lang,
@@ -141,7 +141,7 @@ module DeepL
       source_lang : String,
       target_lang : String,
     ) : Bool
-      url = "#{server_url}/v3/glossaries/#{glossary_id}/dictionaries"
+      url = "#{base_server_url}/v3/glossaries/#{glossary_id}/dictionaries"
       params = {
         "source_lang" => source_lang,
         "target_lang" => target_lang,

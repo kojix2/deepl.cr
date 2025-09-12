@@ -38,6 +38,19 @@ module DeepL
         end
     end
 
+    # Return the base API server URL without any version suffix.
+    # Examples:
+    # - https://api.deepl.com/v2 -> https://api.deepl.com
+    # - https://api.free.deepl.com -> https://api.free.deepl.com
+    # - custom provided server_url (with or without /vN) -> stripped of /vN
+    def base_server_url : String
+      candidate = @server_url || (
+        auth_key_is_free_account? ? DEEPL_SERVER_URL_FREE : DEEPL_SERVER_URL
+      )
+      # Strip a trailing "/v<number>" (optionally followed by a slash)
+      candidate.sub(/\/v\d+(\/)?$/, "")
+    end
+
     def auth_key : String
       @auth_key || ENV["DEEPL_AUTH_KEY"]? || raise ApiKeyNotFoundError.new
     end
