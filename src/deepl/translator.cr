@@ -108,5 +108,17 @@ module DeepL
     private def auth_key_is_mock? : Bool
       auth_key == "mock"
     end
+
+    # Resolve glossary_id from glossary name across API versions.
+    # - In v2 mode, use find_glossary_info_by_name (returns GlossaryInfo)
+    # - In v3 mode, use find_multilingual_glossary_by_name (returns MultilingualGlossaryInfo)
+    # Raises GlossaryNameNotFoundError if not found (delegated).
+    def resolve_glossary_id_from_name(name : String) : String
+      if DEEPL_API_VERSION == "v2"
+        find_glossary_info_by_name(name).glossary_id
+      else
+        find_multilingual_glossary_by_name(name).glossary_id
+      end
+    end
   end
 end

@@ -21,7 +21,7 @@ module DeepL
       model_type = nil,
     ) : Array(TextResult)
       if glossary_name
-        glossary_id ||= find_glossary_info_by_name(glossary_name).glossary_id
+        glossary_id ||= resolve_glossary_id_from_name(glossary_name)
       end
 
       text = [text] if text.is_a?(String)
