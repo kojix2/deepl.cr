@@ -307,6 +307,23 @@ puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went 
 <p><a href="https://github.com/DeepLcom/openapihttps://github.com/DeepLcom/openapi">DeepL OpenAPI Specification</a></p>
 </li>
 </ul>
+<h3><a id="run-tests-v2-v3" class="anchor" href="#run-tests-v2-v3">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Run tests (v2 / v3)</h3>
+<ul>
+<li>v2 (default):
+<pre><code class="language-bash">crystal spec</code></pre>
+</li>
+<li>v3 (compile-time flag):
+<pre><code class="language-bash">crystal spec -Ddeepl_v3</code></pre>
+</li>
+<li>v3 (environment variable):
+<pre><code class="language-bash">DEEPL_API_VERSION=v3 crystal spec</code></pre>
+</li>
+</ul>
+<p>Note: The library surface is also switched by the same conditions.</p>
 <h2><a id="use-case" class="anchor" href="#use-case">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
