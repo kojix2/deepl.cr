@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-{% unless flag?(:deepl_v3) || env("DEEPL_API_VERSION") == "v3" %}
+{% if flag?(:deepl_v2) || env("DEEPL_API_VERSION") == "v2" %}
   describe DeepL::GlossaryLanguagePair do
     it "can be serialized to JSON" do
       pair = DeepL::GlossaryLanguagePair.new("en", "fr")

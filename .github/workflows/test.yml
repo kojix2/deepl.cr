@@ -63,7 +63,7 @@ jobs:
         run: shards install --without-development
 
       - name: Run tests (V2)
-        run: crystal spec -Ddeepl_mock
+        run: crystal spec -Ddeepl_mock -Ddeepl_v2
 
       - name: Run tests (V3)
         run: crystal spec -Ddeepl_mock -Ddeepl_v3
