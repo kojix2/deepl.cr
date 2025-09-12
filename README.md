@@ -66,7 +66,7 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
   </tbody>
 </table>
 
-- When the environment variable `DEEPL_TARGET_LANG` is set, the method `DeepL::Translator#guess_target_language` will prioritize the language defined in `DEEPL_TARGET_LANG`. 
+- When the environment variable `DEEPL_TARGET_LANG` is set, the method `DeepL::Translator#guess_target_language` will prioritize the language defined in `DEEPL_TARGET_LANG`.
 - However, please note that this does not directly affect translation methods like `translate_text`.
 
 ## Development
@@ -75,6 +75,23 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 - If you want to take over the project and become the owner, please submit your request with a pull request.
 
 - [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapihttps://github.com/DeepLcom/openapi)
+
+### Run tests (v2 / v3)
+
+- v2 (default):
+  ```bash
+  crystal spec
+  ```
+- v3 (compile-time flag):
+  ```bash
+  crystal spec -Ddeepl_v3
+  ```
+- v3 (environment variable):
+  ```bash
+  DEEPL_API_VERSION=v3 crystal spec
+  ```
+
+Note: The library surface is also switched by the same conditions.
 
 ## Use case
 
