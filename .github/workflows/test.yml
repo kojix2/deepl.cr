@@ -65,13 +65,14 @@ jobs:
       - name: Curl test for DeepL mock rephrase
         run: |
           set -e
-          response=$(curl -s -X POST http://localhost:8080/v2/rephrase \
-            -H "Authorization: DeepL-Auth-Key: dummy_key" \
+          response=$(curl -s -X POST http://localhost:3000/v2/write/rephrase \
+            -H "User-Agent: test-runner" \
+            -H "Authorization: DeepL-Auth-Key mock" \
             -H "Content-Type: application/x-www-form-urlencoded" \
             --data-urlencode "text=any input text" \
             --data-urlencode "target_lang=EN")
           echo "$response"
-          echo "$response" | jq -e '.[0].detected_source_language == "EN" and .[0].text == "proton beam"'
+          echo "$response" | jq -e '.improvements[0].target_language == "EN-US"'
 
       - name: Install dependencies
         run: shards install --without-development
