@@ -72,7 +72,7 @@ jobs:
             --data-urlencode "text=any input text" \
             --data-urlencode "target_lang=EN")
           echo "$response"
-          echo "$response" | jq -e '.improvements[0].target_language == "EN-US"'
+          echo "$response" | jq -e '(.improvements[0].target_language | ascii_upcase) == "EN-US"'
 
       - name: Install dependencies
         run: shards install --without-development
