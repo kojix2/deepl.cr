@@ -59,6 +59,20 @@ jobs:
             --header "Content-Type: application/json" \
             --data '{"text":["proton beam"],"target_lang":"DE"}'
 
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Curl test for DeepL mock rephrase
+        run: |
+          set -e
+          response=$(curl -s -X POST http://localhost:8080/v2/rephrase \
+            -H "Authorization: DeepL-Auth-Key: dummy_key" \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            --data-urlencode "text=any input text" \
+            --data-urlencode "target_lang=EN")
+          echo "$response"
+          echo "$response" | jq -e '.[0].detected_source_language == "EN" and .[0].text == "proton beam"'
+
       - name: Install dependencies
         run: shards install --without-development
 
