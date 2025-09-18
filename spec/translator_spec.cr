@@ -157,8 +157,8 @@ describe DeepL::Translator do
 
     it "can rephrase text using mock" do
       t = DeepL::Translator.new
-      r = t.rephrase_text("any input text", "EN").first
-      r.detected_source_language.should eq("EN")
+      r = t.rephrase_text("any input text", "en").first
+      r.detected_source_language.should eq("en")
       r.text.should eq("proton beam")
     end
   {% end %}
