@@ -37,7 +37,7 @@ module DeepL
         "dictionaries" => dict_data,
       }
 
-      response = Crest.post(url, json: data, headers: http_headers_json)
+      response = Crest.post(url, form: data, json: true, headers: http_headers_json)
       handle_response(response, glossary: true)
       MultilingualGlossaryInfo.from_json(response.body)
     end
@@ -91,7 +91,7 @@ module DeepL
         data["dictionaries"] = dict_data
       end
 
-      response = Crest.patch(url, json: data, headers: http_headers_json)
+      response = Crest.patch(url, form: data, json: true, headers: http_headers_json)
       handle_response(response, glossary: true)
       MultilingualGlossaryInfo.from_json(response.body)
     end
@@ -130,7 +130,7 @@ module DeepL
         "entries_format" => entries_format,
       }
 
-      response = Crest.put(url, json: data, headers: http_headers_json)
+      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
       handle_response(response, glossary: true)
       GlossaryEntriesInformation.from_json(response.body)
     end
