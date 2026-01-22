@@ -1,6 +1,7 @@
 require "./multilingual_glossary_info"
 require "./glossary_dictionary"
 require "./glossary_entries_information"
+require "./multilingual_glossary_entries_response"
 require "./multilingual_glossary_language_pair"
 
 module DeepL
@@ -110,7 +111,11 @@ module DeepL
 
       response = Crest.get(url, params: params, headers: http_headers_base)
       handle_response(response, glossary: true)
-      GlossaryDictionary.from_json(response.body)
+      entries_response = MultilingualGlossaryEntriesResponse.from_json(response.body)
+      dict = entries_response.dictionaries.find { |d| d.source_lang == source_lang && d.target_lang == target_lang }
+      dict ||= entries_response.dictionaries.first?
+      raise RequestError.new("No dictionary entries returned") unless dict
+      dict
     end
 
     # Replace or create a dictionary in the glossary
