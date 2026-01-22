@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::UsageFree - deepl main</title>
+  <title>DeepL::MultilingualGlossaryEntriesResponse - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -137,7 +137,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/MultilingualGlossaryEntriesResponse" data-name="deepl::multilingualglossaryentriesresponse">
+  <li class=" current" data-id="deepl/DeepL/MultilingualGlossaryEntriesResponse" data-name="deepl::multilingualglossaryentriesresponse">
       <a href="../DeepL/MultilingualGlossaryEntriesResponse.html">MultilingualGlossaryEntriesResponse</a>
       
     </li>
@@ -187,7 +187,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/UsageFree" data-name="deepl::usagefree">
+  <li class=" " data-id="deepl/DeepL/UsageFree" data-name="deepl::usagefree">
       <a href="../DeepL/UsageFree.html">UsageFree</a>
       
     </li>
@@ -223,12 +223,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>UsageFree
+  </span> DeepL::<wbr>MultilingualGlossaryEntriesResponse
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/UsageFree.html">DeepL::UsageFree</a></li><li class="superclass"><a href="../DeepL/Usage.html">DeepL::Usage</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/MultilingualGlossaryEntriesResponse.html">DeepL::MultilingualGlossaryEntriesResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -238,6 +238,20 @@
 
 
 
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">JSON::Serializable</li>
+    
+  </ul>
 
 
 
@@ -258,8 +272,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v2/usage_status.cr#L31" target="_blank">
-        deepl/v2/usage_status.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v3/multilingual_glossary_entries_response.cr#L2" target="_blank">
+        deepl/v3/multilingual_glossary_entries_response.cr
       </a>
     
     <br/>
@@ -281,12 +295,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28character_count%2Ccharacter_limit%29-class-method" class="signature"><strong>.new</strong>(character_count, character_limit)</a>
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        <a href="#new%28dictionaries%3AArray%28DeepL%3A%3AGlossaryDictionary%29%29-class-method" class="signature"><strong>.new</strong>(dictionaries : Array(DeepL::GlossaryDictionary))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)</a>
         
       </li>
     
@@ -298,55 +317,31 @@
   
 
   
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#dictionaries%3AArray%28GlossaryDictionary%29-instance-method" class="signature"><strong>#dictionaries</strong> : Array(GlossaryDictionary)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dictionaries%3D%28dictionaries%3AArray%28GlossaryDictionary%29%29-instance-method" class="signature"><strong>#dictionaries=</strong>(dictionaries : Array(GlossaryDictionary))</a>
+        
+      </li>
+    
+  </ul>
+
 
 
   <div class="methods-inherited">
-    
-      
-
-  <h3>Instance methods inherited from class <code><a href="../DeepL/Usage.html">DeepL::Usage</a></code></h3>
-  
-  
-    <a href="../DeepL/Usage.html#character_count%3AInt64-instance-method" class="tooltip">
-      <span>character_count : Int64</span>
-    character_count</a>, 
-    
-  
-    <a href="../DeepL/Usage.html#character_count%3D%28character_count%3AInt64%29-instance-method" class="tooltip">
-      <span>character_count=(character_count : Int64)</span>
-    character_count=</a>, 
-    
-  
-    <a href="../DeepL/Usage.html#character_limit%3AInt64-instance-method" class="tooltip">
-      <span>character_limit : Int64</span>
-    character_limit</a>, 
-    
-  
-    <a href="../DeepL/Usage.html#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="tooltip">
-      <span>character_limit=(character_limit : Int64)</span>
-    character_limit=</a>
-    
-  
-
-
-      
-
-  <h3>Constructor methods inherited from class <code><a href="../DeepL/Usage.html">DeepL::Usage</a></code></h3>
-  
-  
-    <a href="../DeepL/Usage.html#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="tooltip">
-      <span>new(pull : JSON::PullParser)<br/>new(*, __pull_for_json_serializable pull : JSON::PullParser)</span>
-    new</a>
-    
-  
-
-
-      
-
-
-      
-
-
     
       
 
@@ -399,22 +394,6 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(character_count,character_limit)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(character_count, character_limit)
-
-        <a class="method-permalink" href="#new%28character_count%2Ccharacter_limit%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v2/usage_status.cr#L32" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
@@ -426,7 +405,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v2/usage_status.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v3/multilingual_glossary_entries_response.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(dictionaries:Array(DeepL::GlossaryDictionary))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(dictionaries : Array(<a href="../DeepL/GlossaryDictionary.html">DeepL::GlossaryDictionary</a>))
+
+        <a class="method-permalink" href="#new%28dictionaries%3AArray%28DeepL%3A%3AGlossaryDictionary%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v3/multilingual_glossary_entries_response.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*,__pull_for_json_serializablepull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v3/multilingual_glossary_entries_response.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -438,6 +449,48 @@
   
 
   
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="dictionaries:Array(GlossaryDictionary)-instance-method">
+      <div class="signature">
+        
+        def <strong>dictionaries</strong> : Array(<a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>)
+
+        <a class="method-permalink" href="#dictionaries%3AArray%28GlossaryDictionary%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v3/multilingual_glossary_entries_response.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dictionaries=(dictionaries:Array(GlossaryDictionary))-instance-method">
+      <div class="signature">
+        
+        def <strong>dictionaries=</strong>(dictionaries : Array(<a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>))
+
+        <a class="method-permalink" href="#dictionaries%3D%28dictionaries%3AArray%28GlossaryDictionary%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/a349db8cfd6a9855d9a26ce1454d1adc37434882/src/deepl/v3/multilingual_glossary_entries_response.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 </div>
