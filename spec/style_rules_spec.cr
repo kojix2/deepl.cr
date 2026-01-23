@@ -1,7 +1,7 @@
 require "./spec_helper"
-require "../src/deepl/v3/style_rules"
 
-describe DeepL::StyleRuleList do
+{% unless flag?(:deepl_v2) %}
+  describe DeepL::StyleRuleList do
   sample_json = %({
     "style_id": "bd0a38f3-1831-440b-a8dd-2c702e2325ab",
     "name": "My Style Rules",
@@ -50,3 +50,4 @@ describe DeepL::StyleRuleList do
     list.first.name.should eq("My Style Rules")
   end
 end
+{% end %}
