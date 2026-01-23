@@ -35,8 +35,8 @@ describe DeepL::AdminUsageReport do
         "speech_to_text_milliseconds": 1800000
       },
       "group_by": "key_and_day",
-      "start_date": "2025-09-29T00:00:00",
-      "end_date": "2025-10-01T00:00:00",
+      "start_date": "2025-09-29T00:00:00Z",
+      "end_date": "2025-10-01T00:00:00Z",
       "key_and_day_usages": [
         {
           "api_key": "dc88****3a2c",
