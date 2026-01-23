@@ -13,18 +13,33 @@ module DeepL
       property product_type : String
       property api_key_character_count : Int64
       property character_count : Int64
+      property billing_unit : String?
+      property api_key_unit_count : Int64?
+      property account_unit_count : Int64?
 
-      def initialize(@product_type, @api_key_character_count, @character_count)
+      def initialize(@product_type, @api_key_character_count, @character_count, @billing_unit = nil, @api_key_unit_count = nil, @account_unit_count = nil)
       end
     end
 
     property products : Array(Product)
     property api_key_character_count : Int64
     property api_key_character_limit : Int64
+    property speech_to_text_milliseconds_count : Int64?
+    property speech_to_text_milliseconds_limit : Int64?
     property start_time : Time
     property end_time : Time
 
-    def initialize(@products, @api_key_character_count, @api_key_character_limit, @start_time, @end_time, @character_count, @character_limit)
+    def initialize(
+      @products,
+      @api_key_character_count,
+      @api_key_character_limit,
+      @start_time,
+      @end_time,
+      @character_count,
+      @character_limit,
+      @speech_to_text_milliseconds_count = nil,
+      @speech_to_text_milliseconds_limit = nil
+    )
     end
   end
 
