@@ -11,6 +11,7 @@ require "./v2/rephrase"
 
 # V3 specific modules
 require "./v3/glossary"
+require "./v3/style_rules"
 
 module DeepL
   class Translator
