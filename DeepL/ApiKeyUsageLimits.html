@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::DeepLError - deepl main</title>
+  <title>DeepL::ApiKeyUsageLimits - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -82,7 +82,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/ApiKeyUsageLimits" data-name="deepl::apikeyusagelimits">
+  <li class=" current" data-id="deepl/DeepL/ApiKeyUsageLimits" data-name="deepl::apikeyusagelimits">
       <a href="../DeepL/ApiKeyUsageLimits.html">ApiKeyUsageLimits</a>
       
     </li>
@@ -97,7 +97,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
+  <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="../DeepL/DeepLError.html">DeepLError</a>
       
     </li>
@@ -268,16 +268,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>DeepLError
+  </span> DeepL::<wbr>ApiKeyUsageLimits
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DeepLError.html">DeepL::DeepLError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
-
-
-
-
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/ApiKeyUsageLimits.html">DeepL::ApiKeyUsageLimits</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -289,34 +285,22 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="included-modules" class="anchor" href="#included-modules">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Included Modules
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../DeepL/ApiKeyNotFoundError.html">DeepL::ApiKeyNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/AuthorizationError.html">DeepL::AuthorizationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentNotReadyError.html">DeepL::DocumentNotReadyError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentTranslationError.html">DeepL::DocumentTranslationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNameNotFoundError.html">DeepL::GlossaryNameNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNotFoundError.html">DeepL::GlossaryNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/QuotaExceededError.html">DeepL::QuotaExceededError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/RequestError.html">DeepL::RequestError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/TooManyRequestsError.html">DeepL::TooManyRequestsError</a></li>
+      <li class="other-type">JSON::Serializable</li>
     
   </ul>
+
+
+
+
 
 
 
@@ -333,8 +317,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/exceptions.cr#L2" target="_blank">
-        deepl/exceptions.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L4" target="_blank">
+        deepl/v2/admin.cr
       </a>
     
     <br/>
@@ -345,12 +329,61 @@
 
 
   
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28characters%3AFloat64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(characters : Float64 | Nil = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)</a>
+        
+      </li>
+    
+  </ul>
+
 
   
 
   
 
   
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#characters%3AFloat64%7CNil-instance-method" class="signature"><strong>#characters</strong> : Float64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#characters%3D%28characters%3AFloat64%7CNil%29-instance-method" class="signature"><strong>#characters=</strong>(characters : Float64 | Nil)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
   <div class="methods-inherited">
@@ -397,12 +430,112 @@
   </div>
 
   
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(characters:Float64|Nil=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(characters : Float64 | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28characters%3AFloat64%7CNil%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*,__pull_for_json_serializablepull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
   
 
   
 
   
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="characters:Float64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>characters</strong> : Float64 | Nil
+
+        <a class="method-permalink" href="#characters%3AFloat64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="characters=(characters:Float64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>characters=</strong>(characters : Float64 | Nil)
+
+        <a class="method-permalink" href="#characters%3D%28characters%3AFloat64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 </div>

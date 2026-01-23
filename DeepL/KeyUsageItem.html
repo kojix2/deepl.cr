@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::DeepLError - deepl main</title>
+  <title>DeepL::KeyUsageItem - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -97,7 +97,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
+  <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="../DeepL/DeepLError.html">DeepLError</a>
       
     </li>
@@ -162,7 +162,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/KeyUsageItem" data-name="deepl::keyusageitem">
+  <li class=" current" data-id="deepl/DeepL/KeyUsageItem" data-name="deepl::keyusageitem">
       <a href="../DeepL/KeyUsageItem.html">KeyUsageItem</a>
       
     </li>
@@ -268,16 +268,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>DeepLError
+  </span> DeepL::<wbr>KeyUsageItem
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DeepLError.html">DeepL::DeepLError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
-
-
-
-
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/KeyUsageItem.html">DeepL::KeyUsageItem</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -289,34 +285,22 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="included-modules" class="anchor" href="#included-modules">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Included Modules
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../DeepL/ApiKeyNotFoundError.html">DeepL::ApiKeyNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/AuthorizationError.html">DeepL::AuthorizationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentNotReadyError.html">DeepL::DocumentNotReadyError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentTranslationError.html">DeepL::DocumentTranslationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNameNotFoundError.html">DeepL::GlossaryNameNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNotFoundError.html">DeepL::GlossaryNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/QuotaExceededError.html">DeepL::QuotaExceededError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/RequestError.html">DeepL::RequestError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/TooManyRequestsError.html">DeepL::TooManyRequestsError</a></li>
+      <li class="other-type">JSON::Serializable</li>
     
   </ul>
+
+
+
+
 
 
 
@@ -333,8 +317,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/exceptions.cr#L2" target="_blank">
-        deepl/exceptions.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L53" target="_blank">
+        deepl/v2/admin.cr
       </a>
     
     <br/>
@@ -345,12 +329,81 @@
 
 
   
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28api_key%3AString%2Capi_key_label%3AString%2Cusage%3ADeepL%3A%3AUsageBreakdown%29-class-method" class="signature"><strong>.new</strong>(api_key : String, api_key_label : String, usage : DeepL::UsageBreakdown)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)</a>
+        
+      </li>
+    
+  </ul>
+
 
   
 
   
 
   
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#api_key%3AString-instance-method" class="signature"><strong>#api_key</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#api_key%3D%28api_key%3AString%29-instance-method" class="signature"><strong>#api_key=</strong>(api_key : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#api_key_label%3AString-instance-method" class="signature"><strong>#api_key_label</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#api_key_label%3D%28api_key_label%3AString%29-instance-method" class="signature"><strong>#api_key_label=</strong>(api_key_label : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#usage%3AUsageBreakdown-instance-method" class="signature"><strong>#usage</strong> : UsageBreakdown</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#usage%3D%28usage%3AUsageBreakdown%29-instance-method" class="signature"><strong>#usage=</strong>(usage : UsageBreakdown)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
   <div class="methods-inherited">
@@ -397,12 +450,176 @@
   </div>
 
   
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(api_key:String,api_key_label:String,usage:DeepL::UsageBreakdown)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(api_key : String, api_key_label : String, usage : <a href="../DeepL/UsageBreakdown.html">DeepL::UsageBreakdown</a>)
+
+        <a class="method-permalink" href="#new%28api_key%3AString%2Capi_key_label%3AString%2Cusage%3ADeepL%3A%3AUsageBreakdown%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L60" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*,__pull_for_json_serializablepull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
   
 
   
 
   
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="api_key:String-instance-method">
+      <div class="signature">
+        
+        def <strong>api_key</strong> : String
+
+        <a class="method-permalink" href="#api_key%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="api_key=(api_key:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>api_key=</strong>(api_key : String)
+
+        <a class="method-permalink" href="#api_key%3D%28api_key%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="api_key_label:String-instance-method">
+      <div class="signature">
+        
+        def <strong>api_key_label</strong> : String
+
+        <a class="method-permalink" href="#api_key_label%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="api_key_label=(api_key_label:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>api_key_label=</strong>(api_key_label : String)
+
+        <a class="method-permalink" href="#api_key_label%3D%28api_key_label%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="usage:UsageBreakdown-instance-method">
+      <div class="signature">
+        
+        def <strong>usage</strong> : <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>
+
+        <a class="method-permalink" href="#usage%3AUsageBreakdown-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L58" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="usage=(usage:UsageBreakdown)-instance-method">
+      <div class="signature">
+        
+        def <strong>usage=</strong>(usage : <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>)
+
+        <a class="method-permalink" href="#usage%3D%28usage%3AUsageBreakdown%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L58" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 </div>

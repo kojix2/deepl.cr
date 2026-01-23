@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::LanguageInfo - deepl main</title>
+  <title>DeepL::UsageBreakdown - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -167,7 +167,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
+  <li class=" " data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
       <a href="../DeepL/LanguageInfo.html">LanguageInfo</a>
       
     </li>
@@ -227,7 +227,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/UsageBreakdown" data-name="deepl::usagebreakdown">
+  <li class=" current" data-id="deepl/DeepL/UsageBreakdown" data-name="deepl::usagebreakdown">
       <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>
       
     </li>
@@ -268,12 +268,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>LanguageInfo
+  </span> DeepL::<wbr>UsageBreakdown
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/LanguageInfo.html">DeepL::LanguageInfo</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/UsageBreakdown.html">DeepL::UsageBreakdown</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -317,8 +317,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L2" target="_blank">
-        deepl/v2/language_info.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L34" target="_blank">
+        deepl/v2/admin.cr
       </a>
     
     <br/>
@@ -340,12 +340,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28language%3AString%2Cname%3AString%2Csupports_formality%3ABool%7CNil%29-class-method" class="signature"><strong>.new</strong>(language : String, name : String, supports_formality : Bool | Nil)</a>
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        <a href="#new%28total_characters%3AInt64%2Ctext_translation_characters%3AInt64%7CNil%3Dnil%2Cdocument_translation_characters%3AInt64%7CNil%3Dnil%2Ctext_improvement_characters%3AInt64%7CNil%3Dnil%2Cspeech_to_text_milliseconds%3AInt64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(total_characters : Int64, text_translation_characters : Int64 | Nil = <span class="n">nil</span>, document_translation_characters : Int64 | Nil = <span class="n">nil</span>, text_improvement_characters : Int64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds : Int64 | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -373,32 +373,52 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#language%3AString-instance-method" class="signature"><strong>#language</strong> : String</a>
+        <a href="#document_translation_characters%3AInt64%7CNil-instance-method" class="signature"><strong>#document_translation_characters</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#language%3D%28language%3AString%29-instance-method" class="signature"><strong>#language=</strong>(language : String)</a>
+        <a href="#document_translation_characters%3D%28document_translation_characters%3AInt64%7CNil%29-instance-method" class="signature"><strong>#document_translation_characters=</strong>(document_translation_characters : Int64 | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#name%3AString-instance-method" class="signature"><strong>#name</strong> : String</a>
+        <a href="#speech_to_text_milliseconds%3AInt64%7CNil-instance-method" class="signature"><strong>#speech_to_text_milliseconds</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#name%3D%28name%3AString%29-instance-method" class="signature"><strong>#name=</strong>(name : String)</a>
+        <a href="#speech_to_text_milliseconds%3D%28speech_to_text_milliseconds%3AInt64%7CNil%29-instance-method" class="signature"><strong>#speech_to_text_milliseconds=</strong>(speech_to_text_milliseconds : Int64 | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#supports_formality%3ABool%7CNil-instance-method" class="signature"><strong>#supports_formality</strong> : Bool | Nil</a>
+        <a href="#text_improvement_characters%3AInt64%7CNil-instance-method" class="signature"><strong>#text_improvement_characters</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#supports_formality%3D%28supports_formality%3ABool%7CNil%29-instance-method" class="signature"><strong>#supports_formality=</strong>(supports_formality : Bool | Nil)</a>
+        <a href="#text_improvement_characters%3D%28text_improvement_characters%3AInt64%7CNil%29-instance-method" class="signature"><strong>#text_improvement_characters=</strong>(text_improvement_characters : Int64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#text_translation_characters%3AInt64%7CNil-instance-method" class="signature"><strong>#text_translation_characters</strong> : Int64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#text_translation_characters%3D%28text_translation_characters%3AInt64%7CNil%29-instance-method" class="signature"><strong>#text_translation_characters=</strong>(text_translation_characters : Int64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#total_characters%3AInt64-instance-method" class="signature"><strong>#total_characters</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#total_characters%3D%28total_characters%3AInt64%29-instance-method" class="signature"><strong>#total_characters=</strong>(total_characters : Int64)</a>
         
       </li>
     
@@ -459,22 +479,6 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(language:String,name:String,supports_formality:Bool|Nil)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(language : String, name : String, supports_formality : Bool | Nil)
-
-        <a class="method-permalink" href="#new%28language%3AString%2Cname%3AString%2Csupports_formality%3ABool%7CNil%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L9" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
@@ -486,7 +490,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(total_characters:Int64,text_translation_characters:Int64|Nil=nil,document_translation_characters:Int64|Nil=nil,text_improvement_characters:Int64|Nil=nil,speech_to_text_milliseconds:Int64|Nil=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(total_characters : Int64, text_translation_characters : Int64 | Nil = <span class="n">nil</span>, document_translation_characters : Int64 | Nil = <span class="n">nil</span>, text_improvement_characters : Int64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds : Int64 | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28total_characters%3AInt64%2Ctext_translation_characters%3AInt64%7CNil%3Dnil%2Cdocument_translation_characters%3AInt64%7CNil%3Dnil%2Ctext_improvement_characters%3AInt64%7CNil%3Dnil%2Cspeech_to_text_milliseconds%3AInt64%7CNil%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -502,7 +522,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -523,98 +543,162 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="language:String-instance-method">
+    <div class="entry-detail" id="document_translation_characters:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>language</strong> : String
+        def <strong>document_translation_characters</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#language%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#document_translation_characters%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="language=(language:String)-instance-method">
+    <div class="entry-detail" id="document_translation_characters=(document_translation_characters:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>language=</strong>(language : String)
+        def <strong>document_translation_characters=</strong>(document_translation_characters : Int64 | Nil)
 
-        <a class="method-permalink" href="#language%3D%28language%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#document_translation_characters%3D%28document_translation_characters%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="name:String-instance-method">
+    <div class="entry-detail" id="speech_to_text_milliseconds:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>name</strong> : String
+        def <strong>speech_to_text_milliseconds</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#name%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#speech_to_text_milliseconds%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="name=(name:String)-instance-method">
+    <div class="entry-detail" id="speech_to_text_milliseconds=(speech_to_text_milliseconds:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>name=</strong>(name : String)
+        def <strong>speech_to_text_milliseconds=</strong>(speech_to_text_milliseconds : Int64 | Nil)
 
-        <a class="method-permalink" href="#name%3D%28name%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#speech_to_text_milliseconds%3D%28speech_to_text_milliseconds%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="supports_formality:Bool|Nil-instance-method">
+    <div class="entry-detail" id="text_improvement_characters:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>supports_formality</strong> : Bool | Nil
+        def <strong>text_improvement_characters</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#supports_formality%3ABool%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#text_improvement_characters%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="supports_formality=(supports_formality:Bool|Nil)-instance-method">
+    <div class="entry-detail" id="text_improvement_characters=(text_improvement_characters:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>supports_formality=</strong>(supports_formality : Bool | Nil)
+        def <strong>text_improvement_characters=</strong>(text_improvement_characters : Int64 | Nil)
 
-        <a class="method-permalink" href="#supports_formality%3D%28supports_formality%3ABool%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#text_improvement_characters%3D%28text_improvement_characters%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="text_translation_characters:Int64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>text_translation_characters</strong> : Int64 | Nil
+
+        <a class="method-permalink" href="#text_translation_characters%3AInt64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="text_translation_characters=(text_translation_characters:Int64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>text_translation_characters=</strong>(text_translation_characters : Int64 | Nil)
+
+        <a class="method-permalink" href="#text_translation_characters%3D%28text_translation_characters%3AInt64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="total_characters:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>total_characters</strong> : Int64
+
+        <a class="method-permalink" href="#total_characters%3AInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="total_characters=(total_characters:Int64)-instance-method">
+      <div class="signature">
+        
+        def <strong>total_characters=</strong>(total_characters : Int64)
+
+        <a class="method-permalink" href="#total_characters%3D%28total_characters%3AInt64%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::LanguageInfo - deepl main</title>
+  <title>DeepL::AdminUsageReportData - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -67,7 +67,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/AdminUsageReportData" data-name="deepl::adminusagereportdata">
+  <li class=" current" data-id="deepl/DeepL/AdminUsageReportData" data-name="deepl::adminusagereportdata">
       <a href="../DeepL/AdminUsageReportData.html">AdminUsageReportData</a>
       
     </li>
@@ -167,7 +167,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
+  <li class=" " data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
       <a href="../DeepL/LanguageInfo.html">LanguageInfo</a>
       
     </li>
@@ -268,12 +268,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>LanguageInfo
+  </span> DeepL::<wbr>AdminUsageReportData
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/LanguageInfo.html">DeepL::LanguageInfo</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/AdminUsageReportData.html">DeepL::AdminUsageReportData</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -317,8 +317,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L2" target="_blank">
-        deepl/v2/language_info.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L76" target="_blank">
+        deepl/v2/admin.cr
       </a>
     
     <br/>
@@ -340,7 +340,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28language%3AString%2Cname%3AString%2Csupports_formality%3ABool%7CNil%29-class-method" class="signature"><strong>.new</strong>(language : String, name : String, supports_formality : Bool | Nil)</a>
+        <a href="#new%28total_usage%3ADeepL%3A%3AUsageBreakdown%2Cstart_date%3ATime%2Cend_date%3ATime%2Cgroup_by%3ANil%7CString%3Dnil%2Ckey_usages%3ANil%7CArray%28DeepL%3A%3AKeyUsageItem%29%3Dnil%2Ckey_and_day_usages%3ANil%7CArray%28DeepL%3A%3AKeyAndDayUsageItem%29%3Dnil%29-class-method" class="signature"><strong>.new</strong>(total_usage : DeepL::UsageBreakdown, start_date : Time, end_date : Time, group_by : Nil | String = <span class="n">nil</span>, key_usages : Nil | Array(DeepL::KeyUsageItem) = <span class="n">nil</span>, key_and_day_usages : Nil | Array(DeepL::KeyAndDayUsageItem) = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -373,32 +373,62 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#language%3AString-instance-method" class="signature"><strong>#language</strong> : String</a>
+        <a href="#end_date%3ATime-instance-method" class="signature"><strong>#end_date</strong> : Time</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#language%3D%28language%3AString%29-instance-method" class="signature"><strong>#language=</strong>(language : String)</a>
+        <a href="#end_date%3D%28end_date%3ATime%29-instance-method" class="signature"><strong>#end_date=</strong>(end_date : Time)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#name%3AString-instance-method" class="signature"><strong>#name</strong> : String</a>
+        <a href="#group_by%3AString%7CNil-instance-method" class="signature"><strong>#group_by</strong> : String | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#name%3D%28name%3AString%29-instance-method" class="signature"><strong>#name=</strong>(name : String)</a>
+        <a href="#group_by%3D%28group_by%3AString%7CNil%29-instance-method" class="signature"><strong>#group_by=</strong>(group_by : String | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#supports_formality%3ABool%7CNil-instance-method" class="signature"><strong>#supports_formality</strong> : Bool | Nil</a>
+        <a href="#key_and_day_usages%3AArray%28KeyAndDayUsageItem%29%7CNil-instance-method" class="signature"><strong>#key_and_day_usages</strong> : Array(KeyAndDayUsageItem) | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#supports_formality%3D%28supports_formality%3ABool%7CNil%29-instance-method" class="signature"><strong>#supports_formality=</strong>(supports_formality : Bool | Nil)</a>
+        <a href="#key_and_day_usages%3D%28key_and_day_usages%3AArray%28KeyAndDayUsageItem%29%7CNil%29-instance-method" class="signature"><strong>#key_and_day_usages=</strong>(key_and_day_usages : Array(KeyAndDayUsageItem) | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#key_usages%3AArray%28KeyUsageItem%29%7CNil-instance-method" class="signature"><strong>#key_usages</strong> : Array(KeyUsageItem) | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#key_usages%3D%28key_usages%3AArray%28KeyUsageItem%29%7CNil%29-instance-method" class="signature"><strong>#key_usages=</strong>(key_usages : Array(KeyUsageItem) | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#start_date%3ATime-instance-method" class="signature"><strong>#start_date</strong> : Time</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#start_date%3D%28start_date%3ATime%29-instance-method" class="signature"><strong>#start_date=</strong>(start_date : Time)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#total_usage%3AUsageBreakdown-instance-method" class="signature"><strong>#total_usage</strong> : UsageBreakdown</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#total_usage%3D%28total_usage%3AUsageBreakdown%29-instance-method" class="signature"><strong>#total_usage=</strong>(total_usage : UsageBreakdown)</a>
         
       </li>
     
@@ -459,18 +489,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(language:String,name:String,supports_formality:Bool|Nil)-class-method">
+    <div class="entry-detail" id="new(total_usage:DeepL::UsageBreakdown,start_date:Time,end_date:Time,group_by:Nil|String=nil,key_usages:Nil|Array(DeepL::KeyUsageItem)=nil,key_and_day_usages:Nil|Array(DeepL::KeyAndDayUsageItem)=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(language : String, name : String, supports_formality : Bool | Nil)
+        def self.<strong>new</strong>(total_usage : <a href="../DeepL/UsageBreakdown.html">DeepL::UsageBreakdown</a>, start_date : Time, end_date : Time, group_by : Nil | String = <span class="n">nil</span>, key_usages : Nil | Array(<a href="../DeepL/KeyUsageItem.html">DeepL::KeyUsageItem</a>) = <span class="n">nil</span>, key_and_day_usages : Nil | Array(<a href="../DeepL/KeyAndDayUsageItem.html">DeepL::KeyAndDayUsageItem</a>) = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28language%3AString%2Cname%3AString%2Csupports_formality%3ABool%7CNil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28total_usage%3ADeepL%3A%3AUsageBreakdown%2Cstart_date%3ATime%2Cend_date%3ATime%2Cgroup_by%3ANil%7CString%3Dnil%2Ckey_usages%3ANil%7CArray%28DeepL%3A%3AKeyUsageItem%29%3Dnil%2Ckey_and_day_usages%3ANil%7CArray%28DeepL%3A%3AKeyAndDayUsageItem%29%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L86" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -486,7 +516,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -502,7 +532,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -523,98 +553,194 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="language:String-instance-method">
+    <div class="entry-detail" id="end_date:Time-instance-method">
       <div class="signature">
         
-        def <strong>language</strong> : String
+        def <strong>end_date</strong> : Time
 
-        <a class="method-permalink" href="#language%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#end_date%3ATime-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="language=(language:String)-instance-method">
+    <div class="entry-detail" id="end_date=(end_date:Time)-instance-method">
       <div class="signature">
         
-        def <strong>language=</strong>(language : String)
+        def <strong>end_date=</strong>(end_date : Time)
 
-        <a class="method-permalink" href="#language%3D%28language%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#end_date%3D%28end_date%3ATime%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="name:String-instance-method">
+    <div class="entry-detail" id="group_by:String|Nil-instance-method">
       <div class="signature">
         
-        def <strong>name</strong> : String
+        def <strong>group_by</strong> : String | Nil
 
-        <a class="method-permalink" href="#name%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#group_by%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="name=(name:String)-instance-method">
+    <div class="entry-detail" id="group_by=(group_by:String|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>name=</strong>(name : String)
+        def <strong>group_by=</strong>(group_by : String | Nil)
 
-        <a class="method-permalink" href="#name%3D%28name%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#group_by%3D%28group_by%3AString%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="supports_formality:Bool|Nil-instance-method">
+    <div class="entry-detail" id="key_and_day_usages:Array(KeyAndDayUsageItem)|Nil-instance-method">
       <div class="signature">
         
-        def <strong>supports_formality</strong> : Bool | Nil
+        def <strong>key_and_day_usages</strong> : Array(<a href="../DeepL/KeyAndDayUsageItem.html">KeyAndDayUsageItem</a>) | Nil
 
-        <a class="method-permalink" href="#supports_formality%3ABool%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#key_and_day_usages%3AArray%28KeyAndDayUsageItem%29%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="supports_formality=(supports_formality:Bool|Nil)-instance-method">
+    <div class="entry-detail" id="key_and_day_usages=(key_and_day_usages:Array(KeyAndDayUsageItem)|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>supports_formality=</strong>(supports_formality : Bool | Nil)
+        def <strong>key_and_day_usages=</strong>(key_and_day_usages : Array(<a href="../DeepL/KeyAndDayUsageItem.html">KeyAndDayUsageItem</a>) | Nil)
 
-        <a class="method-permalink" href="#supports_formality%3D%28supports_formality%3ABool%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#key_and_day_usages%3D%28key_and_day_usages%3AArray%28KeyAndDayUsageItem%29%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/language_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L84" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="key_usages:Array(KeyUsageItem)|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>key_usages</strong> : Array(<a href="../DeepL/KeyUsageItem.html">KeyUsageItem</a>) | Nil
+
+        <a class="method-permalink" href="#key_usages%3AArray%28KeyUsageItem%29%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L83" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="key_usages=(key_usages:Array(KeyUsageItem)|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>key_usages=</strong>(key_usages : Array(<a href="../DeepL/KeyUsageItem.html">KeyUsageItem</a>) | Nil)
+
+        <a class="method-permalink" href="#key_usages%3D%28key_usages%3AArray%28KeyUsageItem%29%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L83" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="start_date:Time-instance-method">
+      <div class="signature">
+        
+        def <strong>start_date</strong> : Time
+
+        <a class="method-permalink" href="#start_date%3ATime-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L80" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="start_date=(start_date:Time)-instance-method">
+      <div class="signature">
+        
+        def <strong>start_date=</strong>(start_date : Time)
+
+        <a class="method-permalink" href="#start_date%3D%28start_date%3ATime%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L80" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="total_usage:UsageBreakdown-instance-method">
+      <div class="signature">
+        
+        def <strong>total_usage</strong> : <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>
+
+        <a class="method-permalink" href="#total_usage%3AUsageBreakdown-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="total_usage=(total_usage:UsageBreakdown)-instance-method">
+      <div class="signature">
+        
+        def <strong>total_usage=</strong>(total_usage : <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>)
+
+        <a class="method-permalink" href="#total_usage%3D%28total_usage%3AUsageBreakdown%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/c442a42c4f76b3559b35f5e3e48cd5d825c854d5/src/deepl/v2/admin.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
