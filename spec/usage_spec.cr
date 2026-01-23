@@ -6,16 +6,24 @@ describe DeepL::UsagePro do
       {
         "product_type": "write",
         "api_key_character_count": 1000000,
-        "character_count": 1250000
+        "character_count": 1250000,
+        "billing_unit": "character",
+        "api_key_unit_count": 1200000,
+        "account_unit_count": 1500000
       },
       {
         "product_type": "translate",
         "api_key_character_count": 880000,
-        "character_count": 900000
+        "character_count": 900000,
+        "billing_unit": "character",
+        "api_key_unit_count": 880000,
+        "account_unit_count": 900000
       }
     ],
     "api_key_character_count": 1880000,
     "api_key_character_limit": 0,
+    "speech_to_text_milliseconds_count": 1200,
+    "speech_to_text_milliseconds_limit": 5000,
     "start_time": "2025-04-24T14:58:02Z",
     "end_time": "2025-05-24T14:58:02Z",
     "character_count": 2150000,
@@ -28,6 +36,8 @@ describe DeepL::UsagePro do
     usage.products.size.should eq(2)
     usage.api_key_character_count.should eq(1880000)
     usage.api_key_character_limit.should eq(0)
+    usage.speech_to_text_milliseconds_count.should eq(1200)
+    usage.speech_to_text_milliseconds_limit.should eq(5000)
     usage.character_count.should eq(2150000)
     usage.character_limit.should eq(20000000)
     usage.start_time.should eq(Time.parse_iso8601("2025-04-24T14:58:02Z"))
@@ -41,11 +51,17 @@ describe DeepL::UsagePro do
     write_product.product_type.should eq("write")
     write_product.api_key_character_count.should eq(1000000)
     write_product.character_count.should eq(1250000)
+    write_product.billing_unit.should eq("character")
+    write_product.api_key_unit_count.should eq(1200000)
+    write_product.account_unit_count.should eq(1500000)
 
     translate_product = usage.products[1]
     translate_product.product_type.should eq("translate")
     translate_product.api_key_character_count.should eq(880000)
     translate_product.character_count.should eq(900000)
+    translate_product.billing_unit.should eq("character")
+    translate_product.api_key_unit_count.should eq(880000)
+    translate_product.account_unit_count.should eq(900000)
   end
 
   it "can be serialized to JSON" do
@@ -66,6 +82,27 @@ describe DeepL::UsagePro do
       product.product_type.should eq("translate")
       product.api_key_character_count.should eq(500000)
       product.character_count.should eq(600000)
+      product.billing_unit.should be_nil
+      product.api_key_unit_count.should be_nil
+      product.account_unit_count.should be_nil
+    end
+
+    it "can be initialized with unit fields" do
+      product = DeepL::UsagePro::Product.new(
+        "write",
+        100000_i64,
+        120000_i64,
+        "character",
+        100000_i64,
+        120000_i64
+      )
+
+      product.product_type.should eq("write")
+      product.api_key_character_count.should eq(100000)
+      product.character_count.should eq(120000)
+      product.billing_unit.should eq("character")
+      product.api_key_unit_count.should eq(100000)
+      product.account_unit_count.should eq(120000)
     end
 
     it "can be serialized to JSON" do
