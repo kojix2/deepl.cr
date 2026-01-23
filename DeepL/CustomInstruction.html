@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::TextResult - deepl main</title>
+  <title>DeepL::CustomInstruction - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -72,7 +72,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/CustomInstruction" data-name="deepl::custominstruction">
+  <li class=" current" data-id="deepl/DeepL/CustomInstruction" data-name="deepl::custominstruction">
       <a href="../DeepL/CustomInstruction.html">CustomInstruction</a>
       
     </li>
@@ -177,7 +177,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/TextResult" data-name="deepl::textresult">
+  <li class=" " data-id="deepl/DeepL/TextResult" data-name="deepl::textresult">
       <a href="../DeepL/TextResult.html">TextResult</a>
       
     </li>
@@ -232,13 +232,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    struct
-  </span> DeepL::<wbr>TextResult
+    class
+  </span> DeepL::<wbr>CustomInstruction
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/TextResult.html">DeepL::TextResult</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/CustomInstruction.html">DeepL::CustomInstruction</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -248,6 +248,20 @@
 
 
 
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">JSON::Serializable</li>
+    
+  </ul>
 
 
 
@@ -268,8 +282,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v2/text_result.cr#L2" target="_blank">
-        deepl/v2/text_result.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L4" target="_blank">
+        deepl/v3/style_rules.cr
       </a>
     
     <br/>
@@ -291,7 +305,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28text%3AString%2Cdetected_source_language%3AString%2Cbilled_characters%3AInt64%7CNil%2Cmodel_type_used%3AString%7CNil%29-class-method" class="signature"><strong>.new</strong>(text : String, detected_source_language : String, billed_characters : Int64 | Nil, model_type_used : String | Nil)</a>
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28label%3ANil%7CString%3Dnil%2Cprompt%3ANil%7CString%3Dnil%2Csource_language%3ANil%7CString%3Dnil%29-class-method" class="signature"><strong>.new</strong>(label : Nil | String = <span class="n">nil</span>, prompt : Nil | String = <span class="n">nil</span>, source_language : Nil | String = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)</a>
         
       </li>
     
@@ -314,32 +338,32 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#billed_characters%3AInt64%7CNil-instance-method" class="signature"><strong>#billed_characters</strong> : Int64 | Nil</a>
+        <a href="#label%3AString%7CNil-instance-method" class="signature"><strong>#label</strong> : String | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        <a href="#label%3D%28label%3AString%7CNil%29-instance-method" class="signature"><strong>#label=</strong>(label : String | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28text_text%3D%40text%2Cdetected_source_language_detected_source_language%3D%40detected_source_language%2Cbilled_characters_billed_characters%3D%40billed_characters%2Cmodel_type_used_model_type_used%3D%40model_type_used%29-instance-method" class="signature"><strong>#copy_with</strong>(text _text = @text, detected_source_language _detected_source_language = @detected_source_language, billed_characters _billed_characters = @billed_characters, model_type_used _model_type_used = @model_type_used)</a>
+        <a href="#prompt%3AString%7CNil-instance-method" class="signature"><strong>#prompt</strong> : String | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#detected_source_language%3AString-instance-method" class="signature"><strong>#detected_source_language</strong> : String</a>
+        <a href="#prompt%3D%28prompt%3AString%7CNil%29-instance-method" class="signature"><strong>#prompt=</strong>(prompt : String | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#model_type_used%3AString%7CNil-instance-method" class="signature"><strong>#model_type_used</strong> : String | Nil</a>
+        <a href="#source_language%3AString%7CNil-instance-method" class="signature"><strong>#source_language</strong> : String | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#text%3AString-instance-method" class="signature"><strong>#text</strong> : String</a>
+        <a href="#source_language%3D%28source_language%3AString%7CNil%29-instance-method" class="signature"><strong>#source_language=</strong>(source_language : String | Nil)</a>
         
       </li>
     
@@ -400,18 +424,50 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(text:String,detected_source_language:String,billed_characters:Int64|Nil,model_type_used:String|Nil)-class-method">
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(text : String, detected_source_language : String, billed_characters : Int64 | Nil, model_type_used : String | Nil)
+        def self.<strong>new</strong>(pull : JSON::PullParser)
 
-        <a class="method-permalink" href="#new%28text%3AString%2Cdetected_source_language%3AString%2Cbilled_characters%3AInt64%7CNil%2Cmodel_type_used%3AString%7CNil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v2/text_result.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(label:Nil|String=nil,prompt:Nil|String=nil,source_language:Nil|String=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(label : Nil | String = <span class="n">nil</span>, prompt : Nil | String = <span class="n">nil</span>, source_language : Nil | String = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28label%3ANil%7CString%3Dnil%2Cprompt%3ANil%7CString%3Dnil%2Csource_language%3ANil%7CString%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*,__pull_for_json_serializablepull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -432,90 +488,98 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="billed_characters:Int64|Nil-instance-method">
+    <div class="entry-detail" id="label:String|Nil-instance-method">
       <div class="signature">
         
-        def <strong>billed_characters</strong> : Int64 | Nil
+        def <strong>label</strong> : String | Nil
 
-        <a class="method-permalink" href="#billed_characters%3AInt64%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#label%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="clone-instance-method">
+    <div class="entry-detail" id="label=(label:String|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>clone</strong>
+        def <strong>label=</strong>(label : String | Nil)
 
-        <a class="method-permalink" href="#clone-instance-method">#</a>
+        <a class="method-permalink" href="#label%3D%28label%3AString%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v2/text_result.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(text_text=@text,detected_source_language_detected_source_language=@detected_source_language,billed_characters_billed_characters=@billed_characters,model_type_used_model_type_used=@model_type_used)-instance-method">
+    <div class="entry-detail" id="prompt:String|Nil-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(text _text = @text, detected_source_language _detected_source_language = @detected_source_language, billed_characters _billed_characters = @billed_characters, model_type_used _model_type_used = @model_type_used)
+        def <strong>prompt</strong> : String | Nil
 
-        <a class="method-permalink" href="#copy_with%28text_text%3D%40text%2Cdetected_source_language_detected_source_language%3D%40detected_source_language%2Cbilled_characters_billed_characters%3D%40billed_characters%2Cmodel_type_used_model_type_used%3D%40model_type_used%29-instance-method">#</a>
+        <a class="method-permalink" href="#prompt%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v2/text_result.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="detected_source_language:String-instance-method">
+    <div class="entry-detail" id="prompt=(prompt:String|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>detected_source_language</strong> : String
+        def <strong>prompt=</strong>(prompt : String | Nil)
 
-        <a class="method-permalink" href="#detected_source_language%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#prompt%3D%28prompt%3AString%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="model_type_used:String|Nil-instance-method">
+    <div class="entry-detail" id="source_language:String|Nil-instance-method">
       <div class="signature">
         
-        def <strong>model_type_used</strong> : String | Nil
+        def <strong>source_language</strong> : String | Nil
 
-        <a class="method-permalink" href="#model_type_used%3AString%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#source_language%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="text:String-instance-method">
+    <div class="entry-detail" id="source_language=(source_language:String|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>text</strong> : String
+        def <strong>source_language=</strong>(source_language : String | Nil)
 
-        <a class="method-permalink" href="#text%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#source_language%3D%28source_language%3AString%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>

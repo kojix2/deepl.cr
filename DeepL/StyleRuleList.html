@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::MultilingualGlossaryInfo - deepl main</title>
+  <title>DeepL::StyleRuleList - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -147,7 +147,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/MultilingualGlossaryInfo" data-name="deepl::multilingualglossaryinfo">
+  <li class=" " data-id="deepl/DeepL/MultilingualGlossaryInfo" data-name="deepl::multilingualglossaryinfo">
       <a href="../DeepL/MultilingualGlossaryInfo.html">MultilingualGlossaryInfo</a>
       
     </li>
@@ -172,7 +172,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/StyleRuleList" data-name="deepl::stylerulelist">
+  <li class=" current" data-id="deepl/DeepL/StyleRuleList" data-name="deepl::stylerulelist">
       <a href="../DeepL/StyleRuleList.html">StyleRuleList</a>
       
     </li>
@@ -233,12 +233,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>MultilingualGlossaryInfo
+  </span> DeepL::<wbr>StyleRuleList
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/MultilingualGlossaryInfo.html">DeepL::MultilingualGlossaryInfo</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/StyleRuleList.html">DeepL::StyleRuleList</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -282,8 +282,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L2" target="_blank">
-        deepl/v3/multilingual_glossary_info.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L15" target="_blank">
+        deepl/v3/style_rules.cr
       </a>
     
     <br/>
@@ -305,7 +305,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28glossary_id%3AString%2Cname%3AString%2Cdictionaries%3AArray%28DeepL%3A%3AGlossaryDictionary%29%2Ccreation_time%3ATime%29-class-method" class="signature"><strong>.new</strong>(glossary_id : String, name : String, dictionaries : Array(DeepL::GlossaryDictionary), creation_time : Time)</a>
+        <a href="#new%28style_id%3AString%2Cname%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Clanguage%3AString%2Cversion%3AInt32%2Cconfigured_rules%3ANil%7CArray%28JSON%3A%3AAny%29%3Dnil%2Ccustom_instructions%3ANil%7CArray%28DeepL%3A%3ACustomInstruction%29%3Dnil%29-class-method" class="signature"><strong>.new</strong>(style_id : String, name : String, creation_time : Time, updated_time : Time, language : String, version : Int32, configured_rules : Nil | Array(JSON::Any) = <span class="n">nil</span>, custom_instructions : Nil | Array(DeepL::CustomInstruction) = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -338,6 +338,16 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil-instance-method" class="signature"><strong>#configured_rules</strong> : Array(JSON::Any) | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#configured_rules%3D%28configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil%29-instance-method" class="signature"><strong>#configured_rules=</strong>(configured_rules : Array(JSON::Any) | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#creation_time%3ATime-instance-method" class="signature"><strong>#creation_time</strong> : Time</a>
         
       </li>
@@ -348,22 +358,22 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#dictionaries%3AArray%28GlossaryDictionary%29-instance-method" class="signature"><strong>#dictionaries</strong> : Array(GlossaryDictionary)</a>
+        <a href="#custom_instructions%3AArray%28CustomInstruction%29%7CNil-instance-method" class="signature"><strong>#custom_instructions</strong> : Array(CustomInstruction) | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#dictionaries%3D%28dictionaries%3AArray%28GlossaryDictionary%29%29-instance-method" class="signature"><strong>#dictionaries=</strong>(dictionaries : Array(GlossaryDictionary))</a>
+        <a href="#custom_instructions%3D%28custom_instructions%3AArray%28CustomInstruction%29%7CNil%29-instance-method" class="signature"><strong>#custom_instructions=</strong>(custom_instructions : Array(CustomInstruction) | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#glossary_id%3AString-instance-method" class="signature"><strong>#glossary_id</strong> : String</a>
+        <a href="#language%3AString-instance-method" class="signature"><strong>#language</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#glossary_id%3D%28glossary_id%3AString%29-instance-method" class="signature"><strong>#glossary_id=</strong>(glossary_id : String)</a>
+        <a href="#language%3D%28language%3AString%29-instance-method" class="signature"><strong>#language=</strong>(language : String)</a>
         
       </li>
     
@@ -374,6 +384,36 @@
     
       <li class="entry-summary">
         <a href="#name%3D%28name%3AString%29-instance-method" class="signature"><strong>#name=</strong>(name : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#style_id%3AString-instance-method" class="signature"><strong>#style_id</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#style_id%3D%28style_id%3AString%29-instance-method" class="signature"><strong>#style_id=</strong>(style_id : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#updated_time%3ATime-instance-method" class="signature"><strong>#updated_time</strong> : Time</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#updated_time%3D%28updated_time%3ATime%29-instance-method" class="signature"><strong>#updated_time=</strong>(updated_time : Time)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#version%3AInt32-instance-method" class="signature"><strong>#version</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#version%3D%28version%3AInt32%29-instance-method" class="signature"><strong>#version=</strong>(version : Int32)</a>
         
       </li>
     
@@ -434,18 +474,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(glossary_id:String,name:String,dictionaries:Array(DeepL::GlossaryDictionary),creation_time:Time)-class-method">
+    <div class="entry-detail" id="new(style_id:String,name:String,creation_time:Time,updated_time:Time,language:String,version:Int32,configured_rules:Nil|Array(JSON::Any)=nil,custom_instructions:Nil|Array(DeepL::CustomInstruction)=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(glossary_id : String, name : String, dictionaries : Array(<a href="../DeepL/GlossaryDictionary.html">DeepL::GlossaryDictionary</a>), creation_time : Time)
+        def self.<strong>new</strong>(style_id : String, name : String, creation_time : Time, updated_time : Time, language : String, version : Int32, configured_rules : Nil | Array(JSON::Any) = <span class="n">nil</span>, custom_instructions : Nil | Array(<a href="../DeepL/CustomInstruction.html">DeepL::CustomInstruction</a>) = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28glossary_id%3AString%2Cname%3AString%2Cdictionaries%3AArray%28DeepL%3A%3AGlossaryDictionary%29%2Ccreation_time%3ATime%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28style_id%3AString%2Cname%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Clanguage%3AString%2Cversion%3AInt32%2Cconfigured_rules%3ANil%7CArray%28JSON%3A%3AAny%29%3Dnil%2Ccustom_instructions%3ANil%7CArray%28DeepL%3A%3ACustomInstruction%29%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -461,7 +501,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -477,7 +517,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -498,6 +538,38 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="configured_rules:Array(JSON::Any)|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>configured_rules</strong> : Array(JSON::Any) | Nil
+
+        <a class="method-permalink" href="#configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="configured_rules=(configured_rules:Array(JSON::Any)|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>configured_rules=</strong>(configured_rules : Array(JSON::Any) | Nil)
+
+        <a class="method-permalink" href="#configured_rules%3D%28configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="creation_time:Time-instance-method">
       <div class="signature">
         
@@ -509,7 +581,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -525,71 +597,71 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="dictionaries:Array(GlossaryDictionary)-instance-method">
+    <div class="entry-detail" id="custom_instructions:Array(CustomInstruction)|Nil-instance-method">
       <div class="signature">
         
-        def <strong>dictionaries</strong> : Array(<a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>)
+        def <strong>custom_instructions</strong> : Array(<a href="../DeepL/CustomInstruction.html">CustomInstruction</a>) | Nil
 
-        <a class="method-permalink" href="#dictionaries%3AArray%28GlossaryDictionary%29-instance-method">#</a>
+        <a class="method-permalink" href="#custom_instructions%3AArray%28CustomInstruction%29%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="dictionaries=(dictionaries:Array(GlossaryDictionary))-instance-method">
+    <div class="entry-detail" id="custom_instructions=(custom_instructions:Array(CustomInstruction)|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>dictionaries=</strong>(dictionaries : Array(<a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>))
+        def <strong>custom_instructions=</strong>(custom_instructions : Array(<a href="../DeepL/CustomInstruction.html">CustomInstruction</a>) | Nil)
 
-        <a class="method-permalink" href="#dictionaries%3D%28dictionaries%3AArray%28GlossaryDictionary%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#custom_instructions%3D%28custom_instructions%3AArray%28CustomInstruction%29%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="glossary_id:String-instance-method">
+    <div class="entry-detail" id="language:String-instance-method">
       <div class="signature">
         
-        def <strong>glossary_id</strong> : String
+        def <strong>language</strong> : String
 
-        <a class="method-permalink" href="#glossary_id%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#language%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="glossary_id=(glossary_id:String)-instance-method">
+    <div class="entry-detail" id="language=(language:String)-instance-method">
       <div class="signature">
         
-        def <strong>glossary_id=</strong>(glossary_id : String)
+        def <strong>language=</strong>(language : String)
 
-        <a class="method-permalink" href="#glossary_id%3D%28glossary_id%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#language%3D%28language%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -605,7 +677,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -621,7 +693,103 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/multilingual_glossary_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="style_id:String-instance-method">
+      <div class="signature">
+        
+        def <strong>style_id</strong> : String
+
+        <a class="method-permalink" href="#style_id%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="style_id=(style_id:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>style_id=</strong>(style_id : String)
+
+        <a class="method-permalink" href="#style_id%3D%28style_id%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="updated_time:Time-instance-method">
+      <div class="signature">
+        
+        def <strong>updated_time</strong> : Time
+
+        <a class="method-permalink" href="#updated_time%3ATime-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="updated_time=(updated_time:Time)-instance-method">
+      <div class="signature">
+        
+        def <strong>updated_time=</strong>(updated_time : Time)
+
+        <a class="method-permalink" href="#updated_time%3D%28updated_time%3ATime%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="version:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>version</strong> : Int32
+
+        <a class="method-permalink" href="#version%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="version=(version:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>version=</strong>(version : Int32)
+
+        <a class="method-permalink" href="#version%3D%28version%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/abeb4312529ff8c2fe4a9e46585f677e39c7b7a4/src/deepl/v3/style_rules.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
