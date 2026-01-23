@@ -32,7 +32,7 @@ module DeepL
       @language,
       @version,
       @configured_rules = nil,
-      @custom_instructions = nil
+      @custom_instructions = nil,
     )
     end
   end
@@ -47,9 +47,9 @@ module DeepL
       url = "#{base_server_url}/v3/style_rules"
 
       params = {
-        "page" => page,
+        "page"      => page,
         "page_size" => page_size,
-        "detailed" => detailed,
+        "detailed"  => detailed,
       }.compact!
 
       response = Crest.get(url, params: params, headers: http_headers_base)

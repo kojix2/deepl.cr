@@ -38,7 +38,7 @@ module DeepL
       @character_count,
       @character_limit,
       @speech_to_text_milliseconds_count = nil,
-      @speech_to_text_milliseconds_limit = nil
+      @speech_to_text_milliseconds_limit = nil,
     )
     end
   end

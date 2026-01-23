@@ -26,7 +26,7 @@ module DeepL
       @creation_time,
       @deactivated_time = nil,
       @is_deactivated = false,
-      @usage_limits = nil
+      @usage_limits = nil,
     )
     end
   end
@@ -45,7 +45,7 @@ module DeepL
       @text_translation_characters = nil,
       @document_translation_characters = nil,
       @text_improvement_characters = nil,
-      @speech_to_text_milliseconds = nil
+      @speech_to_text_milliseconds = nil,
     )
     end
   end
@@ -89,7 +89,7 @@ module DeepL
       @end_date,
       @group_by = nil,
       @key_usages = nil,
-      @key_and_day_usages = nil
+      @key_and_day_usages = nil,
     )
     end
   end
@@ -141,7 +141,7 @@ module DeepL
       url = "#{server_url}/admin/developer-keys/label"
       data = {
         "key_id" => key_id,
-        "label" => label,
+        "label"  => label,
       }
 
       response = Crest.put(url, form: data, json: true, headers: http_headers_json)
@@ -153,7 +153,7 @@ module DeepL
     def admin_set_developer_key_usage_limits(key_id : String, characters : Float64? = nil) : ApiKey
       url = "#{server_url}/admin/developer-keys/limits"
       data = {
-        "key_id" => key_id,
+        "key_id"     => key_id,
         "characters" => characters,
       }.compact!
 
@@ -167,8 +167,8 @@ module DeepL
       url = "#{server_url}/admin/analytics"
       params = {
         "start_date" => start_date,
-        "end_date" => end_date,
-        "group_by" => group_by,
+        "end_date"   => end_date,
+        "group_by"   => group_by,
       }.compact!
 
       response = Crest.get(url, params: params, headers: http_headers_base)
