@@ -1,4 +1,5 @@
 require "./spec_helper"
+require "../src/deepl/v3/style_rules"
 
 describe DeepL::StyleRuleList do
   sample_json = %({
