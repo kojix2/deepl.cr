@@ -9,6 +9,7 @@ require "./v2/glossary"
 require "./v2/usage"
 require "./v2/language"
 require "./v2/rephrase"
+require "./v2/admin"
 
 module DeepL
   class Translator

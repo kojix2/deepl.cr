@@ -135,7 +135,7 @@ module DeepL
         "entries_format" => entries_format,
       }
 
-      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
+      response = Crest.put(url, form: data, headers: http_headers_base)
       handle_response(response, glossary: true)
       GlossaryEntriesInformation.from_json(response.body)
     end

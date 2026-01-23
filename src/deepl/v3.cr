@@ -8,6 +8,7 @@ require "./v2/document"
 require "./v2/usage"
 require "./v2/language"
 require "./v2/rephrase"
+require "./v2/admin"
 
 # V3 specific modules
 require "./v3/glossary"
