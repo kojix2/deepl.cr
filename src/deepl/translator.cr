@@ -72,7 +72,8 @@ module DeepL
     end
 
     private def handle_response(response, glossary = false)
-      @last_trace_id = response.headers["X-Trace-ID"]?
+      trace_header = response.headers["X-Trace-ID"]?
+      @last_trace_id = trace_header.is_a?(Array) ? trace_header.first? : trace_header
       case response.status_code
       when 200..399
         return response
