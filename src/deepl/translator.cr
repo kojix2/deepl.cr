@@ -15,6 +15,7 @@ module DeepL
     setter auth_key : String?
     setter user_agent : String?
     setter server_url : String?
+    getter last_trace_id : String?
 
     # Create a new DeepL::Translator instance
     # @param auth_key [String | Nil] DeepL API key
@@ -71,6 +72,7 @@ module DeepL
     end
 
     private def handle_response(response, glossary = false)
+      @last_trace_id = response.headers["X-Trace-ID"]?
       case response.status_code
       when 200..399
         return response
