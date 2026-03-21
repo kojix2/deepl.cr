@@ -283,7 +283,7 @@
 <p>Add the dependency to your <code>shard.yml</code>:</p>
 <pre><code class="language-yaml">dependencies:
   deepl:
-    github: kojix2/deepl</code></pre>
+    github: kojix2/deepl.cr</code></pre>
 </li>
 <li>
 <p>Run <code>shards install</code></p>
@@ -298,11 +298,12 @@
 
 <span class="c"># Translate text</span>
 t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
-puts t.translate_text(<span class="s">&quot;こんにちは、世界！&quot;</span>, target_lang: <span class="s">&quot;EN&quot;</span>) <span class="c"># =&gt; &quot;Hello, world!&quot;</span>
+result <span class="o">=</span> t.translate_text(<span class="s">&quot;こんにちは、世界！&quot;</span>, target_lang: <span class="s">&quot;EN&quot;</span>)
+puts result.first.text <span class="c"># =&gt; &quot;Hello, world!&quot;</span>
 
 <span class="c"># Translate document</span>
 t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
-puts t.translate_document(<span class="s">&quot;path/to/document.pdf&quot;</span>, target_lang: <span class="s">&quot;EN&quot;</span>)
+t.translate_document(<span class="s">&quot;path/to/document.pdf&quot;</span>, target_lang: <span class="s">&quot;EN&quot;</span>)
 <span class="c"># Save to file (default: &quot;path/to/document_EN.pdf&quot;)</span>
 
 <span class="c"># Rephrase text (improve writing)</span>
@@ -354,7 +355,7 @@ puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went 
 <p>If you want to take over the project and become the owner, please submit your request with a pull request.</p>
 </li>
 <li>
-<p><a href="https://github.com/DeepLcom/openapihttps://github.com/DeepLcom/openapi">DeepL OpenAPI Specification</a></p>
+<p><a href="https://github.com/DeepLcom/openapi">DeepL OpenAPI Specification</a></p>
 </li>
 </ul>
 <h3><a id="run-tests-v2-v3" class="anchor" href="#run-tests-v2-v3">
@@ -363,11 +364,14 @@ puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went 
   </svg>
 </a>Run tests (v2 / v3)</h3>
 <ul>
-<li>v2 (default):
-<pre><code class="language-bash">crystal spec</code></pre>
+<li>v2 (compile-time flag):
+<pre><code class="language-bash">crystal spec -Ddeepl_v2</code></pre>
 </li>
 <li>v3 (compile-time flag):
 <pre><code class="language-bash">crystal spec -Ddeepl_v3</code></pre>
+</li>
+<li>v2 (environment variable):
+<pre><code class="language-bash">DEEPL_API_VERSION=v2 crystal spec</code></pre>
 </li>
 <li>v3 (environment variable):
 <pre><code class="language-bash">DEEPL_API_VERSION=v3 crystal spec</code></pre>
