@@ -358,6 +358,18 @@ puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went 
 <p><a href="https://github.com/DeepLcom/openapi">DeepL OpenAPI Specification</a></p>
 </li>
 </ul>
+<h3><a id="api-version-selection-current-behavior" class="anchor" href="#api-version-selection-current-behavior">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>API version selection (current behavior)</h3>
+<p>This library currently supports both v2 and v3 API families.</p>
+<ul>
+<li>The API surface is selected at compile time by either <code>-Ddeepl_v2</code> / <code>-Ddeepl_v3</code> or <code>DEEPL_API_VERSION=v2</code> / <code>DEEPL_API_VERSION=v3</code>.</li>
+<li>In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.</li>
+<li>In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary and style rules use v3 endpoints.</li>
+</ul>
+<p>In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary and style-rule features.</p>
 <h3><a id="run-tests-v2-v3" class="anchor" href="#run-tests-v2-v3">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
