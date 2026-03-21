@@ -14,7 +14,7 @@ Crystal library for the [DeepL language translation API](https://www.deepl.com/p
    ```yaml
    dependencies:
      deepl:
-       github: kojix2/deepl
+       github: kojix2/deepl.cr
    ```
 
 2. Run `shards install`
@@ -26,11 +26,12 @@ require "deepl"
 
 # Translate text
 t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
-puts t.translate_text("こんにちは、世界！", target_lang: "EN") # => "Hello, world!"
+result = t.translate_text("こんにちは、世界！", target_lang: "EN")
+puts result.first.text # => "Hello, world!"
 
 # Translate document
 t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
-puts t.translate_document("path/to/document.pdf", target_lang: "EN")
+t.translate_document("path/to/document.pdf", target_lang: "EN")
 # Save to file (default: "path/to/document_EN.pdf")
 
 # Rephrase text (improve writing)
@@ -74,17 +75,21 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 - Pull requests are welcome.
 - If you want to take over the project and become the owner, please submit your request with a pull request.
 
-- [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapihttps://github.com/DeepLcom/openapi)
+- [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapi)
 
 ### Run tests (v2 / v3)
 
-- v2 (default):
+- v2 (compile-time flag):
   ```bash
-  crystal spec
+  crystal spec -Ddeepl_v2
   ```
 - v3 (compile-time flag):
   ```bash
   crystal spec -Ddeepl_v3
+  ```
+- v2 (environment variable):
+  ```bash
+  DEEPL_API_VERSION=v2 crystal spec
   ```
 - v3 (environment variable):
   ```bash
