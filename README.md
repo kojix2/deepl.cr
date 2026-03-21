@@ -77,6 +77,16 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 
 - [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapi)
 
+### API version selection (current behavior)
+
+This library currently supports both v2 and v3 API families.
+
+- The API surface is selected at compile time by either `-Ddeepl_v2` / `-Ddeepl_v3` or `DEEPL_API_VERSION=v2` / `DEEPL_API_VERSION=v3`.
+- In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.
+- In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary and style rules use v3 endpoints.
+
+In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary and style-rule features.
+
 ### Run tests (v2 / v3)
 
 - v2 (compile-time flag):
