@@ -38,6 +38,16 @@ t.translate_document("path/to/document.pdf", target_lang: "EN")
 t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
 result = t.rephrase_text("I have went to the store yesterday.")
 puts result[0].text # => "I went to the store yesterday."
+
+# Voice realtime (v3 surface)
+t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
+voice = t.get_voice_streaming_url(
+  source_media_content_type: "audio/ogg; codecs=opus",
+  source_language: "en",
+  source_language_mode: "auto",
+  target_languages: ["de", "fr"]
+)
+puts voice.streaming_url
 ```
 
 See [documentation](https://kojix2.github.io/deepl.cr/).
@@ -83,9 +93,9 @@ This library currently supports both v2 and v3 API families.
 
 - The API surface is selected at compile time by either `-Ddeepl_v2` / `-Ddeepl_v3` or `DEEPL_API_VERSION=v2` / `DEEPL_API_VERSION=v3`.
 - In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.
-- In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary and style rules use v3 endpoints.
+- In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, and voice realtime use v3 endpoints.
 
-In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary and style-rule features.
+In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary, style-rule, and voice realtime features.
 
 ### Run tests (v2 / v3)
 
