@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::MultilingualGlossaryEntriesResponse - deepl main</title>
+  <title>DeepL::VoiceStreamingResponse - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -172,7 +172,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/MultilingualGlossaryEntriesResponse" data-name="deepl::multilingualglossaryentriesresponse">
+  <li class=" " data-id="deepl/DeepL/MultilingualGlossaryEntriesResponse" data-name="deepl::multilingualglossaryentriesresponse">
       <a href="../DeepL/MultilingualGlossaryEntriesResponse.html">MultilingualGlossaryEntriesResponse</a>
       
     </li>
@@ -252,7 +252,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/VoiceStreamingResponse" data-name="deepl::voicestreamingresponse">
+  <li class=" current" data-id="deepl/DeepL/VoiceStreamingResponse" data-name="deepl::voicestreamingresponse">
       <a href="../DeepL/VoiceStreamingResponse.html">VoiceStreamingResponse</a>
       
     </li>
@@ -273,12 +273,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>MultilingualGlossaryEntriesResponse
+  </span> DeepL::<wbr>VoiceStreamingResponse
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/MultilingualGlossaryEntriesResponse.html">DeepL::MultilingualGlossaryEntriesResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/VoiceStreamingResponse.html">DeepL::VoiceStreamingResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -322,8 +322,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/multilingual_glossary_entries_response.cr#L2" target="_blank">
-        deepl/v3/multilingual_glossary_entries_response.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L2" target="_blank">
+        deepl/v3/voice_streaming_response.cr
       </a>
     
     <br/>
@@ -345,12 +345,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        <a href="#new%28streaming_url%3AString%2Ctoken%3AString%2Csession_id%3ANil%7CString%3Dnil%29-class-method" class="signature"><strong>.new</strong>(streaming_url : String, token : String, session_id : Nil | String = <span class="n">nil</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28dictionaries%3AArray%28DeepL%3A%3AGlossaryDictionary%29%29-class-method" class="signature"><strong>.new</strong>(dictionaries : Array(DeepL::GlossaryDictionary))</a>
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
         
       </li>
     
@@ -378,12 +378,32 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#dictionaries%3AArray%28GlossaryDictionary%29-instance-method" class="signature"><strong>#dictionaries</strong> : Array(GlossaryDictionary)</a>
+        <a href="#session_id%3AString%7CNil-instance-method" class="signature"><strong>#session_id</strong> : String | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#dictionaries%3D%28dictionaries%3AArray%28GlossaryDictionary%29%29-instance-method" class="signature"><strong>#dictionaries=</strong>(dictionaries : Array(GlossaryDictionary))</a>
+        <a href="#session_id%3D%28session_id%3AString%7CNil%29-instance-method" class="signature"><strong>#session_id=</strong>(session_id : String | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#streaming_url%3AString-instance-method" class="signature"><strong>#streaming_url</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#streaming_url%3D%28streaming_url%3AString%29-instance-method" class="signature"><strong>#streaming_url=</strong>(streaming_url : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#token%3AString-instance-method" class="signature"><strong>#token</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#token%3D%28token%3AString%29-instance-method" class="signature"><strong>#token=</strong>(token : String)</a>
         
       </li>
     
@@ -444,6 +464,22 @@
     Constructor Detail
   </h2>
   
+    <div class="entry-detail" id="new(streaming_url:String,token:String,session_id:Nil|String=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(streaming_url : String, token : String, session_id : Nil | String = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28streaming_url%3AString%2Ctoken%3AString%2Csession_id%3ANil%7CString%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
@@ -455,23 +491,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/multilingual_glossary_entries_response.cr#L3" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="new(dictionaries:Array(DeepL::GlossaryDictionary))-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(dictionaries : Array(<a href="../DeepL/GlossaryDictionary.html">DeepL::GlossaryDictionary</a>))
-
-        <a class="method-permalink" href="#new%28dictionaries%3AArray%28DeepL%3A%3AGlossaryDictionary%29%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/multilingual_glossary_entries_response.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -487,7 +507,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/multilingual_glossary_entries_response.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -508,34 +528,98 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="dictionaries:Array(GlossaryDictionary)-instance-method">
+    <div class="entry-detail" id="session_id:String|Nil-instance-method">
       <div class="signature">
         
-        def <strong>dictionaries</strong> : Array(<a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>)
+        def <strong>session_id</strong> : String | Nil
 
-        <a class="method-permalink" href="#dictionaries%3AArray%28GlossaryDictionary%29-instance-method">#</a>
+        <a class="method-permalink" href="#session_id%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/multilingual_glossary_entries_response.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="dictionaries=(dictionaries:Array(GlossaryDictionary))-instance-method">
+    <div class="entry-detail" id="session_id=(session_id:String|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>dictionaries=</strong>(dictionaries : Array(<a href="../DeepL/GlossaryDictionary.html">GlossaryDictionary</a>))
+        def <strong>session_id=</strong>(session_id : String | Nil)
 
-        <a class="method-permalink" href="#dictionaries%3D%28dictionaries%3AArray%28GlossaryDictionary%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#session_id%3D%28session_id%3AString%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/multilingual_glossary_entries_response.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="streaming_url:String-instance-method">
+      <div class="signature">
+        
+        def <strong>streaming_url</strong> : String
+
+        <a class="method-permalink" href="#streaming_url%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="streaming_url=(streaming_url:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>streaming_url=</strong>(streaming_url : String)
+
+        <a class="method-permalink" href="#streaming_url%3D%28streaming_url%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="token:String-instance-method">
+      <div class="signature">
+        
+        def <strong>token</strong> : String
+
+        <a class="method-permalink" href="#token%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="token=(token:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>token=</strong>(token : String)
+
+        <a class="method-permalink" href="#token%3D%28token%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/56488ef91a9a531315667eb8fdc901cd4e9f8318/src/deepl/v3/voice_streaming_response.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
