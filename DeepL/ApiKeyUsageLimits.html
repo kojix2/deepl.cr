@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Crystal Docs 1.18.2">
+<meta name="generator" content="Crystal Docs 1.19.1">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="deepl">
 
@@ -317,7 +317,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/740c4c1c58d4ca70aaa6f6135dd08ba34202d49c/src/deepl/v2/admin.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L4" target="_blank">
         deepl/v2/admin.cr
       </a>
     
@@ -345,7 +345,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28characters%3AFloat64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(characters : Float64 | Nil = <span class="n">nil</span>)</a>
+        <a href="#new%28characters%3AFloat64%7CNil%3Dnil%2Cspeech_to_text_milliseconds%3AFloat64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(characters : Float64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds : Float64 | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -379,6 +379,16 @@
     
       <li class="entry-summary">
         <a href="#characters%3D%28characters%3AFloat64%7CNil%29-instance-method" class="signature"><strong>#characters=</strong>(characters : Float64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_text_milliseconds%3AFloat64%7CNil-instance-method" class="signature"><strong>#speech_to_text_milliseconds</strong> : Float64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_text_milliseconds%3D%28speech_to_text_milliseconds%3AFloat64%7CNil%29-instance-method" class="signature"><strong>#speech_to_text_milliseconds=</strong>(speech_to_text_milliseconds : Float64 | Nil)</a>
         
       </li>
     
@@ -450,23 +460,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/740c4c1c58d4ca70aaa6f6135dd08ba34202d49c/src/deepl/v2/admin.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(characters:Float64|Nil=nil)-class-method">
+    <div class="entry-detail" id="new(characters:Float64|Nil=nil,speech_to_text_milliseconds:Float64|Nil=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(characters : Float64 | Nil = <span class="n">nil</span>)
+        def self.<strong>new</strong>(characters : Float64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds : Float64 | Nil = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28characters%3AFloat64%7CNil%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28characters%3AFloat64%7CNil%3Dnil%2Cspeech_to_text_milliseconds%3AFloat64%7CNil%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/740c4c1c58d4ca70aaa6f6135dd08ba34202d49c/src/deepl/v2/admin.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -482,7 +492,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/740c4c1c58d4ca70aaa6f6135dd08ba34202d49c/src/deepl/v2/admin.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -514,7 +524,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/740c4c1c58d4ca70aaa6f6135dd08ba34202d49c/src/deepl/v2/admin.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -530,7 +540,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/740c4c1c58d4ca70aaa6f6135dd08ba34202d49c/src/deepl/v2/admin.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_text_milliseconds:Float64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_text_milliseconds</strong> : Float64 | Nil
+
+        <a class="method-permalink" href="#speech_to_text_milliseconds%3AFloat64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_text_milliseconds=(speech_to_text_milliseconds:Float64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_text_milliseconds=</strong>(speech_to_text_milliseconds : Float64 | Nil)
+
+        <a class="method-permalink" href="#speech_to_text_milliseconds%3D%28speech_to_text_milliseconds%3AFloat64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/1d06a7a2f540f814f05e23916ff325f032354f32/src/deepl/v2/admin.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
