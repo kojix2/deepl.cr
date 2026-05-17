@@ -314,7 +314,17 @@ t.translate_document(<span class="s">&quot;path/to/document.pdf&quot;</span>, ta
 <span class="c"># Rephrase text (improve writing)</span>
 t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
 result <span class="o">=</span> t.rephrase_text(<span class="s">&quot;I have went to the store yesterday.&quot;</span>)
-puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went to the store yesterday.&quot;</span></code></pre>
+puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went to the store yesterday.&quot;</span>
+
+<span class="c"># Voice realtime (v3 surface)</span>
+t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
+voice <span class="o">=</span> t.get_voice_streaming_url(
+  source_media_content_type: <span class="s">&quot;audio/ogg; codecs=opus&quot;</span>,
+  source_language: <span class="s">&quot;en&quot;</span>,
+  source_language_mode: <span class="s">&quot;auto&quot;</span>,
+  target_languages: [<span class="s">&quot;de&quot;</span>, <span class="s">&quot;fr&quot;</span>]
+)
+puts voice.streaming_url</code></pre>
 <p>See <a href="https://kojix2.github.io/deepl.cr/">documentation</a>.</p>
 <h3><a id="environment-variables" class="anchor" href="#environment-variables">
   <svg class="octicon-link" aria-hidden="true">
@@ -372,9 +382,9 @@ puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went 
 <ul>
 <li>The API surface is selected at compile time by either <code>-Ddeepl_v2</code> / <code>-Ddeepl_v3</code> or <code>DEEPL_API_VERSION=v2</code> / <code>DEEPL_API_VERSION=v3</code>.</li>
 <li>In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.</li>
-<li>In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary and style rules use v3 endpoints.</li>
+<li>In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, and voice realtime use v3 endpoints.</li>
 </ul>
-<p>In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary and style-rule features.</p>
+<p>In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary, style-rule, and voice realtime features.</p>
 <h3><a id="run-tests-v2-v3" class="anchor" href="#run-tests-v2-v3">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
