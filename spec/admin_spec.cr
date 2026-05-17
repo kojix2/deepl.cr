@@ -8,7 +8,8 @@ describe DeepL::ApiKey do
     "deactivated_time": null,
     "is_deactivated": false,
     "usage_limits": {
-      "characters": 5000
+      "characters": 5000,
+      "speech_to_text_milliseconds": 3600000
     }
   })
 
@@ -21,6 +22,7 @@ describe DeepL::ApiKey do
     api_key.deactivated_time.should be_nil
     api_key.is_deactivated.should be_false
     api_key.usage_limits.not_nil!.characters.should eq(5000)
+    api_key.usage_limits.not_nil!.speech_to_text_milliseconds.should eq(3600000)
   end
 end
 
@@ -59,8 +61,10 @@ describe DeepL::AdminUsageReport do
 
     report.usage_report.group_by.should eq("key_and_day")
     report.usage_report.total_usage.total_characters.should eq(9619)
+    report.usage_report.total_usage.speech_to_text_milliseconds.should eq(1800000)
     report.usage_report.key_and_day_usages.not_nil!.size.should eq(1)
     report.usage_report.key_and_day_usages.not_nil!.first.api_key.should eq("dc88****3a2c")
     report.usage_report.key_and_day_usages.not_nil!.first.usage.total_characters.should eq(315)
+    report.usage_report.key_and_day_usages.not_nil!.first.usage.speech_to_text_milliseconds.should eq(1800000)
   end
 end

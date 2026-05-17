@@ -8,7 +8,7 @@ module DeepL
   class Translator
     # Get supported language pairs for multilingual glossaries
     def get_multilingual_glossary_language_pairs : Array(MultilingualGlossaryLanguagePair)
-      url = "#{base_server_url}/v3/glossary-language-pairs"
+      url = "#{base_server_url}/v2/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
       handle_response(response, glossary: true)
       Array(MultilingualGlossaryLanguagePair).from_json(
@@ -135,7 +135,7 @@ module DeepL
         "entries_format" => entries_format,
       }
 
-      response = Crest.put(url, form: data, headers: http_headers_base)
+      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
       handle_response(response, glossary: true)
       GlossaryEntriesInformation.from_json(response.body)
     end

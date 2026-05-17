@@ -77,6 +77,8 @@ module DeepL
       case response.status_code
       when 200..399
         return response
+      when HTTP::Status::UNAUTHORIZED
+        raise AuthorizationError.new
       when HTTP::Status::FORBIDDEN
         raise AuthorizationError.new
       when HTTP_STATUS_QUOTA_EXCEEDED
@@ -87,10 +89,18 @@ module DeepL
         raise RequestError.new("Not found")
       when HTTP::Status::BAD_REQUEST
         raise RequestError.new("Bad request")
+      when HTTP::Status::PAYLOAD_TOO_LARGE
+        raise RequestError.new("Payload too large")
+      when HTTP::Status::UNSUPPORTED_MEDIA_TYPE
+        raise RequestError.new("Unsupported media type")
       when HTTP::Status::TOO_MANY_REQUESTS
         raise TooManyRequestsError.new
       when HTTP::Status::SERVICE_UNAVAILABLE
         raise RequestError.new("Service unavailable or Document not ready")
+      when HTTP::Status::GATEWAY_TIMEOUT
+        raise RequestError.new("Gateway timeout")
+      when 529
+        raise TooManyRequestsError.new
       else
         raise RequestError.new("Unknown error")
       end

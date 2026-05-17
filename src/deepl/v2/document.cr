@@ -12,6 +12,7 @@ module DeepL
       glossary_name = nil, # original option of deepl.cr
       output_format = nil,
       output_file = nil,
+      filename = nil,
       interval = 5.0,
       message_prefix = "[deepl.cr] ",
       &block : (String ->)
@@ -25,6 +26,7 @@ module DeepL
         glossary_name: glossary_name,
         output_format: output_format,
         output_file: output_file,
+        filename: filename,
         interval: interval,
         message_prefix: message_prefix,
         block: block
@@ -40,6 +42,7 @@ module DeepL
       glossary_name = nil,
       output_format = nil,
       output_file = nil,
+      filename = nil,
       interval = 5.0,
       message_prefix = "[deepl.cr] ",
       block : (String ->)? = nil,
@@ -53,7 +56,8 @@ module DeepL
         formality: formality,
         glossary_id: glossary_id,
         glossary_name: glossary_name,
-        output_format: output_format
+        output_format: output_format,
+        filename: filename
       )
 
       prefix = message_prefix
@@ -99,6 +103,7 @@ module DeepL
       glossary_id = nil,
       glossary_name = nil, # original option of deepl.cr
       output_format = nil,
+      filename = nil,
     ) : DocumentHandle
       path = Path[path] if path.is_a?(String)
       if glossary_name
@@ -110,6 +115,7 @@ module DeepL
         "target_lang"   => target_lang,
         "glossary_id"   => glossary_id,
         "output_format" => output_format,
+        "filename"      => filename,
       }.compact!
       file = File.open(path)
       params = params.merge({"file" => file})

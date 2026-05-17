@@ -5,8 +5,9 @@ module DeepL
     include JSON::Serializable
 
     property characters : Float64?
+    property speech_to_text_milliseconds : Float64?
 
-    def initialize(@characters = nil)
+    def initialize(@characters = nil, @speech_to_text_milliseconds = nil)
     end
   end
 
@@ -150,11 +151,16 @@ module DeepL
     end
 
     # Set developer key usage limits as an admin
-    def admin_set_developer_key_usage_limits(key_id : String, characters : Float64? = nil) : ApiKey
+    def admin_set_developer_key_usage_limits(
+      key_id : String,
+      characters : Float64? = nil,
+      speech_to_text_milliseconds : Float64? = nil,
+    ) : ApiKey
       url = "#{server_url}/admin/developer-keys/limits"
       data = {
-        "key_id"     => key_id,
-        "characters" => characters,
+        "key_id"                      => key_id,
+        "characters"                  => characters,
+        "speech_to_text_milliseconds" => speech_to_text_milliseconds,
       }.compact!
 
       response = Crest.put(url, form: data, json: true, headers: http_headers_json)
