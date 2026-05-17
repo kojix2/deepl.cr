@@ -92,7 +92,7 @@ module DeepL
       return output_file unless File.exists?(output_file)
       output_base_name = "#{output_file.stem}_#{Time.utc.to_unix}"
       output_extension = output_file.extension
-      output_file = output_file.parent / (output_base_name + output_extension)
+      output_file.parent / (output_base_name + output_extension)
     end
 
     def translate_document_upload(

@@ -11,12 +11,12 @@ module DeepL
 
     # currently not used
     def summary : String
-      String.build do |s|
-        s << "(i) #{id}"
-        s << " (s) #{status}"
-        s << " (r) #{seconds_remaining}" if seconds_remaining
-        s << " (c) #{billed_characters}" if billed_characters
-        s << " (e) #{error_message}" if error_message
+      String.build do |summary|
+        summary << "(i) #{id}"
+        summary << " (s) #{status}"
+        summary << " (r) #{seconds_remaining}" if seconds_remaining
+        summary << " (c) #{billed_characters}" if billed_characters
+        summary << " (e) #{error_message}" if error_message
       end
     end
   end

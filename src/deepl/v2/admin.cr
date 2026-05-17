@@ -18,6 +18,7 @@ module DeepL
     property label : String
     property creation_time : Time
     property deactivated_time : Time?
+    # ameba:disable Naming/QueryBoolMethods
     property is_deactivated : Bool
     property usage_limits : ApiKeyUsageLimits?
 

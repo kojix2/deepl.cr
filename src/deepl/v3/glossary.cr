@@ -7,6 +7,7 @@ require "./multilingual_glossary_language_pair"
 module DeepL
   class Translator
     # Get supported language pairs for multilingual glossaries
+    # ameba:disable Naming/AccessorMethodName
     def get_multilingual_glossary_language_pairs : Array(MultilingualGlossaryLanguagePair)
       url = "#{base_server_url}/v2/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
@@ -112,7 +113,7 @@ module DeepL
       response = Crest.get(url, params: params, headers: http_headers_base)
       handle_response(response, glossary: true)
       entries_response = MultilingualGlossaryEntriesResponse.from_json(response.body)
-      dict = entries_response.dictionaries.find { |d| d.source_lang == source_lang && d.target_lang == target_lang }
+      dict = entries_response.dictionaries.find { |dictionary| dictionary.source_lang == source_lang && dictionary.target_lang == target_lang }
       dict ||= entries_response.dictionaries.first?
       raise RequestError.new("No dictionary entries returned") unless dict
       dict
@@ -174,7 +175,7 @@ module DeepL
     # Find multilingual glossary by name
     def find_multilingual_glossary_by_name(name : String) : MultilingualGlossaryInfo
       glossaries = list_multilingual_glossaries
-      glossary = glossaries.find { |g| g.name == name }
+      glossary = glossaries.find { |glossary_info| glossary_info.name == name }
       raise GlossaryNameNotFoundError.new(name) unless glossary
       glossary
     end
@@ -182,7 +183,7 @@ module DeepL
     # Get multilingual glossaries by name (multiple matches possible)
     def get_multilingual_glossaries_by_name(name : String) : Array(MultilingualGlossaryInfo)
       glossaries = list_multilingual_glossaries
-      glossaries.select { |g| g.name == name }
+      glossaries.select { |glossary_info| glossary_info.name == name }
     end
   end
 end

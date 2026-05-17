@@ -5,6 +5,7 @@ module DeepL
 
     property glossary_id : String
     property name : String
+    # ameba:disable Naming/QueryBoolMethods
     property ready : Bool
     property source_lang : String
     property target_lang : String

@@ -4,6 +4,7 @@ require "./glossary_language_pair"
 module DeepL
   @[Deprecated("Use V3 MultilingualGlossaryInfo instead")]
   class Translator
+    # ameba:disable Naming/AccessorMethodName
     def get_glossary_language_pairs : Array(GlossaryLanguagePair)
       url = "#{server_url}/glossary-language-pairs"
       response = Crest.get(url, headers: http_headers_base)
@@ -64,14 +65,14 @@ module DeepL
 
     def find_glossary_info_by_name(name : String) : GlossaryInfo
       glossaries = list_glossaries
-      glossary_info = glossaries.find { |g| g.name == name }
+      glossary_info = glossaries.find { |glossary| glossary.name == name }
       raise GlossaryNameNotFoundError.new(name) unless glossary_info
       glossary_info
     end
 
     def get_glossary_info_by_name(name : String) : Array(GlossaryInfo)
       glossaries = list_glossaries
-      glossaries.select { |g| g.name == name }
+      glossaries.select { |glossary| glossary.name == name }
     end
 
     def list_glossaries : Array(GlossaryInfo)

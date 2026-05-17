@@ -58,12 +58,12 @@ module DeepL
 
     private def parse_translate_text_response(response) : Array(TextResult)
       parsed_response = JSON.parse(response.body)
-      parsed_response["translations"].as_a.map do |t|
+      parsed_response["translations"].as_a.map do |translation|
         TextResult.new(
-          text: t["text"].as_s,
-          detected_source_language: t["detected_source_language"].as_s,
-          billed_characters: t["billed_characters"]?.try &.as_i64,
-          model_type_used: t["model_type_used"]?.try &.as_s
+          text: translation["text"].as_s,
+          detected_source_language: translation["detected_source_language"].as_s,
+          billed_characters: translation["billed_characters"]?.try &.as_i64,
+          model_type_used: translation["model_type_used"]?.try &.as_s
         )
       end
     end

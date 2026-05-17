@@ -11,6 +11,15 @@ module DeepL
     DEEPL_SERVER_URL              = {{ env("DEEPL_SERVER_URL") || DEEPL_DEFAULT_SERVER_URL }}
     DEEPL_SERVER_URL_FREE         = {{ env("DEEPL_SERVER_URL_FREE") || DEEPL_DEFAULT_SERVER_URL_FREE }}
     HTTP_STATUS_QUOTA_EXCEEDED    = 456
+    HTTP_STATUS_TOO_MANY_REQUESTS = 529
+    REQUEST_ERROR_MESSAGES        = {
+      HTTP::Status::NOT_FOUND.to_i              => "Not found",
+      HTTP::Status::BAD_REQUEST.to_i            => "Bad request",
+      HTTP::Status::PAYLOAD_TOO_LARGE.to_i      => "Payload too large",
+      HTTP::Status::UNSUPPORTED_MEDIA_TYPE.to_i => "Unsupported media type",
+      HTTP::Status::SERVICE_UNAVAILABLE.to_i    => "Service unavailable or Document not ready",
+      HTTP::Status::GATEWAY_TIMEOUT.to_i        => "Gateway timeout",
+    }
 
     setter auth_key : String?
     setter user_agent : String?
@@ -74,36 +83,19 @@ module DeepL
     private def handle_response(response, glossary = false)
       trace_header = response.headers["X-Trace-ID"]?
       @last_trace_id = trace_header.is_a?(Array) ? trace_header.first? : trace_header
-      case response.status_code
-      when 200..399
-        return response
-      when HTTP::Status::UNAUTHORIZED
-        raise AuthorizationError.new
-      when HTTP::Status::FORBIDDEN
-        raise AuthorizationError.new
-      when HTTP_STATUS_QUOTA_EXCEEDED
-        raise QuotaExceededError.new
-      when glossary && HTTP::Status::NOT_FOUND
-        raise GlossaryNotFoundError.new
-      when HTTP::Status::NOT_FOUND
-        raise RequestError.new("Not found")
-      when HTTP::Status::BAD_REQUEST
-        raise RequestError.new("Bad request")
-      when HTTP::Status::PAYLOAD_TOO_LARGE
-        raise RequestError.new("Payload too large")
-      when HTTP::Status::UNSUPPORTED_MEDIA_TYPE
-        raise RequestError.new("Unsupported media type")
-      when HTTP::Status::TOO_MANY_REQUESTS
-        raise TooManyRequestsError.new
-      when HTTP::Status::SERVICE_UNAVAILABLE
-        raise RequestError.new("Service unavailable or Document not ready")
-      when HTTP::Status::GATEWAY_TIMEOUT
-        raise RequestError.new("Gateway timeout")
-      when 529
-        raise TooManyRequestsError.new
-      else
-        raise RequestError.new("Unknown error")
-      end
+      status_code = response.status_code.to_i
+      return response if 200 <= status_code <= 399
+
+      raise response_error(status_code, glossary)
+    end
+
+    private def response_error(status_code : Int, glossary : Bool) : DeepLError
+      return GlossaryNotFoundError.new if glossary && status_code == HTTP::Status::NOT_FOUND.to_i
+      return AuthorizationError.new if {HTTP::Status::UNAUTHORIZED.to_i, HTTP::Status::FORBIDDEN.to_i}.includes?(status_code)
+      return QuotaExceededError.new if status_code == HTTP_STATUS_QUOTA_EXCEEDED
+      return TooManyRequestsError.new if {HTTP::Status::TOO_MANY_REQUESTS.to_i, HTTP_STATUS_TOO_MANY_REQUESTS}.includes?(status_code)
+
+      RequestError.new(REQUEST_ERROR_MESSAGES[status_code]? || "Unknown error")
     end
 
     private def api_url_translate : String

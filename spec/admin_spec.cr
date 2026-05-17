@@ -21,8 +21,12 @@ describe DeepL::ApiKey do
     api_key.creation_time.should eq(Time.parse_iso8601("2025-07-08T08:15:29.362Z"))
     api_key.deactivated_time.should be_nil
     api_key.is_deactivated.should be_false
-    api_key.usage_limits.not_nil!.characters.should eq(5000)
-    api_key.usage_limits.not_nil!.speech_to_text_milliseconds.should eq(3600000)
+    if usage_limits = api_key.usage_limits
+      usage_limits.characters.should eq(5000)
+      usage_limits.speech_to_text_milliseconds.should eq(3600000)
+    else
+      fail "expected usage limits"
+    end
   end
 end
 
@@ -62,9 +66,13 @@ describe DeepL::AdminUsageReport do
     report.usage_report.group_by.should eq("key_and_day")
     report.usage_report.total_usage.total_characters.should eq(9619)
     report.usage_report.total_usage.speech_to_text_milliseconds.should eq(1800000)
-    report.usage_report.key_and_day_usages.not_nil!.size.should eq(1)
-    report.usage_report.key_and_day_usages.not_nil!.first.api_key.should eq("dc88****3a2c")
-    report.usage_report.key_and_day_usages.not_nil!.first.usage.total_characters.should eq(315)
-    report.usage_report.key_and_day_usages.not_nil!.first.usage.speech_to_text_milliseconds.should eq(1800000)
+    if key_and_day_usages = report.usage_report.key_and_day_usages
+      key_and_day_usages.size.should eq(1)
+      key_and_day_usages.first.api_key.should eq("dc88****3a2c")
+      key_and_day_usages.first.usage.total_characters.should eq(315)
+      key_and_day_usages.first.usage.speech_to_text_milliseconds.should eq(1800000)
+    else
+      fail "expected key and day usages"
+    end
   end
 end

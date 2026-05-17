@@ -9,11 +9,13 @@ module DeepL
       handle_response(response)
     end
 
+    # ameba:disable Naming/AccessorMethodName
     def get_target_languages : Array(LanguageInfo)
       response = request_languages("target")
       Array(LanguageInfo).from_json(response.body)
     end
 
+    # ameba:disable Naming/AccessorMethodName
     def get_source_languages : Array(LanguageInfo)
       response = request_languages("source")
       Array(LanguageInfo).from_json(response.body)
