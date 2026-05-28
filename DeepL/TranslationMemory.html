@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::GlossaryEntriesInformation - deepl main</title>
+  <title>DeepL::TranslationMemory - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -147,7 +147,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/GlossaryEntriesInformation" data-name="deepl::glossaryentriesinformation">
+  <li class=" " data-id="deepl/DeepL/GlossaryEntriesInformation" data-name="deepl::glossaryentriesinformation">
       <a href="../DeepL/GlossaryEntriesInformation.html">GlossaryEntriesInformation</a>
       
     </li>
@@ -237,7 +237,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/TranslationMemory" data-name="deepl::translationmemory">
+  <li class=" current" data-id="deepl/DeepL/TranslationMemory" data-name="deepl::translationmemory">
       <a href="../DeepL/TranslationMemory.html">TranslationMemory</a>
       
     </li>
@@ -303,12 +303,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>GlossaryEntriesInformation
+  </span> DeepL::<wbr>TranslationMemory
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/GlossaryEntriesInformation.html">DeepL::GlossaryEntriesInformation</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/TranslationMemory.html">DeepL::TranslationMemory</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -352,8 +352,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L2" target="_blank">
-        deepl/v3/glossary_entries_information.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L4" target="_blank">
+        deepl/v3/translation_memory.cr
       </a>
     
     <br/>
@@ -375,7 +375,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28source_lang%3AString%2Ctarget_lang%3AString%2Centry_count%3AInt32%29-class-method" class="signature"><strong>.new</strong>(source_lang : String, target_lang : String, entry_count : Int32)</a>
+        <a href="#new%28translation_memory_id%3AString%2Cname%3AString%2Csource_language%3AString%2Ctarget_languages%3AArray%28String%29%2Csegment_count%3AInt64%29-class-method" class="signature"><strong>.new</strong>(translation_memory_id : String, name : String, source_language : String, target_languages : Array(String), segment_count : Int64)</a>
         
       </li>
     
@@ -408,32 +408,52 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#entry_count%3AInt32-instance-method" class="signature"><strong>#entry_count</strong> : Int32</a>
+        <a href="#name%3AString-instance-method" class="signature"><strong>#name</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#entry_count%3D%28entry_count%3AInt32%29-instance-method" class="signature"><strong>#entry_count=</strong>(entry_count : Int32)</a>
+        <a href="#name%3D%28name%3AString%29-instance-method" class="signature"><strong>#name=</strong>(name : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#source_lang%3AString-instance-method" class="signature"><strong>#source_lang</strong> : String</a>
+        <a href="#segment_count%3AInt64-instance-method" class="signature"><strong>#segment_count</strong> : Int64</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#source_lang%3D%28source_lang%3AString%29-instance-method" class="signature"><strong>#source_lang=</strong>(source_lang : String)</a>
+        <a href="#segment_count%3D%28segment_count%3AInt64%29-instance-method" class="signature"><strong>#segment_count=</strong>(segment_count : Int64)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#target_lang%3AString-instance-method" class="signature"><strong>#target_lang</strong> : String</a>
+        <a href="#source_language%3AString-instance-method" class="signature"><strong>#source_language</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#target_lang%3D%28target_lang%3AString%29-instance-method" class="signature"><strong>#target_lang=</strong>(target_lang : String)</a>
+        <a href="#source_language%3D%28source_language%3AString%29-instance-method" class="signature"><strong>#source_language=</strong>(source_language : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#target_languages%3AArray%28String%29-instance-method" class="signature"><strong>#target_languages</strong> : Array(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#target_languages%3D%28target_languages%3AArray%28String%29%29-instance-method" class="signature"><strong>#target_languages=</strong>(target_languages : Array(String))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#translation_memory_id%3AString-instance-method" class="signature"><strong>#translation_memory_id</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#translation_memory_id%3D%28translation_memory_id%3AString%29-instance-method" class="signature"><strong>#translation_memory_id=</strong>(translation_memory_id : String)</a>
         
       </li>
     
@@ -494,18 +514,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(source_lang:String,target_lang:String,entry_count:Int32)-class-method">
+    <div class="entry-detail" id="new(translation_memory_id:String,name:String,source_language:String,target_languages:Array(String),segment_count:Int64)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(source_lang : String, target_lang : String, entry_count : Int32)
+        def self.<strong>new</strong>(translation_memory_id : String, name : String, source_language : String, target_languages : Array(String), segment_count : Int64)
 
-        <a class="method-permalink" href="#new%28source_lang%3AString%2Ctarget_lang%3AString%2Centry_count%3AInt32%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28translation_memory_id%3AString%2Cname%3AString%2Csource_language%3AString%2Ctarget_languages%3AArray%28String%29%2Csegment_count%3AInt64%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -521,7 +541,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -537,7 +557,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -558,98 +578,162 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="entry_count:Int32-instance-method">
+    <div class="entry-detail" id="name:String-instance-method">
       <div class="signature">
         
-        def <strong>entry_count</strong> : Int32
+        def <strong>name</strong> : String
 
-        <a class="method-permalink" href="#entry_count%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#name%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="entry_count=(entry_count:Int32)-instance-method">
+    <div class="entry-detail" id="name=(name:String)-instance-method">
       <div class="signature">
         
-        def <strong>entry_count=</strong>(entry_count : Int32)
+        def <strong>name=</strong>(name : String)
 
-        <a class="method-permalink" href="#entry_count%3D%28entry_count%3AInt32%29-instance-method">#</a>
+        <a class="method-permalink" href="#name%3D%28name%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="source_lang:String-instance-method">
+    <div class="entry-detail" id="segment_count:Int64-instance-method">
       <div class="signature">
         
-        def <strong>source_lang</strong> : String
+        def <strong>segment_count</strong> : Int64
 
-        <a class="method-permalink" href="#source_lang%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#segment_count%3AInt64-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="source_lang=(source_lang:String)-instance-method">
+    <div class="entry-detail" id="segment_count=(segment_count:Int64)-instance-method">
       <div class="signature">
         
-        def <strong>source_lang=</strong>(source_lang : String)
+        def <strong>segment_count=</strong>(segment_count : Int64)
 
-        <a class="method-permalink" href="#source_lang%3D%28source_lang%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#segment_count%3D%28segment_count%3AInt64%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="target_lang:String-instance-method">
+    <div class="entry-detail" id="source_language:String-instance-method">
       <div class="signature">
         
-        def <strong>target_lang</strong> : String
+        def <strong>source_language</strong> : String
 
-        <a class="method-permalink" href="#target_lang%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#source_language%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="target_lang=(target_lang:String)-instance-method">
+    <div class="entry-detail" id="source_language=(source_language:String)-instance-method">
       <div class="signature">
         
-        def <strong>target_lang=</strong>(target_lang : String)
+        def <strong>source_language=</strong>(source_language : String)
 
-        <a class="method-permalink" href="#target_lang%3D%28target_lang%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#source_language%3D%28source_language%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="target_languages:Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>target_languages</strong> : Array(String)
+
+        <a class="method-permalink" href="#target_languages%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="target_languages=(target_languages:Array(String))-instance-method">
+      <div class="signature">
+        
+        def <strong>target_languages=</strong>(target_languages : Array(String))
+
+        <a class="method-permalink" href="#target_languages%3D%28target_languages%3AArray%28String%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="translation_memory_id:String-instance-method">
+      <div class="signature">
+        
+        def <strong>translation_memory_id</strong> : String
+
+        <a class="method-permalink" href="#translation_memory_id%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="translation_memory_id=(translation_memory_id:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>translation_memory_id=</strong>(translation_memory_id : String)
+
+        <a class="method-permalink" href="#translation_memory_id%3D%28translation_memory_id%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/translation_memory.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>

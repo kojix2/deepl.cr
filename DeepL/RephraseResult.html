@@ -97,6 +97,26 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/CustomTagBreakdown" data-name="deepl::customtagbreakdown">
+      <a href="../DeepL/CustomTagBreakdown.html">CustomTagBreakdown</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/CustomTagUsageItem" data-name="deepl::customtagusageitem">
+      <a href="../DeepL/CustomTagUsageItem.html">CustomTagUsageItem</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/CustomTagUsageReport" data-name="deepl::customtagusagereport">
+      <a href="../DeepL/CustomTagUsageReport.html">CustomTagUsageReport</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/CustomTagUsageReportData" data-name="deepl::customtagusagereportdata">
+      <a href="../DeepL/CustomTagUsageReportData.html">CustomTagUsageReportData</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="../DeepL/DeepLError.html">DeepLError</a>
       
@@ -217,6 +237,16 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/TranslationMemory" data-name="deepl::translationmemory">
+      <a href="../DeepL/TranslationMemory.html">TranslationMemory</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryList" data-name="deepl::translationmemorylist">
+      <a href="../DeepL/TranslationMemoryList.html">TranslationMemoryList</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/Translator" data-name="deepl::translator">
       <a href="../DeepL/Translator.html">Translator</a>
       
@@ -322,7 +352,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L4" target="_blank">
         deepl/v2/rephrase_result.cr
       </a>
     
@@ -345,7 +375,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28detected_source_language%3AString%2Ctext%3AString%29-class-method" class="signature"><strong>.new</strong>(detected_source_language : String, text : String)</a>
+        <a href="#new%28detected_source_language%3AString%2Ctext%3AString%2Ctarget_language%3AString%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(detected_source_language : String, text : String, target_language : String | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -384,6 +414,16 @@
     
       <li class="entry-summary">
         <a href="#detected_source_language%3D%28detected_source_language%3AString%29-instance-method" class="signature"><strong>#detected_source_language=</strong>(detected_source_language : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#target_language%3AString%7CNil-instance-method" class="signature"><strong>#target_language</strong> : String | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#target_language%3D%28target_language%3AString%7CNil%29-instance-method" class="signature"><strong>#target_language=</strong>(target_language : String | Nil)</a>
         
       </li>
     
@@ -454,18 +494,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(detected_source_language:String,text:String)-class-method">
+    <div class="entry-detail" id="new(detected_source_language:String,text:String,target_language:String|Nil=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(detected_source_language : String, text : String)
+        def self.<strong>new</strong>(detected_source_language : String, text : String, target_language : String | Nil = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28detected_source_language%3AString%2Ctext%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28detected_source_language%3AString%2Ctext%3AString%2Ctarget_language%3AString%7CNil%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -481,7 +521,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -497,7 +537,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -529,7 +569,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -545,7 +585,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="target_language:String|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>target_language</strong> : String | Nil
+
+        <a class="method-permalink" href="#target_language%3AString%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="target_language=(target_language:String|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>target_language=</strong>(target_language : String | Nil)
+
+        <a class="method-permalink" href="#target_language%3D%28target_language%3AString%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -561,7 +633,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -577,7 +649,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v2/rephrase_result.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/rephrase_result.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>

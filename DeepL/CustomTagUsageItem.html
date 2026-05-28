@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::GlossaryEntriesInformation - deepl main</title>
+  <title>DeepL::CustomTagUsageItem - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -102,7 +102,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/CustomTagUsageItem" data-name="deepl::customtagusageitem">
+  <li class=" current" data-id="deepl/DeepL/CustomTagUsageItem" data-name="deepl::customtagusageitem">
       <a href="../DeepL/CustomTagUsageItem.html">CustomTagUsageItem</a>
       
     </li>
@@ -147,7 +147,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/GlossaryEntriesInformation" data-name="deepl::glossaryentriesinformation">
+  <li class=" " data-id="deepl/DeepL/GlossaryEntriesInformation" data-name="deepl::glossaryentriesinformation">
       <a href="../DeepL/GlossaryEntriesInformation.html">GlossaryEntriesInformation</a>
       
     </li>
@@ -303,12 +303,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>GlossaryEntriesInformation
+  </span> DeepL::<wbr>CustomTagUsageItem
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/GlossaryEntriesInformation.html">DeepL::GlossaryEntriesInformation</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/CustomTagUsageItem.html">DeepL::CustomTagUsageItem</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -352,8 +352,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L2" target="_blank">
-        deepl/v3/glossary_entries_information.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L125" target="_blank">
+        deepl/v2/admin.cr
       </a>
     
     <br/>
@@ -375,7 +375,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28source_lang%3AString%2Ctarget_lang%3AString%2Centry_count%3AInt32%29-class-method" class="signature"><strong>.new</strong>(source_lang : String, target_lang : String, entry_count : Int32)</a>
+        <a href="#new%28custom_tag%3AString%2Cbreakdown%3ADeepL%3A%3ACustomTagBreakdown%2Cusage_date%3ATime%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(custom_tag : String, breakdown : DeepL::CustomTagBreakdown, usage_date : Time | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -408,32 +408,32 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#entry_count%3AInt32-instance-method" class="signature"><strong>#entry_count</strong> : Int32</a>
+        <a href="#breakdown%3ACustomTagBreakdown-instance-method" class="signature"><strong>#breakdown</strong> : CustomTagBreakdown</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#entry_count%3D%28entry_count%3AInt32%29-instance-method" class="signature"><strong>#entry_count=</strong>(entry_count : Int32)</a>
+        <a href="#breakdown%3D%28breakdown%3ACustomTagBreakdown%29-instance-method" class="signature"><strong>#breakdown=</strong>(breakdown : CustomTagBreakdown)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#source_lang%3AString-instance-method" class="signature"><strong>#source_lang</strong> : String</a>
+        <a href="#custom_tag%3AString-instance-method" class="signature"><strong>#custom_tag</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#source_lang%3D%28source_lang%3AString%29-instance-method" class="signature"><strong>#source_lang=</strong>(source_lang : String)</a>
+        <a href="#custom_tag%3D%28custom_tag%3AString%29-instance-method" class="signature"><strong>#custom_tag=</strong>(custom_tag : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#target_lang%3AString-instance-method" class="signature"><strong>#target_lang</strong> : String</a>
+        <a href="#usage_date%3ATime%7CNil-instance-method" class="signature"><strong>#usage_date</strong> : Time | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#target_lang%3D%28target_lang%3AString%29-instance-method" class="signature"><strong>#target_lang=</strong>(target_lang : String)</a>
+        <a href="#usage_date%3D%28usage_date%3ATime%7CNil%29-instance-method" class="signature"><strong>#usage_date=</strong>(usage_date : Time | Nil)</a>
         
       </li>
     
@@ -494,18 +494,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(source_lang:String,target_lang:String,entry_count:Int32)-class-method">
+    <div class="entry-detail" id="new(custom_tag:String,breakdown:DeepL::CustomTagBreakdown,usage_date:Time|Nil=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(source_lang : String, target_lang : String, entry_count : Int32)
+        def self.<strong>new</strong>(custom_tag : String, breakdown : <a href="../DeepL/CustomTagBreakdown.html">DeepL::CustomTagBreakdown</a>, usage_date : Time | Nil = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28source_lang%3AString%2Ctarget_lang%3AString%2Centry_count%3AInt32%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28custom_tag%3AString%2Cbreakdown%3ADeepL%3A%3ACustomTagBreakdown%2Cusage_date%3ATime%7CNil%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L132" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -521,7 +521,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L126" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -537,7 +537,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L126" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -558,98 +558,98 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="entry_count:Int32-instance-method">
+    <div class="entry-detail" id="breakdown:CustomTagBreakdown-instance-method">
       <div class="signature">
         
-        def <strong>entry_count</strong> : Int32
+        def <strong>breakdown</strong> : <a href="../DeepL/CustomTagBreakdown.html">CustomTagBreakdown</a>
 
-        <a class="method-permalink" href="#entry_count%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#breakdown%3ACustomTagBreakdown-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L130" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="entry_count=(entry_count:Int32)-instance-method">
+    <div class="entry-detail" id="breakdown=(breakdown:CustomTagBreakdown)-instance-method">
       <div class="signature">
         
-        def <strong>entry_count=</strong>(entry_count : Int32)
+        def <strong>breakdown=</strong>(breakdown : <a href="../DeepL/CustomTagBreakdown.html">CustomTagBreakdown</a>)
 
-        <a class="method-permalink" href="#entry_count%3D%28entry_count%3AInt32%29-instance-method">#</a>
+        <a class="method-permalink" href="#breakdown%3D%28breakdown%3ACustomTagBreakdown%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L130" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="source_lang:String-instance-method">
+    <div class="entry-detail" id="custom_tag:String-instance-method">
       <div class="signature">
         
-        def <strong>source_lang</strong> : String
+        def <strong>custom_tag</strong> : String
 
-        <a class="method-permalink" href="#source_lang%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#custom_tag%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="source_lang=(source_lang:String)-instance-method">
+    <div class="entry-detail" id="custom_tag=(custom_tag:String)-instance-method">
       <div class="signature">
         
-        def <strong>source_lang=</strong>(source_lang : String)
+        def <strong>custom_tag=</strong>(custom_tag : String)
 
-        <a class="method-permalink" href="#source_lang%3D%28source_lang%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#custom_tag%3D%28custom_tag%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="target_lang:String-instance-method">
+    <div class="entry-detail" id="usage_date:Time|Nil-instance-method">
       <div class="signature">
         
-        def <strong>target_lang</strong> : String
+        def <strong>usage_date</strong> : Time | Nil
 
-        <a class="method-permalink" href="#target_lang%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#usage_date%3ATime%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L129" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="target_lang=(target_lang:String)-instance-method">
+    <div class="entry-detail" id="usage_date=(usage_date:Time|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>target_lang=</strong>(target_lang : String)
+        def <strong>usage_date=</strong>(usage_date : Time | Nil)
 
-        <a class="method-permalink" href="#target_lang%3D%28target_lang%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#usage_date%3D%28usage_date%3ATime%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/glossary_entries_information.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v2/admin.cr#L129" target="_blank">View source</a>]
         
       </div>
     </div>

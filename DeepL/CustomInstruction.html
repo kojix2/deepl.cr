@@ -97,6 +97,26 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/CustomTagBreakdown" data-name="deepl::customtagbreakdown">
+      <a href="../DeepL/CustomTagBreakdown.html">CustomTagBreakdown</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/CustomTagUsageItem" data-name="deepl::customtagusageitem">
+      <a href="../DeepL/CustomTagUsageItem.html">CustomTagUsageItem</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/CustomTagUsageReport" data-name="deepl::customtagusagereport">
+      <a href="../DeepL/CustomTagUsageReport.html">CustomTagUsageReport</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/CustomTagUsageReportData" data-name="deepl::customtagusagereportdata">
+      <a href="../DeepL/CustomTagUsageReportData.html">CustomTagUsageReportData</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="../DeepL/DeepLError.html">DeepLError</a>
       
@@ -217,6 +237,16 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/TranslationMemory" data-name="deepl::translationmemory">
+      <a href="../DeepL/TranslationMemory.html">TranslationMemory</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryList" data-name="deepl::translationmemorylist">
+      <a href="../DeepL/TranslationMemoryList.html">TranslationMemoryList</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/Translator" data-name="deepl::translator">
       <a href="../DeepL/Translator.html">Translator</a>
       
@@ -322,7 +352,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L4" target="_blank">
         deepl/v3/style_rules.cr
       </a>
     
@@ -350,7 +380,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28label%3ANil%7CString%3Dnil%2Cprompt%3ANil%7CString%3Dnil%2Csource_language%3ANil%7CString%3Dnil%29-class-method" class="signature"><strong>.new</strong>(label : Nil | String = <span class="n">nil</span>, prompt : Nil | String = <span class="n">nil</span>, source_language : Nil | String = <span class="n">nil</span>)</a>
+        <a href="#new%28label%3ANil%7CString%3Dnil%2Cprompt%3ANil%7CString%3Dnil%2Csource_language%3ANil%7CString%3Dnil%2Cid%3ANil%7CString%3Dnil%29-class-method" class="signature"><strong>.new</strong>(label : Nil | String = <span class="n">nil</span>, prompt : Nil | String = <span class="n">nil</span>, source_language : Nil | String = <span class="n">nil</span>, id : Nil | String = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -376,6 +406,16 @@
     Instance Method Summary
   </h2>
   <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#id%3AString%7CNil-instance-method" class="signature"><strong>#id</strong> : String | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#id%3D%28id%3AString%7CNil%29-instance-method" class="signature"><strong>#id=</strong>(id : String | Nil)</a>
+        
+      </li>
     
       <li class="entry-summary">
         <a href="#label%3AString%7CNil-instance-method" class="signature"><strong>#label</strong> : String | Nil</a>
@@ -475,23 +515,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(label:Nil|String=nil,prompt:Nil|String=nil,source_language:Nil|String=nil)-class-method">
+    <div class="entry-detail" id="new(label:Nil|String=nil,prompt:Nil|String=nil,source_language:Nil|String=nil,id:Nil|String=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(label : Nil | String = <span class="n">nil</span>, prompt : Nil | String = <span class="n">nil</span>, source_language : Nil | String = <span class="n">nil</span>)
+        def self.<strong>new</strong>(label : Nil | String = <span class="n">nil</span>, prompt : Nil | String = <span class="n">nil</span>, source_language : Nil | String = <span class="n">nil</span>, id : Nil | String = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28label%3ANil%7CString%3Dnil%2Cprompt%3ANil%7CString%3Dnil%2Csource_language%3ANil%7CString%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28label%3ANil%7CString%3Dnil%2Cprompt%3ANil%7CString%3Dnil%2Csource_language%3ANil%7CString%3Dnil%2Cid%3ANil%7CString%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -507,7 +547,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -528,6 +568,38 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="id:String|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>id</strong> : String | Nil
+
+        <a class="method-permalink" href="#id%3AString%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="id=(id:String|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>id=</strong>(id : String | Nil)
+
+        <a class="method-permalink" href="#id%3D%28id%3AString%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="label:String|Nil-instance-method">
       <div class="signature">
         
@@ -539,7 +611,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -555,7 +627,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -571,7 +643,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -587,7 +659,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -603,7 +675,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -619,7 +691,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/b609d6774d8310958569fb980b5be5eb753149b1/src/deepl/v3/style_rules.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/f6735add2fa9c434d2cc2846049e3c59f91e6c82/src/deepl/v3/style_rules.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
