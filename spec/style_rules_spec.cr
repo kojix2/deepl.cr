@@ -20,7 +20,8 @@ require "./spec_helper"
       {
         "label": "Currency",
         "prompt": "Use currency symbol before number",
-        "source_language": "en"
+        "source_language": "en",
+        "id": "68fdb803-c013-4e67-b62e-1aad0ab519cd"
       }
     ]
   })
@@ -38,6 +39,7 @@ require "./spec_helper"
       style_rule.configured_rules.not_nil!.size.should eq(1)
       style_rule.custom_instructions.not_nil!.size.should eq(1)
       style_rule.custom_instructions.not_nil!.first.label.should eq("Currency")
+      style_rule.custom_instructions.not_nil!.first.id.should eq("68fdb803-c013-4e67-b62e-1aad0ab519cd")
     end
 
     it "can deserialize a list of style rules" do

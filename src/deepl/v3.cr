@@ -13,6 +13,7 @@ require "./v2/admin"
 # V3 specific modules
 require "./v3/glossary"
 require "./v3/style_rules"
+require "./v3/translation_memory"
 require "./v3/voice"
 
 module DeepL

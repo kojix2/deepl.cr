@@ -21,6 +21,10 @@ module DeepL
       splitting_tags : Array(String)? = nil,
       ignore_tags : Array(String)? = nil,
       model_type = nil,
+      style_id = nil,
+      tag_handling_version = nil,
+      translation_memory_id = nil,
+      translation_memory_threshold : Int32? = nil,
     ) : Array(TextResult)
       if glossary_name
         glossary_id ||= resolve_glossary_id_from_name(glossary_name)
@@ -29,23 +33,27 @@ module DeepL
       text = [text] if text.is_a?(String)
 
       params = {
-        "text"                   => text,
-        "target_lang"            => target_lang,
-        "source_lang"            => source_lang,
-        "formality"              => formality,
-        "glossary_id"            => glossary_id,
-        "context"                => context,
-        "enable_beta_languages"  => enable_beta_languages,
-        "custom_instructions"    => custom_instructions,
-        "show_billed_characters" => show_billed_characters,
-        "split_sentences"        => split_sentences,
-        "preserve_formatting"    => preserve_formatting,
-        "tag_handling"           => tag_handling,
-        "outline_detection"      => outline_detection,
-        "non_splitting_tags"     => non_splitting_tags,
-        "splitting_tags"         => splitting_tags,
-        "ignore_tags"            => ignore_tags,
-        "model_type"             => model_type,
+        "text"                         => text,
+        "target_lang"                  => target_lang,
+        "source_lang"                  => source_lang,
+        "formality"                    => formality,
+        "glossary_id"                  => glossary_id,
+        "context"                      => context,
+        "enable_beta_languages"        => enable_beta_languages,
+        "custom_instructions"          => custom_instructions,
+        "show_billed_characters"       => show_billed_characters,
+        "split_sentences"              => split_sentences,
+        "preserve_formatting"          => preserve_formatting,
+        "tag_handling"                 => tag_handling,
+        "outline_detection"            => outline_detection,
+        "non_splitting_tags"           => non_splitting_tags,
+        "splitting_tags"               => splitting_tags,
+        "ignore_tags"                  => ignore_tags,
+        "model_type"                   => model_type,
+        "style_id"                     => style_id,
+        "tag_handling_version"         => tag_handling_version,
+        "translation_memory_id"        => translation_memory_id,
+        "translation_memory_threshold" => translation_memory_threshold,
       }.compact!
 
       response = Crest.post(

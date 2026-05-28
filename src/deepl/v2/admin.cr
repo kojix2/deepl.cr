@@ -41,6 +41,7 @@ module DeepL
     property document_translation_characters : Int64?
     property text_improvement_characters : Int64?
     property speech_to_text_milliseconds : Int64?
+    property speech_to_text_minutes : Float64?
 
     def initialize(
       @total_characters,
@@ -48,6 +49,7 @@ module DeepL
       @document_translation_characters = nil,
       @text_improvement_characters = nil,
       @speech_to_text_milliseconds = nil,
+      @speech_to_text_minutes = nil,
     )
     end
   end
@@ -102,6 +104,60 @@ module DeepL
     property usage_report : AdminUsageReportData
 
     def initialize(@usage_report)
+    end
+  end
+
+  class CustomTagBreakdown
+    include JSON::Serializable
+
+    property total_characters : Int64
+    property text_translation_characters : Int64?
+    property text_improvement_characters : Int64?
+
+    def initialize(
+      @total_characters,
+      @text_translation_characters = nil,
+      @text_improvement_characters = nil,
+    )
+    end
+  end
+
+  class CustomTagUsageItem
+    include JSON::Serializable
+
+    property custom_tag : String
+    property usage_date : Time?
+    property breakdown : CustomTagBreakdown
+
+    def initialize(@custom_tag, @breakdown, @usage_date = nil)
+    end
+  end
+
+  class CustomTagUsageReportData
+    include JSON::Serializable
+
+    property aggregate_by : String?
+    property start_date : Time
+    property end_date : Time
+    property next_page : Int32?
+    property usage : Array(CustomTagUsageItem)
+
+    def initialize(
+      @start_date,
+      @end_date,
+      @usage,
+      @aggregate_by = nil,
+      @next_page = nil,
+    )
+    end
+  end
+
+  class CustomTagUsageReport
+    include JSON::Serializable
+
+    property custom_tag_usage_report : CustomTagUsageReportData
+
+    def initialize(@custom_tag_usage_report)
     end
   end
 
@@ -181,6 +237,25 @@ module DeepL
       response = Crest.get(url, params: params, headers: http_headers_base)
       handle_response(response)
       AdminUsageReport.from_json(response.body)
+    end
+
+    def admin_get_custom_tag_analytics(
+      start_date : String,
+      end_date : String,
+      aggregate_by : String? = nil,
+      page : Int32? = nil,
+    ) : CustomTagUsageReport
+      url = "#{server_url}/admin/analytics/custom-tags"
+      params = {
+        "start_date"   => start_date,
+        "end_date"     => end_date,
+        "aggregate_by" => aggregate_by,
+        "page"         => page,
+      }.compact!
+
+      response = Crest.get(url, params: params, headers: http_headers_base)
+      handle_response(response)
+      CustomTagUsageReport.from_json(response.body)
     end
   end
 end

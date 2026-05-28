@@ -24,8 +24,30 @@ module DeepL
       parse_rephrase_response(response)
     end
 
+    def correct_text(
+      text : (String | Array(String)),
+      target_lang = nil,
+    ) : Array(RephraseResult)
+      text = [text] if text.is_a?(String)
+
+      params = Hash(String, String | Array(String)).new
+      params["text"] = text
+      params["target_lang"] = target_lang if target_lang
+
+      response = Crest.post(
+        api_url_correct, form: params, headers: http_headers_json, json: true
+      )
+
+      handle_response(response)
+      parse_rephrase_response(response)
+    end
+
     private def api_url_rephrase : String
       "#{server_url}/write/rephrase"
+    end
+
+    private def api_url_correct : String
+      "#{server_url}/write/correct"
     end
 
     private def parse_rephrase_response(response) : Array(RephraseResult)
@@ -33,7 +55,8 @@ module DeepL
       parsed_response["improvements"].as_a.map do |improvement|
         RephraseResult.new(
           detected_source_language: improvement["detected_source_language"].as_s,
-          text: improvement["text"].as_s
+          text: improvement["text"].as_s,
+          target_language: improvement["target_language"]?.try &.as_s
         )
       end
     end

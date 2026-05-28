@@ -38,7 +38,7 @@ describe DeepL::AdminUsageReport do
         "text_translation_characters": 4892,
         "document_translation_characters": 0,
         "text_improvement_characters": 4727,
-        "speech_to_text_milliseconds": 1800000
+        "speech_to_text_minutes": 107.46
       },
       "group_by": "key_and_day",
       "start_date": "2025-09-29T00:00:00Z",
@@ -53,7 +53,7 @@ describe DeepL::AdminUsageReport do
             "text_translation_characters": 159,
             "document_translation_characters": 0,
             "text_improvement_characters": 156,
-            "speech_to_text_milliseconds": 1800000
+            "speech_to_text_minutes": 11.94
           }
         }
       ]
@@ -65,14 +65,45 @@ describe DeepL::AdminUsageReport do
 
     report.usage_report.group_by.should eq("key_and_day")
     report.usage_report.total_usage.total_characters.should eq(9619)
-    report.usage_report.total_usage.speech_to_text_milliseconds.should eq(1800000)
+    report.usage_report.total_usage.speech_to_text_minutes.should eq(107.46)
     if key_and_day_usages = report.usage_report.key_and_day_usages
       key_and_day_usages.size.should eq(1)
       key_and_day_usages.first.api_key.should eq("dc88****3a2c")
       key_and_day_usages.first.usage.total_characters.should eq(315)
-      key_and_day_usages.first.usage.speech_to_text_milliseconds.should eq(1800000)
+      key_and_day_usages.first.usage.speech_to_text_minutes.should eq(11.94)
     else
       fail "expected key and day usages"
     end
+  end
+end
+
+describe DeepL::CustomTagUsageReport do
+  sample_json = %({
+    "custom_tag_usage_report": {
+      "aggregate_by": "day",
+      "start_date": "2026-05-03T00:00:00Z",
+      "end_date": "2026-05-05T00:00:00Z",
+      "next_page": null,
+      "usage": [
+        {
+          "custom_tag": "example-custom-tag",
+          "usage_date": "2026-05-04T00:00:00Z",
+          "breakdown": {
+            "total_characters": 380,
+            "text_translation_characters": 380,
+            "text_improvement_characters": 0
+          }
+        }
+      ]
+    }
+  })
+
+  it "can be deserialized from JSON" do
+    report = DeepL::CustomTagUsageReport.from_json(sample_json)
+
+    report.custom_tag_usage_report.aggregate_by.should eq("day")
+    report.custom_tag_usage_report.usage.size.should eq(1)
+    report.custom_tag_usage_report.usage.first.custom_tag.should eq("example-custom-tag")
+    report.custom_tag_usage_report.usage.first.breakdown.total_characters.should eq(380)
   end
 end

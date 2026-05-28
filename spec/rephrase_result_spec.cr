@@ -8,5 +8,16 @@ describe DeepL::RephraseResult do
 
     result.detected_source_language.should eq(detected_source_language)
     result.text.should eq(text)
+    result.target_language.should be_nil
+  end
+
+  it "can be deserialized with target language" do
+    result = DeepL::RephraseResult.from_json(%({
+      "detected_source_language": "en",
+      "target_language": "en-US",
+      "text": "This is improved text."
+    }))
+
+    result.target_language.should eq("en-US")
   end
 end
