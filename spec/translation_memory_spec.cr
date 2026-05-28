@@ -2,7 +2,8 @@ require "./spec_helper"
 
 {% unless flag?(:deepl_v2) %}
   describe DeepL::TranslationMemoryList do
-    sample_json = %({
+    sample_json = <<-JSON
+    {
       "translation_memories": [
         {
           "translation_memory_id": "a74d88fb-ed2a-4943-a664-a4512398b994",
@@ -13,7 +14,8 @@ require "./spec_helper"
         }
       ],
       "total_count": 1
-    })
+    }
+    JSON
 
     it "can be deserialized from JSON" do
       list = DeepL::TranslationMemoryList.from_json(sample_json)

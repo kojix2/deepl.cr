@@ -1,34 +1,36 @@
 require "./spec_helper"
 
 describe DeepL::UsagePro do
-  sample_json = %({
-    "products": [
-      {
-        "product_type": "write",
-        "api_key_character_count": 1000000,
-        "character_count": 1250000,
-        "billing_unit": "character",
-        "api_key_unit_count": 1200000,
-        "account_unit_count": 1500000
-      },
-      {
-        "product_type": "translate",
-        "api_key_character_count": 880000,
-        "character_count": 900000,
-        "billing_unit": "character",
-        "api_key_unit_count": 880000,
-        "account_unit_count": 900000
-      }
-    ],
-    "api_key_character_count": 1880000,
-    "api_key_character_limit": 0,
-    "speech_to_text_milliseconds_count": 1200,
-    "speech_to_text_milliseconds_limit": 5000,
-    "start_time": "2025-04-24T14:58:02Z",
-    "end_time": "2025-05-24T14:58:02Z",
-    "character_count": 2150000,
-    "character_limit": 20000000
-  })
+  sample_json = <<-JSON
+    {
+      "products": [
+        {
+          "product_type": "write",
+          "api_key_character_count": 1000000,
+          "character_count": 1250000,
+          "billing_unit": "character",
+          "api_key_unit_count": 1200000,
+          "account_unit_count": 1500000
+        },
+        {
+          "product_type": "translate",
+          "api_key_character_count": 880000,
+          "character_count": 900000,
+          "billing_unit": "character",
+          "api_key_unit_count": 880000,
+          "account_unit_count": 900000
+        }
+      ],
+      "api_key_character_count": 1880000,
+      "api_key_character_limit": 0,
+      "speech_to_text_milliseconds_count": 1200,
+      "speech_to_text_milliseconds_limit": 5000,
+      "start_time": "2025-04-24T14:58:02Z",
+      "end_time": "2025-05-24T14:58:02Z",
+      "character_count": 2150000,
+      "character_limit": 20000000
+    }
+    JSON
 
   it "can be deserialized from JSON" do
     usage = DeepL::UsagePro.from_json(sample_json)
@@ -118,10 +120,12 @@ describe DeepL::UsagePro do
 
   describe DeepL::UsageFree do
     it "can be deserialized from JSON" do
-      free_json = %({
-        "character_count": 180118,
-        "character_limit": 1250000
-      })
+      free_json = <<-JSON
+        {
+          "character_count": 180118,
+          "character_limit": 1250000
+        }
+        JSON
 
       usage = DeepL::UsageFree.from_json(free_json)
 

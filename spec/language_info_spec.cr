@@ -12,7 +12,7 @@ describe DeepL::LanguageInfo do
     info = DeepL::LanguageInfo.from_json(json)
     info.language.should eq("en")
     info.name.should eq("English")
-    info.supports_formality.should eq(true)
+    info.supports_formality.should be_true
     info.to_json.should eq(json)
   end
 end

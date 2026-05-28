@@ -1,17 +1,19 @@
 require "./spec_helper"
 
 describe DeepL::ApiKey do
-  sample_json = %({
-    "key_id": "ca7d5694-96eb-4263-a9a4-7f7e4211529e:20c2abcf-4c3c-4cd6-8ae8-8bd2a7d4da38",
-    "label": "developer key prod",
-    "creation_time": "2025-07-08T08:15:29.362Z",
-    "deactivated_time": null,
-    "is_deactivated": false,
-    "usage_limits": {
-      "characters": 5000,
-      "speech_to_text_milliseconds": 3600000
+  sample_json = <<-JSON
+    {
+      "key_id": "ca7d5694-96eb-4263-a9a4-7f7e4211529e:20c2abcf-4c3c-4cd6-8ae8-8bd2a7d4da38",
+      "label": "developer key prod",
+      "creation_time": "2025-07-08T08:15:29.362Z",
+      "deactivated_time": null,
+      "is_deactivated": false,
+      "usage_limits": {
+        "characters": 5000,
+        "speech_to_text_milliseconds": 3600000
+      }
     }
-  })
+    JSON
 
   it "can be deserialized from JSON" do
     api_key = DeepL::ApiKey.from_json(sample_json)
@@ -31,34 +33,36 @@ describe DeepL::ApiKey do
 end
 
 describe DeepL::AdminUsageReport do
-  sample_json = %({
-    "usage_report": {
-      "total_usage": {
-        "total_characters": 9619,
-        "text_translation_characters": 4892,
-        "document_translation_characters": 0,
-        "text_improvement_characters": 4727,
-        "speech_to_text_minutes": 107.46
-      },
-      "group_by": "key_and_day",
-      "start_date": "2025-09-29T00:00:00Z",
-      "end_date": "2025-10-01T00:00:00Z",
-      "key_and_day_usages": [
-        {
-          "api_key": "dc88****3a2c",
-          "api_key_label": "Staging API Key",
-          "usage_date": "2025-09-29T00:00:00Z",
-          "usage": {
-            "total_characters": 315,
-            "text_translation_characters": 159,
-            "document_translation_characters": 0,
-            "text_improvement_characters": 156,
-            "speech_to_text_minutes": 11.94
+  sample_json = <<-JSON
+    {
+      "usage_report": {
+        "total_usage": {
+          "total_characters": 9619,
+          "text_translation_characters": 4892,
+          "document_translation_characters": 0,
+          "text_improvement_characters": 4727,
+          "speech_to_text_minutes": 107.46
+        },
+        "group_by": "key_and_day",
+        "start_date": "2025-09-29T00:00:00Z",
+        "end_date": "2025-10-01T00:00:00Z",
+        "key_and_day_usages": [
+          {
+            "api_key": "dc88****3a2c",
+            "api_key_label": "Staging API Key",
+            "usage_date": "2025-09-29T00:00:00Z",
+            "usage": {
+              "total_characters": 315,
+              "text_translation_characters": 159,
+              "document_translation_characters": 0,
+              "text_improvement_characters": 156,
+              "speech_to_text_minutes": 11.94
+            }
           }
-        }
-      ]
+        ]
+      }
     }
-  })
+    JSON
 
   it "can be deserialized from JSON" do
     report = DeepL::AdminUsageReport.from_json(sample_json)
@@ -78,25 +82,27 @@ describe DeepL::AdminUsageReport do
 end
 
 describe DeepL::CustomTagUsageReport do
-  sample_json = %({
-    "custom_tag_usage_report": {
-      "aggregate_by": "day",
-      "start_date": "2026-05-03T00:00:00Z",
-      "end_date": "2026-05-05T00:00:00Z",
-      "next_page": null,
-      "usage": [
-        {
-          "custom_tag": "example-custom-tag",
-          "usage_date": "2026-05-04T00:00:00Z",
-          "breakdown": {
-            "total_characters": 380,
-            "text_translation_characters": 380,
-            "text_improvement_characters": 0
+  sample_json = <<-JSON
+    {
+      "custom_tag_usage_report": {
+        "aggregate_by": "day",
+        "start_date": "2026-05-03T00:00:00Z",
+        "end_date": "2026-05-05T00:00:00Z",
+        "next_page": null,
+        "usage": [
+          {
+            "custom_tag": "example-custom-tag",
+            "usage_date": "2026-05-04T00:00:00Z",
+            "breakdown": {
+              "total_characters": 380,
+              "text_translation_characters": 380,
+              "text_improvement_characters": 0
+            }
           }
-        }
-      ]
+        ]
+      }
     }
-  })
+    JSON
 
   it "can be deserialized from JSON" do
     report = DeepL::CustomTagUsageReport.from_json(sample_json)
