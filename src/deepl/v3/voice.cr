@@ -7,6 +7,11 @@ module DeepL
       source_language : String? = nil,
       source_language_mode : String? = nil,
       target_languages : Array(String)? = nil,
+      message_format : String? = nil,
+      target_media_languages : Array(String)? = nil,
+      target_media_content_type : String? = nil,
+      target_media_voice : String? = nil,
+      spoken_terms_id : String? = nil,
       glossary_id : String? = nil,
       formality : String? = nil,
     ) : VoiceStreamingResponse
@@ -16,6 +21,11 @@ module DeepL
         "source_language"           => source_language,
         "source_language_mode"      => source_language_mode,
         "target_languages"          => target_languages,
+        "message_format"            => message_format,
+        "target_media_languages"    => target_media_languages,
+        "target_media_content_type" => target_media_content_type,
+        "target_media_voice"        => target_media_voice,
+        "spoken_terms_id"           => spoken_terms_id,
         "glossary_id"               => glossary_id,
         "formality"                 => formality,
       }.compact!
