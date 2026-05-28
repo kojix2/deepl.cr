@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::LanguageInfo - deepl main</title>
+  <title>DeepL::ResourceLanguage - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -192,7 +192,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
+  <li class=" " data-id="deepl/DeepL/LanguageInfo" data-name="deepl::languageinfo">
       <a href="../DeepL/LanguageInfo.html">LanguageInfo</a>
       
     </li>
@@ -232,7 +232,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/ResourceLanguage" data-name="deepl::resourcelanguage">
+  <li class=" current" data-id="deepl/DeepL/ResourceLanguage" data-name="deepl::resourcelanguage">
       <a href="../DeepL/ResourceLanguage.html">ResourceLanguage</a>
       
     </li>
@@ -318,12 +318,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>LanguageInfo
+  </span> DeepL::<wbr>ResourceLanguage
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/LanguageInfo.html">DeepL::LanguageInfo</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/ResourceLanguage.html">DeepL::ResourceLanguage</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -367,8 +367,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L2" target="_blank">
-        deepl/v2/language_info.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L25" target="_blank">
+        deepl/v3/language.cr
       </a>
     
     <br/>
@@ -390,7 +390,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28language%3AString%2Cname%3AString%2Csupports_formality%3ABool%7CNil%29-class-method" class="signature"><strong>.new</strong>(language : String, name : String, supports_formality : Bool | Nil)</a>
+        <a href="#new%28lang%3AString%2Cname%3AString%2Cusable_as_source%3ABool%2Cusable_as_target%3ABool%2Cstatus%3AString%2Cfeatures%3AHash%28String%2CJSON%3A%3AAny%29%29-class-method" class="signature"><strong>.new</strong>(lang : String, name : String, usable_as_source : Bool, usable_as_target : Bool, status : String, features : Hash(String, JSON::Any))</a>
         
       </li>
     
@@ -423,12 +423,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#language%3AString-instance-method" class="signature"><strong>#language</strong> : String</a>
+        <a href="#features%3AHash%28String%2CJSON%3A%3AAny%29-instance-method" class="signature"><strong>#features</strong> : Hash(String, JSON::Any)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#language%3D%28language%3AString%29-instance-method" class="signature"><strong>#language=</strong>(language : String)</a>
+        <a href="#features%3D%28features%3AHash%28String%2CJSON%3A%3AAny%29%29-instance-method" class="signature"><strong>#features=</strong>(features : Hash(String, JSON::Any))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#lang%3AString-instance-method" class="signature"><strong>#lang</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#lang%3D%28lang%3AString%29-instance-method" class="signature"><strong>#lang=</strong>(lang : String)</a>
         
       </li>
     
@@ -443,12 +453,40 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#supports_formality%3ABool%7CNil-instance-method" class="signature"><strong>#supports_formality</strong> : Bool | Nil</a>
+        <a href="#status%3AString-instance-method" class="signature"><strong>#status</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#supports_formality%3D%28supports_formality%3ABool%7CNil%29-instance-method" class="signature"><strong>#supports_formality=</strong>(supports_formality : Bool | Nil)</a>
+        <a href="#status%3D%28status%3AString%29-instance-method" class="signature"><strong>#status=</strong>(status : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#usable_as_source%3ABool-instance-method" class="signature"><strong>#usable_as_source</strong> : Bool</a>
+        
+          <div class="summary"><p>ameba:disable Naming/QueryBoolMethods</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#usable_as_source%3D%28usable_as_source%3ABool%29-instance-method" class="signature"><strong>#usable_as_source=</strong>(usable_as_source : Bool)</a>
+        
+          <div class="summary"><p>ameba:disable Naming/QueryBoolMethods</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#usable_as_target%3ABool-instance-method" class="signature"><strong>#usable_as_target</strong> : Bool</a>
+        
+          <div class="summary"><p>ameba:disable Naming/QueryBoolMethods</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#usable_as_target%3D%28usable_as_target%3ABool%29-instance-method" class="signature"><strong>#usable_as_target=</strong>(usable_as_target : Bool)</a>
+        
+          <div class="summary"><p>ameba:disable Naming/QueryBoolMethods</p></div>
         
       </li>
     
@@ -509,18 +547,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(language:String,name:String,supports_formality:Bool|Nil)-class-method">
+    <div class="entry-detail" id="new(lang:String,name:String,usable_as_source:Bool,usable_as_target:Bool,status:String,features:Hash(String,JSON::Any))-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(language : String, name : String, supports_formality : Bool | Nil)
+        def self.<strong>new</strong>(lang : String, name : String, usable_as_source : Bool, usable_as_target : Bool, status : String, features : Hash(String, JSON::Any))
 
-        <a class="method-permalink" href="#new%28language%3AString%2Cname%3AString%2Csupports_formality%3ABool%7CNil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28lang%3AString%2Cname%3AString%2Cusable_as_source%3ABool%2Cusable_as_target%3ABool%2Cstatus%3AString%2Cfeatures%3AHash%28String%2CJSON%3A%3AAny%29%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +574,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,7 +590,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -573,34 +611,66 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="language:String-instance-method">
+    <div class="entry-detail" id="features:Hash(String,JSON::Any)-instance-method">
       <div class="signature">
         
-        def <strong>language</strong> : String
+        def <strong>features</strong> : Hash(String, JSON::Any)
 
-        <a class="method-permalink" href="#language%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#features%3AHash%28String%2CJSON%3A%3AAny%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="language=(language:String)-instance-method">
+    <div class="entry-detail" id="features=(features:Hash(String,JSON::Any))-instance-method">
       <div class="signature">
         
-        def <strong>language=</strong>(language : String)
+        def <strong>features=</strong>(features : Hash(String, JSON::Any))
 
-        <a class="method-permalink" href="#language%3D%28language%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#features%3D%28features%3AHash%28String%2CJSON%3A%3AAny%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="lang:String-instance-method">
+      <div class="signature">
+        
+        def <strong>lang</strong> : String
+
+        <a class="method-permalink" href="#lang%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="lang=(lang:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>lang=</strong>(lang : String)
+
+        <a class="method-permalink" href="#lang%3D%28lang%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -616,7 +686,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -632,39 +702,123 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="supports_formality:Bool|Nil-instance-method">
+    <div class="entry-detail" id="status:String-instance-method">
       <div class="signature">
         
-        def <strong>supports_formality</strong> : Bool | Nil
+        def <strong>status</strong> : String
 
-        <a class="method-permalink" href="#supports_formality%3ABool%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#status%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="supports_formality=(supports_formality:Bool|Nil)-instance-method">
+    <div class="entry-detail" id="status=(status:String)-instance-method">
       <div class="signature">
         
-        def <strong>supports_formality=</strong>(supports_formality : Bool | Nil)
+        def <strong>status=</strong>(status : String)
 
-        <a class="method-permalink" href="#supports_formality%3D%28supports_formality%3ABool%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#status%3D%28status%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v2/language_info.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="usable_as_source:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>usable_as_source</strong> : Bool
+
+        <a class="method-permalink" href="#usable_as_source%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>ameba:disable Naming/QueryBoolMethods</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="usable_as_source=(usable_as_source:Bool)-instance-method">
+      <div class="signature">
+        
+        def <strong>usable_as_source=</strong>(usable_as_source : Bool)
+
+        <a class="method-permalink" href="#usable_as_source%3D%28usable_as_source%3ABool%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>ameba:disable Naming/QueryBoolMethods</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="usable_as_target:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>usable_as_target</strong> : Bool
+
+        <a class="method-permalink" href="#usable_as_target%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>ameba:disable Naming/QueryBoolMethods</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="usable_as_target=(usable_as_target:Bool)-instance-method">
+      <div class="signature">
+        
+        def <strong>usable_as_target=</strong>(usable_as_target : Bool)
+
+        <a class="method-permalink" href="#usable_as_target%3D%28usable_as_target%3ABool%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>ameba:disable Naming/QueryBoolMethods</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>

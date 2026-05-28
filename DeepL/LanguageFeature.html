@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::DeepLError - deepl main</title>
+  <title>DeepL::LanguageFeature - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -117,7 +117,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
+  <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="../DeepL/DeepLError.html">DeepLError</a>
       
     </li>
@@ -187,7 +187,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/LanguageFeature" data-name="deepl::languagefeature">
+  <li class=" current" data-id="deepl/DeepL/LanguageFeature" data-name="deepl::languagefeature">
       <a href="../DeepL/LanguageFeature.html">LanguageFeature</a>
       
     </li>
@@ -318,16 +318,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>DeepLError
+  </span> DeepL::<wbr>LanguageFeature
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/DeepLError.html">DeepL::DeepLError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
-
-
-
-
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/LanguageFeature.html">DeepL::LanguageFeature</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -339,34 +335,22 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="included-modules" class="anchor" href="#included-modules">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Included Modules
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../DeepL/ApiKeyNotFoundError.html">DeepL::ApiKeyNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/AuthorizationError.html">DeepL::AuthorizationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentNotReadyError.html">DeepL::DocumentNotReadyError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/DocumentTranslationError.html">DeepL::DocumentTranslationError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNameNotFoundError.html">DeepL::GlossaryNameNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/GlossaryNotFoundError.html">DeepL::GlossaryNotFoundError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/QuotaExceededError.html">DeepL::QuotaExceededError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/RequestError.html">DeepL::RequestError</a></li>
-    
-      <li class="other-type"><a href="../DeepL/TooManyRequestsError.html">DeepL::TooManyRequestsError</a></li>
+      <li class="other-type">JSON::Serializable</li>
     
   </ul>
+
+
+
+
 
 
 
@@ -383,8 +367,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/exceptions.cr#L2" target="_blank">
-        deepl/exceptions.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L4" target="_blank">
+        deepl/v3/language.cr
       </a>
     
     <br/>
@@ -395,12 +379,81 @@
 
 
   
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28name%3AString%2Cneeds_source_support%3ABool%7CNil%3Dnil%2Cneeds_target_support%3ABool%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(name : String, needs_source_support : Bool | Nil = <span class="n">nil</span>, needs_target_support : Bool | Nil = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)</a>
+        
+      </li>
+    
+  </ul>
+
 
   
 
   
 
   
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#name%3AString-instance-method" class="signature"><strong>#name</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name%3D%28name%3AString%29-instance-method" class="signature"><strong>#name=</strong>(name : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#needs_source_support%3ABool%7CNil-instance-method" class="signature"><strong>#needs_source_support</strong> : Bool | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#needs_source_support%3D%28needs_source_support%3ABool%7CNil%29-instance-method" class="signature"><strong>#needs_source_support=</strong>(needs_source_support : Bool | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#needs_target_support%3ABool%7CNil-instance-method" class="signature"><strong>#needs_target_support</strong> : Bool | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#needs_target_support%3D%28needs_target_support%3ABool%7CNil%29-instance-method" class="signature"><strong>#needs_target_support=</strong>(needs_target_support : Bool | Nil)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
   <div class="methods-inherited">
@@ -447,12 +500,176 @@
   </div>
 
   
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(name:String,needs_source_support:Bool|Nil=nil,needs_target_support:Bool|Nil=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(name : String, needs_source_support : Bool | Nil = <span class="n">nil</span>, needs_target_support : Bool | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28name%3AString%2Cneeds_source_support%3ABool%7CNil%3Dnil%2Cneeds_target_support%3ABool%7CNil%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*,__pull_for_json_serializablepull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*, __pull_for_json_serializable pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28%2A%2C__pull_for_json_serializablepull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
   
 
   
 
   
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>name</strong> : String
+
+        <a class="method-permalink" href="#name%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name=(name:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>name=</strong>(name : String)
+
+        <a class="method-permalink" href="#name%3D%28name%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="needs_source_support:Bool|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>needs_source_support</strong> : Bool | Nil
+
+        <a class="method-permalink" href="#needs_source_support%3ABool%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="needs_source_support=(needs_source_support:Bool|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>needs_source_support=</strong>(needs_source_support : Bool | Nil)
+
+        <a class="method-permalink" href="#needs_source_support%3D%28needs_source_support%3ABool%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="needs_target_support:Bool|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>needs_target_support</strong> : Bool | Nil
+
+        <a class="method-permalink" href="#needs_target_support%3ABool%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="needs_target_support=(needs_target_support:Bool|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>needs_target_support=</strong>(needs_target_support : Bool | Nil)
+
+        <a class="method-permalink" href="#needs_target_support%3D%28needs_target_support%3ABool%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/149c4c6a6fde78b137c9eef4081ca4065598077b/src/deepl/v3/language.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 </div>
