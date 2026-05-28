@@ -162,7 +162,7 @@ module DeepL
     def translate_document_get_status(handle : DocumentHandle) : DocumentStatus
       url = "#{api_url_document}/#{handle.id}"
       data = {"document_key" => handle.key}
-      response = Crest.post(url, form: data, headers: http_headers_json)
+      response = Crest.post(url, form: data, headers: http_headers_json, json: true)
       handle_response(response)
       DocumentStatus.from_json(response.body)
     end
@@ -170,7 +170,7 @@ module DeepL
     def translate_document_download(handle : DocumentHandle, output_file)
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
-      Crest.post(url, form: data, headers: http_headers_json) do |response|
+      Crest.post(url, form: data, headers: http_headers_json, json: true) do |response|
         raise DocumentTranslationError.new unless response.success?
         File.open(output_file, "wb") do |file|
           IO.copy(response.body_io, file)
