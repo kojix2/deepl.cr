@@ -117,13 +117,14 @@ module DeepL
         "output_format" => output_format,
         "filename"      => filename,
       }.compact!
-      file = File.open(path)
-      params = params.merge({"file" => file})
+      File.open(path) do |file|
+        params = params.merge({"file" => file})
 
-      response = Crest.post(api_url_document, form: params, headers: http_headers_base)
-      handle_response(response)
+        response = Crest.post(api_url_document, form: params, headers: http_headers_base)
+        handle_response(response)
 
-      DocumentHandle.from_json(response.body)
+        DocumentHandle.from_json(response.body)
+      end
     end
 
     def translate_document_wait_until_done(
