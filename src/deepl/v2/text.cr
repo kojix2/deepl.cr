@@ -26,6 +26,8 @@ module DeepL
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
     ) : Array(TextResult)
+      return mock_translate_text_response if auth_key_is_mock?
+
       if glossary_name
         glossary_id ||= resolve_glossary_id_from_name(glossary_name)
       end
@@ -62,6 +64,10 @@ module DeepL
 
       handle_response(response)
       parse_translate_text_response(response)
+    end
+
+    private def mock_translate_text_response : Array(TextResult)
+      [TextResult.new("Protonenstrahl", "EN", nil, nil)]
     end
 
     private def parse_translate_text_response(response) : Array(TextResult)

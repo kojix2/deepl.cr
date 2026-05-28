@@ -105,6 +105,8 @@ module DeepL
       output_format = nil,
       filename = nil,
     ) : DocumentHandle
+      return mock_document_handle if auth_key_is_mock?
+
       path = Path[path] if path.is_a?(String)
       if glossary_name
         glossary_id ||= resolve_glossary_id_from_name(glossary_name)
@@ -144,6 +146,12 @@ module DeepL
       interval = 5.0,
       block : (DocumentStatus ->)? = nil,
     )
+      if auth_key_is_mock?
+        document_status = translate_document_get_status(handle)
+        block.try &.call(document_status)
+        return
+      end
+
       loop do
         sleep_interval_ns = (interval * 1_000_000_000).to_i64
         sleep Time::Span.new(nanoseconds: sleep_interval_ns)
@@ -160,6 +168,8 @@ module DeepL
     end
 
     def translate_document_get_status(handle : DocumentHandle) : DocumentStatus
+      return mock_document_status(handle) if auth_key_is_mock?
+
       url = "#{api_url_document}/#{handle.id}"
       data = {"document_key" => handle.key}
       response = Crest.post(url, form: data, headers: http_headers_json, json: true)
@@ -168,6 +178,11 @@ module DeepL
     end
 
     def translate_document_download(handle : DocumentHandle, output_file)
+      if auth_key_is_mock?
+        File.write(output_file, "Protonenstrahl\nProtonenstrahl\nProtonenstrahl")
+        return
+      end
+
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
       Crest.post(url, form: data, headers: http_headers_json, json: true) do |response|
@@ -176,6 +191,20 @@ module DeepL
           IO.copy(response.body_io, file)
         end
       end
+    end
+
+    private def mock_document_handle : DocumentHandle
+      DocumentHandle.new("mock-document-id", "mock-document-key")
+    end
+
+    private def mock_document_status(handle : DocumentHandle) : DocumentStatus
+      DocumentStatus.from_json(<<-JSON)
+        {
+          "document_id": "#{handle.id}",
+          "status": "done",
+          "billed_characters": 42
+        }
+        JSON
     end
   end
 end
