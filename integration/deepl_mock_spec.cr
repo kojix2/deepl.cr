@@ -263,6 +263,40 @@ describe "deepl-mock integration" do
     filtered.segments.first.source_text.should eq("Quelltext Nummer 7")
   end
 
+  it "imports, exports, and deletes a translation memory through signed URLs" do
+    translator = DeepLMockIntegration.translator("translation-memory-management")
+    source_path = Path[__DIR__] / "../spec/fixtures/proton_beams.txt"
+    output_path = File.tempname("deepl-mock-translation-memory", ".tmx")
+
+    begin
+      imported = translator.import_translation_memory(
+        source_path,
+        display_name: "Mock legal memory",
+        interval: 0.01,
+        timeout: 5.seconds,
+      )
+      memory_id = imported.results.first.translation_memory_id || fail "Import job did not return a translation memory ID"
+      translator.get_translation_memory_job(imported.job_id).results.first.status.should eq("completed")
+      translator.get_translation_memory(memory_id).name.should eq("Mock legal memory")
+
+      exported = translator.export_translation_memory(
+        memory_id,
+        output_path,
+        interval: 0.01,
+        timeout: 5.seconds,
+      )
+      exported.results.first.download_url.should_not be_nil
+      File.read(output_path).should contain("<tmx version=\"1.4\">")
+
+      translator.delete_translation_memory(memory_id).should be_true
+      expect_raises(DeepL::RequestError) do
+        translator.get_translation_memory(memory_id)
+      end
+    ensure
+      File.delete?(output_path)
+    end
+  end
+
   it "maps invalid mock credentials to AuthorizationError with a trace ID" do
     translator = DeepL::Translator.new(
       auth_key: "invalid",
