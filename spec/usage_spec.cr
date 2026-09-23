@@ -46,6 +46,72 @@ describe DeepL::UsagePro do
     usage.end_time.should eq(Time.parse_iso8601("2025-05-24T14:58:02Z"))
   end
 
+  it "accepts sparse Pro responses" do
+    sparse_json = <<-JSON
+      {
+        "character_count": 636,
+        "character_limit": 1000000000000,
+        "products": [
+          {
+            "product_type": "speechToText",
+            "billing_unit": "minutes",
+            "api_key_unit_count": 30,
+            "account_unit_count": 30
+          }
+        ]
+      }
+      JSON
+
+    usage = DeepL::UsagePro.from_json(sparse_json)
+
+    usage.character_count.should eq(636)
+    usage.character_limit.should eq(1000000000000)
+    usage.api_key_character_count.should be_nil
+    usage.api_key_character_limit.should be_nil
+    usage.start_time.should be_nil
+    usage.end_time.should be_nil
+    usage.products.size.should eq(1)
+    usage.products.first.api_key_character_count.should be_nil
+    usage.products.first.character_count.should be_nil
+    usage.products.first.billing_unit.should eq("minutes")
+  end
+
+  it "defaults missing Pro products to an empty array" do
+    sparse_json = %({"character_count":636,"character_limit":1000000000000})
+
+    usage = DeepL::UsagePro.from_json(sparse_json)
+
+    usage.products.should be_empty
+  end
+
+  it "exposes optional document and speech-minute usage" do
+    usage_json = <<-JSON
+      {
+        "character_count": 636,
+        "character_limit": 1000000000000,
+        "document_count": 4,
+        "document_limit": 10,
+        "team_document_count": 12,
+        "team_document_limit": 100,
+        "speech_to_text_minutes_count": 30,
+        "speech_to_text_minutes_limit": 600,
+        "speech_to_speech_minutes_count": 12,
+        "speech_to_speech_minutes_limit": 600
+      }
+      JSON
+
+    usage = DeepL::UsagePro.from_json(usage_json)
+
+    usage.document_count.should eq(4)
+    usage.document_limit.should eq(10)
+    usage.team_document_count.should eq(12)
+    usage.team_document_limit.should eq(100)
+    usage.speech_to_text_minutes_count.should eq(30)
+    usage.speech_to_text_minutes_limit.should eq(600)
+    usage.speech_to_speech_minutes_count.should eq(12)
+    usage.speech_to_speech_minutes_limit.should eq(600)
+  end
+
   it "can deserialize products correctly" do
     usage = DeepL::UsagePro.from_json(sample_json)
 

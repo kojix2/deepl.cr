@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-{% unless flag?(:deepl_v2) %}
+{% unless flag?(:deepl_v2) || env("DEEPL_API_VERSION") == "v2" %}
   describe DeepL::StyleRuleList do
     sample_json = %({
     "style_id": "bd0a38f3-1831-440b-a8dd-2c702e2325ab",
@@ -9,13 +9,14 @@ require "./spec_helper"
     "updated_time": "2025-01-02T00:00:00Z",
     "language": "en",
     "version": 13,
-    "configured_rules": [
-      {
-        "dates_and_times": {
-          "date_format": "use_dd_slash_mm_slash_yyyy"
-        }
+    "configured_rules": {
+      "dates_and_times": {
+        "date_format": "use_dd_slash_mm_slash_yyyy"
+      },
+      "punctuation": {
+        "apostrophe": "use_curly_apostrophes"
       }
-    ],
+    },
     "custom_instructions": [
       {
         "label": "Currency",
@@ -36,10 +37,20 @@ require "./spec_helper"
       style_rule.creation_time.should eq(Time.parse_iso8601("2025-01-01T00:00:00Z"))
       style_rule.updated_time.should eq(Time.parse_iso8601("2025-01-02T00:00:00Z"))
 
-      style_rule.configured_rules.not_nil!.size.should eq(1)
+      configured_rules = style_rule.configured_rules.not_nil!
+      configured_rules.as_h["dates_and_times"].as_h["date_format"].as_s.should eq("use_dd_slash_mm_slash_yyyy")
       style_rule.custom_instructions.not_nil!.size.should eq(1)
       style_rule.custom_instructions.not_nil!.first.label.should eq("Currency")
       style_rule.custom_instructions.not_nil!.first.id.should eq("68fdb803-c013-4e67-b62e-1aad0ab519cd")
+    end
+
+    it "round-trips object-shaped configured rules" do
+      style_rule = DeepL::StyleRuleList.from_json(sample_json)
+      round_tripped = DeepL::StyleRuleList.from_json(style_rule.to_json)
+      configured_rules = round_tripped.configured_rules.not_nil!
+
+      configured_rules.as_h["dates_and_times"].as_h["date_format"].as_s.should eq("use_dd_slash_mm_slash_yyyy")
+      configured_rules.as_h["punctuation"].as_h["apostrophe"].as_s.should eq("use_curly_apostrophes")
     end
 
     it "can deserialize a list of style rules" do

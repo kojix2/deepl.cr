@@ -22,7 +22,7 @@ module DeepL
     property updated_time : Time
     property language : String
     property version : Int32
-    property configured_rules : Array(JSON::Any)?
+    property configured_rules : JSON::Any?
     property custom_instructions : Array(CustomInstruction)?
 
     def initialize(
