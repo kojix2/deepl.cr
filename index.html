@@ -390,6 +390,40 @@ voice <span class="o">=</span> t.get_voice_streaming_url(
   target_languages: [<span class="s">&quot;de&quot;</span>, <span class="s">&quot;fr&quot;</span>]
 )
 puts voice.streaming_url</code></pre>
+<h3><a id="glossaries-document-options-and-translation-memory" class="anchor" href="#glossaries-document-options-and-translation-memory">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Glossaries, document options, and Translation Memory</h3>
+<p>Use an ID for automation. Name-based helpers are conveniences only: a name
+must resolve to exactly one glossary, otherwise the library raises
+<code>AmbiguousGlossaryNameError</code> and asks the caller to select an ID explicitly.</p>
+<p>Text and document translation can use up to five glossary IDs. Supplying
+<code>glossary_ids</code> requires <code>source_lang</code> and cannot be combined with
+<code>glossary_id</code> or <code>glossary_name</code>.</p>
+<pre><code class="language-crystal">result <span class="o">=</span> t.translate_text(
+  <span class="s">&quot;Hello&quot;</span>,
+  target_lang: <span class="s">&quot;DE&quot;</span>,
+  source_lang: <span class="s">&quot;EN&quot;</span>,
+  glossary_ids: [<span class="s">&quot;glossary-id-1&quot;</span>, <span class="s">&quot;glossary-id-2&quot;</span>],
+)
+
+t.translate_document(
+  <span class="s">&quot;path/to/document.pdf&quot;</span>,
+  target_lang: <span class="s">&quot;DE&quot;</span>,
+  source_lang: <span class="s">&quot;EN&quot;</span>,
+  glossary_ids: [<span class="s">&quot;glossary-id-1&quot;</span>, <span class="s">&quot;glossary-id-2&quot;</span>],
+  style_id: <span class="s">&quot;style-id&quot;</span>,
+  translation_memory_id: <span class="s">&quot;translation-memory-id&quot;</span>,
+  translation_memory_threshold: <span class="n">75</span>,
+)</code></pre>
+<p>On the v3 surface, Translation Memory reads are available without adding a
+write or job-management layer:</p>
+<pre><code class="language-crystal">memory <span class="o">=</span> t.get_translation_memory(<span class="s">&quot;translation-memory-id&quot;</span>)
+segments <span class="o">=</span> t.list_translation_memory_segments(<span class="s">&quot;translation-memory-id&quot;</span>, page_size: <span class="n">100</span>)</code></pre>
+<p>All non-2xx HTTP responses raise a <code><a href="DeepL/DeepLError.html">DeepL::DeepLError</a></code>. When the service
+provides an <code>X-Trace-ID</code>, it is available as <code>error.trace_id</code> for support
+requests.</p>
 <p>See <a href="https://kojix2.github.io/deepl.cr/">documentation</a>.</p>
 <h3><a id="environment-variables" class="anchor" href="#environment-variables">
   <svg class="octicon-link" aria-hidden="true">
