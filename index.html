@@ -262,6 +262,51 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryExport" data-name="deepl::translationmemoryexport">
+      <a href="DeepL/TranslationMemoryExport.html">TranslationMemoryExport</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryImport" data-name="deepl::translationmemoryimport">
+      <a href="DeepL/TranslationMemoryImport.html">TranslationMemoryImport</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJob" data-name="deepl::translationmemoryjob">
+      <a href="DeepL/TranslationMemoryJob.html">TranslationMemoryJob</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobError" data-name="deepl::translationmemoryjoberror">
+      <a href="DeepL/TranslationMemoryJobError.html">TranslationMemoryJobError</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobFailure" data-name="deepl::translationmemoryjobfailure">
+      <a href="DeepL/TranslationMemoryJobFailure.html">TranslationMemoryJobFailure</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobParameters" data-name="deepl::translationmemoryjobparameters">
+      <a href="DeepL/TranslationMemoryJobParameters.html">TranslationMemoryJobParameters</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobResult" data-name="deepl::translationmemoryjobresult">
+      <a href="DeepL/TranslationMemoryJobResult.html">TranslationMemoryJobResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobSourceFile" data-name="deepl::translationmemoryjobsourcefile">
+      <a href="DeepL/TranslationMemoryJobSourceFile.html">TranslationMemoryJobSourceFile</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobStatusMetadata" data-name="deepl::translationmemoryjobstatusmetadata">
+      <a href="DeepL/TranslationMemoryJobStatusMetadata.html">TranslationMemoryJobStatusMetadata</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/TranslationMemoryList" data-name="deepl::translationmemorylist">
       <a href="DeepL/TranslationMemoryList.html">TranslationMemoryList</a>
       
@@ -387,7 +432,9 @@ voice <span class="o">=</span> t.get_voice_streaming_url(
   source_media_content_type: <span class="s">&quot;audio/ogg; codecs=opus&quot;</span>,
   source_language: <span class="s">&quot;en&quot;</span>,
   source_language_mode: <span class="s">&quot;auto&quot;</span>,
-  target_languages: [<span class="s">&quot;de&quot;</span>, <span class="s">&quot;fr&quot;</span>]
+  target_languages: [<span class="s">&quot;de&quot;</span>, <span class="s">&quot;fr&quot;</span>],
+  glossary_ids: [<span class="s">&quot;highest-priority&quot;</span>, <span class="s">&quot;next-priority&quot;</span>],
+  reporting_tag: <span class="s">&quot;voice-team&quot;</span>,
 )
 puts voice.streaming_url</code></pre>
 <h3><a id="glossaries-document-options-and-translation-memory" class="anchor" href="#glossaries-document-options-and-translation-memory">
@@ -416,11 +463,30 @@ t.translate_document(
   style_id: <span class="s">&quot;style-id&quot;</span>,
   translation_memory_id: <span class="s">&quot;translation-memory-id&quot;</span>,
   translation_memory_threshold: <span class="n">75</span>,
+  enable_watermark: <span class="n">true</span>, <span class="c"># DeepL applies this to docx/pdf output</span>
 )</code></pre>
-<p>Translation Memory reads are available without adding a write or
-job-management layer:</p>
+<p><code>reporting_tag:</code> sends <code>X-<a href="DeepL.html">DeepL</a>-Reporting-Tag</code> for text translation and Voice
+session creation. Tags are limited to 100 characters. Voice <code>glossary_ids:</code> are
+applied in array order, with the first glossary taking precedence on conflicts.</p>
+<p>Translation Memory supports reads, import/export job management, and
+file-oriented helpers. The helpers upload and download through the short-lived
+signed URLs returned by DeepL, then wait for the background job to complete:</p>
 <pre><code class="language-crystal">memory <span class="o">=</span> t.get_translation_memory(<span class="s">&quot;translation-memory-id&quot;</span>)
-segments <span class="o">=</span> t.list_translation_memory_segments(<span class="s">&quot;translation-memory-id&quot;</span>, page_size: <span class="n">100</span>)</code></pre>
+segments <span class="o">=</span> t.list_translation_memory_segments(<span class="s">&quot;translation-memory-id&quot;</span>, page_size: <span class="n">100</span>)
+
+imported <span class="o">=</span> t.import_translation_memory(
+  <span class="s">&quot;legal.tmx&quot;</span>,
+  display_name: <span class="s">&quot;Legal&quot;</span>,
+  interval: <span class="n">1.0</span>,
+)
+memory_id <span class="o">=</span> imported.results.first.translation_memory_id
+
+t.export_translation_memory(memory_id.not_nil!, <span class="s">&quot;legal-export.tmx&quot;</span>)</code></pre>
+<p>For finer control, use <code>create_translation_memory_import</code>,
+<code>upload_translation_memory_import</code>, <code>get_translation_memory_job</code>,
+<code>create_translation_memory_export</code>, <code>download_translation_memory_export</code>, and
+<code>wait_for_translation_memory_job</code>. Failed, expired, or timed-out jobs raise
+<code>TranslationMemoryJobError</code>.</p>
 <p>All non-2xx HTTP responses raise a <code><a href="DeepL/DeepLError.html">DeepL::DeepLError</a></code>. When the service
 provides an <code>X-Trace-ID</code>, it is available as <code>error.trace_id</code> for support
 requests.</p>
@@ -485,6 +551,17 @@ aliases for this same unified surface; they no longer select an API version.</p>
 <li>Translation, document, usage, language, rephrase, admin, and legacy glossary methods use v2 endpoints.</li>
 <li>Multilingual glossary, Style Rules, Translation Memory, and voice realtime methods use v3 endpoints. Multilingual glossary language pairs are the intentional <code>/v2</code> exception.</li>
 </ul>
+<h3><a id="deprecated-compatibility-ap-is" class="anchor" href="#deprecated-compatibility-ap-is">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Deprecated compatibility APIs</h3>
+<p><code>get_source_languages</code> and <code>get_target_languages</code> use DeepL's deprecated
+<code>/v2/languages</code>; use <code>get_languages(&quot;translate_text&quot;)</code> (or another v3
+resource) for new code. <code>get_glossary_language_pairs</code> uses deprecated
+<code>/v2/glossary-language-pairs</code>; use <code>get_languages(&quot;glossary&quot;)</code> instead.
+<code>enable_beta_languages:</code> remains accepted by <code>translate_text</code> only for
+backward compatibility and has no effect.</p>
 <p>Each endpoint determines its own <code>/v2</code> or <code>/v3</code> path. <code>Translator#server_url</code> is a versionless base URL, and internal requests add the endpoint path. Custom URLs ending in <code>/v2</code> or <code>/v3</code> are accepted and normalized; custom base paths are preserved.</p>
 <p><code>DEEPL_API_VERSION</code>, <code>-Ddeepl_v2</code>, and <code>-Ddeepl_v3</code> have been removed. Builds that set any of them fail with a migration error; remove the global version setting instead.</p>
 <p><code>glossary_name:</code> now resolves a multilingual glossary through <code>/v3/glossaries</code>.

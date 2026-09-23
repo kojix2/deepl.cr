@@ -262,6 +262,51 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryExport" data-name="deepl::translationmemoryexport">
+      <a href="../DeepL/TranslationMemoryExport.html">TranslationMemoryExport</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryImport" data-name="deepl::translationmemoryimport">
+      <a href="../DeepL/TranslationMemoryImport.html">TranslationMemoryImport</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJob" data-name="deepl::translationmemoryjob">
+      <a href="../DeepL/TranslationMemoryJob.html">TranslationMemoryJob</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobError" data-name="deepl::translationmemoryjoberror">
+      <a href="../DeepL/TranslationMemoryJobError.html">TranslationMemoryJobError</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobFailure" data-name="deepl::translationmemoryjobfailure">
+      <a href="../DeepL/TranslationMemoryJobFailure.html">TranslationMemoryJobFailure</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobParameters" data-name="deepl::translationmemoryjobparameters">
+      <a href="../DeepL/TranslationMemoryJobParameters.html">TranslationMemoryJobParameters</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobResult" data-name="deepl::translationmemoryjobresult">
+      <a href="../DeepL/TranslationMemoryJobResult.html">TranslationMemoryJobResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobSourceFile" data-name="deepl::translationmemoryjobsourcefile">
+      <a href="../DeepL/TranslationMemoryJobSourceFile.html">TranslationMemoryJobSourceFile</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/TranslationMemoryJobStatusMetadata" data-name="deepl::translationmemoryjobstatusmetadata">
+      <a href="../DeepL/TranslationMemoryJobStatusMetadata.html">TranslationMemoryJobStatusMetadata</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/TranslationMemoryList" data-name="deepl::translationmemorylist">
       <a href="../DeepL/TranslationMemoryList.html">TranslationMemoryList</a>
       
@@ -387,7 +432,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L110" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L110" target="_blank">
         deepl/v2/admin.cr
       </a>
     
@@ -415,7 +460,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28total_characters%3AInt64%2Ctext_translation_characters%3AInt64%7CNil%3Dnil%2Ctext_improvement_characters%3AInt64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(total_characters : Int64, text_translation_characters : Int64 | Nil = <span class="n">nil</span>, text_improvement_characters : Int64 | Nil = <span class="n">nil</span>)</a>
+        <a href="#new%28total_characters%3AInt64%2Ctext_translation_characters%3AInt64%7CNil%3Dnil%2Ctext_improvement_characters%3AInt64%7CNil%3Dnil%2Cspeech_to_text_minutes%3AFloat64%7CNil%3Dnil%2Cspeech_to_speech_minutes%3AFloat64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(total_characters : Int64, text_translation_characters : Int64 | Nil = <span class="n">nil</span>, text_improvement_characters : Int64 | Nil = <span class="n">nil</span>, speech_to_text_minutes : Float64 | Nil = <span class="n">nil</span>, speech_to_speech_minutes : Float64 | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -441,6 +486,26 @@
     Instance Method Summary
   </h2>
   <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#speech_to_speech_minutes%3AFloat64%7CNil-instance-method" class="signature"><strong>#speech_to_speech_minutes</strong> : Float64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_speech_minutes%3D%28speech_to_speech_minutes%3AFloat64%7CNil%29-instance-method" class="signature"><strong>#speech_to_speech_minutes=</strong>(speech_to_speech_minutes : Float64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_text_minutes%3AFloat64%7CNil-instance-method" class="signature"><strong>#speech_to_text_minutes</strong> : Float64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_text_minutes%3D%28speech_to_text_minutes%3AFloat64%7CNil%29-instance-method" class="signature"><strong>#speech_to_text_minutes=</strong>(speech_to_text_minutes : Float64 | Nil)</a>
+        
+      </li>
     
       <li class="entry-summary">
         <a href="#text_improvement_characters%3AInt64%7CNil-instance-method" class="signature"><strong>#text_improvement_characters</strong> : Int64 | Nil</a>
@@ -540,23 +605,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(total_characters:Int64,text_translation_characters:Int64|Nil=nil,text_improvement_characters:Int64|Nil=nil)-class-method">
+    <div class="entry-detail" id="new(total_characters:Int64,text_translation_characters:Int64|Nil=nil,text_improvement_characters:Int64|Nil=nil,speech_to_text_minutes:Float64|Nil=nil,speech_to_speech_minutes:Float64|Nil=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(total_characters : Int64, text_translation_characters : Int64 | Nil = <span class="n">nil</span>, text_improvement_characters : Int64 | Nil = <span class="n">nil</span>)
+        def self.<strong>new</strong>(total_characters : Int64, text_translation_characters : Int64 | Nil = <span class="n">nil</span>, text_improvement_characters : Int64 | Nil = <span class="n">nil</span>, speech_to_text_minutes : Float64 | Nil = <span class="n">nil</span>, speech_to_speech_minutes : Float64 | Nil = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28total_characters%3AInt64%2Ctext_translation_characters%3AInt64%7CNil%3Dnil%2Ctext_improvement_characters%3AInt64%7CNil%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28total_characters%3AInt64%2Ctext_translation_characters%3AInt64%7CNil%3Dnil%2Ctext_improvement_characters%3AInt64%7CNil%3Dnil%2Cspeech_to_text_minutes%3AFloat64%7CNil%3Dnil%2Cspeech_to_speech_minutes%3AFloat64%7CNil%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L117" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L119" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -572,7 +637,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -593,6 +658,70 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="speech_to_speech_minutes:Float64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_speech_minutes</strong> : Float64 | Nil
+
+        <a class="method-permalink" href="#speech_to_speech_minutes%3AFloat64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L117" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_speech_minutes=(speech_to_speech_minutes:Float64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_speech_minutes=</strong>(speech_to_speech_minutes : Float64 | Nil)
+
+        <a class="method-permalink" href="#speech_to_speech_minutes%3D%28speech_to_speech_minutes%3AFloat64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L117" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_text_minutes:Float64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_text_minutes</strong> : Float64 | Nil
+
+        <a class="method-permalink" href="#speech_to_text_minutes%3AFloat64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L116" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_text_minutes=(speech_to_text_minutes:Float64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_text_minutes=</strong>(speech_to_text_minutes : Float64 | Nil)
+
+        <a class="method-permalink" href="#speech_to_text_minutes%3D%28speech_to_text_minutes%3AFloat64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L116" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="text_improvement_characters:Int64|Nil-instance-method">
       <div class="signature">
         
@@ -604,7 +733,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L115" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L115" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -620,7 +749,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L115" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L115" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -636,7 +765,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L114" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L114" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -652,7 +781,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L114" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L114" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -668,7 +797,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L113" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L113" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -684,7 +813,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/2738fb69de6decdb6210df3fe05157d7f3f066f8/src/deepl/v2/admin.cr#L113" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L113" target="_blank">View source</a>]
         
       </div>
     </div>

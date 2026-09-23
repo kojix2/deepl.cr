@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="deepl">
-  <title>DeepL::KeyUsageItem - deepl main</title>
+  <title>DeepL::TranslationMemoryJob - deepl main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -187,7 +187,7 @@
       
     </li>
   
-  <li class=" current" data-id="deepl/DeepL/KeyUsageItem" data-name="deepl::keyusageitem">
+  <li class=" " data-id="deepl/DeepL/KeyUsageItem" data-name="deepl::keyusageitem">
       <a href="../DeepL/KeyUsageItem.html">KeyUsageItem</a>
       
     </li>
@@ -272,7 +272,7 @@
       
     </li>
   
-  <li class=" " data-id="deepl/DeepL/TranslationMemoryJob" data-name="deepl::translationmemoryjob">
+  <li class=" current" data-id="deepl/DeepL/TranslationMemoryJob" data-name="deepl::translationmemoryjob">
       <a href="../DeepL/TranslationMemoryJob.html">TranslationMemoryJob</a>
       
     </li>
@@ -383,12 +383,12 @@
 
   <span class="kind">
     class
-  </span> DeepL::<wbr>KeyUsageItem
+  </span> DeepL::<wbr>TranslationMemoryJob
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/KeyUsageItem.html">DeepL::KeyUsageItem</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../DeepL/TranslationMemoryJob.html">DeepL::TranslationMemoryJob</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -432,8 +432,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L57" target="_blank">
-        deepl/v2/admin.cr
+      <a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L172" target="_blank">
+        deepl/v3/translation_memory.cr
       </a>
     
     <br/>
@@ -455,7 +455,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28api_key%3AString%2Capi_key_label%3AString%2Cusage%3ADeepL%3A%3AUsageBreakdown%29-class-method" class="signature"><strong>.new</strong>(api_key : String, api_key_label : String, usage : DeepL::UsageBreakdown)</a>
+        <a href="#new%28job_id%3AString%2Cproduct%3AString%2Coperation%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Cparameters%3ADeepL%3A%3ATranslationMemoryJobParameters%2Cresults%3AArray%28DeepL%3A%3ATranslationMemoryJobResult%29%2Csource_file%3ANil%7CDeepL%3A%3ATranslationMemoryJobSourceFile%3Dnil%29-class-method" class="signature"><strong>.new</strong>(job_id : String, product : String, operation : String, creation_time : Time, updated_time : Time, parameters : DeepL::TranslationMemoryJobParameters, results : Array(DeepL::TranslationMemoryJobResult), source_file : Nil | DeepL::TranslationMemoryJobSourceFile = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -488,32 +488,82 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#api_key%3AString-instance-method" class="signature"><strong>#api_key</strong> : String</a>
+        <a href="#creation_time%3ATime-instance-method" class="signature"><strong>#creation_time</strong> : Time</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key%3D%28api_key%3AString%29-instance-method" class="signature"><strong>#api_key=</strong>(api_key : String)</a>
+        <a href="#creation_time%3D%28creation_time%3ATime%29-instance-method" class="signature"><strong>#creation_time=</strong>(creation_time : Time)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_label%3AString-instance-method" class="signature"><strong>#api_key_label</strong> : String</a>
+        <a href="#job_id%3AString-instance-method" class="signature"><strong>#job_id</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_label%3D%28api_key_label%3AString%29-instance-method" class="signature"><strong>#api_key_label=</strong>(api_key_label : String)</a>
+        <a href="#job_id%3D%28job_id%3AString%29-instance-method" class="signature"><strong>#job_id=</strong>(job_id : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#usage%3AUsageBreakdown-instance-method" class="signature"><strong>#usage</strong> : UsageBreakdown</a>
+        <a href="#operation%3AString-instance-method" class="signature"><strong>#operation</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#usage%3D%28usage%3AUsageBreakdown%29-instance-method" class="signature"><strong>#usage=</strong>(usage : UsageBreakdown)</a>
+        <a href="#operation%3D%28operation%3AString%29-instance-method" class="signature"><strong>#operation=</strong>(operation : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parameters%3ATranslationMemoryJobParameters-instance-method" class="signature"><strong>#parameters</strong> : TranslationMemoryJobParameters</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parameters%3D%28parameters%3ATranslationMemoryJobParameters%29-instance-method" class="signature"><strong>#parameters=</strong>(parameters : TranslationMemoryJobParameters)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#product%3AString-instance-method" class="signature"><strong>#product</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#product%3D%28product%3AString%29-instance-method" class="signature"><strong>#product=</strong>(product : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#results%3AArray%28TranslationMemoryJobResult%29-instance-method" class="signature"><strong>#results</strong> : Array(TranslationMemoryJobResult)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#results%3D%28results%3AArray%28TranslationMemoryJobResult%29%29-instance-method" class="signature"><strong>#results=</strong>(results : Array(TranslationMemoryJobResult))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#source_file%3ATranslationMemoryJobSourceFile%7CNil-instance-method" class="signature"><strong>#source_file</strong> : TranslationMemoryJobSourceFile | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#source_file%3D%28source_file%3ATranslationMemoryJobSourceFile%7CNil%29-instance-method" class="signature"><strong>#source_file=</strong>(source_file : TranslationMemoryJobSourceFile | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#updated_time%3ATime-instance-method" class="signature"><strong>#updated_time</strong> : Time</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#updated_time%3D%28updated_time%3ATime%29-instance-method" class="signature"><strong>#updated_time=</strong>(updated_time : Time)</a>
         
       </li>
     
@@ -574,18 +624,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(api_key:String,api_key_label:String,usage:DeepL::UsageBreakdown)-class-method">
+    <div class="entry-detail" id="new(job_id:String,product:String,operation:String,creation_time:Time,updated_time:Time,parameters:DeepL::TranslationMemoryJobParameters,results:Array(DeepL::TranslationMemoryJobResult),source_file:Nil|DeepL::TranslationMemoryJobSourceFile=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(api_key : String, api_key_label : String, usage : <a href="../DeepL/UsageBreakdown.html">DeepL::UsageBreakdown</a>)
+        def self.<strong>new</strong>(job_id : String, product : String, operation : String, creation_time : Time, updated_time : Time, parameters : <a href="../DeepL/TranslationMemoryJobParameters.html">DeepL::TranslationMemoryJobParameters</a>, results : Array(<a href="../DeepL/TranslationMemoryJobResult.html">DeepL::TranslationMemoryJobResult</a>), source_file : Nil | <a href="../DeepL/TranslationMemoryJobSourceFile.html">DeepL::TranslationMemoryJobSourceFile</a> = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28api_key%3AString%2Capi_key_label%3AString%2Cusage%3ADeepL%3A%3AUsageBreakdown%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28job_id%3AString%2Cproduct%3AString%2Coperation%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Cparameters%3ADeepL%3A%3ATranslationMemoryJobParameters%2Cresults%3AArray%28DeepL%3A%3ATranslationMemoryJobResult%29%2Csource_file%3ANil%7CDeepL%3A%3ATranslationMemoryJobSourceFile%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L184" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -601,7 +651,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L173" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -617,7 +667,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L173" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -638,98 +688,258 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="api_key:String-instance-method">
+    <div class="entry-detail" id="creation_time:Time-instance-method">
       <div class="signature">
         
-        def <strong>api_key</strong> : String
+        def <strong>creation_time</strong> : Time
 
-        <a class="method-permalink" href="#api_key%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#creation_time%3ATime-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L178" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key=(api_key:String)-instance-method">
+    <div class="entry-detail" id="creation_time=(creation_time:Time)-instance-method">
       <div class="signature">
         
-        def <strong>api_key=</strong>(api_key : String)
+        def <strong>creation_time=</strong>(creation_time : Time)
 
-        <a class="method-permalink" href="#api_key%3D%28api_key%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#creation_time%3D%28creation_time%3ATime%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L178" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_label:String-instance-method">
+    <div class="entry-detail" id="job_id:String-instance-method">
       <div class="signature">
         
-        def <strong>api_key_label</strong> : String
+        def <strong>job_id</strong> : String
 
-        <a class="method-permalink" href="#api_key_label%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#job_id%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L175" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_label=(api_key_label:String)-instance-method">
+    <div class="entry-detail" id="job_id=(job_id:String)-instance-method">
       <div class="signature">
         
-        def <strong>api_key_label=</strong>(api_key_label : String)
+        def <strong>job_id=</strong>(job_id : String)
 
-        <a class="method-permalink" href="#api_key_label%3D%28api_key_label%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#job_id%3D%28job_id%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L175" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="usage:UsageBreakdown-instance-method">
+    <div class="entry-detail" id="operation:String-instance-method">
       <div class="signature">
         
-        def <strong>usage</strong> : <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>
+        def <strong>operation</strong> : String
 
-        <a class="method-permalink" href="#usage%3AUsageBreakdown-instance-method">#</a>
+        <a class="method-permalink" href="#operation%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L177" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="usage=(usage:UsageBreakdown)-instance-method">
+    <div class="entry-detail" id="operation=(operation:String)-instance-method">
       <div class="signature">
         
-        def <strong>usage=</strong>(usage : <a href="../DeepL/UsageBreakdown.html">UsageBreakdown</a>)
+        def <strong>operation=</strong>(operation : String)
 
-        <a class="method-permalink" href="#usage%3D%28usage%3AUsageBreakdown%29-instance-method">#</a>
+        <a class="method-permalink" href="#operation%3D%28operation%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v2/admin.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L177" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parameters:TranslationMemoryJobParameters-instance-method">
+      <div class="signature">
+        
+        def <strong>parameters</strong> : <a href="../DeepL/TranslationMemoryJobParameters.html">TranslationMemoryJobParameters</a>
+
+        <a class="method-permalink" href="#parameters%3ATranslationMemoryJobParameters-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L181" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parameters=(parameters:TranslationMemoryJobParameters)-instance-method">
+      <div class="signature">
+        
+        def <strong>parameters=</strong>(parameters : <a href="../DeepL/TranslationMemoryJobParameters.html">TranslationMemoryJobParameters</a>)
+
+        <a class="method-permalink" href="#parameters%3D%28parameters%3ATranslationMemoryJobParameters%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L181" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="product:String-instance-method">
+      <div class="signature">
+        
+        def <strong>product</strong> : String
+
+        <a class="method-permalink" href="#product%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L176" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="product=(product:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>product=</strong>(product : String)
+
+        <a class="method-permalink" href="#product%3D%28product%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L176" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="results:Array(TranslationMemoryJobResult)-instance-method">
+      <div class="signature">
+        
+        def <strong>results</strong> : Array(<a href="../DeepL/TranslationMemoryJobResult.html">TranslationMemoryJobResult</a>)
+
+        <a class="method-permalink" href="#results%3AArray%28TranslationMemoryJobResult%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L182" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="results=(results:Array(TranslationMemoryJobResult))-instance-method">
+      <div class="signature">
+        
+        def <strong>results=</strong>(results : Array(<a href="../DeepL/TranslationMemoryJobResult.html">TranslationMemoryJobResult</a>))
+
+        <a class="method-permalink" href="#results%3D%28results%3AArray%28TranslationMemoryJobResult%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L182" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="source_file:TranslationMemoryJobSourceFile|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>source_file</strong> : <a href="../DeepL/TranslationMemoryJobSourceFile.html">TranslationMemoryJobSourceFile</a> | Nil
+
+        <a class="method-permalink" href="#source_file%3ATranslationMemoryJobSourceFile%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L180" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="source_file=(source_file:TranslationMemoryJobSourceFile|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>source_file=</strong>(source_file : <a href="../DeepL/TranslationMemoryJobSourceFile.html">TranslationMemoryJobSourceFile</a> | Nil)
+
+        <a class="method-permalink" href="#source_file%3D%28source_file%3ATranslationMemoryJobSourceFile%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L180" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="updated_time:Time-instance-method">
+      <div class="signature">
+        
+        def <strong>updated_time</strong> : Time
+
+        <a class="method-permalink" href="#updated_time%3ATime-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L179" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="updated_time=(updated_time:Time)-instance-method">
+      <div class="signature">
+        
+        def <strong>updated_time=</strong>(updated_time : Time)
+
+        <a class="method-permalink" href="#updated_time%3D%28updated_time%3ATime%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/77c811cd9a70cf53e277546705d08d3a4a1d9745/src/deepl/v3/translation_memory.cr#L179" target="_blank">View source</a>]
         
       </div>
     </div>
