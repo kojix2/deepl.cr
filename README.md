@@ -45,9 +45,7 @@ voice = t.get_voice_streaming_url(
   source_media_content_type: "audio/ogg; codecs=opus",
   source_language: "en",
   source_language_mode: "auto",
-  target_languages: ["de", "fr"],
-  glossary_ids: ["highest-priority", "next-priority"],
-  reporting_tag: "voice-team",
+  target_languages: ["de", "fr"]
 )
 puts voice.streaming_url
 ```
@@ -78,37 +76,16 @@ t.translate_document(
   style_id: "style-id",
   translation_memory_id: "translation-memory-id",
   translation_memory_threshold: 75,
-  enable_watermark: true, # DeepL applies this to docx/pdf output
 )
 ```
 
-`reporting_tag:` sends `X-DeepL-Reporting-Tag` for text translation and Voice
-session creation. Tags are limited to 100 characters. Voice `glossary_ids:` are
-applied in array order, with the first glossary taking precedence on conflicts.
-
-Translation Memory supports reads, import/export job management, and
-file-oriented helpers. The helpers upload and download through the short-lived
-signed URLs returned by DeepL, then wait for the background job to complete:
+Translation Memory supports reads and file-based import/export:
 
 ```crystal
 memory = t.get_translation_memory("translation-memory-id")
-segments = t.list_translation_memory_segments("translation-memory-id", page_size: 100)
-
-imported = t.import_translation_memory(
-  "legal.tmx",
-  display_name: "Legal",
-  interval: 1.0,
-)
-memory_id = imported.results.first.translation_memory_id
-
-t.export_translation_memory(memory_id.not_nil!, "legal-export.tmx")
+job = t.import_translation_memory("legal.tmx", display_name: "Legal")
+t.export_translation_memory(job.results.first.translation_memory_id.not_nil!, "legal-export.tmx")
 ```
-
-For finer control, use `create_translation_memory_import`,
-`upload_translation_memory_import`, `get_translation_memory_job`,
-`create_translation_memory_export`, `download_translation_memory_export`, and
-`wait_for_translation_memory_job`. Failed, expired, or timed-out jobs raise
-`TranslationMemoryJobError`.
 
 All non-2xx HTTP responses raise a `DeepL::DeepLError`. When the service
 provides an `X-Trace-ID`, it is available as `error.trace_id` for support
@@ -162,14 +139,8 @@ aliases for this same unified surface; they no longer select an API version.
 - Translation, document, usage, language, rephrase, admin, and legacy glossary methods use v2 endpoints.
 - Multilingual glossary, Style Rules, Translation Memory, and voice realtime methods use v3 endpoints. Multilingual glossary language pairs are the intentional `/v2` exception.
 
-### Deprecated compatibility APIs
-
-`get_source_languages` and `get_target_languages` use DeepL's deprecated
-`/v2/languages`; use `get_languages("translate_text")` (or another v3
-resource) for new code. `get_glossary_language_pairs` uses deprecated
-`/v2/glossary-language-pairs`; use `get_languages("glossary")` instead.
-`enable_beta_languages:` remains accepted by `translate_text` only for
-backward compatibility and has no effect.
+Deprecated v2 language discovery methods remain available for compatibility;
+new code should use `get_languages` with the appropriate v3 resource.
 
 Each endpoint determines its own `/v2` or `/v3` path. `Translator#server_url` is a versionless base URL, and internal requests add the endpoint path. Custom URLs ending in `/v2` or `/v3` are accepted and normalized; custom base paths are preserved.
 
