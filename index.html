@@ -381,7 +381,7 @@ t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span>
 result <span class="o">=</span> t.rephrase_text(<span class="s">&quot;I have went to the store yesterday.&quot;</span>)
 puts result[<span class="n">0</span>].text <span class="c"># =&gt; &quot;I went to the store yesterday.&quot;</span>
 
-<span class="c"># Voice realtime (v3 surface)</span>
+<span class="c"># Voice realtime (v3 endpoint)</span>
 t <span class="o">=</span> <span class="t">DeepL</span><span class="t">::</span><span class="t">Translator</span>.new(auth_key: <span class="s">&quot;YOUR_AUTH_KEY&quot;</span>)
 voice <span class="o">=</span> t.get_voice_streaming_url(
   source_media_content_type: <span class="s">&quot;audio/ogg; codecs=opus&quot;</span>,
@@ -417,8 +417,8 @@ t.translate_document(
   translation_memory_id: <span class="s">&quot;translation-memory-id&quot;</span>,
   translation_memory_threshold: <span class="n">75</span>,
 )</code></pre>
-<p>On the v3 surface, Translation Memory reads are available without adding a
-write or job-management layer:</p>
+<p>Translation Memory reads are available without adding a write or
+job-management layer:</p>
 <pre><code class="language-crystal">memory <span class="o">=</span> t.get_translation_memory(<span class="s">&quot;translation-memory-id&quot;</span>)
 segments <span class="o">=</span> t.list_translation_memory_segments(<span class="s">&quot;translation-memory-id&quot;</span>, page_size: <span class="n">100</span>)</code></pre>
 <p>All non-2xx HTTP responses raise a <code><a href="DeepL/DeepLError.html">DeepL::DeepLError</a></code>. When the service
@@ -472,38 +472,31 @@ requests.</p>
 <p><a href="https://github.com/DeepLcom/openapi">DeepL OpenAPI Specification</a></p>
 </li>
 </ul>
-<h3><a id="api-version-selection-and-endpoint-routing" class="anchor" href="#api-version-selection-and-endpoint-routing">
+<h3><a id="endpoint-routing" class="anchor" href="#endpoint-routing">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>API version selection and endpoint routing</h3>
-<p>This library currently supports both v2 and v3 API families.</p>
+</a>Endpoint routing</h3>
+<p>This library exposes one unified API surface from <code>require &quot;deepl&quot;</code>. It supports
+both v2 and v3 API families at the same time.</p>
+<p>The legacy <code>require &quot;deepl/v2&quot;</code> and <code>require &quot;deepl/v3&quot;</code> entry paths remain
+aliases for this same unified surface; they no longer select an API version.</p>
 <ul>
-<li>The API surface is selected at compile time. The library loads v2 when <code>-Ddeepl_v2</code> is set or <code>DEEPL_API_VERSION=v2</code>; otherwise it loads v3 when <code>-Ddeepl_v3</code> or <code>DEEPL_API_VERSION=v3</code> is set, and defaults to v3.</li>
-<li>In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.</li>
-<li>In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, Translation Memory, and voice realtime use v3 endpoints. Multilingual glossary language pairs are the intentional <code>/v2</code> exception.</li>
+<li>Translation, document, usage, language, rephrase, admin, and legacy glossary methods use v2 endpoints.</li>
+<li>Multilingual glossary, Style Rules, Translation Memory, and voice realtime methods use v3 endpoints. Multilingual glossary language pairs are the intentional <code>/v2</code> exception.</li>
 </ul>
-<p>Each endpoint determines its own <code>/v2</code> or <code>/v3</code> path; surface selection never rewrites a request URL. <code>Translator#server_url</code> remains a compatibility accessor and may include the legacy <code>DEEPL_API_VERSION</code> suffix, but internal requests use a normalized base URL. Custom URLs ending in <code>/v2</code> or <code>/v3</code> are accepted and normalized for internal routing.</p>
-<h3><a id="run-tests-v2-v3" class="anchor" href="#run-tests-v2-v3">
+<p>Each endpoint determines its own <code>/v2</code> or <code>/v3</code> path. <code>Translator#server_url</code> is a versionless base URL, and internal requests add the endpoint path. Custom URLs ending in <code>/v2</code> or <code>/v3</code> are accepted and normalized; custom base paths are preserved.</p>
+<p><code>DEEPL_API_VERSION</code>, <code>-Ddeepl_v2</code>, and <code>-Ddeepl_v3</code> have been removed. Builds that set any of them fail with a migration error; remove the global version setting instead.</p>
+<p><code>glossary_name:</code> now resolves a multilingual glossary through <code>/v3/glossaries</code>.
+To use a legacy v2 glossary, resolve its ID with <code>find_glossary_info_by_name</code>
+and pass that ID as <code>glossary_id:</code>.</p>
+<h3><a id="run-tests" class="anchor" href="#run-tests">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Run tests (v2 / v3)</h3>
-<ul>
-<li>v2 (compile-time flag):
-<pre><code class="language-bash">crystal spec -Ddeepl_v2</code></pre>
-</li>
-<li>v3 (compile-time flag):
-<pre><code class="language-bash">crystal spec -Ddeepl_v3</code></pre>
-</li>
-<li>v2 (environment variable):
-<pre><code class="language-bash">DEEPL_API_VERSION=v2 crystal spec</code></pre>
-</li>
-<li>v3 (environment variable):
-<pre><code class="language-bash">DEEPL_API_VERSION=v3 crystal spec</code></pre>
-</li>
-</ul>
-<p>Note: The library surface is also switched by the same conditions.</p>
+</a>Run tests</h3>
+<pre><code class="language-bash">crystal spec
+crystal spec -Ddeepl_mock</code></pre>
 <h2><a id="use-case" class="anchor" href="#use-case">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
