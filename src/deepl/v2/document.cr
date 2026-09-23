@@ -16,6 +16,10 @@ module DeepL
       interval = 5.0,
       message_prefix = "[deepl.cr] ",
       timeout : Time::Span? = nil,
+      glossary_ids : Array(String)? = nil,
+      style_id = nil,
+      translation_memory_id = nil,
+      translation_memory_threshold : Int32? = nil,
       &block : (String ->)
     )
       translate_document(
@@ -31,6 +35,10 @@ module DeepL
         interval: interval,
         message_prefix: message_prefix,
         timeout: timeout,
+        glossary_ids: glossary_ids,
+        style_id: style_id,
+        translation_memory_id: translation_memory_id,
+        translation_memory_threshold: translation_memory_threshold,
         block: block
       )
     end
@@ -49,6 +57,10 @@ module DeepL
       message_prefix = "[deepl.cr] ",
       timeout : Time::Span? = nil,
       block : (String ->)? = nil,
+      glossary_ids : Array(String)? = nil,
+      style_id = nil,
+      translation_memory_id = nil,
+      translation_memory_threshold : Int32? = nil,
     )
       validate_document_polling_options(interval, timeout)
       source_path = Path[path]
@@ -60,8 +72,12 @@ module DeepL
         formality: formality,
         glossary_id: glossary_id,
         glossary_name: glossary_name,
+        glossary_ids: glossary_ids,
         output_format: output_format,
-        filename: filename
+        filename: filename,
+        style_id: style_id,
+        translation_memory_id: translation_memory_id,
+        translation_memory_threshold: translation_memory_threshold,
       )
 
       prefix = message_prefix
@@ -107,7 +123,12 @@ module DeepL
       glossary_name = nil, # original option of deepl.cr
       output_format = nil,
       filename = nil,
+      glossary_ids : Array(String)? = nil,
+      style_id = nil,
+      translation_memory_id = nil,
+      translation_memory_threshold : Int32? = nil,
     ) : DocumentHandle
+      validate_document_glossary_ids(glossary_ids, source_lang, glossary_id, glossary_name)
       return mock_document_handle if auth_key_is_mock?
 
       path = Path[path] if path.is_a?(String)
@@ -115,12 +136,16 @@ module DeepL
         glossary_id ||= resolve_glossary_id_from_name(glossary_name)
       end
       params = {
-        "source_lang"   => source_lang,
-        "formality"     => formality,
-        "target_lang"   => target_lang,
-        "glossary_id"   => glossary_id,
-        "output_format" => output_format,
-        "filename"      => filename,
+        "source_lang"                  => source_lang,
+        "formality"                    => formality,
+        "target_lang"                  => target_lang,
+        "glossary_id"                  => glossary_id,
+        "glossary_ids"                 => glossary_ids.try(&.join(",")),
+        "output_format"                => output_format,
+        "filename"                     => filename,
+        "style_id"                     => style_id,
+        "translation_memory_id"        => translation_memory_id,
+        "translation_memory_threshold" => translation_memory_threshold,
       }.compact!
       File.open(path) do |file|
         params = params.merge({"file" => file})
@@ -275,6 +300,21 @@ module DeepL
       raise ArgumentError.new("Document polling interval must be positive.") unless interval > 0
       if timeout && timeout < Time::Span.zero
         raise ArgumentError.new("Document polling timeout must not be negative.")
+      end
+    end
+
+    private def validate_document_glossary_ids(
+      glossary_ids : Array(String)?,
+      source_lang,
+      glossary_id,
+      glossary_name,
+    ) : Nil
+      return unless glossary_ids
+
+      raise ArgumentError.new("glossary_ids accepts at most 5 glossary IDs.") if glossary_ids.size > 5
+      raise ArgumentError.new("source_lang is required when using glossary_ids.") unless source_lang
+      if glossary_id || glossary_name
+        raise ArgumentError.new("glossary_ids cannot be used with glossary_id or glossary_name.")
       end
     end
 
