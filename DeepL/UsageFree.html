@@ -72,6 +72,11 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/AmbiguousGlossaryNameError" data-name="deepl::ambiguousglossarynameerror">
+      <a href="../DeepL/AmbiguousGlossaryNameError.html">AmbiguousGlossaryNameError</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/ApiKey" data-name="deepl::apikey">
       <a href="../DeepL/ApiKey.html">ApiKey</a>
       
@@ -353,7 +358,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L46" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L69" target="_blank">
         deepl/v2/usage_status.cr
       </a>
     
@@ -376,7 +381,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28character_count%2Ccharacter_limit%29-class-method" class="signature"><strong>.new</strong>(character_count, character_limit)</a>
+        <a href="#new%28character_count%2Ccharacter_limit%2Cdocument_count%3Dnil%2Cdocument_limit%3Dnil%2Cteam_document_count%3Dnil%2Cteam_document_limit%3Dnil%29-class-method" class="signature"><strong>.new</strong>(character_count, character_limit, document_count = <span class="n">nil</span>, document_limit = <span class="n">nil</span>, team_document_count = <span class="n">nil</span>, team_document_limit = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -419,7 +424,47 @@
   
     <a href="../DeepL/Usage.html#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="tooltip">
       <span>character_limit=(character_limit : Int64)</span>
-    character_limit=</a>
+    character_limit=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_count%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>document_count : Int64 | Nil</span>
+    document_count</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_count%3D%28document_count%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>document_count=(document_count : Int64 | Nil)</span>
+    document_count=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_limit%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>document_limit : Int64 | Nil</span>
+    document_limit</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_limit%3D%28document_limit%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>document_limit=(document_limit : Int64 | Nil)</span>
+    document_limit=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_count%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>team_document_count : Int64 | Nil</span>
+    team_document_count</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_count%3D%28team_document_count%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>team_document_count=(team_document_count : Int64 | Nil)</span>
+    team_document_count=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_limit%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>team_document_limit : Int64 | Nil</span>
+    team_document_limit</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_limit%3D%28team_document_limit%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>team_document_limit=(team_document_limit : Int64 | Nil)</span>
+    team_document_limit=</a>
     
   
 
@@ -494,18 +539,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(character_count,character_limit)-class-method">
+    <div class="entry-detail" id="new(character_count,character_limit,document_count=nil,document_limit=nil,team_document_count=nil,team_document_limit=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(character_count, character_limit)
+        def self.<strong>new</strong>(character_count, character_limit, document_count = <span class="n">nil</span>, document_limit = <span class="n">nil</span>, team_document_count = <span class="n">nil</span>, team_document_limit = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28character_count%2Ccharacter_limit%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28character_count%2Ccharacter_limit%2Cdocument_count%3Dnil%2Cdocument_limit%3Dnil%2Cteam_document_count%3Dnil%2Cteam_document_limit%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -521,7 +566,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>

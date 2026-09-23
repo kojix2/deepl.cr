@@ -72,6 +72,11 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/AmbiguousGlossaryNameError" data-name="deepl::ambiguousglossarynameerror">
+      <a href="../DeepL/AmbiguousGlossaryNameError.html">AmbiguousGlossaryNameError</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/ApiKey" data-name="deepl::apikey">
       <a href="../DeepL/ApiKey.html">ApiKey</a>
       
@@ -353,7 +358,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L9" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L13" target="_blank">
         deepl/v2/usage_status.cr
       </a>
     
@@ -376,7 +381,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%2Capi_key_character_limit%3AInt64%2Cstart_time%3ATime%2Cend_time%3ATime%2Ccharacter_count%2Ccharacter_limit%2Cspeech_to_text_milliseconds_count%3AInt64%7CNil%3Dnil%2Cspeech_to_text_milliseconds_limit%3AInt64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(products : Array(DeepL::UsagePro::Product), api_key_character_count : Int64, api_key_character_limit : Int64, start_time : Time, end_time : Time, character_count, character_limit, speech_to_text_milliseconds_count : Int64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds_limit : Int64 | Nil = <span class="n">nil</span>)</a>
+        <a href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%7CNil%2Capi_key_character_limit%3AInt64%7CNil%2Cstart_time%3ATime%7CNil%2Cend_time%3ATime%7CNil%2Ccharacter_count%2Ccharacter_limit%2Cspeech_to_text_milliseconds_count%3AInt64%7CNil%3Dnil%2Cspeech_to_text_milliseconds_limit%3AInt64%7CNil%3Dnil%2Cdocument_count%3Dnil%2Cdocument_limit%3Dnil%2Cteam_document_count%3Dnil%2Cteam_document_limit%3Dnil%2Cspeech_to_text_minutes_count%3AInt64%7CNil%3Dnil%2Cspeech_to_text_minutes_limit%3AInt64%7CNil%3Dnil%2Cspeech_to_speech_minutes_count%3AInt64%7CNil%3Dnil%2Cspeech_to_speech_minutes_limit%3AInt64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(products : Array(DeepL::UsagePro::Product), api_key_character_count : Int64 | Nil, api_key_character_limit : Int64 | Nil, start_time : Time | Nil, end_time : Time | Nil, character_count, character_limit, speech_to_text_milliseconds_count : Int64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds_limit : Int64 | Nil = <span class="n">nil</span>, document_count = <span class="n">nil</span>, document_limit = <span class="n">nil</span>, team_document_count = <span class="n">nil</span>, team_document_limit = <span class="n">nil</span>, speech_to_text_minutes_count : Int64 | Nil = <span class="n">nil</span>, speech_to_text_minutes_limit : Int64 | Nil = <span class="n">nil</span>, speech_to_speech_minutes_count : Int64 | Nil = <span class="n">nil</span>, speech_to_speech_minutes_limit : Int64 | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -404,32 +409,32 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#api_key_character_count%3AInt64-instance-method" class="signature"><strong>#api_key_character_count</strong> : Int64</a>
+        <a href="#api_key_character_count%3AInt64%7CNil-instance-method" class="signature"><strong>#api_key_character_count</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_character_count%3D%28api_key_character_count%3AInt64%29-instance-method" class="signature"><strong>#api_key_character_count=</strong>(api_key_character_count : Int64)</a>
+        <a href="#api_key_character_count%3D%28api_key_character_count%3AInt64%7CNil%29-instance-method" class="signature"><strong>#api_key_character_count=</strong>(api_key_character_count : Int64 | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_character_limit%3AInt64-instance-method" class="signature"><strong>#api_key_character_limit</strong> : Int64</a>
+        <a href="#api_key_character_limit%3AInt64%7CNil-instance-method" class="signature"><strong>#api_key_character_limit</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_character_limit%3D%28api_key_character_limit%3AInt64%29-instance-method" class="signature"><strong>#api_key_character_limit=</strong>(api_key_character_limit : Int64)</a>
+        <a href="#api_key_character_limit%3D%28api_key_character_limit%3AInt64%7CNil%29-instance-method" class="signature"><strong>#api_key_character_limit=</strong>(api_key_character_limit : Int64 | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#end_time%3ATime-instance-method" class="signature"><strong>#end_time</strong> : Time</a>
+        <a href="#end_time%3ATime%7CNil-instance-method" class="signature"><strong>#end_time</strong> : Time | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#end_time%3D%28end_time%3ATime%29-instance-method" class="signature"><strong>#end_time=</strong>(end_time : Time)</a>
+        <a href="#end_time%3D%28end_time%3ATime%7CNil%29-instance-method" class="signature"><strong>#end_time=</strong>(end_time : Time | Nil)</a>
         
       </li>
     
@@ -440,6 +445,26 @@
     
       <li class="entry-summary">
         <a href="#products%3D%28products%3AArray%28Product%29%29-instance-method" class="signature"><strong>#products=</strong>(products : Array(Product))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_speech_minutes_count%3AInt64%7CNil-instance-method" class="signature"><strong>#speech_to_speech_minutes_count</strong> : Int64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_speech_minutes_count%3D%28speech_to_speech_minutes_count%3AInt64%7CNil%29-instance-method" class="signature"><strong>#speech_to_speech_minutes_count=</strong>(speech_to_speech_minutes_count : Int64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_speech_minutes_limit%3AInt64%7CNil-instance-method" class="signature"><strong>#speech_to_speech_minutes_limit</strong> : Int64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_speech_minutes_limit%3D%28speech_to_speech_minutes_limit%3AInt64%7CNil%29-instance-method" class="signature"><strong>#speech_to_speech_minutes_limit=</strong>(speech_to_speech_minutes_limit : Int64 | Nil)</a>
         
       </li>
     
@@ -464,12 +489,32 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#start_time%3ATime-instance-method" class="signature"><strong>#start_time</strong> : Time</a>
+        <a href="#speech_to_text_minutes_count%3AInt64%7CNil-instance-method" class="signature"><strong>#speech_to_text_minutes_count</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#start_time%3D%28start_time%3ATime%29-instance-method" class="signature"><strong>#start_time=</strong>(start_time : Time)</a>
+        <a href="#speech_to_text_minutes_count%3D%28speech_to_text_minutes_count%3AInt64%7CNil%29-instance-method" class="signature"><strong>#speech_to_text_minutes_count=</strong>(speech_to_text_minutes_count : Int64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_text_minutes_limit%3AInt64%7CNil-instance-method" class="signature"><strong>#speech_to_text_minutes_limit</strong> : Int64 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#speech_to_text_minutes_limit%3D%28speech_to_text_minutes_limit%3AInt64%7CNil%29-instance-method" class="signature"><strong>#speech_to_text_minutes_limit=</strong>(speech_to_text_minutes_limit : Int64 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#start_time%3ATime%7CNil-instance-method" class="signature"><strong>#start_time</strong> : Time | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#start_time%3D%28start_time%3ATime%7CNil%29-instance-method" class="signature"><strong>#start_time=</strong>(start_time : Time | Nil)</a>
         
       </li>
     
@@ -501,7 +546,47 @@
   
     <a href="../DeepL/Usage.html#character_limit%3D%28character_limit%3AInt64%29-instance-method" class="tooltip">
       <span>character_limit=(character_limit : Int64)</span>
-    character_limit=</a>
+    character_limit=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_count%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>document_count : Int64 | Nil</span>
+    document_count</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_count%3D%28document_count%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>document_count=(document_count : Int64 | Nil)</span>
+    document_count=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_limit%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>document_limit : Int64 | Nil</span>
+    document_limit</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#document_limit%3D%28document_limit%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>document_limit=(document_limit : Int64 | Nil)</span>
+    document_limit=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_count%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>team_document_count : Int64 | Nil</span>
+    team_document_count</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_count%3D%28team_document_count%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>team_document_count=(team_document_count : Int64 | Nil)</span>
+    team_document_count=</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_limit%3AInt64%7CNil-instance-method" class="tooltip">
+      <span>team_document_limit : Int64 | Nil</span>
+    team_document_limit</a>, 
+    
+  
+    <a href="../DeepL/Usage.html#team_document_limit%3D%28team_document_limit%3AInt64%7CNil%29-instance-method" class="tooltip">
+      <span>team_document_limit=(team_document_limit : Int64 | Nil)</span>
+    team_document_limit=</a>
     
   
 
@@ -576,18 +661,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(products:Array(DeepL::UsagePro::Product),api_key_character_count:Int64,api_key_character_limit:Int64,start_time:Time,end_time:Time,character_count,character_limit,speech_to_text_milliseconds_count:Int64|Nil=nil,speech_to_text_milliseconds_limit:Int64|Nil=nil)-class-method">
+    <div class="entry-detail" id="new(products:Array(DeepL::UsagePro::Product),api_key_character_count:Int64|Nil,api_key_character_limit:Int64|Nil,start_time:Time|Nil,end_time:Time|Nil,character_count,character_limit,speech_to_text_milliseconds_count:Int64|Nil=nil,speech_to_text_milliseconds_limit:Int64|Nil=nil,document_count=nil,document_limit=nil,team_document_count=nil,team_document_limit=nil,speech_to_text_minutes_count:Int64|Nil=nil,speech_to_text_minutes_limit:Int64|Nil=nil,speech_to_speech_minutes_count:Int64|Nil=nil,speech_to_speech_minutes_limit:Int64|Nil=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(products : Array(<a href="../DeepL/UsagePro/Product.html">DeepL::UsagePro::Product</a>), api_key_character_count : Int64, api_key_character_limit : Int64, start_time : Time, end_time : Time, character_count, character_limit, speech_to_text_milliseconds_count : Int64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds_limit : Int64 | Nil = <span class="n">nil</span>)
+        def self.<strong>new</strong>(products : Array(<a href="../DeepL/UsagePro/Product.html">DeepL::UsagePro::Product</a>), api_key_character_count : Int64 | Nil, api_key_character_limit : Int64 | Nil, start_time : Time | Nil, end_time : Time | Nil, character_count, character_limit, speech_to_text_milliseconds_count : Int64 | Nil = <span class="n">nil</span>, speech_to_text_milliseconds_limit : Int64 | Nil = <span class="n">nil</span>, document_count = <span class="n">nil</span>, document_limit = <span class="n">nil</span>, team_document_count = <span class="n">nil</span>, team_document_limit = <span class="n">nil</span>, speech_to_text_minutes_count : Int64 | Nil = <span class="n">nil</span>, speech_to_text_minutes_limit : Int64 | Nil = <span class="n">nil</span>, speech_to_speech_minutes_count : Int64 | Nil = <span class="n">nil</span>, speech_to_speech_minutes_limit : Int64 | Nil = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%2Capi_key_character_limit%3AInt64%2Cstart_time%3ATime%2Cend_time%3ATime%2Ccharacter_count%2Ccharacter_limit%2Cspeech_to_text_milliseconds_count%3AInt64%7CNil%3Dnil%2Cspeech_to_text_milliseconds_limit%3AInt64%7CNil%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28products%3AArray%28DeepL%3A%3AUsagePro%3A%3AProduct%29%2Capi_key_character_count%3AInt64%7CNil%2Capi_key_character_limit%3AInt64%7CNil%2Cstart_time%3ATime%7CNil%2Cend_time%3ATime%7CNil%2Ccharacter_count%2Ccharacter_limit%2Cspeech_to_text_milliseconds_count%3AInt64%7CNil%3Dnil%2Cspeech_to_text_milliseconds_limit%3AInt64%7CNil%3Dnil%2Cdocument_count%3Dnil%2Cdocument_limit%3Dnil%2Cteam_document_count%3Dnil%2Cteam_document_limit%3Dnil%2Cspeech_to_text_minutes_count%3AInt64%7CNil%3Dnil%2Cspeech_to_text_minutes_limit%3AInt64%7CNil%3Dnil%2Cspeech_to_speech_minutes_count%3AInt64%7CNil%3Dnil%2Cspeech_to_speech_minutes_limit%3AInt64%7CNil%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -603,7 +688,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -624,98 +709,98 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="api_key_character_count:Int64-instance-method">
+    <div class="entry-detail" id="api_key_character_count:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>api_key_character_count</strong> : Int64
+        def <strong>api_key_character_count</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#api_key_character_count%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#api_key_character_count%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_character_count=(api_key_character_count:Int64)-instance-method">
+    <div class="entry-detail" id="api_key_character_count=(api_key_character_count:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>api_key_character_count=</strong>(api_key_character_count : Int64)
+        def <strong>api_key_character_count=</strong>(api_key_character_count : Int64 | Nil)
 
-        <a class="method-permalink" href="#api_key_character_count%3D%28api_key_character_count%3AInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#api_key_character_count%3D%28api_key_character_count%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_character_limit:Int64-instance-method">
+    <div class="entry-detail" id="api_key_character_limit:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>api_key_character_limit</strong> : Int64
+        def <strong>api_key_character_limit</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#api_key_character_limit%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#api_key_character_limit%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_character_limit=(api_key_character_limit:Int64)-instance-method">
+    <div class="entry-detail" id="api_key_character_limit=(api_key_character_limit:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>api_key_character_limit=</strong>(api_key_character_limit : Int64)
+        def <strong>api_key_character_limit=</strong>(api_key_character_limit : Int64 | Nil)
 
-        <a class="method-permalink" href="#api_key_character_limit%3D%28api_key_character_limit%3AInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#api_key_character_limit%3D%28api_key_character_limit%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="end_time:Time-instance-method">
+    <div class="entry-detail" id="end_time:Time|Nil-instance-method">
       <div class="signature">
         
-        def <strong>end_time</strong> : Time
+        def <strong>end_time</strong> : Time | Nil
 
-        <a class="method-permalink" href="#end_time%3ATime-instance-method">#</a>
+        <a class="method-permalink" href="#end_time%3ATime%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="end_time=(end_time:Time)-instance-method">
+    <div class="entry-detail" id="end_time=(end_time:Time|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>end_time=</strong>(end_time : Time)
+        def <strong>end_time=</strong>(end_time : Time | Nil)
 
-        <a class="method-permalink" href="#end_time%3D%28end_time%3ATime%29-instance-method">#</a>
+        <a class="method-permalink" href="#end_time%3D%28end_time%3ATime%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -731,7 +816,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -747,7 +832,71 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_speech_minutes_count:Int64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_speech_minutes_count</strong> : Int64 | Nil
+
+        <a class="method-permalink" href="#speech_to_speech_minutes_count%3AInt64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_speech_minutes_count=(speech_to_speech_minutes_count:Int64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_speech_minutes_count=</strong>(speech_to_speech_minutes_count : Int64 | Nil)
+
+        <a class="method-permalink" href="#speech_to_speech_minutes_count%3D%28speech_to_speech_minutes_count%3AInt64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_speech_minutes_limit:Int64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_speech_minutes_limit</strong> : Int64 | Nil
+
+        <a class="method-permalink" href="#speech_to_speech_minutes_limit%3AInt64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L43" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_speech_minutes_limit=(speech_to_speech_minutes_limit:Int64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_speech_minutes_limit=</strong>(speech_to_speech_minutes_limit : Int64 | Nil)
+
+        <a class="method-permalink" href="#speech_to_speech_minutes_limit%3D%28speech_to_speech_minutes_limit%3AInt64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -763,7 +912,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -779,7 +928,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -795,7 +944,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -811,39 +960,103 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="start_time:Time-instance-method">
+    <div class="entry-detail" id="speech_to_text_minutes_count:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>start_time</strong> : Time
+        def <strong>speech_to_text_minutes_count</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#start_time%3ATime-instance-method">#</a>
+        <a class="method-permalink" href="#speech_to_text_minutes_count%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="start_time=(start_time:Time)-instance-method">
+    <div class="entry-detail" id="speech_to_text_minutes_count=(speech_to_text_minutes_count:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>start_time=</strong>(start_time : Time)
+        def <strong>speech_to_text_minutes_count=</strong>(speech_to_text_minutes_count : Int64 | Nil)
 
-        <a class="method-permalink" href="#start_time%3D%28start_time%3ATime%29-instance-method">#</a>
+        <a class="method-permalink" href="#speech_to_text_minutes_count%3D%28speech_to_text_minutes_count%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_text_minutes_limit:Int64|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_text_minutes_limit</strong> : Int64 | Nil
+
+        <a class="method-permalink" href="#speech_to_text_minutes_limit%3AInt64%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="speech_to_text_minutes_limit=(speech_to_text_minutes_limit:Int64|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>speech_to_text_minutes_limit=</strong>(speech_to_text_minutes_limit : Int64 | Nil)
+
+        <a class="method-permalink" href="#speech_to_text_minutes_limit%3D%28speech_to_text_minutes_limit%3AInt64%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="start_time:Time|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>start_time</strong> : Time | Nil
+
+        <a class="method-permalink" href="#start_time%3ATime%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="start_time=(start_time:Time|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>start_time=</strong>(start_time : Time | Nil)
+
+        <a class="method-permalink" href="#start_time%3D%28start_time%3ATime%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>

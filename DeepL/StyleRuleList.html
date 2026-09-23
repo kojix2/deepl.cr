@@ -72,6 +72,11 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/AmbiguousGlossaryNameError" data-name="deepl::ambiguousglossarynameerror">
+      <a href="../DeepL/AmbiguousGlossaryNameError.html">AmbiguousGlossaryNameError</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/ApiKey" data-name="deepl::apikey">
       <a href="../DeepL/ApiKey.html">ApiKey</a>
       
@@ -367,7 +372,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L16" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L16" target="_blank">
         deepl/v3/style_rules.cr
       </a>
     
@@ -390,7 +395,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28style_id%3AString%2Cname%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Clanguage%3AString%2Cversion%3AInt32%2Cconfigured_rules%3ANil%7CArray%28JSON%3A%3AAny%29%3Dnil%2Ccustom_instructions%3ANil%7CArray%28DeepL%3A%3ACustomInstruction%29%3Dnil%29-class-method" class="signature"><strong>.new</strong>(style_id : String, name : String, creation_time : Time, updated_time : Time, language : String, version : Int32, configured_rules : Nil | Array(JSON::Any) = <span class="n">nil</span>, custom_instructions : Nil | Array(DeepL::CustomInstruction) = <span class="n">nil</span>)</a>
+        <a href="#new%28style_id%3AString%2Cname%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Clanguage%3AString%2Cversion%3AInt32%2Cconfigured_rules%3AJSON%3A%3AAny%7CNil%3Dnil%2Ccustom_instructions%3ANil%7CArray%28DeepL%3A%3ACustomInstruction%29%3Dnil%29-class-method" class="signature"><strong>.new</strong>(style_id : String, name : String, creation_time : Time, updated_time : Time, language : String, version : Int32, configured_rules : JSON::Any | Nil = <span class="n">nil</span>, custom_instructions : Nil | Array(DeepL::CustomInstruction) = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -423,12 +428,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil-instance-method" class="signature"><strong>#configured_rules</strong> : Array(JSON::Any) | Nil</a>
+        <a href="#configured_rules%3AJSON%3A%3AAny%7CNil-instance-method" class="signature"><strong>#configured_rules</strong> : JSON::Any | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#configured_rules%3D%28configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil%29-instance-method" class="signature"><strong>#configured_rules=</strong>(configured_rules : Array(JSON::Any) | Nil)</a>
+        <a href="#configured_rules%3D%28configured_rules%3AJSON%3A%3AAny%7CNil%29-instance-method" class="signature"><strong>#configured_rules=</strong>(configured_rules : JSON::Any | Nil)</a>
         
       </li>
     
@@ -559,18 +564,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(style_id:String,name:String,creation_time:Time,updated_time:Time,language:String,version:Int32,configured_rules:Nil|Array(JSON::Any)=nil,custom_instructions:Nil|Array(DeepL::CustomInstruction)=nil)-class-method">
+    <div class="entry-detail" id="new(style_id:String,name:String,creation_time:Time,updated_time:Time,language:String,version:Int32,configured_rules:JSON::Any|Nil=nil,custom_instructions:Nil|Array(DeepL::CustomInstruction)=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(style_id : String, name : String, creation_time : Time, updated_time : Time, language : String, version : Int32, configured_rules : Nil | Array(JSON::Any) = <span class="n">nil</span>, custom_instructions : Nil | Array(<a href="../DeepL/CustomInstruction.html">DeepL::CustomInstruction</a>) = <span class="n">nil</span>)
+        def self.<strong>new</strong>(style_id : String, name : String, creation_time : Time, updated_time : Time, language : String, version : Int32, configured_rules : JSON::Any | Nil = <span class="n">nil</span>, custom_instructions : Nil | Array(<a href="../DeepL/CustomInstruction.html">DeepL::CustomInstruction</a>) = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28style_id%3AString%2Cname%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Clanguage%3AString%2Cversion%3AInt32%2Cconfigured_rules%3ANil%7CArray%28JSON%3A%3AAny%29%3Dnil%2Ccustom_instructions%3ANil%7CArray%28DeepL%3A%3ACustomInstruction%29%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28style_id%3AString%2Cname%3AString%2Ccreation_time%3ATime%2Cupdated_time%3ATime%2Clanguage%3AString%2Cversion%3AInt32%2Cconfigured_rules%3AJSON%3A%3AAny%7CNil%3Dnil%2Ccustom_instructions%3ANil%7CArray%28DeepL%3A%3ACustomInstruction%29%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -586,7 +591,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -602,7 +607,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -623,34 +628,34 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="configured_rules:Array(JSON::Any)|Nil-instance-method">
+    <div class="entry-detail" id="configured_rules:JSON::Any|Nil-instance-method">
       <div class="signature">
         
-        def <strong>configured_rules</strong> : Array(JSON::Any) | Nil
+        def <strong>configured_rules</strong> : JSON::Any | Nil
 
-        <a class="method-permalink" href="#configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#configured_rules%3AJSON%3A%3AAny%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="configured_rules=(configured_rules:Array(JSON::Any)|Nil)-instance-method">
+    <div class="entry-detail" id="configured_rules=(configured_rules:JSON::Any|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>configured_rules=</strong>(configured_rules : Array(JSON::Any) | Nil)
+        def <strong>configured_rules=</strong>(configured_rules : JSON::Any | Nil)
 
-        <a class="method-permalink" href="#configured_rules%3D%28configured_rules%3AArray%28JSON%3A%3AAny%29%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#configured_rules%3D%28configured_rules%3AJSON%3A%3AAny%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -666,7 +671,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -682,7 +687,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -698,7 +703,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -714,7 +719,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -730,7 +735,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -746,7 +751,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -762,7 +767,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -778,7 +783,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -794,7 +799,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -810,7 +815,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -826,7 +831,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -842,7 +847,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -858,7 +863,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -874,7 +879,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v3/style_rules.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v3/style_rules.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>

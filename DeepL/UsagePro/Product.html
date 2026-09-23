@@ -72,6 +72,11 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/AmbiguousGlossaryNameError" data-name="deepl::ambiguousglossarynameerror">
+      <a href="../../DeepL/AmbiguousGlossaryNameError.html">AmbiguousGlossaryNameError</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/ApiKey" data-name="deepl::apikey">
       <a href="../../DeepL/ApiKey.html">ApiKey</a>
       
@@ -367,7 +372,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L10" target="_blank">
+      <a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L14" target="_blank">
         deepl/v2/usage_status.cr
       </a>
     
@@ -390,12 +395,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28product_type%3AString%2Capi_key_character_count%3AInt64%2Ccharacter_count%3AInt64%2Cbilling_unit%3ANil%7CString%3Dnil%2Capi_key_unit_count%3AInt64%7CNil%3Dnil%2Caccount_unit_count%3AInt64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(product_type : String, api_key_character_count : Int64, character_count : Int64, billing_unit : Nil | String = <span class="n">nil</span>, api_key_unit_count : Int64 | Nil = <span class="n">nil</span>, account_unit_count : Int64 | Nil = <span class="n">nil</span>)</a>
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        <a href="#new%28product_type%3AString%2Capi_key_character_count%3AInt64%7CNil%3Dnil%2Ccharacter_count%3AInt64%7CNil%3Dnil%2Cbilling_unit%3ANil%7CString%3Dnil%2Capi_key_unit_count%3AInt64%7CNil%3Dnil%2Caccount_unit_count%3AInt64%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(product_type : String, api_key_character_count : Int64 | Nil = <span class="n">nil</span>, character_count : Int64 | Nil = <span class="n">nil</span>, billing_unit : Nil | String = <span class="n">nil</span>, api_key_unit_count : Int64 | Nil = <span class="n">nil</span>, account_unit_count : Int64 | Nil = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -433,12 +438,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_character_count%3AInt64-instance-method" class="signature"><strong>#api_key_character_count</strong> : Int64</a>
+        <a href="#api_key_character_count%3AInt64%7CNil-instance-method" class="signature"><strong>#api_key_character_count</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key_character_count%3D%28api_key_character_count%3AInt64%29-instance-method" class="signature"><strong>#api_key_character_count=</strong>(api_key_character_count : Int64)</a>
+        <a href="#api_key_character_count%3D%28api_key_character_count%3AInt64%7CNil%29-instance-method" class="signature"><strong>#api_key_character_count=</strong>(api_key_character_count : Int64 | Nil)</a>
         
       </li>
     
@@ -463,12 +468,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#character_count%3AInt64-instance-method" class="signature"><strong>#character_count</strong> : Int64</a>
+        <a href="#character_count%3AInt64%7CNil-instance-method" class="signature"><strong>#character_count</strong> : Int64 | Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#character_count%3D%28character_count%3AInt64%29-instance-method" class="signature"><strong>#character_count=</strong>(character_count : Int64)</a>
+        <a href="#character_count%3D%28character_count%3AInt64%7CNil%29-instance-method" class="signature"><strong>#character_count=</strong>(character_count : Int64 | Nil)</a>
         
       </li>
     
@@ -539,22 +544,6 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(product_type:String,api_key_character_count:Int64,character_count:Int64,billing_unit:Nil|String=nil,api_key_unit_count:Int64|Nil=nil,account_unit_count:Int64|Nil=nil)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(product_type : String, api_key_character_count : Int64, character_count : Int64, billing_unit : Nil | String = <span class="n">nil</span>, api_key_unit_count : Int64 | Nil = <span class="n">nil</span>, account_unit_count : Int64 | Nil = <span class="n">nil</span>)
-
-        <a class="method-permalink" href="#new%28product_type%3AString%2Capi_key_character_count%3AInt64%2Ccharacter_count%3AInt64%2Cbilling_unit%3ANil%7CString%3Dnil%2Capi_key_unit_count%3AInt64%7CNil%3Dnil%2Caccount_unit_count%3AInt64%7CNil%3Dnil%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L20" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
       <div class="signature">
         
@@ -566,7 +555,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(product_type:String,api_key_character_count:Int64|Nil=nil,character_count:Int64|Nil=nil,billing_unit:Nil|String=nil,api_key_unit_count:Int64|Nil=nil,account_unit_count:Int64|Nil=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(product_type : String, api_key_character_count : Int64 | Nil = <span class="n">nil</span>, character_count : Int64 | Nil = <span class="n">nil</span>, billing_unit : Nil | String = <span class="n">nil</span>, api_key_unit_count : Int64 | Nil = <span class="n">nil</span>, account_unit_count : Int64 | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28product_type%3AString%2Capi_key_character_count%3AInt64%7CNil%3Dnil%2Ccharacter_count%3AInt64%7CNil%3Dnil%2Cbilling_unit%3ANil%7CString%3Dnil%2Capi_key_unit_count%3AInt64%7CNil%3Dnil%2Caccount_unit_count%3AInt64%7CNil%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -582,7 +587,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -614,7 +619,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -630,39 +635,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_character_count:Int64-instance-method">
+    <div class="entry-detail" id="api_key_character_count:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>api_key_character_count</strong> : Int64
+        def <strong>api_key_character_count</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#api_key_character_count%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#api_key_character_count%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key_character_count=(api_key_character_count:Int64)-instance-method">
+    <div class="entry-detail" id="api_key_character_count=(api_key_character_count:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>api_key_character_count=</strong>(api_key_character_count : Int64)
+        def <strong>api_key_character_count=</strong>(api_key_character_count : Int64 | Nil)
 
-        <a class="method-permalink" href="#api_key_character_count%3D%28api_key_character_count%3AInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#api_key_character_count%3D%28api_key_character_count%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -678,7 +683,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -694,7 +699,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -710,7 +715,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -726,39 +731,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="character_count:Int64-instance-method">
+    <div class="entry-detail" id="character_count:Int64|Nil-instance-method">
       <div class="signature">
         
-        def <strong>character_count</strong> : Int64
+        def <strong>character_count</strong> : Int64 | Nil
 
-        <a class="method-permalink" href="#character_count%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#character_count%3AInt64%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="character_count=(character_count:Int64)-instance-method">
+    <div class="entry-detail" id="character_count=(character_count:Int64|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>character_count=</strong>(character_count : Int64)
+        def <strong>character_count=</strong>(character_count : Int64 | Nil)
 
-        <a class="method-permalink" href="#character_count%3D%28character_count%3AInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#character_count%3D%28character_count%3AInt64%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -774,7 +779,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -790,7 +795,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/deepl.cr/blob/f3d783dc405dc35cb7fb1aae3cf3b3c744b583f9/src/deepl/v2/usage_status.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/deepl.cr/blob/fe0d7de56bd049cf6876ee6b52f75967bdf554eb/src/deepl/v2/usage_status.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
