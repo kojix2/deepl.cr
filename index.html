@@ -495,7 +495,20 @@ and pass that ID as <code>glossary_id:</code>.</p>
     <use href="#octicon-link"/>
   </svg>
 </a>Run tests</h3>
+<p>The default suite is self-contained and does not require a DeepL account or an
+external service:</p>
 <pre><code class="language-bash">crystal spec</code></pre>
+<p>The integration suite runs against DeepL's mock server at the revision pinned
+by CI. It requires Node.js 22. Start the server from the repository root:</p>
+<pre><code class="language-bash">git clone https://github.com/DeepLcom/deepl-mock.git /tmp/deepl-mock
+git -C /tmp/deepl-mock checkout --detach 6e14679feed9d4f87741727e31cb5fb9d64e0d34
+npm ci --prefix /tmp/deepl-mock
+VALIDATE_REQUESTS=1 \
+  DEEPL_MOCK_SPEC_PATH=&quot;$PWD/openapi/openapi.yaml&quot; \
+  npm --prefix /tmp/deepl-mock start</code></pre>
+<p>Then run the integration spec from another terminal:</p>
+<pre><code class="language-bash">DEEPL_MOCK_URL=http://127.0.0.1:3000 \
+  crystal spec integration/deepl_mock_spec.cr</code></pre>
 <h2><a id="use-case" class="anchor" href="#use-case">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
