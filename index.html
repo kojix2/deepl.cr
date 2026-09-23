@@ -418,18 +418,18 @@ puts voice.streaming_url</code></pre>
 <p><a href="https://github.com/DeepLcom/openapi">DeepL OpenAPI Specification</a></p>
 </li>
 </ul>
-<h3><a id="api-version-selection-current-behavior" class="anchor" href="#api-version-selection-current-behavior">
+<h3><a id="api-version-selection-and-endpoint-routing" class="anchor" href="#api-version-selection-and-endpoint-routing">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>API version selection (current behavior)</h3>
+</a>API version selection and endpoint routing</h3>
 <p>This library currently supports both v2 and v3 API families.</p>
 <ul>
-<li>The API surface is selected at compile time by either <code>-Ddeepl_v2</code> / <code>-Ddeepl_v3</code> or <code>DEEPL_API_VERSION=v2</code> / <code>DEEPL_API_VERSION=v3</code>.</li>
+<li>The API surface is selected at compile time. The library loads v2 when <code>-Ddeepl_v2</code> is set or <code>DEEPL_API_VERSION=v2</code>; otherwise it loads v3 when <code>-Ddeepl_v3</code> or <code>DEEPL_API_VERSION=v3</code> is set, and defaults to v3.</li>
 <li>In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.</li>
-<li>In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, and voice realtime use v3 endpoints.</li>
+<li>In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, Translation Memory, and voice realtime use v3 endpoints. Multilingual glossary language pairs are the intentional <code>/v2</code> exception.</li>
 </ul>
-<p>In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary, style-rule, and voice realtime features.</p>
+<p>Each endpoint determines its own <code>/v2</code> or <code>/v3</code> path; surface selection never rewrites a request URL. <code>Translator#server_url</code> remains a compatibility accessor and may include the legacy <code>DEEPL_API_VERSION</code> suffix, but internal requests use a normalized base URL. Custom URLs ending in <code>/v2</code> or <code>/v3</code> are accepted and normalized for internal routing.</p>
 <h3><a id="run-tests-v2-v3" class="anchor" href="#run-tests-v2-v3">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
