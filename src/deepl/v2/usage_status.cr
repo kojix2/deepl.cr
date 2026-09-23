@@ -2,8 +2,8 @@ module DeepL
   abstract class Usage
     include JSON::Serializable
 
-    property character_count : Int64
-    property character_limit : Int64
+    property character_count : Int64?
+    property character_limit : Int64?
     property document_count : Int64?
     property document_limit : Int64?
     property team_document_count : Int64?
@@ -14,7 +14,7 @@ module DeepL
     class Product
       include JSON::Serializable
 
-      property product_type : String
+      property product_type : String?
       property api_key_character_count : Int64?
       property character_count : Int64?
       property billing_unit : String?
@@ -22,7 +22,7 @@ module DeepL
       property account_unit_count : Int64?
 
       def initialize(
-        @product_type,
+        @product_type = nil,
         @api_key_character_count = nil,
         @character_count = nil,
         @billing_unit = nil,

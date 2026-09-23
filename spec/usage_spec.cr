@@ -8,7 +8,7 @@ describe DeepL::UsagePro do
           "product_type": "write",
           "api_key_character_count": 1000000,
           "character_count": 1250000,
-          "billing_unit": "character",
+          "billing_unit": "characters",
           "api_key_unit_count": 1200000,
           "account_unit_count": 1500000
         },
@@ -16,7 +16,7 @@ describe DeepL::UsagePro do
           "product_type": "translate",
           "api_key_character_count": 880000,
           "character_count": 900000,
-          "billing_unit": "character",
+          "billing_unit": "characters",
           "api_key_unit_count": 880000,
           "account_unit_count": 900000
         }
@@ -84,6 +84,14 @@ describe DeepL::UsagePro do
     usage.products.should be_empty
   end
 
+  it "accepts missing top-level character fields and product type" do
+    usage = DeepL::UsagePro.from_json(%({"products":[{}]}))
+
+    usage.character_count.should be_nil
+    usage.character_limit.should be_nil
+    usage.products.first.product_type.should be_nil
+  end
+
   it "exposes optional document and speech-minute usage" do
     usage_json = <<-JSON
       {
@@ -119,7 +127,7 @@ describe DeepL::UsagePro do
     write_product.product_type.should eq("write")
     write_product.api_key_character_count.should eq(1000000)
     write_product.character_count.should eq(1250000)
-    write_product.billing_unit.should eq("character")
+    write_product.billing_unit.should eq("characters")
     write_product.api_key_unit_count.should eq(1200000)
     write_product.account_unit_count.should eq(1500000)
 
@@ -127,7 +135,7 @@ describe DeepL::UsagePro do
     translate_product.product_type.should eq("translate")
     translate_product.api_key_character_count.should eq(880000)
     translate_product.character_count.should eq(900000)
-    translate_product.billing_unit.should eq("character")
+    translate_product.billing_unit.should eq("characters")
     translate_product.api_key_unit_count.should eq(880000)
     translate_product.account_unit_count.should eq(900000)
   end
@@ -160,7 +168,7 @@ describe DeepL::UsagePro do
         "write",
         100000_i64,
         120000_i64,
-        "character",
+        "characters",
         100000_i64,
         120000_i64
       )
@@ -168,7 +176,7 @@ describe DeepL::UsagePro do
       product.product_type.should eq("write")
       product.api_key_character_count.should eq(100000)
       product.character_count.should eq(120000)
-      product.billing_unit.should eq("character")
+      product.billing_unit.should eq("characters")
       product.api_key_unit_count.should eq(100000)
       product.account_unit_count.should eq(120000)
     end
@@ -185,6 +193,13 @@ describe DeepL::UsagePro do
   end
 
   describe DeepL::UsageFree do
+    it "accepts a response without top-level character fields" do
+      usage = DeepL::UsageFree.from_json("{}")
+
+      usage.character_count.should be_nil
+      usage.character_limit.should be_nil
+    end
+
     it "can be deserialized from JSON" do
       free_json = <<-JSON
         {
