@@ -59,6 +59,18 @@ describe "translation options" do
     end
   end
 
+  it "sends a custom reporting tag for text translation" do
+    with_translation_options_server([translation_options_text_response]) do |server|
+      translation_options_translator(server).translate_text(
+        "hello",
+        "DE",
+        reporting_tag: "team-billing",
+      )
+
+      server.requests.first.headers["X-DeepL-Reporting-Tag"].should eq("team-billing")
+    end
+  end
+
   it "sends document plural glossary IDs and document options as multipart fields" do
     responses = [
       translation_options_document_response,
@@ -76,6 +88,7 @@ describe "translation options" do
         style_id: "style-id",
         translation_memory_id: "translation-memory-id",
         translation_memory_threshold: 75,
+        enable_watermark: true,
         output_file: output_file,
         interval: 0.001,
       ) { |_| }
@@ -92,6 +105,8 @@ describe "translation options" do
       request.body.should contain("translation-memory-id")
       request.body.should contain(%(name="translation_memory_threshold"))
       request.body.should contain("75")
+      request.body.should contain(%(name="enable_watermark"))
+      request.body.should contain("true")
     ensure
       File.delete?(output_file)
     end
@@ -146,6 +161,9 @@ describe "translation options" do
     end
     expect_raises(ArgumentError, /glossary_name/) do
       translator.translate_text("hello", "DE", "EN", glossary_name: "Glossary", glossary_ids: ["glossary-id"])
+    end
+    expect_raises(ArgumentError, /100 characters/) do
+      translator.translate_text("hello", "DE", reporting_tag: "x" * 101)
     end
   end
 

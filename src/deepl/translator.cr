@@ -61,8 +61,10 @@ module DeepL
       }
     end
 
-    private def http_headers_json
-      http_headers_base.merge({"Content-Type" => "application/json"})
+    private def http_headers_json(reporting_tag : String? = nil)
+      headers = http_headers_base.merge({"Content-Type" => "application/json"})
+      headers["X-DeepL-Reporting-Tag"] = reporting_tag if reporting_tag
+      headers
     end
 
     private def api_url(path : String) : String
@@ -155,6 +157,28 @@ module DeepL
       raise ArgumentError.new("source_lang is required when using glossary_ids.") unless source_lang
       if glossary_id || glossary_name
         raise ArgumentError.new("glossary_ids cannot be used with glossary_id or glossary_name.")
+      end
+    end
+
+    private def validate_reporting_tag(reporting_tag : String?) : Nil
+      return unless reporting_tag
+
+      if reporting_tag.size > 100
+        raise ArgumentError.new("reporting_tag must not exceed 100 characters.")
+      end
+    end
+
+    private def validate_voice_glossary_ids(
+      glossary_ids : Array(String)?,
+      glossary_id : String?,
+    ) : Nil
+      return unless glossary_ids
+
+      if glossary_id
+        raise ArgumentError.new("glossary_ids cannot be used with glossary_id.")
+      end
+      if glossary_ids.uniq.size != glossary_ids.size
+        raise ArgumentError.new("glossary_ids cannot contain duplicate glossary IDs.")
       end
     end
   end

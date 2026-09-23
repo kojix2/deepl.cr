@@ -96,7 +96,9 @@ describe DeepL::CustomTagUsageReport do
             "breakdown": {
               "total_characters": 380,
               "text_translation_characters": 380,
-              "text_improvement_characters": 0
+              "text_improvement_characters": 0,
+              "speech_to_text_minutes": 12.5,
+              "speech_to_speech_minutes": 4.2
             }
           }
         ]
@@ -111,5 +113,7 @@ describe DeepL::CustomTagUsageReport do
     report.custom_tag_usage_report.usage.size.should eq(1)
     report.custom_tag_usage_report.usage.first.custom_tag.should eq("example-custom-tag")
     report.custom_tag_usage_report.usage.first.breakdown.total_characters.should eq(380)
+    report.custom_tag_usage_report.usage.first.breakdown.speech_to_text_minutes.should eq(12.5)
+    report.custom_tag_usage_report.usage.first.breakdown.speech_to_speech_minutes.should eq(4.2)
   end
 end

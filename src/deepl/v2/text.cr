@@ -2,6 +2,8 @@ require "./text_result"
 
 module DeepL
   class Translator
+    # `enable_beta_languages` is retained for API compatibility only; DeepL
+    # documents that it has no effect.
     def translate_text(
       text : (String | Array(String)),
       target_lang,
@@ -26,8 +28,10 @@ module DeepL
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
       glossary_ids : Array(String)? = nil,
+      reporting_tag : String? = nil,
     ) : Array(TextResult)
       validate_glossary_ids(glossary_ids, source_lang, glossary_id, glossary_name)
+      validate_reporting_tag(reporting_tag)
 
       if glossary_name
         glossary_id ||= find_multilingual_glossary_by_name(glossary_name).glossary_id
@@ -64,7 +68,7 @@ module DeepL
         Crest.post(
           api_url_translate,
           form: params,
-          headers: http_headers_json,
+          headers: http_headers_json(reporting_tag),
           json: true,
           handle_errors: false,
           max_redirects: 0,

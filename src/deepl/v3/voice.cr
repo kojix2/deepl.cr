@@ -13,8 +13,13 @@ module DeepL
       target_media_voice : String? = nil,
       spoken_terms_id : String? = nil,
       glossary_id : String? = nil,
+      glossary_ids : Array(String)? = nil,
       formality : String? = nil,
+      reporting_tag : String? = nil,
     ) : VoiceStreamingResponse
+      validate_voice_glossary_ids(glossary_ids, glossary_id)
+      validate_reporting_tag(reporting_tag)
+
       url = api_url("/v3/voice/realtime")
       data = {
         "source_media_content_type" => source_media_content_type,
@@ -27,6 +32,7 @@ module DeepL
         "target_media_voice"        => target_media_voice,
         "spoken_terms_id"           => spoken_terms_id,
         "glossary_id"               => glossary_id,
+        "glossary_ids"              => glossary_ids,
         "formality"                 => formality,
       }.compact!
 
@@ -35,7 +41,7 @@ module DeepL
           url,
           form: data,
           json: true,
-          headers: http_headers_json,
+          headers: http_headers_json(reporting_tag),
           handle_errors: false,
           max_redirects: 0,
         )

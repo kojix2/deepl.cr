@@ -113,11 +113,15 @@ module DeepL
     property total_characters : Int64
     property text_translation_characters : Int64?
     property text_improvement_characters : Int64?
+    property speech_to_text_minutes : Float64?
+    property speech_to_speech_minutes : Float64?
 
     def initialize(
       @total_characters,
       @text_translation_characters = nil,
       @text_improvement_characters = nil,
+      @speech_to_text_minutes = nil,
+      @speech_to_speech_minutes = nil,
     )
     end
   end

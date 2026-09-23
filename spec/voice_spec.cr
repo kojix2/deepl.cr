@@ -1,4 +1,5 @@
 require "./spec_helper"
+require "./support/recording_server"
 
 describe DeepL::VoiceStreamingResponse do
   it "can be deserialized from JSON" do
@@ -35,5 +36,51 @@ describe DeepL::Translator do
 
     translator.responds_to?(:get_voice_streaming_url).should be_true
     translator.responds_to?(:request_reconnection).should be_true
+  end
+
+  it "sends Voice glossary IDs in priority order with a reporting tag" do
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(
+        200,
+        %({"streaming_url":"wss://example.test/connect","token":"token"}),
+      ),
+    ])
+
+    begin
+      translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
+      translator.get_voice_streaming_url(
+        source_media_content_type: "audio/ogg; codecs=opus",
+        glossary_ids: ["highest-priority", "next-priority"],
+        reporting_tag: "voice-team",
+      ).token.should eq("token")
+
+      request = server.requests.first
+      request.resource.should eq("/v3/voice/realtime")
+      JSON.parse(request.body)["glossary_ids"].as_a.map(&.as_s).should eq([
+        "highest-priority",
+        "next-priority",
+      ])
+      request.headers["X-DeepL-Reporting-Tag"].should eq("voice-team")
+    ensure
+      server.close
+    end
+  end
+
+  it "validates Voice glossary IDs before creating a session" do
+    translator = DeepL::Translator.new(auth_key: "dummy")
+
+    expect_raises(ArgumentError, /glossary_id/) do
+      translator.get_voice_streaming_url(
+        source_media_content_type: "audio/ogg; codecs=opus",
+        glossary_id: "legacy",
+        glossary_ids: ["new"],
+      )
+    end
+    expect_raises(ArgumentError, /duplicate/) do
+      translator.get_voice_streaming_url(
+        source_media_content_type: "audio/ogg; codecs=opus",
+        glossary_ids: ["same", "same"],
+      )
+    end
   end
 end

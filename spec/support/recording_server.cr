@@ -7,7 +7,8 @@ class RecordingServer
     body : String = "",
     headers : Hash(String, String) = {} of String => String
 
-  record ReceivedRequest, method : String, resource : String, body : String
+  record ReceivedRequest, method : String, resource : String, body : String,
+    headers : Hash(String, String)
 
   getter requests : Array(ReceivedRequest)
   getter url : String
@@ -16,7 +17,16 @@ class RecordingServer
     @requests = [] of ReceivedRequest
     @server = HTTP::Server.new do |context|
       body = context.request.body.try(&.gets_to_end) || ""
-      @requests << ReceivedRequest.new(context.request.method, context.request.resource, body)
+      headers = {} of String => String
+      context.request.headers.to_h.each do |name, values|
+        headers[name] = values.join(",")
+      end
+      @requests << ReceivedRequest.new(
+        context.request.method,
+        context.request.resource,
+        body,
+        headers,
+      )
 
       scripted_response = @responses.shift? || ScriptedResponse.new(500, "No scripted response")
       context.response.status_code = scripted_response.status_code

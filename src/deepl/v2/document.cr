@@ -20,6 +20,7 @@ module DeepL
       style_id = nil,
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
+      enable_watermark : Bool? = nil,
       &block : (String ->)
     )
       translate_document(
@@ -39,6 +40,7 @@ module DeepL
         style_id: style_id,
         translation_memory_id: translation_memory_id,
         translation_memory_threshold: translation_memory_threshold,
+        enable_watermark: enable_watermark,
         block: block
       )
     end
@@ -61,6 +63,7 @@ module DeepL
       style_id = nil,
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
+      enable_watermark : Bool? = nil,
     )
       validate_document_polling_options(interval, timeout)
       source_path = Path[path]
@@ -78,6 +81,7 @@ module DeepL
         style_id: style_id,
         translation_memory_id: translation_memory_id,
         translation_memory_threshold: translation_memory_threshold,
+        enable_watermark: enable_watermark,
       )
 
       prefix = message_prefix
@@ -127,6 +131,7 @@ module DeepL
       style_id = nil,
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
+      enable_watermark : Bool? = nil,
     ) : DocumentHandle
       validate_glossary_ids(glossary_ids, source_lang, glossary_id, glossary_name)
 
@@ -145,6 +150,7 @@ module DeepL
         "style_id"                     => style_id,
         "translation_memory_id"        => translation_memory_id,
         "translation_memory_threshold" => translation_memory_threshold,
+        "enable_watermark"             => enable_watermark,
       }.compact!
       File.open(path) do |file|
         params = params.merge({"file" => file})
