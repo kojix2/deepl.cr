@@ -18,9 +18,16 @@ module DeepL
       params["writing_style"] = writing_style if writing_style
       params["tone"] = tone if tone
 
-      response = Crest.post(
-        api_url_rephrase, form: params, headers: http_headers_json, json: true
-      )
+      response = with_transport_error do
+        Crest.post(
+          api_url_rephrase,
+          form: params,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
 
       handle_response(response)
       parse_rephrase_response(response)
@@ -38,20 +45,27 @@ module DeepL
       params["text"] = text
       params["target_lang"] = target_lang if target_lang
 
-      response = Crest.post(
-        api_url_correct, form: params, headers: http_headers_json, json: true
-      )
+      response = with_transport_error do
+        Crest.post(
+          api_url_correct,
+          form: params,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
 
       handle_response(response)
       parse_rephrase_response(response)
     end
 
     private def api_url_rephrase : String
-      "#{server_url}/write/rephrase"
+      api_url("/v2/write/rephrase")
     end
 
     private def api_url_correct : String
-      "#{server_url}/write/correct"
+      api_url("/v2/write/correct")
     end
 
     private def mock_rephrase_response : Array(RephraseResult)

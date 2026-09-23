@@ -4,8 +4,16 @@ module DeepL
   class Translator
     private def request_languages(type)
       data = {"type" => type}
-      url = "#{server_url}/languages"
-      response = Crest.get(url, params: data, headers: http_headers_base)
+      url = api_url("/v2/languages")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: data,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
     end
 

@@ -9,8 +9,15 @@ module DeepL
     # Get supported language pairs for multilingual glossaries
     # ameba:disable Naming/AccessorMethodName
     def get_multilingual_glossary_language_pairs : Array(MultilingualGlossaryLanguagePair)
-      url = "#{base_server_url}/v2/glossary-language-pairs"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v2/glossary-language-pairs")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       Array(MultilingualGlossaryLanguagePair).from_json(
         JSON.parse(response.body)["supported_languages"].to_json
@@ -22,7 +29,7 @@ module DeepL
       name : String,
       dictionaries : Array(GlossaryDictionary),
     ) : MultilingualGlossaryInfo
-      url = "#{base_server_url}/v3/glossaries"
+      url = api_url("/v3/glossaries")
 
       # Convert GlossaryDictionary objects to the expected API format
       dict_data = dictionaries.map do |dict|
@@ -39,15 +46,31 @@ module DeepL
         "dictionaries" => dict_data,
       }
 
-      response = Crest.post(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       MultilingualGlossaryInfo.from_json(response.body)
     end
 
     # List all multilingual glossaries and their meta-information
     def list_multilingual_glossaries : Array(MultilingualGlossaryInfo)
-      url = "#{base_server_url}/v3/glossaries"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v3/glossaries")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       glossaries_json = JSON.parse(response.body)["glossaries"].to_json
       Array(MultilingualGlossaryInfo).from_json(glossaries_json)
@@ -55,16 +78,30 @@ module DeepL
 
     # Get multilingual glossary details by ID
     def get_multilingual_glossary(glossary_id : String) : MultilingualGlossaryInfo
-      url = "#{base_server_url}/v3/glossaries/#{glossary_id}"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v3/glossaries/#{glossary_id}")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       MultilingualGlossaryInfo.from_json(response.body)
     end
 
     # Delete a multilingual glossary by ID
     def delete_multilingual_glossary(glossary_id : String) : Bool
-      url = "#{base_server_url}/v3/glossaries/#{glossary_id}"
-      response = Crest.delete(url, headers: http_headers_base)
+      url = api_url("/v3/glossaries/#{glossary_id}")
+      response = with_transport_error do
+        Crest.delete(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       true
     end
@@ -75,7 +112,7 @@ module DeepL
       name : String? = nil,
       dictionaries : Array(GlossaryDictionary)? = nil,
     ) : MultilingualGlossaryInfo
-      url = "#{base_server_url}/v3/glossaries/#{glossary_id}"
+      url = api_url("/v3/glossaries/#{glossary_id}")
 
       data = {} of String => JSON::Any::Type
       data["name"] = name if name
@@ -93,7 +130,16 @@ module DeepL
         data["dictionaries"] = dict_data
       end
 
-      response = Crest.patch(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.patch(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       MultilingualGlossaryInfo.from_json(response.body)
     end
@@ -104,13 +150,21 @@ module DeepL
       source_lang : String,
       target_lang : String,
     ) : GlossaryDictionary
-      url = "#{base_server_url}/v3/glossaries/#{glossary_id}/entries"
+      url = api_url("/v3/glossaries/#{glossary_id}/entries")
       params = {
         "source_lang" => source_lang,
         "target_lang" => target_lang,
       }
 
-      response = Crest.get(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       entries_response = MultilingualGlossaryEntriesResponse.from_json(response.body)
       dict = entries_response.dictionaries.find { |dictionary| dictionary.source_lang == source_lang && dictionary.target_lang == target_lang }
@@ -127,7 +181,7 @@ module DeepL
       entries : String,
       entries_format : String = "tsv",
     ) : GlossaryEntriesInformation
-      url = "#{base_server_url}/v3/glossaries/#{glossary_id}/dictionaries"
+      url = api_url("/v3/glossaries/#{glossary_id}/dictionaries")
 
       data = {
         "source_lang"    => source_lang,
@@ -136,7 +190,16 @@ module DeepL
         "entries_format" => entries_format,
       }
 
-      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.put(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       GlossaryEntriesInformation.from_json(response.body)
     end
@@ -147,13 +210,21 @@ module DeepL
       source_lang : String,
       target_lang : String,
     ) : Bool
-      url = "#{base_server_url}/v3/glossaries/#{glossary_id}/dictionaries"
+      url = api_url("/v3/glossaries/#{glossary_id}/dictionaries")
       params = {
         "source_lang" => source_lang,
         "target_lang" => target_lang,
       }
 
-      response = Crest.delete(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.delete(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       true
     end

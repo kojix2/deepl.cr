@@ -57,8 +57,9 @@ module DeepL
       candidate = @server_url || (
         auth_key_is_free_account? ? DEEPL_SERVER_URL_FREE : DEEPL_SERVER_URL
       )
-      # Strip a trailing "/v<number>" (optionally followed by a slash)
-      candidate.sub(/\/v\d+(\/)?$/, "")
+      # Strip a trailing "/v<number>" (optionally followed by a slash) and
+      # normalize trailing slashes so endpoint paths can always begin with "/".
+      candidate.sub(/\/v\d+\/?$/, "").sub(/\/+$/, "")
     end
 
     def auth_key : String
@@ -80,30 +81,78 @@ module DeepL
       http_headers_base.merge({"Content-Type" => "application/json"})
     end
 
-    private def handle_response(response, glossary = false)
-      trace_header = response.headers["X-Trace-ID"]?
-      @last_trace_id = trace_header.is_a?(Array) ? trace_header.first? : trace_header
-      status_code = response.status_code.to_i
-      return response if 200 <= status_code <= 399
-
-      raise response_error(status_code, glossary)
+    private def api_url(path : String) : String
+      raise ArgumentError.new("API paths must begin with '/'.") unless path.starts_with?("/")
+      "#{base_server_url}#{path}"
     end
 
-    private def response_error(status_code : Int, glossary : Bool) : DeepLError
-      return GlossaryNotFoundError.new if glossary && status_code == HTTP::Status::NOT_FOUND.to_i
-      return AuthorizationError.new if {HTTP::Status::UNAUTHORIZED.to_i, HTTP::Status::FORBIDDEN.to_i}.includes?(status_code)
-      return QuotaExceededError.new if status_code == HTTP_STATUS_QUOTA_EXCEEDED
-      return TooManyRequestsError.new if {HTTP::Status::TOO_MANY_REQUESTS.to_i, HTTP_STATUS_TOO_MANY_REQUESTS}.includes?(status_code)
+    private def with_transport_error(&)
+      @last_trace_id = nil
+      yield
+    rescue error : File::Error
+      raise error
+    rescue error : IO::Error
+      request_error = RequestError.new(error)
+      request_error.trace_id = @last_trace_id
+      raise request_error
+    end
 
-      RequestError.new(REQUEST_ERROR_MESSAGES[status_code]? || "Unknown error")
+    private def handle_response(response : Crest::Response, glossary = false)
+      @last_trace_id = response.http_client_res.headers["X-Trace-ID"]?
+      status_code = response.status_code.to_i
+      return response if 200 <= status_code <= 299
+
+      raise response_error(response, glossary)
+    end
+
+    private def response_error(response : Crest::Response, glossary : Bool) : DeepLError
+      status_code = response.status_code.to_i
+      error = if glossary && status_code == HTTP::Status::NOT_FOUND.to_i
+                GlossaryNotFoundError.new
+              elsif {HTTP::Status::UNAUTHORIZED.to_i, HTTP::Status::FORBIDDEN.to_i}.includes?(status_code)
+                AuthorizationError.new
+              elsif status_code == HTTP_STATUS_QUOTA_EXCEEDED
+                QuotaExceededError.new
+              elsif {HTTP::Status::TOO_MANY_REQUESTS.to_i, HTTP_STATUS_TOO_MANY_REQUESTS}.includes?(status_code)
+                TooManyRequestsError.new
+              else
+                RequestError.new(response_error_message(response))
+              end
+      error.trace_id = @last_trace_id
+      error
+    end
+
+    private def response_error_message(response : Crest::Response) : String
+      default_message : String = REQUEST_ERROR_MESSAGES[response.status_code.to_i]? || "Request failed"
+      raw_body = response.body
+      body = raw_body ? raw_body.strip : ""
+      return default_message if body.empty?
+
+      parsed = begin
+        JSON.parse(body)
+      rescue JSON::ParseException
+        return body
+      end
+
+      if object = parsed.as_h?
+        message = object["message"]?.try(&.as_s?)
+        return message if message
+
+        if error = object["error"]?
+          message = error.as_s? || error.as_h?.try { |nested| nested["message"]?.try(&.as_s?) }
+          return message if message
+        end
+      end
+
+      body
     end
 
     private def api_url_translate : String
-      "#{server_url}/translate"
+      api_url("/v2/translate")
     end
 
     private def api_url_document : String
-      "#{server_url}/document"
+      api_url("/v2/document")
     end
 
     private def auth_key_is_free_account? : Bool

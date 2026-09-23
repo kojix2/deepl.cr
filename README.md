@@ -87,15 +87,15 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 
 - [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapi)
 
-### API version selection (current behavior)
+### API version selection and endpoint routing
 
 This library currently supports both v2 and v3 API families.
 
-- The API surface is selected at compile time by either `-Ddeepl_v2` / `-Ddeepl_v3` or `DEEPL_API_VERSION=v2` / `DEEPL_API_VERSION=v3`.
+- The API surface is selected at compile time. The library loads v2 when `-Ddeepl_v2` is set or `DEEPL_API_VERSION=v2`; otherwise it loads v3 when `-Ddeepl_v3` or `DEEPL_API_VERSION=v3` is set, and defaults to v3.
 - In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.
-- In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, and voice realtime use v3 endpoints.
+- In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, Translation Memory, and voice realtime use v3 endpoints. Multilingual glossary language pairs are the intentional `/v2` exception.
 
-In short, the current v3 surface is hybrid: v2 for core translation flows, plus v3 for newer glossary, style-rule, and voice realtime features.
+Each endpoint determines its own `/v2` or `/v3` path; surface selection never rewrites a request URL. `Translator#server_url` remains a compatibility accessor and may include the legacy `DEEPL_API_VERSION` suffix, but internal requests use a normalized base URL. Custom URLs ending in `/v2` or `/v3` are accepted and normalized for internal routing.
 
 ### Run tests (v2 / v3)
 

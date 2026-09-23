@@ -45,7 +45,7 @@ module DeepL
       page_size : Int32? = nil,
       detailed : Bool? = nil,
     ) : Array(StyleRuleList)
-      url = "#{base_server_url}/v3/style_rules"
+      url = api_url("/v3/style_rules")
 
       params = {
         "page"      => page,
@@ -53,7 +53,15 @@ module DeepL
         "detailed"  => detailed,
       }.compact!
 
-      response = Crest.get(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
 
       style_rules_json = JSON.parse(response.body)["style_rules"].to_json
@@ -66,7 +74,7 @@ module DeepL
       configured_rules : JSON::Any? = nil,
       custom_instructions : Array(CustomInstruction)? = nil,
     ) : StyleRuleList
-      url = "#{base_server_url}/v3/style_rules"
+      url = api_url("/v3/style_rules")
       data = {
         "name"                => name,
         "language"            => language,
@@ -74,30 +82,62 @@ module DeepL
         "custom_instructions" => custom_instructions,
       }.compact!
 
-      response = Crest.post(url, form: data, headers: http_headers_json, json: true)
+      response = with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       StyleRuleList.from_json(response.body)
     end
 
     def get_style_rule_list(style_id : String) : StyleRuleList
-      url = "#{base_server_url}/v3/style_rules/#{style_id}"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v3/style_rules/#{style_id}")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       StyleRuleList.from_json(response.body)
     end
 
     def update_style_rule_list(style_id : String, name : String) : StyleRuleList
-      url = "#{base_server_url}/v3/style_rules/#{style_id}"
+      url = api_url("/v3/style_rules/#{style_id}")
       data = {"name" => name}
 
-      response = Crest.patch(url, form: data, headers: http_headers_json, json: true)
+      response = with_transport_error do
+        Crest.patch(
+          url,
+          form: data,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       StyleRuleList.from_json(response.body)
     end
 
     def delete_style_rule_list(style_id : String) : Nil
-      url = "#{base_server_url}/v3/style_rules/#{style_id}"
-      response = Crest.delete(url, headers: http_headers_base)
+      url = api_url("/v3/style_rules/#{style_id}")
+      response = with_transport_error do
+        Crest.delete(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       nil
     end
@@ -106,9 +146,17 @@ module DeepL
       style_id : String,
       configured_rules : JSON::Any,
     ) : StyleRuleList
-      url = "#{base_server_url}/v3/style_rules/#{style_id}/configured_rules"
+      url = api_url("/v3/style_rules/#{style_id}/configured_rules")
 
-      response = Crest.put(url, form: configured_rules.to_json, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.put(
+          url,
+          form: configured_rules.to_json,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       StyleRuleList.from_json(response.body)
     end
@@ -119,21 +167,37 @@ module DeepL
       prompt : String,
       source_language : String? = nil,
     ) : CustomInstruction
-      url = "#{base_server_url}/v3/style_rules/#{style_id}/custom_instructions"
+      url = api_url("/v3/style_rules/#{style_id}/custom_instructions")
       data = {
         "label"           => label,
         "prompt"          => prompt,
         "source_language" => source_language,
       }.compact!
 
-      response = Crest.post(url, form: data, headers: http_headers_json, json: true)
+      response = with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       CustomInstruction.from_json(response.body)
     end
 
     def get_custom_instruction(style_id : String, instruction_id : String) : CustomInstruction
-      url = "#{base_server_url}/v3/style_rules/#{style_id}/custom_instructions/#{instruction_id}"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v3/style_rules/#{style_id}/custom_instructions/#{instruction_id}")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       CustomInstruction.from_json(response.body)
     end
@@ -145,21 +209,37 @@ module DeepL
       prompt : String,
       source_language : String? = nil,
     ) : CustomInstruction
-      url = "#{base_server_url}/v3/style_rules/#{style_id}/custom_instructions/#{instruction_id}"
+      url = api_url("/v3/style_rules/#{style_id}/custom_instructions/#{instruction_id}")
       data = {
         "label"           => label,
         "prompt"          => prompt,
         "source_language" => source_language,
       }.compact!
 
-      response = Crest.put(url, form: data, headers: http_headers_json, json: true)
+      response = with_transport_error do
+        Crest.put(
+          url,
+          form: data,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       CustomInstruction.from_json(response.body)
     end
 
     def delete_custom_instruction(style_id : String, instruction_id : String) : Nil
-      url = "#{base_server_url}/v3/style_rules/#{style_id}/custom_instructions/#{instruction_id}"
-      response = Crest.delete(url, headers: http_headers_base)
+      url = api_url("/v3/style_rules/#{style_id}/custom_instructions/#{instruction_id}")
+      response = with_transport_error do
+        Crest.delete(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       nil
     end

@@ -30,6 +30,8 @@ module Crest
     )
       previous_def
       url = URI.parse(@url)
+      # Local spec servers must not be sent through the deepl-mock proxy.
+      return if url.host == "127.0.0.1" || url.host == "localhost"
       no_proxy = ENV["no_proxy"]? || ENV["NO_PROXY"]?
       return if no_proxy && no_proxy.split(",").includes?(url.host)
       key = "#{url.scheme}_proxy"

@@ -48,20 +48,35 @@ module DeepL
   class Translator
     # ameba:disable Naming/AccessorMethodName
     def get_language_resources : Array(LanguageResource)
-      url = "#{base_server_url}/v3/languages/resources"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v3/languages/resources")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       Array(LanguageResource).from_json(response.body)
     end
 
     def get_languages(resource : String, include_values : Array(String)? = nil) : Array(ResourceLanguage)
-      url = "#{base_server_url}/v3/languages"
+      url = api_url("/v3/languages")
       params = HTTP::Params.build do |form|
         form.add("resource", resource)
         include_values.try &.each { |value| form.add("include", value) }
       end
 
-      response = Crest.get(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       Array(ResourceLanguage).from_json(response.body)
     end

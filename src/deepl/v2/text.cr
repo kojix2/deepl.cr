@@ -58,9 +58,16 @@ module DeepL
         "translation_memory_threshold" => translation_memory_threshold,
       }.compact!
 
-      response = Crest.post(
-        api_url_translate, form: params, headers: http_headers_json, json: true
-      )
+      response = with_transport_error do
+        Crest.post(
+          api_url_translate,
+          form: params,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
 
       handle_response(response)
       parse_translate_text_response(response)

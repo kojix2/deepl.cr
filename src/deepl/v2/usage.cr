@@ -24,8 +24,15 @@ module DeepL
     end
 
     private def request_get_usage
-      url = "#{server_url}/usage"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v2/usage")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
     end
   end

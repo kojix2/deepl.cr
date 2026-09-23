@@ -1,5 +1,6 @@
 module DeepL
   class DeepLError < Exception
+    property trace_id : String?
   end
 
   class ApiKeyNotFoundError < DeepLError

@@ -6,8 +6,15 @@ module DeepL
   class Translator
     # ameba:disable Naming/AccessorMethodName
     def get_glossary_language_pairs : Array(GlossaryLanguagePair)
-      url = "#{server_url}/glossary-language-pairs"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v2/glossary-language-pairs")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       Array(GlossaryLanguagePair).from_json(
         JSON.parse(response.body)["supported_languages"].to_json
@@ -21,7 +28,7 @@ module DeepL
       entries,
       entry_format = "tsv",
     ) : GlossaryInfo
-      url = "#{server_url}/glossaries"
+      url = api_url("/v2/glossaries")
       data = {
         "name"           => name,
         "source_lang"    => source_lang,
@@ -29,7 +36,15 @@ module DeepL
         "entries"        => entries,
         "entries_format" => entry_format,
       }
-      response = Crest.post(url, form: data, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       GlossaryInfo.from_json(response.body)
     end
@@ -39,8 +54,15 @@ module DeepL
     end
 
     def delete_glossary(glossary_id : String) : Bool
-      url = "#{server_url}/glossaries/#{glossary_id}"
-      response = Crest.delete(url, headers: http_headers_base)
+      url = api_url("/v2/glossaries/#{glossary_id}")
+      response = with_transport_error do
+        Crest.delete(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       true
     end
@@ -52,8 +74,15 @@ module DeepL
     end
 
     def get_glossary_info(glossary_id : String) : GlossaryInfo
-      url = "#{server_url}/glossaries/#{glossary_id}"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v2/glossaries/#{glossary_id}")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       GlossaryInfo.from_json(response.body)
     end
@@ -76,8 +105,15 @@ module DeepL
     end
 
     def list_glossaries : Array(GlossaryInfo)
-      url = "#{server_url}/glossaries"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v2/glossaries")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       glossaries_json = JSON.parse(response.body)["glossaries"].to_json
       Array(GlossaryInfo).from_json(glossaries_json)
@@ -90,8 +126,15 @@ module DeepL
     def get_glossary_entries(glossary_id : String) : String
       header = http_headers_base
       header["Accept"] = "text/tab-separated-values"
-      url = "#{server_url}/glossaries/#{glossary_id}/entries"
-      response = Crest.get(url, headers: header)
+      url = api_url("/v2/glossaries/#{glossary_id}/entries")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: header,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response, glossary: true)
       response.body # Do not parse because it is a TSV
     end

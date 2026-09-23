@@ -35,13 +35,21 @@ module DeepL
       page : Int32? = nil,
       page_size : Int32? = nil,
     ) : TranslationMemoryList
-      url = "#{base_server_url}/v3/translation_memories"
+      url = api_url("/v3/translation_memories")
       params = {
         "page"      => page,
         "page_size" => page_size,
       }.compact!
 
-      response = Crest.get(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       TranslationMemoryList.from_json(response.body)
     end

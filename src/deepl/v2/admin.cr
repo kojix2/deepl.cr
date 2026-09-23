@@ -164,45 +164,79 @@ module DeepL
   class Translator
     # Create a developer key as an admin
     def admin_create_developer_key(label : String? = nil) : ApiKey
-      url = "#{server_url}/admin/developer-keys"
+      url = api_url("/v2/admin/developer-keys")
       data = {
         "label" => label,
       }.compact!
 
-      response = Crest.post(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       ApiKey.from_json(response.body)
     end
 
     # Get all developer keys as an admin
     def admin_get_developer_keys : Array(ApiKey)
-      url = "#{server_url}/admin/developer-keys"
-      response = Crest.get(url, headers: http_headers_base)
+      url = api_url("/v2/admin/developer-keys")
+      response = with_transport_error do
+        Crest.get(
+          url,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       Array(ApiKey).from_json(response.body)
     end
 
     # Deactivate a developer key as an admin
     def admin_deactivate_developer_key(key_id : String) : ApiKey
-      url = "#{server_url}/admin/developer-keys/deactivate"
+      url = api_url("/v2/admin/developer-keys/deactivate")
       data = {
         "key_id" => key_id,
       }
 
-      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.put(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       ApiKey.from_json(response.body)
     end
 
     # Rename a developer key as an admin
     def admin_rename_developer_key(key_id : String, label : String) : ApiKey
-      url = "#{server_url}/admin/developer-keys/label"
+      url = api_url("/v2/admin/developer-keys/label")
       data = {
         "key_id" => key_id,
         "label"  => label,
       }
 
-      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.put(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       ApiKey.from_json(response.body)
     end
@@ -213,28 +247,45 @@ module DeepL
       characters : Float64? = nil,
       speech_to_text_milliseconds : Float64? = nil,
     ) : ApiKey
-      url = "#{server_url}/admin/developer-keys/limits"
+      url = api_url("/v2/admin/developer-keys/limits")
       data = {
         "key_id"                      => key_id,
         "characters"                  => characters,
         "speech_to_text_milliseconds" => speech_to_text_milliseconds,
       }.compact!
 
-      response = Crest.put(url, form: data, json: true, headers: http_headers_json)
+      response = with_transport_error do
+        Crest.put(
+          url,
+          form: data,
+          json: true,
+          headers: http_headers_json,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       ApiKey.from_json(response.body)
     end
 
     # Get usage statistics as an admin
     def admin_get_analytics(start_date : String, end_date : String, group_by : String? = nil) : AdminUsageReport
-      url = "#{server_url}/admin/analytics"
+      url = api_url("/v2/admin/analytics")
       params = {
         "start_date" => start_date,
         "end_date"   => end_date,
         "group_by"   => group_by,
       }.compact!
 
-      response = Crest.get(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       AdminUsageReport.from_json(response.body)
     end
@@ -245,7 +296,7 @@ module DeepL
       aggregate_by : String? = nil,
       page : Int32? = nil,
     ) : CustomTagUsageReport
-      url = "#{server_url}/admin/analytics/custom-tags"
+      url = api_url("/v2/admin/analytics/custom-tags")
       params = {
         "start_date"   => start_date,
         "end_date"     => end_date,
@@ -253,7 +304,15 @@ module DeepL
         "page"         => page,
       }.compact!
 
-      response = Crest.get(url, params: params, headers: http_headers_base)
+      response = with_transport_error do
+        Crest.get(
+          url,
+          params: params,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0,
+        )
+      end
       handle_response(response)
       CustomTagUsageReport.from_json(response.body)
     end
