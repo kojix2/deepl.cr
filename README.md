@@ -50,6 +50,47 @@ voice = t.get_voice_streaming_url(
 puts voice.streaming_url
 ```
 
+### Glossaries, document options, and Translation Memory
+
+Use an ID for automation. Name-based helpers are conveniences only: a name
+must resolve to exactly one glossary, otherwise the library raises
+`AmbiguousGlossaryNameError` and asks the caller to select an ID explicitly.
+
+Text and document translation can use up to five glossary IDs. Supplying
+`glossary_ids` requires `source_lang` and cannot be combined with
+`glossary_id` or `glossary_name`.
+
+```crystal
+result = t.translate_text(
+  "Hello",
+  target_lang: "DE",
+  source_lang: "EN",
+  glossary_ids: ["glossary-id-1", "glossary-id-2"],
+)
+
+t.translate_document(
+  "path/to/document.pdf",
+  target_lang: "DE",
+  source_lang: "EN",
+  glossary_ids: ["glossary-id-1", "glossary-id-2"],
+  style_id: "style-id",
+  translation_memory_id: "translation-memory-id",
+  translation_memory_threshold: 75,
+)
+```
+
+On the v3 surface, Translation Memory reads are available without adding a
+write or job-management layer:
+
+```crystal
+memory = t.get_translation_memory("translation-memory-id")
+segments = t.list_translation_memory_segments("translation-memory-id", page_size: 100)
+```
+
+All non-2xx HTTP responses raise a `DeepL::DeepLError`. When the service
+provides an `X-Trace-ID`, it is available as `error.trace_id` for support
+requests.
+
 See [documentation](https://kojix2.github.io/deepl.cr/).
 
 ### Environment Variables
