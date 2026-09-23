@@ -17,12 +17,14 @@ module DeepL
       handle_response(response)
     end
 
+    # Deprecated by DeepL: use `get_languages("translate_text")` for new code.
     # ameba:disable Naming/AccessorMethodName
     def get_target_languages : Array(LanguageInfo)
       response = request_languages("target")
       Array(LanguageInfo).from_json(response.body)
     end
 
+    # Deprecated by DeepL: use `get_languages("translate_text")` for new code.
     # ameba:disable Naming/AccessorMethodName
     def get_source_languages : Array(LanguageInfo)
       response = request_languages("source")

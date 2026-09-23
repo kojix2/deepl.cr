@@ -3,6 +3,7 @@ require "./glossary_language_pair"
 
 module DeepL
   class Translator
+    # Deprecated by DeepL: use `get_languages("glossary")` for new code.
     # ameba:disable Naming/AccessorMethodName
     def get_glossary_language_pairs : Array(GlossaryLanguagePair)
       url = api_url("/v2/glossary-language-pairs")
