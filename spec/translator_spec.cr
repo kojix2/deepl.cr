@@ -24,7 +24,7 @@ describe DeepL::Translator do
   it "cannot change deepl server url at runtime" do
     original_server_url = ENV["DEEPL_SERVER_URL"]?
     ENV["DEEPL_SERVER_URL"] = "https://example.com"
-    t = DeepL::Translator.new
+    t = DeepL::Translator.new(auth_key: "dummy-key")
     t.server_url.should_not contain("example.com")
     if original_server_url
       ENV["DEEPL_SERVER_URL"] = original_server_url
@@ -64,7 +64,6 @@ describe DeepL::Translator do
     ENV["DEEPL_AUTH_KEY"] = dummy_api_key
     t = DeepL::Translator.new
     t.auth_key.should eq(dummy_api_key)
-    # ENV.delete("DEEPL_AUTH_KEY")
     if original_api_key
       ENV["DEEPL_AUTH_KEY"] = original_api_key
     else

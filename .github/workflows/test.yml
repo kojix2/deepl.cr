@@ -10,13 +10,6 @@ jobs:
   test:
     name: ubuntu
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-
-    env:
-      HTTP_PROXY: http://localhost:3001
-      DEEPL_SERVER_URL: http://localhost:3000
-      DEEPL_AUTH_KEY: mock
 
     steps:
       - uses: actions/checkout@v7
@@ -30,41 +23,10 @@ jobs:
       - name: Ubuntu - Install libreadline-dev
         run: sudo apt-get update && sudo apt-get install -y libreadline-dev
 
-      - name: Clone deepl-mock repository
-        run: git clone --depth=1 https://github.com/DeepLcom/deepl-mock.git deepl-mock
-
-      - name: Build deepl-mock Docker image
-        run: |
-          cd deepl-mock
-          docker build -t deepl-mock .
-
-      - name: Start deepl-mock server
-        run: docker run -d --rm --name deepl-mock -p3000:3000 -p3001:3001 deepl-mock
-
-      - name: Wait for deepl-mock to be ready
-        run: |
-          for i in {1..30}; do
-            if curl --silent http://localhost:3000/v2/translate > /dev/null; then
-              echo "deepl-mock server is ready"
-              break
-            fi
-            echo "Waiting for deepl-mock server to be ready..."
-            sleep 1
-          done
-
-      - name: Test deepl-mock server with curl
-        run: |
-          curl -X POST "${HTTP_PROXY}/v2/translate" \
-            --header "Authorization: DeepL-Auth-Key ${DEEPL_AUTH_KEY}" \
-            --header "Content-Type: application/json" \
-            --data '{"text":["proton beam"],"target_lang":"DE"}'
-
       - name: Install dependencies
         run: shards install --without-development
 
       - name: Run tests
-        run: crystal spec -Ddeepl_mock
-
-      - name: Stop deepl-mock server
-        if: always()
-        run: docker stop deepl-mock || true
+        run: |
+          crystal spec
+          crystal spec -Ddeepl_mock

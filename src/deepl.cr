@@ -7,6 +7,3 @@ require "./deepl/version"
 # The API has mixed endpoint versions. Load the single unified surface rather
 # than selecting a global API version at compile time.
 require "./deepl/api"
-
-module DeepL
-end

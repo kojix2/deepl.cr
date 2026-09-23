@@ -32,12 +32,6 @@ module DeepL
     end
   end
 
-  # class ConnectionError < DeepLError
-  #   def initialize(message)
-  #     super("Connection to the DeepL API failed.")
-  #   end
-  # end
-
   class DocumentTranslationError < DeepLError
     def initialize(message : String? = nil)
       m = "Error occurred while translating document."

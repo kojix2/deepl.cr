@@ -14,13 +14,7 @@ module DeepL
 
     # ameba:disable Naming/AccessorMethodName
     def get_usage : Usage
-      if auth_key_is_mock? # Workaround for testing
-        get_usage_free
-      elsif auth_key_is_free_account?
-        get_usage_free
-      else
-        get_usage_pro
-      end
+      auth_key_is_free_account? ? get_usage_free : get_usage_pro
     end
 
     private def request_get_usage

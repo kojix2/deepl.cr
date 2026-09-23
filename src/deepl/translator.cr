@@ -34,7 +34,6 @@ module DeepL
     def initialize(auth_key = nil, user_agent = nil, server_url = nil)
       @auth_key = auth_key
       @user_agent = user_agent
-      # Flexibility for testing or future changes
       @server_url = server_url
     end
 
@@ -144,8 +143,25 @@ module DeepL
       auth_key.ends_with?(":fx")
     end
 
-    private def auth_key_is_mock? : Bool
-      auth_key == "mock"
+    private def validate_glossary_ids(
+      glossary_ids : Array(String)?,
+      source_lang,
+      glossary_id,
+      glossary_name,
+    ) : Nil
+      return unless glossary_ids
+
+      raise ArgumentError.new("glossary_ids accepts at most 5 glossary IDs.") if glossary_ids.size > 5
+      raise ArgumentError.new("source_lang is required when using glossary_ids.") unless source_lang
+      if glossary_id || glossary_name
+        raise ArgumentError.new("glossary_ids cannot be used with glossary_id or glossary_name.")
+      end
     end
+
+    {% if flag?(:deepl_mock) %}
+      private def auth_key_is_mock? : Bool
+        auth_key == "mock"
+      end
+    {% end %}
   end
 end

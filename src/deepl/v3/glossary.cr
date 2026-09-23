@@ -31,19 +31,9 @@ module DeepL
     ) : MultilingualGlossaryInfo
       url = api_url("/v3/glossaries")
 
-      # Convert GlossaryDictionary objects to the expected API format
-      dict_data = dictionaries.map do |dict|
-        {
-          "source_lang"    => dict.source_lang,
-          "target_lang"    => dict.target_lang,
-          "entries"        => dict.entries,
-          "entries_format" => dict.entries_format || "tsv",
-        }
-      end
-
       data = {
         "name"         => name,
-        "dictionaries" => dict_data,
+        "dictionaries" => glossary_dictionary_payloads(dictionaries),
       }
 
       response = with_transport_error do
@@ -118,16 +108,7 @@ module DeepL
       data["name"] = name if name
 
       if dictionaries
-        # Convert GlossaryDictionary objects to the expected API format
-        dict_data = dictionaries.map do |dict|
-          {
-            "source_lang"    => dict.source_lang,
-            "target_lang"    => dict.target_lang,
-            "entries"        => dict.entries,
-            "entries_format" => dict.entries_format || "tsv",
-          }
-        end
-        data["dictionaries"] = dict_data
+        data["dictionaries"] = glossary_dictionary_payloads(dictionaries)
       end
 
       response = with_transport_error do
@@ -241,6 +222,17 @@ module DeepL
       target_lang : String,
     ) : GlossaryDictionary
       get_multilingual_glossary_entries(glossary.glossary_id, source_lang, target_lang)
+    end
+
+    private def glossary_dictionary_payloads(dictionaries : Array(GlossaryDictionary))
+      dictionaries.map do |dictionary|
+        {
+          "source_lang"    => dictionary.source_lang,
+          "target_lang"    => dictionary.target_lang,
+          "entries"        => dictionary.entries,
+          "entries_format" => dictionary.entries_format || "tsv",
+        }
+      end
     end
 
     # Resolve a glossary name only when it identifies exactly one glossary.

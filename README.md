@@ -151,7 +151,6 @@ and pass that ID as `glossary_id:`.
 
 ```bash
 crystal spec
-crystal spec -Ddeepl_mock
 ```
 
 ## Use case

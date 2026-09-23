@@ -20,6 +20,25 @@ describe "HTTP transport contracts" do
     end
   end
 
+  {% unless flag?(:deepl_mock) %}
+    it "treats mock as a normal API key outside mock builds" do
+      server = RecordingServer.new([
+        RecordingServer::ScriptedResponse.new(
+          200,
+          %({"translations":[{"text":"Hallo","detected_source_language":"EN"}]}),
+        ),
+      ])
+
+      begin
+        translator = DeepL::Translator.new(auth_key: "mock", server_url: server.url)
+        translator.translate_text("hello", "DE").first.text.should eq("Hallo")
+        server.requests.map(&.resource).should eq(["/v2/translate"])
+      ensure
+        server.close
+      end
+    end
+  {% end %}
+
   it "replaces a custom trailing API version when routing text translation" do
     server = RecordingServer.new([
       RecordingServer::ScriptedResponse.new(

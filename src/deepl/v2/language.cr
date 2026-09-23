@@ -19,7 +19,9 @@ module DeepL
 
     # ameba:disable Naming/AccessorMethodName
     def get_target_languages : Array(LanguageInfo)
-      return mock_target_languages if auth_key_is_mock?
+      {% if flag?(:deepl_mock) %}
+        return mock_target_languages if auth_key_is_mock?
+      {% end %}
 
       response = request_languages("target")
       Array(LanguageInfo).from_json(response.body)
@@ -27,19 +29,23 @@ module DeepL
 
     # ameba:disable Naming/AccessorMethodName
     def get_source_languages : Array(LanguageInfo)
-      return mock_source_languages if auth_key_is_mock?
+      {% if flag?(:deepl_mock) %}
+        return mock_source_languages if auth_key_is_mock?
+      {% end %}
 
       response = request_languages("source")
       Array(LanguageInfo).from_json(response.body)
     end
 
-    private def mock_target_languages : Array(LanguageInfo)
-      [LanguageInfo.new("DE", "German", true)]
-    end
+    {% if flag?(:deepl_mock) %}
+      private def mock_target_languages : Array(LanguageInfo)
+        [LanguageInfo.new("DE", "German", true)]
+      end
 
-    private def mock_source_languages : Array(LanguageInfo)
-      [LanguageInfo.new("EN", "English", nil)]
-    end
+      private def mock_source_languages : Array(LanguageInfo)
+        [LanguageInfo.new("EN", "English", nil)]
+      end
+    {% end %}
 
     def guess_target_language : String
       tl = ENV["DEEPL_TARGET_LANG"]?
@@ -52,8 +58,6 @@ module DeepL
         l = `powershell -Command "[System.Globalization.CultureInfo]::CurrentCulture.TwoLetterISOLanguageName"`
         l.empty? ? "EN" : l.strip.upcase
       {% else %}
-        # From official deepl documentation, EN is deprecated.
-        # EN-US or EN-GB is recommended.
         "EN"
       {% end %}
     end
