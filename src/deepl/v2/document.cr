@@ -15,6 +15,7 @@ module DeepL
       filename = nil,
       interval = 5.0,
       message_prefix = "[deepl.cr] ",
+      timeout : Time::Span? = nil,
       &block : (String ->)
     )
       translate_document(
@@ -29,6 +30,7 @@ module DeepL
         filename: filename,
         interval: interval,
         message_prefix: message_prefix,
+        timeout: timeout,
         block: block
       )
     end
@@ -45,8 +47,10 @@ module DeepL
       filename = nil,
       interval = 5.0,
       message_prefix = "[deepl.cr] ",
+      timeout : Time::Span? = nil,
       block : (String ->)? = nil,
     )
+      validate_document_polling_options(interval, timeout)
       source_path = Path[path]
 
       document_handle = translate_document_upload(
@@ -64,9 +68,8 @@ module DeepL
       block.try &.call("#{prefix}Document uploaded")
       block.try &.call("#{prefix}File: #{source_path}")
       block.try &.call("#{prefix}ID: #{document_handle.id}")
-      block.try &.call("#{prefix}Key: #{document_handle.key}")
 
-      translate_document_wait_until_done(document_handle, interval) do |document_status|
+      translate_document_wait_until_done(document_handle, interval, timeout: timeout) do |document_status|
         block.try &.call("#{prefix}Status: #{document_status.status}")
         block.try &.call("#{prefix}Seconds Remaining: #{document_status.seconds_remaining}") if document_status.seconds_remaining
         block.try &.call("#{prefix}Billed Characters: #{document_status.billed_characters}") if document_status.billed_characters
@@ -122,7 +125,15 @@ module DeepL
       File.open(path) do |file|
         params = params.merge({"file" => file})
 
-        response = Crest.post(api_url_document, form: params, headers: http_headers_base)
+        response = with_transport_error do
+          Crest.post(
+            api_url_document,
+            form: params,
+            headers: http_headers_base,
+            handle_errors: false,
+            max_redirects: 0
+          )
+        end
         handle_response(response)
 
         DocumentHandle.from_json(response.body)
@@ -132,11 +143,13 @@ module DeepL
     def translate_document_wait_until_done(
       handle : DocumentHandle,
       interval = 5.0,
+      timeout : Time::Span? = nil,
       &block : (DocumentStatus ->)
     )
       translate_document_wait_until_done(
         handle: handle,
         interval: interval,
+        timeout: timeout,
         block: block
       )
     end
@@ -144,19 +157,29 @@ module DeepL
     def translate_document_wait_until_done(
       handle : DocumentHandle,
       interval = 5.0,
+      timeout : Time::Span? = nil,
       block : (DocumentStatus ->)? = nil,
     )
+      validate_document_polling_options(interval, timeout)
+
       if auth_key_is_mock?
         document_status = translate_document_get_status(handle)
         block.try &.call(document_status)
         return
       end
 
-      loop do
-        sleep_interval_ns = (interval * 1_000_000_000).to_i64
-        sleep Time::Span.new(nanoseconds: sleep_interval_ns)
+      deadline = timeout.try { |value| Time.instant + value }
+      first_poll = true
 
-        document_status = translate_document_get_status(handle)
+      loop do
+        unless first_poll
+          sleep_for_document_status_poll(interval, deadline)
+        end
+        first_poll = false
+
+        raise_document_polling_timeout(deadline)
+        document_status = translate_document_get_status_with_retry(handle, interval, deadline)
+        raise_document_polling_timeout(deadline)
 
         block.try &.call(document_status)
 
@@ -170,9 +193,7 @@ module DeepL
     def translate_document_get_status(handle : DocumentHandle) : DocumentStatus
       return mock_document_status(handle) if auth_key_is_mock?
 
-      url = "#{api_url_document}/#{handle.id}"
-      data = {"document_key" => handle.key}
-      response = Crest.post(url, form: data, headers: http_headers_json, json: true)
+      response = document_status_response(handle)
       handle_response(response)
       DocumentStatus.from_json(response.body)
     end
@@ -185,11 +206,112 @@ module DeepL
 
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
-      Crest.post(url, form: data, headers: http_headers_json, json: true) do |response|
-        raise DocumentTranslationError.new unless response.success?
-        File.open(output_file, "wb") do |file|
-          IO.copy(response.body_io, file)
+      with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0
+        ) do |response|
+          handle_response(response)
+          write_document_result(response.body_io, output_file)
         end
+      end
+    end
+
+    private def document_status_response(handle : DocumentHandle) : Crest::Response
+      url = "#{api_url_document}/#{handle.id}"
+      data = {"document_key" => handle.key}
+      with_transport_error do
+        Crest.post(
+          url,
+          form: data,
+          headers: http_headers_json,
+          json: true,
+          handle_errors: false,
+          max_redirects: 0
+        )
+      end
+    end
+
+    private def translate_document_get_status_with_retry(
+      handle : DocumentHandle,
+      interval,
+      deadline : Time::Instant?,
+    ) : DocumentStatus
+      retries = 0
+
+      loop do
+        response = begin
+          document_status_response(handle)
+        rescue error : RequestError
+          raise error unless retries < 2
+
+          retries += 1
+          sleep_for_document_status_poll(interval, deadline)
+          next
+        end
+
+        if transient_document_status_response?(response)
+          handle_response(response) unless retries < 2
+
+          retries += 1
+          sleep_for_document_status_poll(interval, deadline)
+          next
+        end
+
+        handle_response(response)
+        return DocumentStatus.from_json(response.body)
+      end
+    end
+
+    private def transient_document_status_response?(response : Crest::Response) : Bool
+      {429, 503, HTTP_STATUS_TOO_MANY_REQUESTS}.includes?(response.status_code.to_i)
+    end
+
+    private def validate_document_polling_options(interval, timeout : Time::Span?) : Nil
+      raise ArgumentError.new("Document polling interval must be positive.") unless interval > 0
+      if timeout && timeout < Time::Span.zero
+        raise ArgumentError.new("Document polling timeout must not be negative.")
+      end
+    end
+
+    private def sleep_for_document_status_poll(interval, deadline : Time::Instant?) : Nil
+      interval_span = Time::Span.new(nanoseconds: (interval * 1_000_000_000).to_i64)
+      sleep_span = interval_span
+
+      if deadline
+        remaining = deadline - Time.instant
+        raise_document_polling_timeout(deadline) if remaining <= Time::Span.zero
+        sleep_span = remaining if remaining < sleep_span
+      end
+
+      sleep sleep_span
+      raise_document_polling_timeout(deadline)
+    end
+
+    private def raise_document_polling_timeout(deadline : Time::Instant?) : Nil
+      return unless deadline && Time.instant >= deadline
+
+      raise DocumentTranslationError.new("Document translation timed out.")
+    end
+
+    private def write_document_result(body : IO, output_file) : Nil
+      output_path = Path[output_file]
+      temporary_file = File.tempfile("deepl-document", ".tmp", dir: output_path.parent.to_s)
+      temporary_path = temporary_file.path
+      temporary_file.close
+
+      begin
+        File.open(temporary_path, "wb") do |file|
+          IO.copy(body, file)
+        end
+        File.rename(temporary_path, output_path)
+      ensure
+        temporary_file.close unless temporary_file.closed?
+        File.delete?(temporary_path)
       end
     end
 
