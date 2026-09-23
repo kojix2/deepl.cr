@@ -87,16 +87,17 @@ module DeepL
       GlossaryInfo.from_json(response.body)
     end
 
-    # NOTE:
-    # If multiple glossaries have the same name, the ID of the first matching
-    # glossary is returned. (Expected to match the last glossary created,
-    # but depends on DeepL API behavior)
-
+    # Resolve a glossary name only when it identifies exactly one glossary.
     def find_glossary_info_by_name(name : String) : GlossaryInfo
-      glossaries = list_glossaries
-      glossary_info = glossaries.find { |glossary| glossary.name == name }
-      raise GlossaryNameNotFoundError.new(name) unless glossary_info
-      glossary_info
+      glossaries = get_glossary_info_by_name(name)
+      case glossaries.size
+      when 0
+        raise GlossaryNameNotFoundError.new(name)
+      when 1
+        glossaries.first
+      else
+        raise AmbiguousGlossaryNameError.new(name)
+      end
     end
 
     def get_glossary_info_by_name(name : String) : Array(GlossaryInfo)

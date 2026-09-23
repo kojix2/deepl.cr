@@ -58,6 +58,12 @@ module DeepL
     end
   end
 
+  class AmbiguousGlossaryNameError < DeepLError
+    def initialize(name : String)
+      super("Multiple glossaries with the name '#{name}' were found. Use a glossary ID instead.")
+    end
+  end
+
   class DocumentNotReadyError < DeepLError
     def initialize
       super("The translation of the specified document is not yet complete.")

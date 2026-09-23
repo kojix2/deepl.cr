@@ -243,12 +243,17 @@ module DeepL
       get_multilingual_glossary_entries(glossary.glossary_id, source_lang, target_lang)
     end
 
-    # Find multilingual glossary by name
+    # Resolve a glossary name only when it identifies exactly one glossary.
     def find_multilingual_glossary_by_name(name : String) : MultilingualGlossaryInfo
-      glossaries = list_multilingual_glossaries
-      glossary = glossaries.find { |glossary_info| glossary_info.name == name }
-      raise GlossaryNameNotFoundError.new(name) unless glossary
-      glossary
+      glossaries = get_multilingual_glossaries_by_name(name)
+      case glossaries.size
+      when 0
+        raise GlossaryNameNotFoundError.new(name)
+      when 1
+        glossaries.first
+      else
+        raise AmbiguousGlossaryNameError.new(name)
+      end
     end
 
     # Get multilingual glossaries by name (multiple matches possible)
