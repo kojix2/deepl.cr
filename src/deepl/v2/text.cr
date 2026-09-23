@@ -31,7 +31,7 @@ module DeepL
       return mock_translate_text_response if auth_key_is_mock?
 
       if glossary_name
-        glossary_id ||= resolve_glossary_id_from_name(glossary_name)
+        glossary_id ||= find_multilingual_glossary_by_name(glossary_name).glossary_id
       end
 
       text = [text] if text.is_a?(String)

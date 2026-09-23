@@ -7,7 +7,6 @@ module DeepL
     # To change the default server URL, you need to recompile the code.
     DEEPL_DEFAULT_SERVER_URL      = "https://api.deepl.com"
     DEEPL_DEFAULT_SERVER_URL_FREE = "https://api-free.deepl.com"
-    DEEPL_API_VERSION             = {{ env("DEEPL_API_VERSION") || "v2" }}
     DEEPL_SERVER_URL              = {{ env("DEEPL_SERVER_URL") || DEEPL_DEFAULT_SERVER_URL }}
     DEEPL_SERVER_URL_FREE         = {{ env("DEEPL_SERVER_URL_FREE") || DEEPL_DEFAULT_SERVER_URL_FREE }}
     HTTP_STATUS_QUOTA_EXCEEDED    = 456
@@ -40,25 +39,11 @@ module DeepL
     end
 
     def server_url : String
-      @server_url ||
-        if auth_key_is_free_account?
-          "#{DEEPL_SERVER_URL_FREE}/#{DEEPL_API_VERSION}"
-        else
-          "#{DEEPL_SERVER_URL}/#{DEEPL_API_VERSION}"
-        end
-    end
-
-    # Return the base API server URL without any version suffix.
-    # Examples:
-    # - https://api.deepl.com/v2 -> https://api.deepl.com
-    # - https://api.free.deepl.com -> https://api.free.deepl.com
-    # - custom provided server_url (with or without /vN) -> stripped of /vN
-    def base_server_url : String
       candidate = @server_url || (
         auth_key_is_free_account? ? DEEPL_SERVER_URL_FREE : DEEPL_SERVER_URL
       )
-      # Strip a trailing "/v<number>" (optionally followed by a slash) and
-      # normalize trailing slashes so endpoint paths can always begin with "/".
+      # Accept legacy custom URLs while exposing one canonical, versionless
+      # server URL. Endpoint modules add their own /v2 or /v3 path.
       candidate.sub(/\/v\d+\/?$/, "").sub(/\/+$/, "")
     end
 
@@ -83,7 +68,7 @@ module DeepL
 
     private def api_url(path : String) : String
       raise ArgumentError.new("API paths must begin with '/'.") unless path.starts_with?("/")
-      "#{base_server_url}#{path}"
+      "#{server_url}#{path}"
     end
 
     private def with_transport_error(&)

@@ -1,26 +1,3 @@
-require "./translator"
-require "./exceptions"
-
-# V3 Translator modules
-
-require "./v2/text"
-require "./v2/document"
-require "./v2/usage"
-require "./v2/language"
-require "./v2/rephrase"
-require "./v2/admin"
-
-# V3 specific modules
-require "./v3/glossary"
-require "./v3/language"
-require "./v3/style_rules"
-require "./v3/translation_memory"
-require "./v3/voice"
-
-module DeepL
-  class Translator
-    def resolve_glossary_id_from_name(name : String) : String
-      find_multilingual_glossary_by_name(name).glossary_id
-    end
-  end
-end
+# Backward-compatible require path. API endpoint versions are no longer a
+# global surface selection.
+require "../deepl"

@@ -18,6 +18,7 @@ describe DeepL::Translator do
       eq("#{ENV.fetch("DEEPL_SERVER_URL", "https://api.deepl.com")}")
     DeepL::Translator::DEEPL_SERVER_URL_FREE.should \
       eq("#{ENV.fetch("DEEPL_SERVER_URL_FREE", "https://api-free.deepl.com")}")
+    DeepL::Translator.new(auth_key: "dummy-key").server_url.should eq(DeepL::Translator::DEEPL_SERVER_URL)
   end
 
   it "cannot change deepl server url at runtime" do
@@ -30,6 +31,31 @@ describe DeepL::Translator do
     else
       ENV.delete("DEEPL_SERVER_URL")
     end
+  end
+
+  it "exposes a versionless server URL" do
+    translator = DeepL::Translator.new(
+      auth_key: "dummy-key",
+      server_url: "https://example.test/proxy/v3/",
+    )
+
+    translator.server_url.should eq("https://example.test/proxy")
+  end
+
+  it "selects the versionless free endpoint for free API keys" do
+    translator = DeepL::Translator.new(auth_key: "dummy-key:fx")
+
+    translator.server_url.should eq(DeepL::Translator::DEEPL_SERVER_URL_FREE)
+  end
+
+  it "exposes v2 and v3 endpoint APIs together" do
+    translator = DeepL::Translator.new(auth_key: "dummy-key")
+
+    translator.responds_to?(:translate_text).should be_true
+    translator.responds_to?(:get_glossary_info).should be_true
+    translator.responds_to?(:list_style_rule_lists).should be_true
+    translator.responds_to?(:list_translation_memories).should be_true
+    translator.responds_to?(:get_voice_streaming_url).should be_true
   end
 
   it "can get deepl api key from environment variable" do

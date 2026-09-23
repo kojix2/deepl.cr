@@ -1,5 +1,4 @@
 module DeepL
-  @[Deprecated("Use V3 MultilingualGlossaryInfo instead")]
   class GlossaryInfo
     include JSON::Serializable
 

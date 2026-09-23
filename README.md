@@ -39,7 +39,7 @@ t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
 result = t.rephrase_text("I have went to the store yesterday.")
 puts result[0].text # => "I went to the store yesterday."
 
-# Voice realtime (v3 surface)
+# Voice realtime (v3 endpoint)
 t = DeepL::Translator.new(auth_key: "YOUR_AUTH_KEY")
 voice = t.get_voice_streaming_url(
   source_media_content_type: "audio/ogg; codecs=opus",
@@ -79,8 +79,8 @@ t.translate_document(
 )
 ```
 
-On the v3 surface, Translation Memory reads are available without adding a
-write or job-management layer:
+Translation Memory reads are available without adding a write or
+job-management layer:
 
 ```crystal
 memory = t.get_translation_memory("translation-memory-id")
@@ -128,36 +128,31 @@ See [documentation](https://kojix2.github.io/deepl.cr/).
 
 - [DeepL OpenAPI Specification](https://github.com/DeepLcom/openapi)
 
-### API version selection and endpoint routing
+### Endpoint routing
 
-This library currently supports both v2 and v3 API families.
+This library exposes one unified API surface from `require "deepl"`. It supports
+both v2 and v3 API families at the same time.
 
-- The API surface is selected at compile time. The library loads v2 when `-Ddeepl_v2` is set or `DEEPL_API_VERSION=v2`; otherwise it loads v3 when `-Ddeepl_v3` or `DEEPL_API_VERSION=v3` is set, and defaults to v3.
-- In the v2 surface, translation, document, usage, language, rephrase, admin, and glossary methods use v2 endpoints.
-- In the v3 surface, translation, document, usage, language, rephrase, and admin methods remain on v2 endpoints, while multilingual glossary, style rules, Translation Memory, and voice realtime use v3 endpoints. Multilingual glossary language pairs are the intentional `/v2` exception.
+The legacy `require "deepl/v2"` and `require "deepl/v3"` entry paths remain
+aliases for this same unified surface; they no longer select an API version.
 
-Each endpoint determines its own `/v2` or `/v3` path; surface selection never rewrites a request URL. `Translator#server_url` remains a compatibility accessor and may include the legacy `DEEPL_API_VERSION` suffix, but internal requests use a normalized base URL. Custom URLs ending in `/v2` or `/v3` are accepted and normalized for internal routing.
+- Translation, document, usage, language, rephrase, admin, and legacy glossary methods use v2 endpoints.
+- Multilingual glossary, Style Rules, Translation Memory, and voice realtime methods use v3 endpoints. Multilingual glossary language pairs are the intentional `/v2` exception.
 
-### Run tests (v2 / v3)
+Each endpoint determines its own `/v2` or `/v3` path. `Translator#server_url` is a versionless base URL, and internal requests add the endpoint path. Custom URLs ending in `/v2` or `/v3` are accepted and normalized; custom base paths are preserved.
 
-- v2 (compile-time flag):
-  ```bash
-  crystal spec -Ddeepl_v2
-  ```
-- v3 (compile-time flag):
-  ```bash
-  crystal spec -Ddeepl_v3
-  ```
-- v2 (environment variable):
-  ```bash
-  DEEPL_API_VERSION=v2 crystal spec
-  ```
-- v3 (environment variable):
-  ```bash
-  DEEPL_API_VERSION=v3 crystal spec
-  ```
+`DEEPL_API_VERSION`, `-Ddeepl_v2`, and `-Ddeepl_v3` have been removed. Builds that set any of them fail with a migration error; remove the global version setting instead.
 
-Note: The library surface is also switched by the same conditions.
+`glossary_name:` now resolves a multilingual glossary through `/v3/glossaries`.
+To use a legacy v2 glossary, resolve its ID with `find_glossary_info_by_name`
+and pass that ID as `glossary_id:`.
+
+### Run tests
+
+```bash
+crystal spec
+crystal spec -Ddeepl_mock
+```
 
 ## Use case
 

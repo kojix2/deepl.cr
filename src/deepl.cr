@@ -1,15 +1,12 @@
 require "./deepl/version"
 
-{% if flag?(:deepl_v2) || env("DEEPL_API_VERSION") == "v2" %}
-  # Load V2 API surface
-  require "./deepl/v2"
-{% elsif flag?(:deepl_v3) || env("DEEPL_API_VERSION") == "v3" %}
-  # Load V3 API surface
-  require "./deepl/v3"
-{% else %}
-  # Load V3 API surface (default)
-  require "./deepl/v3"
+{% if flag?(:deepl_v2) || flag?(:deepl_v3) || env("DEEPL_API_VERSION") %}
+  {% raise "DEEPL_API_VERSION and -Ddeepl_v2/-Ddeepl_v3 were removed. DeepL API versions are selected by each endpoint; remove the global version setting." %}
 {% end %}
+
+# The API has mixed endpoint versions. Load the single unified surface rather
+# than selecting a global API version at compile time.
+require "./deepl/api"
 
 module DeepL
 end

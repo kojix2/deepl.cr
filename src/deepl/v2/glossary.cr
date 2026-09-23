@@ -2,7 +2,6 @@ require "./glossary_info"
 require "./glossary_language_pair"
 
 module DeepL
-  @[Deprecated("Use V3 MultilingualGlossaryInfo instead")]
   class Translator
     # ameba:disable Naming/AccessorMethodName
     def get_glossary_language_pairs : Array(GlossaryLanguagePair)

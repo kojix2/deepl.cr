@@ -133,7 +133,7 @@ module DeepL
 
       path = Path[path] if path.is_a?(String)
       if glossary_name
-        glossary_id ||= resolve_glossary_id_from_name(glossary_name)
+        glossary_id ||= find_multilingual_glossary_by_name(glossary_name).glossary_id
       end
       params = {
         "source_lang"                  => source_lang,

@@ -40,21 +40,19 @@ describe "HTTP transport contracts" do
     end
   end
 
-  {% unless flag?(:deepl_v2) || env("DEEPL_API_VERSION") == "v2" %}
-    it "routes style rules through v3" do
-      server = RecordingServer.new([
-        RecordingServer::ScriptedResponse.new(200, %({"style_rules":[]})),
-      ])
+  it "routes style rules through v3" do
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(200, %({"style_rules":[]})),
+    ])
 
-      begin
-        translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
-        translator.list_style_rule_lists.should be_empty
-        server.requests.map(&.resource).should eq(["/v3/style_rules"])
-      ensure
-        server.close
-      end
+    begin
+      translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
+      translator.list_style_rule_lists.should be_empty
+      server.requests.map(&.resource).should eq(["/v3/style_rules"])
+    ensure
+      server.close
     end
-  {% end %}
+  end
 
   it "does not follow redirects for authenticated API requests" do
     server = RecordingServer.new([
@@ -81,35 +79,33 @@ describe "HTTP transport contracts" do
     end
   end
 
-  {% if flag?(:deepl_v2) || env("DEEPL_API_VERSION") == "v2" %}
-    it "accepts every 2xx response, including 204" do
-      server = RecordingServer.new([
-        RecordingServer::ScriptedResponse.new(204),
-      ])
+  it "accepts a 204 response for a v2 legacy glossary deletion" do
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(204),
+    ])
 
-      begin
-        translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
-        translator.delete_glossary("glossary-id").should be_true
-        server.requests.map(&.resource).should eq(["/v2/glossaries/glossary-id"])
-      ensure
-        server.close
-      end
+    begin
+      translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
+      translator.delete_glossary("glossary-id").should be_true
+      server.requests.map(&.resource).should eq(["/v2/glossaries/glossary-id"])
+    ensure
+      server.close
     end
-  {% else %}
-    it "accepts every 2xx response, including 204" do
-      server = RecordingServer.new([
-        RecordingServer::ScriptedResponse.new(204),
-      ])
+  end
 
-      begin
-        translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
-        translator.delete_style_rule_list("style-id").should be_nil
-        server.requests.map(&.resource).should eq(["/v3/style_rules/style-id"])
-      ensure
-        server.close
-      end
+  it "accepts a 204 response for a v3 style rule deletion" do
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(204),
+    ])
+
+    begin
+      translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
+      translator.delete_style_rule_list("style-id").should be_nil
+      server.requests.map(&.resource).should eq(["/v3/style_rules/style-id"])
+    ensure
+      server.close
     end
-  {% end %}
+  end
 
   it "maps API errors, response bodies, and trace IDs" do
     server = RecordingServer.new([

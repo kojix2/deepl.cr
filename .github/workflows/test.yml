@@ -62,11 +62,8 @@ jobs:
       - name: Install dependencies
         run: shards install --without-development
 
-      - name: Run tests (V2)
-        run: crystal spec -Ddeepl_mock -Ddeepl_v2
-
-      - name: Run tests (V3)
-        run: crystal spec -Ddeepl_mock -Ddeepl_v3
+      - name: Run tests
+        run: crystal spec -Ddeepl_mock
 
       - name: Stop deepl-mock server
         if: always()
