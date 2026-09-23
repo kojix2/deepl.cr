@@ -20,6 +20,10 @@ jobs:
         with:
           crystal: latest
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Ubuntu - Install libreadline-dev
         run: sudo apt-get update && sudo apt-get install -y libreadline-dev
 
@@ -27,6 +31,47 @@ jobs:
         run: shards install --without-development
 
       - name: Run tests
+        run: crystal spec
+
+      - name: Run deepl-mock integration tests
+        shell: bash
+        env:
+          DEEPL_MOCK_REVISION: 6e14679feed9d4f87741727e31cb5fb9d64e0d34
         run: |
-          crystal spec
-          crystal spec -Ddeepl_mock
+          mock_dir="${RUNNER_TEMP}/deepl-mock"
+          mock_log="${RUNNER_TEMP}/deepl-mock.log"
+
+          git clone https://github.com/DeepLcom/deepl-mock.git "$mock_dir"
+          git -C "$mock_dir" checkout --detach "$DEEPL_MOCK_REVISION"
+          npm ci --prefix "$mock_dir"
+
+          (
+            cd "$mock_dir"
+            exec env \
+              DEEPL_MOCK_SERVER_PORT=3000 \
+              VALIDATE_REQUESTS=1 \
+              DEEPL_MOCK_SPEC_PATH="${GITHUB_WORKSPACE}/openapi/openapi.yaml" \
+              node index.js
+          ) >"$mock_log" 2>&1 &
+          mock_pid=$!
+          trap 'kill "$mock_pid" 2>/dev/null || true' EXIT
+
+          ready=0
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/healthz >/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$ready" -ne 1 ]; then
+            cat "$mock_log"
+            exit 1
+          fi
+
+          if ! DEEPL_MOCK_URL=http://127.0.0.1:3000 \
+            crystal spec integration/deepl_mock_spec.cr; then
+            cat "$mock_log"
+            exit 1
+          fi

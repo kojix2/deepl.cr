@@ -28,9 +28,6 @@ module DeepL
       glossary_ids : Array(String)? = nil,
     ) : Array(TextResult)
       validate_glossary_ids(glossary_ids, source_lang, glossary_id, glossary_name)
-      {% if flag?(:deepl_mock) %}
-        return mock_translate_text_response if auth_key_is_mock?
-      {% end %}
 
       if glossary_name
         glossary_id ||= find_multilingual_glossary_by_name(glossary_name).glossary_id
@@ -77,12 +74,6 @@ module DeepL
       handle_response(response)
       parse_translate_text_response(response)
     end
-
-    {% if flag?(:deepl_mock) %}
-      private def mock_translate_text_response : Array(TextResult)
-        [TextResult.new("Protonenstrahl", "EN", nil, nil)]
-      end
-    {% end %}
 
     private def parse_translate_text_response(response) : Array(TextResult)
       parsed_response = JSON.parse(response.body)

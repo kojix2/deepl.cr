@@ -129,9 +129,6 @@ module DeepL
       translation_memory_threshold : Int32? = nil,
     ) : DocumentHandle
       validate_glossary_ids(glossary_ids, source_lang, glossary_id, glossary_name)
-      {% if flag?(:deepl_mock) %}
-        return mock_document_handle if auth_key_is_mock?
-      {% end %}
 
       path = Path[path] if path.is_a?(String)
       if glossary_name
@@ -189,14 +186,6 @@ module DeepL
     )
       validate_document_polling_options(interval, timeout)
 
-      {% if flag?(:deepl_mock) %}
-        if auth_key_is_mock?
-          document_status = translate_document_get_status(handle)
-          block.try &.call(document_status)
-          return
-        end
-      {% end %}
-
       deadline = timeout.try { |value| Time.instant + value }
       first_poll = true
 
@@ -220,23 +209,12 @@ module DeepL
     end
 
     def translate_document_get_status(handle : DocumentHandle) : DocumentStatus
-      {% if flag?(:deepl_mock) %}
-        return mock_document_status(handle) if auth_key_is_mock?
-      {% end %}
-
       response = document_status_response(handle)
       handle_response(response)
       DocumentStatus.from_json(response.body)
     end
 
     def translate_document_download(handle : DocumentHandle, output_file)
-      {% if flag?(:deepl_mock) %}
-        if auth_key_is_mock?
-          File.write(output_file, "Protonenstrahl\nProtonenstrahl\nProtonenstrahl")
-          return
-        end
-      {% end %}
-
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
       with_transport_error do
@@ -351,21 +329,5 @@ module DeepL
         File.delete?(temporary_path)
       end
     end
-
-    {% if flag?(:deepl_mock) %}
-      private def mock_document_handle : DocumentHandle
-        DocumentHandle.new("mock-document-id", "mock-document-key")
-      end
-
-      private def mock_document_status(handle : DocumentHandle) : DocumentStatus
-        DocumentStatus.from_json(<<-JSON)
-          {
-            "document_id": "#{handle.id}",
-            "status": "done",
-            "billed_characters": 42
-          }
-          JSON
-      end
-    {% end %}
   end
 end

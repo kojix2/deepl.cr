@@ -20,24 +20,44 @@ describe "HTTP transport contracts" do
     end
   end
 
-  {% unless flag?(:deepl_mock) %}
-    it "treats mock as a normal API key outside mock builds" do
-      server = RecordingServer.new([
-        RecordingServer::ScriptedResponse.new(
-          200,
-          %({"translations":[{"text":"Hallo","detected_source_language":"EN"}]}),
-        ),
-      ])
+  it "treats mock as a normal API key" do
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(
+        200,
+        %({"translations":[{"text":"Hallo","detected_source_language":"EN"}]}),
+      ),
+    ])
 
-      begin
-        translator = DeepL::Translator.new(auth_key: "mock", server_url: server.url)
-        translator.translate_text("hello", "DE").first.text.should eq("Hallo")
-        server.requests.map(&.resource).should eq(["/v2/translate"])
-      ensure
-        server.close
-      end
+    begin
+      translator = DeepL::Translator.new(auth_key: "mock", server_url: server.url)
+      translator.translate_text("hello", "DE").first.text.should eq("Hallo")
+      server.requests.map(&.resource).should eq(["/v2/translate"])
+    ensure
+      server.close
     end
-  {% end %}
+  end
+
+  it "routes rephrase and correct through their distinct write endpoints" do
+    responses = Array.new(2) do
+      RecordingServer::ScriptedResponse.new(
+        200,
+        %({"improvements":[{"text":"proton beam","detected_source_language":"en","target_language":"en-US"}]}),
+      )
+    end
+    server = RecordingServer.new(responses)
+
+    begin
+      translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
+      translator.rephrase_text("input", "en").first.text.should eq("proton beam")
+      translator.correct_text("input", "en").first.text.should eq("proton beam")
+      server.requests.map(&.resource).should eq([
+        "/v2/write/rephrase",
+        "/v2/write/correct",
+      ])
+    ensure
+      server.close
+    end
+  end
 
   it "replaces a custom trailing API version when routing text translation" do
     server = RecordingServer.new([

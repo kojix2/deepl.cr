@@ -149,8 +149,30 @@ and pass that ID as `glossary_id:`.
 
 ### Run tests
 
+The default suite is self-contained and does not require a DeepL account or an
+external service:
+
 ```bash
 crystal spec
+```
+
+The integration suite runs against DeepL's mock server at the revision pinned
+by CI. It requires Node.js 22. Start the server from the repository root:
+
+```bash
+git clone https://github.com/DeepLcom/deepl-mock.git /tmp/deepl-mock
+git -C /tmp/deepl-mock checkout --detach 6e14679feed9d4f87741727e31cb5fb9d64e0d34
+npm ci --prefix /tmp/deepl-mock
+VALIDATE_REQUESTS=1 \
+  DEEPL_MOCK_SPEC_PATH="$PWD/openapi/openapi.yaml" \
+  npm --prefix /tmp/deepl-mock start
+```
+
+Then run the integration spec from another terminal:
+
+```bash
+DEEPL_MOCK_URL=http://127.0.0.1:3000 \
+  crystal spec integration/deepl_mock_spec.cr
 ```
 
 ## Use case

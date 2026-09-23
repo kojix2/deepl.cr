@@ -157,11 +157,5 @@ module DeepL
         raise ArgumentError.new("glossary_ids cannot be used with glossary_id or glossary_name.")
       end
     end
-
-    {% if flag?(:deepl_mock) %}
-      private def auth_key_is_mock? : Bool
-        auth_key == "mock"
-      end
-    {% end %}
   end
 end

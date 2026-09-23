@@ -19,33 +19,15 @@ module DeepL
 
     # ameba:disable Naming/AccessorMethodName
     def get_target_languages : Array(LanguageInfo)
-      {% if flag?(:deepl_mock) %}
-        return mock_target_languages if auth_key_is_mock?
-      {% end %}
-
       response = request_languages("target")
       Array(LanguageInfo).from_json(response.body)
     end
 
     # ameba:disable Naming/AccessorMethodName
     def get_source_languages : Array(LanguageInfo)
-      {% if flag?(:deepl_mock) %}
-        return mock_source_languages if auth_key_is_mock?
-      {% end %}
-
       response = request_languages("source")
       Array(LanguageInfo).from_json(response.body)
     end
-
-    {% if flag?(:deepl_mock) %}
-      private def mock_target_languages : Array(LanguageInfo)
-        [LanguageInfo.new("DE", "German", true)]
-      end
-
-      private def mock_source_languages : Array(LanguageInfo)
-        [LanguageInfo.new("EN", "English", nil)]
-      end
-    {% end %}
 
     def guess_target_language : String
       tl = ENV["DEEPL_TARGET_LANG"]?

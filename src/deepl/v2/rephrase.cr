@@ -8,10 +8,6 @@ module DeepL
       writing_style = nil,
       tone = nil,
     ) : Array(RephraseResult)
-      {% if flag?(:deepl_mock) %}
-        return mock_rephrase_response if auth_key_is_mock?
-      {% end %}
-
       text = [text] if text.is_a?(String)
 
       params = Hash(String, String | Array(String)).new
@@ -39,10 +35,6 @@ module DeepL
       text : (String | Array(String)),
       target_lang = nil,
     ) : Array(RephraseResult)
-      {% if flag?(:deepl_mock) %}
-        return mock_rephrase_response if auth_key_is_mock?
-      {% end %}
-
       text = [text] if text.is_a?(String)
 
       params = Hash(String, String | Array(String)).new
@@ -71,12 +63,6 @@ module DeepL
     private def api_url_correct : String
       api_url("/v2/write/correct")
     end
-
-    {% if flag?(:deepl_mock) %}
-      private def mock_rephrase_response : Array(RephraseResult)
-        [RephraseResult.new("en", "proton beam")]
-      end
-    {% end %}
 
     private def parse_rephrase_response(response) : Array(RephraseResult)
       parsed_response = JSON.parse(response.body)
