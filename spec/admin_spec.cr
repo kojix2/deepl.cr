@@ -44,8 +44,8 @@ describe DeepL::AdminUsageReport do
           "speech_to_text_minutes": 107.46
         },
         "group_by": "key_and_day",
-        "start_date": "2025-09-29T00:00:00Z",
-        "end_date": "2025-10-01T00:00:00Z",
+        "start_date": "2025-09-29T00:00:00",
+        "end_date": "2025-10-01T00:00:00+02:00",
         "key_and_day_usages": [
           {
             "api_key": "dc88****3a2c",
@@ -68,6 +68,8 @@ describe DeepL::AdminUsageReport do
     report = DeepL::AdminUsageReport.from_json(sample_json)
 
     report.usage_report.group_by.should eq("key_and_day")
+    report.usage_report.start_date.should eq(Time.utc(2025, 9, 29))
+    report.usage_report.end_date.should eq(Time.parse_iso8601("2025-10-01T00:00:00+02:00"))
     report.usage_report.total_usage.total_characters.should eq(9619)
     report.usage_report.total_usage.speech_to_text_minutes.should eq(107.46)
     if key_and_day_usages = report.usage_report.key_and_day_usages
@@ -86,7 +88,7 @@ describe DeepL::CustomTagUsageReport do
     {
       "custom_tag_usage_report": {
         "aggregate_by": "day",
-        "start_date": "2026-05-03T00:00:00Z",
+        "start_date": "2026-05-03T00:00:00",
         "end_date": "2026-05-05T00:00:00Z",
         "next_page": null,
         "usage": [
@@ -110,6 +112,7 @@ describe DeepL::CustomTagUsageReport do
     report = DeepL::CustomTagUsageReport.from_json(sample_json)
 
     report.custom_tag_usage_report.aggregate_by.should eq("day")
+    report.custom_tag_usage_report.start_date.should eq(Time.utc(2026, 5, 3))
     report.custom_tag_usage_report.usage.size.should eq(1)
     report.custom_tag_usage_report.usage.first.custom_tag.should eq("example-custom-tag")
     report.custom_tag_usage_report.usage.first.breakdown.total_characters.should eq(380)

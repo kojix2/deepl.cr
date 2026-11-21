@@ -1,6 +1,19 @@
 require "json"
 
 module DeepL
+  # Analytics period boundaries may omit the UTC offset in DeepL responses.
+  module AnalyticsTimeConverter
+    def self.from_json(pull : JSON::PullParser) : Time
+      value = pull.read_string
+      value += "Z" unless value.matches?(/(?:Z|[+-]\d{2}:?\d{2})$/i)
+      Time.parse_iso8601(value)
+    end
+
+    def self.to_json(value : Time, json : JSON::Builder) : Nil
+      value.to_json(json)
+    end
+  end
+
   class ApiKeyUsageLimits
     include JSON::Serializable
 
@@ -81,7 +94,9 @@ module DeepL
     include JSON::Serializable
 
     property total_usage : UsageBreakdown
+    @[JSON::Field(converter: AnalyticsTimeConverter)]
     property start_date : Time
+    @[JSON::Field(converter: AnalyticsTimeConverter)]
     property end_date : Time
     property group_by : String?
     property key_usages : Array(KeyUsageItem)?
@@ -141,7 +156,9 @@ module DeepL
     include JSON::Serializable
 
     property aggregate_by : String?
+    @[JSON::Field(converter: AnalyticsTimeConverter)]
     property start_date : Time
+    @[JSON::Field(converter: AnalyticsTimeConverter)]
     property end_date : Time
     property next_page : Int32?
     property usage : Array(CustomTagUsageItem)
