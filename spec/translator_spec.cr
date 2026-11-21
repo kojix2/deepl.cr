@@ -6,10 +6,6 @@ class DeepL::Translator
   def generate_output_file(source_path : Path, target_lang, output_format) : Path
     previous_def
   end
-
-  def ensure_unique_output_file(output_file : Path) : Path
-    previous_def
-  end
 end
 
 describe DeepL::Translator do
@@ -122,13 +118,13 @@ describe DeepL::Translator do
     output_file.should eq(Path[__DIR__] / "fixtures" / "sample_PT-BR.docx")
   end
 
-  it "can ensure unique output path" do
+  it "generates the preferred output path before atomic publication chooses a free name" do
     t = DeepL::Translator.new
     source_path = Path[__DIR__] / "fixtures" / "sample.pdf"
     target_lang = "PT-BR"
     output_format = "txt"
     output_file = t.generate_output_file(source_path, target_lang, output_format)
     output_file.parent.should eq(Path[__DIR__] / "fixtures")
-    output_file.basename.to_s.should match(/sample_PT-BR_\d{10}.txt/)
+    output_file.basename.should eq("sample_PT-BR.txt")
   end
 end

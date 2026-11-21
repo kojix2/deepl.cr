@@ -79,11 +79,15 @@ t.translate_document(
 )
 ```
 
+Automatically named translations never replace an existing file. An explicit
+`output_file` still replaces that destination after a successful download.
+
 A successful document download can consume the server's only copy. The client
 checks the output directory before requesting it. If receiving or publishing
 the result fails, `DeepL::DocumentDownloadError#recovery_path` identifies the
 preserved temporary file, which may contain incomplete data. Recover that file
-instead of relying on another download.
+instead of relying on another download. This also applies when the filesystem
+does not support the hard links used to publish automatic filenames safely.
 
 Translation Memory supports reads and file-based import/export:
 

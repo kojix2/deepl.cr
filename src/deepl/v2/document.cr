@@ -96,10 +96,14 @@ module DeepL
         block.try &.call("#{prefix}Error Message: #{document_status.error_message}") if document_status.error_message
       end
 
-      output_file ||= generate_output_file(source_path, target_lang, output_format)
-
-      block.try &.call("#{prefix}Downloading translated document to #{output_file}")
-      translate_document_download(document_handle, output_file)
+      if output_file
+        block.try &.call("#{prefix}Downloading translated document to #{output_file}")
+        translate_document_download(document_handle, output_file)
+      else
+        output_file = generate_output_file(source_path, target_lang, output_format)
+        block.try &.call("#{prefix}Downloading translated document")
+        output_file = download_document_to_unique_file(document_handle, output_file)
+      end
 
       block.try &.call("#{prefix}Document saved as #{output_file}")
     end
@@ -107,15 +111,40 @@ module DeepL
     private def generate_output_file(source_path : Path, target_lang, output_format) : Path
       output_base_name = "#{source_path.stem}_#{target_lang}"
       output_extension = output_format ? ".#{output_format.downcase}" : source_path.extension
-      output_file = source_path.parent / (output_base_name + output_extension)
-      ensure_unique_output_file(output_file)
+      source_path.parent / (output_base_name + output_extension)
     end
 
-    private def ensure_unique_output_file(output_file : Path) : Path
-      return output_file unless File.exists?(output_file)
-      output_base_name = "#{output_file.stem}_#{Time.utc.to_unix}"
-      output_extension = output_file.extension
-      output_file.parent / (output_base_name + output_extension)
+    private def download_document_to_unique_file(handle : DocumentHandle, output_file : Path) : Path
+      temporary_file = File.tempfile("deepl-document-output", ".tmp", dir: output_file.parent.to_s)
+      temporary_path = temporary_file.path
+      temporary_file.close
+      downloaded = false
+      begin
+        translate_document_download(handle, temporary_path)
+        downloaded = true
+        timestamp = Time.utc.to_unix
+        suffix = 0
+        loop do
+          candidate = if suffix == 0
+                        output_file
+                      else
+                        extra = suffix == 1 ? "" : "_#{suffix - 1}"
+                        output_file.parent / "#{output_file.stem}_#{timestamp}#{extra}#{output_file.extension}"
+                      end
+          begin
+            File.link(temporary_path, candidate)
+            File.delete(temporary_path)
+            return candidate
+          rescue File::AlreadyExistsError
+            suffix += 1
+          end
+        end
+      rescue error
+        raise DocumentDownloadError.new(temporary_path, error) if downloaded
+        raise error
+      ensure
+        File.delete?(temporary_path) unless downloaded
+      end
     end
 
     def translate_document_upload(

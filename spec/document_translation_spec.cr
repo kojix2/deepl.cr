@@ -1,6 +1,7 @@
 require "./spec_helper"
 require "./support/recording_server"
 require "./support/raw_http_server"
+require "file_utils"
 
 private def with_document_test_server(
   responses : Array(RecordingServer::ScriptedResponse),
@@ -76,6 +77,32 @@ private def with_document_transport_failure_server(& : DocumentTransportFailureS
 end
 
 describe "document translation" do
+  it "does not overwrite existing automatically named translations" do
+    dir = File.tempname("deepl-document-spec")
+    Dir.mkdir(dir, 0o700)
+    begin
+      input = Path[dir] / "input.txt"
+      File.write(input, "source")
+      File.write(Path[dir] / "input_DE.txt", "existing")
+      responses = [] of RecordingServer::ScriptedResponse
+      3.times do
+        responses << RecordingServer::ScriptedResponse.new(200, %({"document_id":"id","document_key":"key"}))
+        responses << document_status_response("done")
+        responses << RecordingServer::ScriptedResponse.new(200, "translated")
+      end
+      with_document_test_server(responses) do |server|
+        translator = document_test_translator(server)
+        3.times { translator.translate_document(input, "DE", interval: 0.001) }
+      end
+      File.read(Path[dir] / "input_DE.txt").should eq("existing")
+      outputs = Dir.children(dir).select(&.starts_with?("input_DE_"))
+      outputs.size.should eq(3)
+      outputs.each { |name| File.read(Path[dir] / name).should eq("translated") }
+    ensure
+      FileUtils.rm_r(dir)
+    end
+  end
+
   it "checks the output directory before requesting the one-time download" do
     with_document_test_server([] of RecordingServer::ScriptedResponse) do |server|
       missing = Path[File.tempname("deepl-missing-directory")] / "output.txt"
