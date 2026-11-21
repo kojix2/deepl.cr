@@ -498,6 +498,20 @@ not include uploading or downloading the document or translation-memory file.</p
 <pre><code class="language-crystal">memory <span class="o">=</span> t.get_translation_memory(<span class="s">&quot;translation-memory-id&quot;</span>)
 job <span class="o">=</span> t.import_translation_memory(<span class="s">&quot;legal.tmx&quot;</span>, display_name: <span class="s">&quot;Legal&quot;</span>)
 t.export_translation_memory(job.results.first.translation_memory_id.not_nil!, <span class="s">&quot;legal-export.tmx&quot;</span>)</code></pre>
+<p>Both convenience methods accept <code>on_job_created</code>, called once immediately after
+job creation, before uploading or polling. Save the ID there to recover from an
+upload failure, an initial polling failure, or a timeout without changing the
+existing exception types:</p>
+<pre><code class="language-crystal">job_id : <span class="t">String</span>? <span class="o">=</span> <span class="n">nil</span>
+t.export_translation_memory(
+  <span class="s">&quot;translation-memory-id&quot;</span>,
+  <span class="s">&quot;legal-export.tmx&quot;</span>,
+  on_job_created: <span class="o">-&gt;</span>(id : <span class="t">String</span>) { job_id <span class="o">=</span> id; <span class="n">nil</span> },
+)
+<span class="c"># After a failure, use the saved ID with t.wait_for_translation_memory_job(id).</span></code></pre>
+<p>An interrupted export download raises an error instead of replacing an existing
+file with incomplete data. A complete download is installed only after its
+declared Content-Length, when present, has been verified.</p>
 <p>All non-2xx HTTP responses raise a <code><a href="DeepL/DeepLError.html">DeepL::DeepLError</a></code>. When the service
 provides an <code>X-Trace-ID</code>, it is available as <code>error.trace_id</code> for support
 requests.</p>
