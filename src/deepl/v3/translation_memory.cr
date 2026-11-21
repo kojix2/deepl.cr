@@ -556,6 +556,7 @@ module DeepL
       timeout : Time::Span?,
     ) : Nil
       raise ArgumentError.new("Translation memory job polling interval must be positive.") unless interval > 0
+      raise ArgumentError.new("Translation memory job polling interval must be finite.") unless interval.to_f.finite?
       if timeout && timeout < Time::Span.zero
         raise ArgumentError.new("Translation memory job polling timeout must not be negative.")
       end

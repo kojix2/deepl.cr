@@ -313,12 +313,30 @@ describe "translation memory endpoints" do
   end
 
   it "validates convenience polling options before creating jobs" do
-    translator = DeepL::Translator.new(auth_key: "test-key", server_url: "http://127.0.0.1:1")
-    expect_raises(ArgumentError, /interval/) do
-      translator.import_translation_memory("unused.tmx", interval: 0)
-    end
-    expect_raises(ArgumentError, /timeout/) do
-      translator.export_translation_memory("memory-id", "unused.tmx", timeout: -1.second)
+    server = RecordingServer.new([] of RecordingServer::ScriptedResponse)
+    source = File.tempfile("deepl-invalid-polling", ".tmx")
+    source.print("<tmx/>")
+    source.close
+    begin
+      translator = DeepL::Translator.new(auth_key: "test-key", server_url: server.url)
+      [0.0, -1.0, Float64::INFINITY, Float64::NAN].each do |interval|
+        expect_raises(ArgumentError, /interval/) do
+          translator.import_translation_memory(source.path, interval: interval)
+        end
+        expect_raises(ArgumentError, /interval/) do
+          translator.export_translation_memory("memory-id", "unused.tmx", interval: interval)
+        end
+      end
+      expect_raises(ArgumentError, /timeout/) do
+        translator.import_translation_memory(source.path, timeout: -1.second)
+      end
+      expect_raises(ArgumentError, /timeout/) do
+        translator.export_translation_memory("memory-id", "unused.tmx", timeout: -1.second)
+      end
+      server.requests.should be_empty
+    ensure
+      server.close
+      File.delete?(source.path)
     end
   end
 
