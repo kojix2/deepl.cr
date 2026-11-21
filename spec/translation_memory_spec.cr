@@ -312,6 +312,16 @@ describe "translation memory endpoints" do
     end
   end
 
+  it "validates convenience polling options before creating jobs" do
+    translator = DeepL::Translator.new(auth_key: "test-key", server_url: "http://127.0.0.1:1")
+    expect_raises(ArgumentError, /interval/) do
+      translator.import_translation_memory("unused.tmx", interval: 0)
+    end
+    expect_raises(ArgumentError, /timeout/) do
+      translator.export_translation_memory("memory-id", "unused.tmx", timeout: -1.second)
+    end
+  end
+
   it "does not overwrite an existing export file when a signed download fails" do
     output_path = File.tempname("deepl-translation-memory", ".tmx")
     File.write(output_path, "existing export")

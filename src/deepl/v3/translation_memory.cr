@@ -447,6 +447,7 @@ module DeepL
       interval = 5.0,
       timeout : Time::Span? = nil,
     ) : TranslationMemoryJob
+      validate_translation_memory_polling_options(interval, timeout)
       source_path = Path[path]
       import_job = create_translation_memory_import(
         source_path.basename.to_s,
@@ -464,6 +465,7 @@ module DeepL
       interval = 5.0,
       timeout : Time::Span? = nil,
     ) : TranslationMemoryJob
+      validate_translation_memory_polling_options(interval, timeout)
       export_job = create_translation_memory_export(translation_memory_id)
       job = wait_for_translation_memory_job(export_job.job_id, interval, timeout: timeout)
       result = translation_memory_job_result(job)
