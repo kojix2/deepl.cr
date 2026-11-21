@@ -195,10 +195,12 @@ describe "translation memory endpoints" do
 
     begin
       translator = DeepL::Translator.new(auth_key: "test-key", server_url: api_server.url)
+      created_jobs = [] of String
       imported = translator.import_translation_memory(
         source_path,
         display_name: "Legal",
         interval: 0.001,
+        on_job_created: ->(id : String) { created_jobs << id; nil },
       )
       imported.results.first.translation_memory_id.should eq("imported-memory")
 
@@ -206,10 +208,12 @@ describe "translation memory endpoints" do
         "imported-memory",
         output_path,
         interval: 0.001,
+        on_job_created: ->(id : String) { created_jobs << id; nil },
       )
       exported.results.first.download_url.should eq("#{asset_server.url}/download")
       File.read(output_path).should eq("<tmx>exported</tmx>")
       translator.delete_translation_memory("imported-memory").should be_true
+      created_jobs.should eq(["import-job", "export-job"])
 
       api_server.requests.map(&.resource).should eq([
         "/v3/translation_memories/import",
@@ -421,4 +425,79 @@ describe "translation memory endpoints" do
     end
   end
 
+  it "exposes both convenience job IDs before the first polling timeout" do
+    source = File.tempfile("deepl-memory-recovery", ".tmx")
+    source.print("<tmx/>")
+    source.close
+    assets = RecordingServer.new([RecordingServer::ScriptedResponse.new(200)])
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(202, %({"job_id":"import-id","upload_url":"#{assets.url}/upload","expires_at":"2026-08-06T15:34:25Z"})),
+      RecordingServer::ScriptedResponse.new(202, %({"job_id":"export-id","parameters":{"translation_memory_id":"memory-id"}})),
+    ])
+    begin
+      translator = DeepL::Translator.new("test-key", nil, server.url)
+      ids = [] of String
+      import_callback = ->(id : String) do
+        assets.requests.should be_empty
+        ids << id
+        nil
+      end
+      expect_raises(DeepL::TranslationMemoryJobError, /timed out/) do
+        translator.import_translation_memory(source.path, timeout: Time::Span.zero, on_job_created: import_callback)
+      end
+      ids.should eq(["import-id"])
+      expect_raises(DeepL::TranslationMemoryJobError, /timed out/) do
+        translator.export_translation_memory("memory-id", "unused.tmx", timeout: Time::Span.zero,
+          on_job_created: ->(id : String) { ids << id; nil })
+      end
+      ids.should eq(["import-id", "export-id"])
+      server.requests.map(&.method).should eq(["POST", "POST"])
+    ensure
+      server.close
+      assets.close
+      File.delete?(source.path)
+    end
+  end
+
+  it "exposes the import job ID before an upload failure without changing the exception type" do
+    source = File.tempfile("deepl-memory-upload-error", ".tmx")
+    source.print("<tmx/>")
+    source.close
+    assets = RecordingServer.new([RecordingServer::ScriptedResponse.new(500, "upload failed")])
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(202, %({"job_id":"import-id","upload_url":"#{assets.url}/upload","expires_at":"2026-08-06T15:34:25Z"})),
+    ])
+    begin
+      ids = [] of String
+      expect_raises(DeepL::RequestError, /upload failed/) do
+        DeepL::Translator.new("test-key", nil, server.url).import_translation_memory(source.path,
+          on_job_created: ->(id : String) { ids << id; nil })
+      end
+      ids.should eq(["import-id"])
+      server.requests.size.should eq(1)
+      assets.requests.size.should eq(1)
+    ensure
+      server.close
+      assets.close
+      File.delete?(source.path)
+    end
+  end
+
+  it "exposes the export job ID before a failed first poll without changing the exception type" do
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(202, %({"job_id":"export-id","parameters":{"translation_memory_id":"memory-id"}})),
+      RecordingServer::ScriptedResponse.new(400, "poll failed"),
+    ])
+    begin
+      ids = [] of String
+      expect_raises(DeepL::RequestError, /poll failed/) do
+        DeepL::Translator.new("test-key", nil, server.url).export_translation_memory("memory-id", "unused.tmx",
+          on_job_created: ->(id : String) { ids << id; nil })
+      end
+      ids.should eq(["export-id"])
+      server.requests.map(&.method).should eq(["POST", "GET"])
+    ensure
+      server.close
+    end
+  end
 end

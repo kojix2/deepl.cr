@@ -116,6 +116,21 @@ job = t.import_translation_memory("legal.tmx", display_name: "Legal")
 t.export_translation_memory(job.results.first.translation_memory_id.not_nil!, "legal-export.tmx")
 ```
 
+Both convenience methods accept `on_job_created`, called once immediately after
+job creation, before uploading or polling. Save the ID there to recover from an
+upload failure, an initial polling failure, or a timeout without changing the
+existing exception types:
+
+```crystal
+job_id : String? = nil
+t.export_translation_memory(
+  "translation-memory-id",
+  "legal-export.tmx",
+  on_job_created: ->(id : String) { job_id = id; nil },
+)
+# After a failure, use the saved ID with t.wait_for_translation_memory_job(id).
+```
+
 An interrupted export download raises an error instead of replacing an existing
 file with incomplete data. A complete download is installed only after its
 declared Content-Length, when present, has been verified.

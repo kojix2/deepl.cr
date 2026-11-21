@@ -447,6 +447,8 @@ module DeepL
       content_type : String = "application/xml",
       interval = 5.0,
       timeout : Time::Span? = nil,
+      *,
+      on_job_created : (String ->)? = nil,
     ) : TranslationMemoryJob
       validate_translation_memory_polling_options(interval, timeout)
       source_path = Path[path]
@@ -456,6 +458,7 @@ module DeepL
         content_type,
         display_name,
       )
+      on_job_created.try &.call(import_job.job_id)
       upload_translation_memory_import(import_job, source_path, content_type)
       wait_for_translation_memory_job(import_job.job_id, interval, timeout: timeout)
     end
@@ -465,9 +468,12 @@ module DeepL
       output_file : Path | String,
       interval = 5.0,
       timeout : Time::Span? = nil,
+      *,
+      on_job_created : (String ->)? = nil,
     ) : TranslationMemoryJob
       validate_translation_memory_polling_options(interval, timeout)
       export_job = create_translation_memory_export(translation_memory_id)
+      on_job_created.try &.call(export_job.job_id)
       job = wait_for_translation_memory_job(export_job.job_id, interval, timeout: timeout)
       result = translation_memory_job_result(job)
       download_url = result.download_url || raise TranslationMemoryJobError.new(
