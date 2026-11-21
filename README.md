@@ -116,6 +116,10 @@ job = t.import_translation_memory("legal.tmx", display_name: "Legal")
 t.export_translation_memory(job.results.first.translation_memory_id.not_nil!, "legal-export.tmx")
 ```
 
+An interrupted export download raises an error instead of replacing an existing
+file with incomplete data. A complete download is installed only after its
+declared Content-Length, when present, has been verified.
+
 All non-2xx HTTP responses raise a `DeepL::DeepLError`. When the service
 provides an `X-Trace-ID`, it is available as `error.trace_id` for support
 requests.

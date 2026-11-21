@@ -346,7 +346,8 @@ module DeepL
           max_redirects: 0,
         ) do |response|
           handle_response(response)
-          write_translation_memory_export(response.body_io, output_file)
+          expected_bytes = response.http_client_res.headers["Content-Length"]?.try(&.to_i64)
+          write_translation_memory_export(response.body_io, output_file, expected_bytes)
         end
       end
     end
@@ -589,7 +590,7 @@ module DeepL
       raise TranslationMemoryJobError.new(last_job, "Translation memory job timed out.")
     end
 
-    private def write_translation_memory_export(body : IO, output_file : Path | String) : Nil
+    private def write_translation_memory_export(body : IO, output_file : Path | String, expected_bytes : Int64? = nil) : Nil
       output_path = Path[output_file]
       temporary_file = File.tempfile("deepl-translation-memory", ".tmp", dir: output_path.parent.to_s)
       temporary_path = temporary_file.path
@@ -597,7 +598,10 @@ module DeepL
 
       begin
         File.open(temporary_path, "wb") do |file|
-          IO.copy(body, file)
+          received_bytes = IO.copy(body, file)
+          if expected_bytes && received_bytes != expected_bytes
+            raise IO::EOFError.new("Incomplete translation memory export: expected #{expected_bytes} bytes, received #{received_bytes}.")
+          end
         end
         File.rename(temporary_path, output_path)
       ensure

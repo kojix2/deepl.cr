@@ -1,5 +1,7 @@
 require "./spec_helper"
 require "./support/recording_server"
+require "./support/raw_http_server"
+require "compress/gzip"
 
 describe DeepL::TranslationMemoryList do
   sample_json = <<-JSON
@@ -358,4 +360,65 @@ describe "translation memory endpoints" do
       File.delete?(output_path)
     end
   end
+
+  [false, true].each do |existing_output|
+    it "rejects a truncated export download (existing output: #{existing_output})" do
+      output_path = File.tempname("deepl-truncated-export", ".tmx")
+      File.write(output_path, "existing complete export") if existing_output
+      server = RawHTTPServer.new do |socket|
+        socket << "HTTP/1.1 200 OK\r\nContent-Length: 1000\r\n\r\npartial export"
+        socket.flush
+      end
+      begin
+        translator = DeepL::Translator.new("test-key", nil, server.url)
+        expect_raises(DeepL::RequestError, /Incomplete translation memory export/) do
+          translator.download_translation_memory_export("#{server.url}/download", output_path)
+        end
+        if existing_output
+          File.read(output_path).should eq("existing complete export")
+        else
+          File.exists?(output_path).should be_false
+        end
+        server.requests.should eq(1)
+      ensure
+        server.close
+        File.delete?(output_path)
+      end
+    end
+  end
+
+  it "accepts a complete chunked export without a Content-Length header" do
+    output_path = File.tempname("deepl-chunked-export", ".tmx")
+    server = RawHTTPServer.new do |socket|
+      socket << "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n6\r\n<tmx/>\r\n0\r\n\r\n"
+      socket.flush
+    end
+    begin
+      DeepL::Translator.new("test-key", nil, server.url)
+        .download_translation_memory_export("#{server.url}/download", output_path)
+      File.read(output_path).should eq("<tmx/>")
+    ensure
+      server.close
+      File.delete?(output_path)
+    end
+  end
+
+  it "checks compressed export responses without comparing compressed and decoded sizes" do
+    output_path = File.tempname("deepl-compressed-export", ".tmx")
+    content = "<tmx>#{"segment" * 100}</tmx>"
+    compressed = IO::Memory.new
+    Compress::Gzip::Writer.open(compressed, &.print(content))
+    server = RecordingServer.new([
+      RecordingServer::ScriptedResponse.new(200, compressed.to_s, {"Content-Encoding" => "gzip"}),
+    ])
+    begin
+      DeepL::Translator.new("test-key", nil, server.url)
+        .download_translation_memory_export("#{server.url}/download", output_path)
+      File.read(output_path).should eq(content)
+    ensure
+      server.close
+      File.delete?(output_path)
+    end
+  end
+
 end
