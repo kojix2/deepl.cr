@@ -40,6 +40,14 @@ module DeepL
     end
   end
 
+  class DocumentDownloadError < DeepLError
+    getter recovery_path : String
+
+    def initialize(@recovery_path : String, error : Exception)
+      super("Could not save the downloaded document. Data (possibly incomplete) is preserved at #{@recovery_path}: #{error.message}")
+    end
+  end
+
   class GlossaryNotFoundError < DeepLError
     def initialize
       super("The specified glossary was not found.")

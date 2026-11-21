@@ -21,6 +21,12 @@ private def document_test_handle : DeepL::DocumentHandle
   DeepL::DocumentHandle.new("document-id", "document-key")
 end
 
+private class FailingDocumentSaveTranslator < DeepL::Translator
+  private def finalize_document_result(temporary_path : String, output_path : Path) : Nil
+    raise File::Error.new("simulated rename failure", file: output_path)
+  end
+end
+
 private def document_status_response(status : String) : RecordingServer::ScriptedResponse
   RecordingServer::ScriptedResponse.new(
     200,
@@ -69,6 +75,31 @@ private def with_document_transport_failure_server(& : DocumentTransportFailureS
 end
 
 describe "document translation" do
+  it "checks the output directory before requesting the one-time download" do
+    translator = DeepL::Translator.new("test-key", nil, "http://127.0.0.1:1")
+    missing = Path[File.tempname("deepl-missing-directory")] / "output.txt"
+    expect_raises(File::Error) do
+      translator.translate_document_download(document_test_handle, missing)
+    end
+  end
+
+  it "preserves downloaded data when the final move fails" do
+    with_document_test_server([RecordingServer::ScriptedResponse.new(200, "translated document")]) do |server|
+      translator = FailingDocumentSaveTranslator.new("test-key", nil, server.url)
+      output = File.tempname("deepl-output")
+      error = expect_raises(DeepL::DocumentDownloadError) do
+        translator.translate_document_download(document_test_handle, output)
+      end
+      begin
+        File.read(error.recovery_path).should eq("translated document")
+        File.exists?(output).should be_false
+      ensure
+        File.delete?(error.recovery_path)
+        File.delete?(output)
+      end
+    end
+  end
+
   it "does not expose the document key in progress callbacks" do
     secret = "document-key-sentinel"
     responses = [

@@ -223,18 +223,38 @@ module DeepL
     def translate_document_download(handle : DocumentHandle, output_file)
       data = {"document_key" => handle.key}
       url = "#{api_url_document}/#{handle.id}/result"
-      with_transport_error do
-        Crest.post(
-          url,
-          form: data,
-          headers: http_headers_json,
-          json: true,
-          handle_errors: false,
-          max_redirects: 0
-        ) do |response|
-          handle_response(response)
-          write_document_result(response.body_io, output_file)
+      output_path = Path[output_file]
+      raise ArgumentError.new("Document output path is a directory: #{output_path}") if Dir.exists?(output_path)
+      temporary_file = File.tempfile("deepl-document", ".tmp", dir: output_path.parent.to_s)
+      temporary_path = temporary_file.path
+      receiving = false
+      preserved = false
+      begin
+        with_transport_error do
+          Crest.post(
+            url,
+            form: data,
+            headers: http_headers_json,
+            json: true,
+            handle_errors: false,
+            max_redirects: 0
+          ) do |response|
+            handle_response(response)
+            receiving = true
+            IO.copy(response.body_io, temporary_file)
+            temporary_file.close
+            finalize_document_result(temporary_path, output_path)
+          end
         end
+      rescue error
+        if receiving
+          preserved = true
+          raise DocumentDownloadError.new(temporary_path, error)
+        end
+        raise error
+      ensure
+        temporary_file.close unless temporary_file.closed?
+        File.delete?(temporary_path) unless preserved
       end
     end
 
@@ -319,21 +339,8 @@ module DeepL
       raise DocumentTranslationError.new("Document translation timed out.")
     end
 
-    private def write_document_result(body : IO, output_file) : Nil
-      output_path = Path[output_file]
-      temporary_file = File.tempfile("deepl-document", ".tmp", dir: output_path.parent.to_s)
-      temporary_path = temporary_file.path
-      temporary_file.close
-
-      begin
-        File.open(temporary_path, "wb") do |file|
-          IO.copy(body, file)
-        end
-        File.rename(temporary_path, output_path)
-      ensure
-        temporary_file.close unless temporary_file.closed?
-        File.delete?(temporary_path)
-      end
+    private def finalize_document_result(temporary_path : String, output_path : Path) : Nil
+      File.rename(temporary_path, output_path)
     end
   end
 end
