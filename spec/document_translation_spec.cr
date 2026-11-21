@@ -143,6 +143,47 @@ describe "document translation" do
     end
   end
 
+  [false, true].each do |with_progress|
+    it "exposes the handle before polling fails (progress callback: #{with_progress})" do
+      responses = [RecordingServer::ScriptedResponse.new(200, %({"document_id":"id","document_key":"key"}))]
+      with_document_test_server(responses) do |server|
+        handles = [] of DeepL::DocumentHandle
+        uploaded = ->(handle : DeepL::DocumentHandle) { handles << handle; nil }
+        translator = document_test_translator(server)
+        source = Path[__DIR__] / "fixtures" / "proton_beams.txt"
+        expect_raises(DeepL::DocumentTranslationError, /timed out/) do
+          if with_progress
+            translator.translate_document(source, "DE", timeout: Time::Span.zero, on_uploaded: uploaded) { |_message| }
+          else
+            translator.translate_document(source, "DE", timeout: Time::Span.zero, on_uploaded: uploaded)
+          end
+        end
+        handles.size.should eq(1)
+        handles.first.id.should eq("id")
+        handles.first.key.should eq("key")
+        server.requests.size.should eq(1)
+      end
+    end
+  end
+
+  it "exposes the uploaded handle while retaining the original polling exception type" do
+    responses = [
+      RecordingServer::ScriptedResponse.new(200, %({"document_id":"id","document_key":"key"})),
+      RecordingServer::ScriptedResponse.new(400, "invalid status request"),
+    ]
+    with_document_test_server(responses) do |server|
+      handle : DeepL::DocumentHandle? = nil
+      on_uploaded = ->(uploaded : DeepL::DocumentHandle) { handle = uploaded; nil }
+      expect_raises(DeepL::RequestError) do
+        document_test_translator(server).translate_document(
+          Path[__DIR__] / "fixtures" / "proton_beams.txt", "DE", on_uploaded: on_uploaded)
+      end
+      handle.should_not be_nil
+      handle.not_nil!.key.should eq("key")
+      server.requests.size.should eq(2)
+    end
+  end
+
   it "preserves downloaded data when the final move fails" do
     with_document_test_server([RecordingServer::ScriptedResponse.new(200, "translated document")]) do |server|
       translator = FailingDocumentSaveTranslator.new("test-key", nil, server.url)

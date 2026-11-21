@@ -21,6 +21,8 @@ module DeepL
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
       enable_watermark : Bool? = nil,
+      *,
+      on_uploaded : (DocumentHandle ->)? = nil,
       &block : (String ->)
     )
       translate_document(
@@ -41,6 +43,7 @@ module DeepL
         translation_memory_id: translation_memory_id,
         translation_memory_threshold: translation_memory_threshold,
         enable_watermark: enable_watermark,
+        on_uploaded: on_uploaded,
         block: block
       )
     end
@@ -64,6 +67,8 @@ module DeepL
       translation_memory_id = nil,
       translation_memory_threshold : Int32? = nil,
       enable_watermark : Bool? = nil,
+      *,
+      on_uploaded : (DocumentHandle ->)? = nil,
     )
       validate_document_polling_options(interval, timeout)
       source_path = Path[path]
@@ -83,6 +88,8 @@ module DeepL
         translation_memory_threshold: translation_memory_threshold,
         enable_watermark: enable_watermark,
       )
+
+      on_uploaded.try &.call(document_handle)
 
       prefix = message_prefix
       block.try &.call("#{prefix}Document uploaded")

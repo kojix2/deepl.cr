@@ -82,6 +82,21 @@ t.translate_document(
 Automatically named translations never replace an existing file. An explicit
 `output_file` still replaces that destination after a successful download.
 
+To retain the document ID and key for recovery after a polling timeout or
+connection error, supply `on_uploaded`. It runs once, immediately after upload,
+and works alongside the existing progress-message block:
+
+```crystal
+handle : DeepL::DocumentHandle? = nil
+t.translate_document(
+  "path/to/document.pdf",
+  target_lang: "DE",
+  on_uploaded: ->(uploaded : DeepL::DocumentHandle) { handle = uploaded; nil },
+) { |message| STDERR.puts message }
+# Persist the handle in private storage inside the callback if recovery must
+# survive a process exit. Its document key is a secret.
+```
+
 A successful document download can consume the server's only copy. The client
 checks the output directory before requesting it. If receiving or publishing
 the result fails, `DeepL::DocumentDownloadError#recovery_path` identifies the
