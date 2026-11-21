@@ -77,6 +77,11 @@
       
     </li>
   
+  <li class=" " data-id="deepl/DeepL/AnalyticsTimeConverter" data-name="deepl::analyticstimeconverter">
+      <a href="DeepL/AnalyticsTimeConverter.html">AnalyticsTimeConverter</a>
+      
+    </li>
+  
   <li class=" " data-id="deepl/DeepL/ApiKey" data-name="deepl::apikey">
       <a href="DeepL/ApiKey.html">ApiKey</a>
       
@@ -124,6 +129,11 @@
   
   <li class=" " data-id="deepl/DeepL/DeepLError" data-name="deepl::deeplerror">
       <a href="DeepL/DeepLError.html">DeepLError</a>
+      
+    </li>
+  
+  <li class=" " data-id="deepl/DeepL/DocumentDownloadError" data-name="deepl::documentdownloaderror">
+      <a href="DeepL/DocumentDownloadError.html">DocumentDownloadError</a>
       
     </li>
   
@@ -462,6 +472,28 @@ t.translate_document(
   translation_memory_id: <span class="s">&quot;translation-memory-id&quot;</span>,
   translation_memory_threshold: <span class="n">75</span>,
 )</code></pre>
+<p>Document uploads stream multipart data rather than buffering the whole file.
+Automatically named translations never replace an existing file. An explicit
+<code>output_file</code> still replaces that destination after a successful download.</p>
+<p>To retain the document ID and key for recovery after a polling timeout or
+connection error, supply <code>on_uploaded</code>. It runs once, immediately after upload,
+and works alongside the existing progress-message block:</p>
+<pre><code class="language-crystal">handle : <span class="t">DeepL</span><span class="t">::</span><span class="t">DocumentHandle</span>? <span class="o">=</span> <span class="n">nil</span>
+t.translate_document(
+  <span class="s">&quot;path/to/document.pdf&quot;</span>,
+  target_lang: <span class="s">&quot;DE&quot;</span>,
+  on_uploaded: <span class="o">-&gt;</span>(uploaded : <span class="t">DeepL</span><span class="t">::</span><span class="t">DocumentHandle</span>) { handle <span class="o">=</span> uploaded; <span class="n">nil</span> },
+) { <span class="o">|</span>message<span class="o">|</span> <span class="t">STDERR</span>.puts message }
+<span class="c"># Persist the handle in private storage inside the callback if recovery must</span>
+<span class="c"># survive a process exit. Its document key is a secret.</span></code></pre>
+<p>A successful document download can consume the server's only copy. The client
+checks the output directory before requesting it. If receiving or publishing
+the result fails, <code>DeepL::DocumentDownloadError#recovery_path</code> identifies the
+preserved temporary file, which may contain incomplete data. Recover that file
+instead of relying on another download. This also applies when the filesystem
+does not support the hard links used to publish automatic filenames safely.</p>
+<p>Polling <code>timeout</code> includes active status HTTP requests and retry delays. It does
+not include uploading or downloading the document or translation-memory file.</p>
 <p>Translation Memory supports reads and file-based import/export:</p>
 <pre><code class="language-crystal">memory <span class="o">=</span> t.get_translation_memory(<span class="s">&quot;translation-memory-id&quot;</span>)
 job <span class="o">=</span> t.import_translation_memory(<span class="s">&quot;legal.tmx&quot;</span>, display_name: <span class="s">&quot;Legal&quot;</span>)
