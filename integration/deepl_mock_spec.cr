@@ -127,8 +127,11 @@ describe "deepl-mock integration" do
     patched = translator.patch_multilingual_glossary(
       glossary.glossary_id,
       name: "renamed multilingual glossary",
+      dictionaries: [DeepL::GlossaryDictionary.new("en", "de", "proton beam\tPatchstrahl")],
     )
     patched.name.should eq("renamed multilingual glossary")
+    translator.get_multilingual_glossary_entries(glossary.glossary_id, "en", "de")
+      .entries.should eq("proton beam\tPatchstrahl")
 
     updated = translator.put_multilingual_glossary_dictionary(
       glossary.glossary_id,

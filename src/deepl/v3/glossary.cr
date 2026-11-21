@@ -104,12 +104,10 @@ module DeepL
     ) : MultilingualGlossaryInfo
       url = api_url("/v3/glossaries/#{glossary_id}")
 
-      data = {} of String => JSON::Any::Type
-      data["name"] = name if name
-
-      if dictionaries
-        data["dictionaries"] = glossary_dictionary_payloads(dictionaries)
-      end
+      data = {
+        "name"         => name,
+        "dictionaries" => dictionaries.try { |values| glossary_dictionary_payloads(values) },
+      }.compact!
 
       response = with_transport_error do
         Crest.patch(
