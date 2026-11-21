@@ -310,8 +310,8 @@ module DeepL
         # A second close error must not hide the exception with the recovery path.
         begin
           temporary_file.close unless temporary_file.closed?
-        rescue close_error
-          raise close_error unless preserved
+        rescue error
+          raise error unless preserved
         ensure
           File.delete?(temporary_path) unless preserved
         end

@@ -214,8 +214,7 @@ describe "document translation" do
         document_test_translator(server).translate_document(
           Path[__DIR__] / "fixtures" / "proton_beams.txt", "DE", on_uploaded: on_uploaded)
       end
-      handle.should_not be_nil
-      handle.not_nil!.key.should eq("key")
+      handle.try(&.key).should eq("key")
       server.requests.size.should eq(2)
     end
   end

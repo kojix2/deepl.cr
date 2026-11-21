@@ -163,7 +163,7 @@ module DeepL
         return message if message
 
         if error = object["error"]?
-          message = error.as_s? || error.as_h?.try { |nested| nested["message"]?.try(&.as_s?) }
+          message = error.as_s? || error.as_h?.try(&.["message"]?.try(&.as_s?))
           return message if message
         end
       end
