@@ -44,7 +44,8 @@ module DeepL
     getter recovery_path : String
 
     def initialize(@recovery_path : String, error : Exception)
-      super("Could not save the downloaded document. Data (possibly incomplete) is preserved at #{@recovery_path}: #{error.message}")
+      super("Could not save the downloaded document. Data (possibly incomplete) is preserved at #{@recovery_path}: #{error.message}", cause: error)
+      self.trace_id = error.trace_id if error.is_a?(DeepLError)
     end
   end
 

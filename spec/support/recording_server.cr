@@ -40,7 +40,7 @@ class RecordingServer
 
     address = @server.bind_tcp("127.0.0.1", 0)
     @url = "http://127.0.0.1:#{address.port}"
-    spawn { @server.listen }
+    spawn { @server.listen unless @server.closed? }
   end
 
   def close : Nil

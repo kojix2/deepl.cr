@@ -1,5 +1,6 @@
 require "./spec_helper"
 require "./support/recording_server"
+require "./support/raw_http_server"
 
 private def with_document_test_server(
   responses : Array(RecordingServer::ScriptedResponse),
@@ -76,10 +77,42 @@ end
 
 describe "document translation" do
   it "checks the output directory before requesting the one-time download" do
-    translator = DeepL::Translator.new("test-key", nil, "http://127.0.0.1:1")
-    missing = Path[File.tempname("deepl-missing-directory")] / "output.txt"
-    expect_raises(File::Error) do
-      translator.translate_document_download(document_test_handle, missing)
+    with_document_test_server([] of RecordingServer::ScriptedResponse) do |server|
+      missing = Path[File.tempname("deepl-missing-directory")] / "output.txt"
+      expect_raises(File::Error) do
+        document_test_translator(server).translate_document_download(document_test_handle, missing)
+      end
+      server.requests.should be_empty
+    end
+  end
+
+  it "rejects a directory as the download destination without making a request" do
+    with_document_test_server([] of RecordingServer::ScriptedResponse) do |server|
+      expect_raises(ArgumentError, /directory/) do
+        document_test_translator(server).translate_document_download(document_test_handle, Dir.tempdir)
+      end
+      server.requests.should be_empty
+    end
+  end
+
+  it "preserves a partial response when the download connection closes early" do
+    server = RawHTTPServer.new do |socket|
+      socket << "HTTP/1.1 200 OK\r\nContent-Length: 1000\r\n\r\npartial translation"
+      socket.flush
+    end
+    output = File.tempname("deepl-document-partial")
+    begin
+      error = expect_raises(DeepL::DocumentDownloadError) do
+        DeepL::Translator.new("test-key", nil, server.url).translate_document_download(document_test_handle, output)
+      end
+      File.read(error.recovery_path).should eq("partial translation")
+      error.message.to_s.should contain(error.recovery_path)
+      File.exists?(output).should be_false
+      server.requests.should eq(1)
+    ensure
+      server.close
+      File.delete?(error.recovery_path) if error
+      File.delete?(output)
     end
   end
 

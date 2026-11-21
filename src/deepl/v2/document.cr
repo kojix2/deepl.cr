@@ -241,7 +241,13 @@ module DeepL
           ) do |response|
             handle_response(response)
             receiving = true
-            IO.copy(response.body_io, temporary_file)
+            received_bytes = IO.copy(response.body_io, temporary_file)
+            if content_length = response.http_client_res.headers["Content-Length"]?
+              expected_bytes = content_length.to_i64
+              if received_bytes != expected_bytes
+                raise IO::EOFError.new("Incomplete document download: expected #{expected_bytes} bytes, received #{received_bytes}.")
+              end
+            end
             temporary_file.close
             finalize_document_result(temporary_path, output_path)
           end
@@ -253,8 +259,14 @@ module DeepL
         end
         raise error
       ensure
-        temporary_file.close unless temporary_file.closed?
-        File.delete?(temporary_path) unless preserved
+        # A second close error must not hide the exception with the recovery path.
+        begin
+          temporary_file.close unless temporary_file.closed?
+        rescue close_error
+          raise close_error unless preserved
+        ensure
+          File.delete?(temporary_path) unless preserved
+        end
       end
     end
 

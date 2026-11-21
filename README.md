@@ -79,6 +79,12 @@ t.translate_document(
 )
 ```
 
+A successful document download can consume the server's only copy. The client
+checks the output directory before requesting it. If receiving or publishing
+the result fails, `DeepL::DocumentDownloadError#recovery_path` identifies the
+preserved temporary file, which may contain incomplete data. Recover that file
+instead of relying on another download.
+
 Translation Memory supports reads and file-based import/export:
 
 ```crystal
