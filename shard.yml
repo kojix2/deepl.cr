@@ -7,5 +7,6 @@ authors:
 dependencies:
   crest:
     github: mamantoha/crest
+    version: ">= 1.8.0"
 
 license: MIT

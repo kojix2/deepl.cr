@@ -143,6 +143,25 @@ describe "document translation" do
     end
   end
 
+  it "streams multipart document uploads with the original fields and file content" do
+    source = File.tempfile("deepl-upload", ".txt")
+    content = "document contents\n" * 100_000
+    source.print(content)
+    source.close
+    responses = [RecordingServer::ScriptedResponse.new(200, %({"document_id":"id","document_key":"key"}))]
+    with_document_test_server(responses) do |server|
+      document_test_translator(server).translate_document_upload(source.path, "DE", source_lang: "EN")
+      request = server.requests.first
+      request.headers["Transfer-Encoding"].should eq("chunked")
+      request.headers.has_key?("Content-Length").should be_false
+      request.body.should contain("name=\"target_lang\"\r\n\r\nDE\r\n")
+      request.body.should contain("name=\"source_lang\"\r\n\r\nEN\r\n")
+      request.body.should contain(content)
+    end
+  ensure
+    File.delete?(source.path) if source
+  end
+
   [false, true].each do |with_progress|
     it "exposes the handle before polling fails (progress callback: #{with_progress})" do
       responses = [RecordingServer::ScriptedResponse.new(200, %({"document_id":"id","document_key":"key"}))]
@@ -164,6 +183,23 @@ describe "document translation" do
         server.requests.size.should eq(1)
       end
     end
+  end
+
+  it "finishes a streaming upload's producer when the connection fails" do
+    source = File.tempfile("deepl-upload-failure", ".txt")
+    source.print("large document\n" * 100_000)
+    source.close
+    with_document_transport_failure_server do |server|
+      translator = DeepL::Translator.new("test-key", nil, server.url)
+      expect_raises(DeepL::RequestError) do
+        translator.translate_document_upload(source.path, "DE")
+      end
+      server.connections.should eq(1)
+      # Let any multipart writer finish; it must not read a closed source file.
+      Fiber.yield
+    end
+  ensure
+    File.delete?(source.path) if source
   end
 
   it "exposes the uploaded handle while retaining the original polling exception type" do

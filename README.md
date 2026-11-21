@@ -79,6 +79,7 @@ t.translate_document(
 )
 ```
 
+Document uploads stream multipart data rather than buffering the whole file.
 Automatically named translations never replace an existing file. An explicit
 `output_file` still replaces that destination after a successful download.
 

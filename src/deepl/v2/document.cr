@@ -191,18 +191,30 @@ module DeepL
       File.open(path) do |file|
         params = params.merge({"file" => file})
 
-        response = with_transport_error do
-          Crest.post(
-            api_url_document,
-            form: params,
-            headers: http_headers_base,
-            handle_errors: false,
-            max_redirects: 0
-          )
+        request = Crest::Request.new(
+          :post,
+          api_url_document,
+          form: params,
+          stream_multipart: true,
+          headers: http_headers_base,
+          handle_errors: false,
+          max_redirects: 0
+        )
+        begin
+          response = with_transport_error { request.execute }
+          handle_response(response)
+          DocumentHandle.from_json(response.body)
+        ensure
+          if body = request.form_data.as?(IO)
+            # Finish Crest's multipart producer before closing its source file,
+            # including when the server rejects or disconnects during upload.
+            begin
+              body.skip_to_end
+            ensure
+              body.close
+            end
+          end
         end
-        handle_response(response)
-
-        DocumentHandle.from_json(response.body)
       end
     end
 
