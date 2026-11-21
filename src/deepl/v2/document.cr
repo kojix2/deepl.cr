@@ -306,11 +306,12 @@ module DeepL
       end
     end
 
-    private def document_status_response(handle : DocumentHandle) : Crest::Response
+    private def document_status_response(handle : DocumentHandle, deadline : Time::Instant? = nil) : Crest::Response
       url = "#{api_url_document}/#{handle.id}"
       data = {"document_key" => handle.key}
       with_transport_error do
-        Crest.post(
+        request = Crest::Request.new(
+          :post,
           url,
           form: data,
           headers: http_headers_json,
@@ -318,6 +319,7 @@ module DeepL
           handle_errors: false,
           max_redirects: 0
         )
+        execute_polling_request(request, deadline)
       end
     end
 
@@ -330,8 +332,11 @@ module DeepL
 
       loop do
         response = begin
-          document_status_response(handle)
+          document_status_response(handle, deadline)
+        rescue PollingTimeoutError
+          raise DocumentTranslationError.new("Document translation timed out.")
         rescue error : RequestError
+          raise_document_polling_timeout(deadline)
           raise error unless retries < 2
 
           retries += 1
@@ -362,6 +367,7 @@ module DeepL
 
     private def validate_document_polling_options(interval, timeout : Time::Span?) : Nil
       raise ArgumentError.new("Document polling interval must be positive.") unless interval > 0
+      raise ArgumentError.new("Document polling interval must be finite.") unless interval.to_f.finite?
       if timeout && timeout < Time::Span.zero
         raise ArgumentError.new("Document polling timeout must not be negative.")
       end

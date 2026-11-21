@@ -249,6 +249,11 @@ describe "document translation" do
     expect_raises(ArgumentError, /interval/) do
       translator.translate_document_wait_until_done(handle, 0)
     end
+    [Float64::INFINITY, Float64::NAN].each do |interval|
+      expect_raises(ArgumentError, /interval/) do
+        translator.translate_document_wait_until_done(handle, interval)
+      end
+    end
     expect_raises(ArgumentError, /timeout/) do
       translator.translate_document_wait_until_done(handle, 0.1, timeout: -1.second)
     end

@@ -104,6 +104,9 @@ preserved temporary file, which may contain incomplete data. Recover that file
 instead of relying on another download. This also applies when the filesystem
 does not support the hard links used to publish automatic filenames safely.
 
+Polling `timeout` includes active status HTTP requests and retry delays. It does
+not include uploading or downloading the document or translation-memory file.
+
 Translation Memory supports reads and file-based import/export:
 
 ```crystal

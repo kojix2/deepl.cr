@@ -477,14 +477,16 @@ module DeepL
       job
     end
 
-    private def translation_memory_job_response(job_id : String) : Crest::Response
+    private def translation_memory_job_response(job_id : String, deadline : Time::Instant? = nil) : Crest::Response
       with_transport_error do
-        Crest.get(
+        request = Crest::Request.new(
+          :get,
           api_url("/v3/translation_memories/jobs/#{job_id}"),
           headers: http_headers_base,
           handle_errors: false,
           max_redirects: 0,
         )
+        execute_polling_request(request, deadline)
       end
     end
 
@@ -498,8 +500,11 @@ module DeepL
 
       loop do
         response = begin
-          translation_memory_job_response(job_id)
+          translation_memory_job_response(job_id, deadline)
+        rescue PollingTimeoutError
+          raise TranslationMemoryJobError.new(last_job, "Translation memory job timed out.")
         rescue error : RequestError
+          raise_translation_memory_job_timeout(deadline, last_job)
           raise error unless retries < 2
 
           retries += 1

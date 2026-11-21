@@ -2,6 +2,10 @@ require "json"
 require "crest"
 
 module DeepL
+  # Internal signal, translated to the endpoint's existing timeout exception.
+  private class PollingTimeoutError < Exception
+  end
+
   class Translator
     # Note: The default server URL is set during the compilation process.
     # To change the default server URL, you need to recompile the code.
@@ -70,6 +74,40 @@ module DeepL
     private def api_url(path : String) : String
       raise ArgumentError.new("API paths must begin with '/'.") unless path.starts_with?("/")
       "#{server_url}#{path}"
+    end
+
+    # Per-I/O timeouts alone do not bound a response that keeps trickling data.
+    # Race the entire read-only request against the polling deadline as well.
+    private def execute_polling_request(request : Crest::Request, deadline : Time::Instant?) : Crest::Response
+      return request.execute unless deadline
+
+      remaining = deadline - Time.instant
+      raise PollingTimeoutError.new if remaining <= Time::Span.zero
+
+      request.http_client.connect_timeout = remaining
+      request.http_client.read_timeout = remaining
+      request.http_client.write_timeout = remaining
+      result_channel = Channel(Crest::Response | Exception).new(1)
+      spawn do
+        result = begin
+          request.execute
+        rescue error
+          error
+        end
+        # Buffered so a late completion cannot leave a fiber blocked on send.
+        result_channel.send(result)
+      end
+
+      select
+      when result = result_channel.receive
+        raise PollingTimeoutError.new if Time.instant >= deadline
+        raise result if result.is_a?(Exception)
+        result
+      when timeout(remaining)
+        raise PollingTimeoutError.new
+      end
+    ensure
+      request.close
     end
 
     private def with_transport_error(&)
