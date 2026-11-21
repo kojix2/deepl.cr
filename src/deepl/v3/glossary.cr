@@ -148,9 +148,14 @@ module DeepL
       end
       handle_response(response, glossary: true)
       entries_response = MultilingualGlossaryEntriesResponse.from_json(response.body)
-      dict = entries_response.dictionaries.find { |dictionary| dictionary.source_lang == source_lang && dictionary.target_lang == target_lang }
-      dict ||= entries_response.dictionaries.first?
-      raise RequestError.new("No dictionary entries returned") unless dict
+      dict = entries_response.dictionaries.find do |dictionary|
+        dictionary.source_lang.downcase == source_lang.downcase && dictionary.target_lang.downcase == target_lang.downcase
+      end
+      unless dict
+        error = RequestError.new("No dictionary entries returned for #{source_lang} -> #{target_lang}")
+        error.trace_id = @last_trace_id
+        raise error
+      end
       dict
     end
 
