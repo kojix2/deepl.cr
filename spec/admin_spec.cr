@@ -1,5 +1,36 @@
 require "./spec_helper"
 
+describe "analytics period date parsing" do
+  {
+    "2026-05-03T00:00:00"           => "2026-05-03T00:00:00Z",
+    "2026-05-03T00:00:00Z"          => "2026-05-03T00:00:00Z",
+    "2026-05-03T00:00:00+09:00"     => "2026-05-03T00:00:00+09:00",
+    "2026-05-03T00:00:00.123456"    => "2026-05-03T00:00:00.123456Z",
+    "2026-05-03T00:00:00.123-02:30" => "2026-05-03T00:00:00.123-02:30",
+  }.each do |value, expected|
+    it "accepts #{value} in both analytics report types and serializes valid timestamps" do
+      admin = DeepL::AdminUsageReportData.from_json(%({"start_date":#{value.to_json},"end_date":#{value.to_json},"total_usage":{"total_characters":0}}))
+      tags = DeepL::CustomTagUsageReportData.from_json(%({"start_date":#{value.to_json},"end_date":#{value.to_json},"usage":[]}))
+      [admin, tags].each do |report|
+        report.start_date.should eq(Time.parse_iso8601(expected))
+        report.end_date.should eq(Time.parse_iso8601(expected))
+        Time.parse_iso8601(JSON.parse(report.to_json)["start_date"].as_s).to_unix.should eq(report.start_date.to_unix)
+      end
+    end
+  end
+
+  it "rejects malformed analytics dates" do
+    ["not-a-date", "2026-05-03T00:00:00+bad"].each do |value|
+      expect_raises(Time::Format::Error) do
+        DeepL::AdminUsageReportData.from_json(%({"start_date":#{value.to_json},"end_date":"2026-05-04T00:00:00","total_usage":{"total_characters":0}}))
+      end
+      expect_raises(Time::Format::Error) do
+        DeepL::CustomTagUsageReportData.from_json(%({"start_date":#{value.to_json},"end_date":"2026-05-04T00:00:00","usage":[]}))
+      end
+    end
+  end
+end
+
 describe DeepL::ApiKey do
   sample_json = <<-JSON
     {

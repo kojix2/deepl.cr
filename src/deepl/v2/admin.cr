@@ -94,9 +94,9 @@ module DeepL
     include JSON::Serializable
 
     property total_usage : UsageBreakdown
-    @[JSON::Field(converter: AnalyticsTimeConverter)]
+    @[JSON::Field(converter: DeepL::AnalyticsTimeConverter)]
     property start_date : Time
-    @[JSON::Field(converter: AnalyticsTimeConverter)]
+    @[JSON::Field(converter: DeepL::AnalyticsTimeConverter)]
     property end_date : Time
     property group_by : String?
     property key_usages : Array(KeyUsageItem)?
@@ -156,9 +156,9 @@ module DeepL
     include JSON::Serializable
 
     property aggregate_by : String?
-    @[JSON::Field(converter: AnalyticsTimeConverter)]
+    @[JSON::Field(converter: DeepL::AnalyticsTimeConverter)]
     property start_date : Time
-    @[JSON::Field(converter: AnalyticsTimeConverter)]
+    @[JSON::Field(converter: DeepL::AnalyticsTimeConverter)]
     property end_date : Time
     property next_page : Int32?
     property usage : Array(CustomTagUsageItem)
